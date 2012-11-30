@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<!--
+   This is a jQuery Tools standalone demo. Feel free to copy/paste.
+   http://flowplayer.org/tools/demos/
+
+   Do *not* reference CSS files and images from flowplayer.org when in
+   production Enjoy!
+-->
+<head>
+    <title>jQuery Tools standalone demo</title>
+
+    <!-- include the Tools -->
+    <!--script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script-->
+    <script src="js/jquery.tools.min.js"></script>
+    <style>
+            /* main vertical scroll */
+        #main {
+            position:relative;
+            overflow:hidden;
+            height: 450px;
+        }
+
+            /* root element for pages */
+        #pages {
+            position:absolute;
+            height:20000em;
+        }
+
+            /* single page */
+        .page {
+            padding:10px;
+            height: 450px;
+            width:520px;
+        }
+
+            /* root element for horizontal scrollables */
+        .scrollable {
+            position:relative;
+            overflow:hidden;
+            width: 510px;
+            height: 450px;
+        }
+
+            /* root element for scrollable items */
+        .scrollable .items {
+            width:20000em;
+            position:absolute;
+            clear:both;
+        }
+
+            /* single scrollable item */
+        .item {
+            float:left;
+            cursor:pointer;
+            width:500px;
+            height:450px;
+            padding:10px;
+        }
+
+            /* main navigator */
+        #main_navi {
+            float:left;
+            padding:0px !important;
+            margin:0px !important;
+        }
+
+        #main_navi li {
+            background-color:#333;
+            border-top:1px solid #666;
+            clear:both;
+            color:#FFFFFF;
+            font-size:12px;
+            height:45px;
+            list-style-type:none;
+            padding:10px;
+            width:190px;
+            cursor:pointer;
+        }
+
+        #main_navi li:hover {
+            background-color:#444;
+        }
+
+        #main_navi li.active {
+            background-color:#555;
+        }
+
+
+        #main div.navi {
+            margin-left:250px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body><!-- main navigator -->
+<ul id="main_navi">
+
+    <li class="active">
+        flight 1, this one is longer and should wrap
+    </li>
+    <li>
+        flight 2, this one is longer and should wrap
+    </li>
+    <li>
+        flight 3, this one is longer and should wrap
+    </li>
+</ul>
+
+<!-- root element for the main scrollable -->
+<div id="main">
+    <div id="pages">
+        <div class="page">
+            <div class="scrollable">
+                <div class="items">
+                    <div class="item">
+                        <img src="images/homepromo/image1.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- page #2 -->
+        <div class="page">
+            <!-- inner scrollable #2 -->
+            <div class="scrollable">
+
+                <!-- root element for scrollable items -->
+                <div class="items">
+
+                    <!-- items on the second page -->
+                    <div class="item">
+                        <img src="images/homepromo/image2.jpg" />
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- page #3 -->
+        <div class="page">
+
+            <!-- inner scrollable #3 -->
+            <div class="scrollable">
+
+                <!-- root element for scrollable items -->
+                <div class="items">
+
+                    <div class="item">
+                        <img src="http://farm4.static.flickr.com/3155/2636513939_cd75b704ec.jpg" />
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function() {
+        // main vertical scroll
+        $("#main").scrollable({
+
+            // basic settings
+            vertical: true,
+
+            // up/down keys will always control this scrollable
+            keyboard: 'static',
+
+            // assign left/right keys to the actively viewed scrollable
+            onSeek: function(event, i) {
+                horizontal.eq(i).data("scrollable").focus();
+            }
+
+            // main navigator (thumbnail images)
+        }).navigator("#main_navi");
+
+        // horizontal scrollables. each one is circular and has its own navigator instance
+        var horizontal = $(".scrollable").scrollable({ circular: true }).navigator(".navi");
+
+
+        // when page loads setup keyboard focus on the first horzontal scrollable
+        horizontal.eq(0).data("scrollable").focus();
+    });
+</script>
+</body>
+</html>

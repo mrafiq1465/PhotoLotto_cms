@@ -1,0 +1,12 @@
+.ui-page {
+    background: url(../images/bkg.png);
+	background-repeat:repeat-x;
+	background-color:#fff;
+	color:#002072;
+	font-family:tahoma,arial;
+	text-shadow: none;
+}
+
+.content {padding:20px;}
+.home {text-align:center;}
+.footer {background: url(../images/foot.png);height:37px;}

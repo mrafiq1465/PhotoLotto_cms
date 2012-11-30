@@ -1,4 +1,4 @@
-PhotoLotto_cms
-==============
+SyntaxPerfect
+=============
 
-PhotoLotto Cms
+SyntaxPerfect Website

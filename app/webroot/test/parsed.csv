@@ -1,0 +1,801 @@
+Time,Query_time,Lock_time,Rows_sent,Rows_examined,timestamp,Query
+"121023  0:01:03",62.002121,0.000081,0,29632,1350975663,"SELECT
+    sessions.id,
+    sessions.email,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason,
+    sessions.affiliate,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'program"":""', -1), '""', 1) as program,
+    sessions.data
+FROM
+    sessions
+WHERE
+    sessions.sent = 0
+    AND sessions.`show` = 1
+    AND sessions.disqualified = 0
+    AND sessions.post <> ''
+    AND sessions.reason = ''
+    AND sessions.expire > DATE_SUB(NOW(), INTERVAL 15 DAY)"
+,62.002542,0.000125,0,29632,1350975663,"SELECT
+    sessions.id,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason
+FROM
+    sessions
+WHERE
+    sessions.sent = 0 
+    AND sessions.`show` = 1 
+    AND sessions.disqualified = 0 
+    AND sessions.post <> ''
+    AND sessions.university <> ''
+    AND SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'verification_score"":', -1), ',', 1) = 0 
+    AND sessions.expire > DATE_FORMAT(NOW(), '%Y-%m-01')"
+"121023  0:02:16",134.137100,0.000123,125,1043801,1350975736,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+,134.950978,0.000121,468,1241755,1350975736,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:02:22",80.332752,0.000201,16539,8077488,1350975742,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:02:48",46.433377,0.000147,65079,1734687,1350975768,"SELECT /* Memcached:program_mix_flags */
+	allocations.id,
+	allocations.allocation,
+	programs.id,
+	COUNT(DISTINCT sessions.id),
+	programs.boost,
+	programs.cap,
+	programs.cap_number,
+	programs.pause
+FROM
+	programs
+	INNER JOIN allocations ON (
+		allocations.id=programs.allocation_id
+	)
+	LEFT JOIN sessions ON (
+		sessions.program_id=programs.id
+		AND sessions.`show`=1
+		AND sessions.sent=1
+		AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+	)
+	GROUP BY
+		programs.id
+	HAVING
+		COUNT(DISTINCT sessions.id)>0
+		OR programs.boost=1
+		OR programs.cap>0
+		OR programs.cap_number>0
+		OR programs.pause=1"
+"121023  0:04:54",53.549788,0.000161,125,1043801,1350975894,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+"121023  0:04:55",54.169244,0.000100,468,1241755,1350975895,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:05:01",60.049395,0.000190,16539,8077488,1350975901,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:05:15",14.031280,0.000096,0,29632,1350975915,"SELECT
+    sessions.id,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason
+FROM
+    sessions
+WHERE
+    sessions.sent = 0 
+    AND sessions.`show` = 1 
+    AND sessions.disqualified = 0 
+    AND sessions.post <> ''
+    AND sessions.university <> ''
+    AND SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'verification_score"":', -1), ',', 1) = 0 
+    AND sessions.expire > DATE_FORMAT(NOW(), '%Y-%m-01')"
+"121023  0:06:27",26.079865,0.000069,125,1043801,1350975987,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+"121023  0:06:28",27.189190,0.000100,468,1241755,1350975988,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:07:03",121.967825,0.000159,1493,6450359,1350976023,"SELECT /* Memcached:allocations_by_source */
+    COUNT(DISTINCT sessions.id),
+    allocations_referrals.allocation,
+    allocations_referrals.percent,
+    allocations.id,
+    allocations_referrals.hardcap,
+    allocations_referrals.referral_name
+FROM
+    allocations_referrals
+INNER JOIN allocations ON (
+    allocations.id = allocations_referrals.allocation_id
+)
+INNER JOIN programs ON (
+    programs.allocation_id = allocations.id
+)
+LEFT JOIN sessions ON(
+    sessions.program_id = programs.id
+    AND sessions.affiliate = allocations_referrals.referral_name
+    AND sessions.sent = 1
+    AND sessions.show = 1
+    AND sessions.disqualified = 0
+    AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+)
+GROUP BY
+    allocations.id,
+    allocations_referrals.referral_name"
+
+"121023  0:08:51",50.239806,0.000131,125,1043802,1350976131,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+,50.720855,0.000078,468,1241756,1350976131,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:10:04",2.506166,0.000058,0,18409,1350976204,"SELECT id,`return`,university FROM sessions WHERE disqualified=1 AND reason='Awaiting Status' AND sent_date > DATE_SUB(CURDATE(), INTERVAL 15 DAY)"
+"121023  0:10:19",17.734028,0.000093,0,29632,1350976219,"SELECT
+    sessions.id,
+    sessions.email,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason,
+    sessions.affiliate,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'program"":""', -1), '""', 1) as program,
+    sessions.data
+FROM
+    sessions
+WHERE
+    sessions.sent = 0
+    AND sessions.`show` = 1
+    AND sessions.disqualified = 0
+    AND sessions.post <> ''
+    AND sessions.reason = ''
+    AND sessions.expire > DATE_SUB(NOW(), INTERVAL 15 DAY)"
+,17.738678,0.000115,0,29632,1350976219,"SELECT
+    sessions.id,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason
+FROM
+    sessions
+WHERE
+    sessions.sent = 0 
+    AND sessions.`show` = 1 
+    AND sessions.disqualified = 0 
+    AND sessions.post <> ''
+    AND sessions.university <> ''
+    AND SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'verification_score"":', -1), ',', 1) = 0 
+    AND sessions.expire > DATE_FORMAT(NOW(), '%Y-%m-01')"
+"121023  0:11:20",78.497683,0.000147,125,1043802,1350976280,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+"121023  0:11:21",79.124240,0.000096,468,1241756,1350976281,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:11:26",84.782067,0.000215,16539,8077527,1350976286,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:12:02",1.131986,0.000061,0,18409,1350976322,"SELECT id,`return`,university FROM sessions WHERE disqualified=1 AND reason='Awaiting Status' AND sent_date > DATE_SUB(CURDATE(), INTERVAL 15 DAY)"
+"121023  0:12:15",14.433077,0.000211,3,29315,1350976335,"SELECT /* Memcached:Operation_Allocation */
+   allocations.id,
+   allocations.allocation
+FROM
+   sessions USE INDEX (sent_date)
+   INNER JOIN programs ON (
+       programs.id=sessions.program_id
+        AND INSTR(sessions.data, '_orig') > 0
+        AND CONVERT(SUBSTR(sessions.data,INSTR(sessions.data, 'age_orig"":""') + 11, 2), SIGNED) BETWEEN 15 AND 20
+       AND sessions.sent_date > DATE_FORMAT(NOW(), '%Y-%m-01')
+       AND sessions.disqualified=0
+       AND programs.university_id NOT IN(SELECT id FROM universities WHERE tier=5)
+   )
+   INNER JOIN allocations ON (
+       allocations.id=programs.allocation_id
+   )
+GROUP BY
+   allocations.id
+HAVING
+   COUNT(sessions.session_id)/allocations.allocation>0.2"
+"121023  0:13:21",80.346184,0.000101,125,1043802,1350976401,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+"121023  0:13:22",81.202210,0.000093,468,1241756,1350976402,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:14:19",77.985518,0.000209,16539,8077527,1350976459,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:14:42",40.361330,0.000122,125,1043803,1350976482,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+,40.978935,0.000161,468,1241757,1350976482,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:15:16",14.590096,0.000084,0,29632,1350976516,"SELECT
+    sessions.id,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason
+FROM
+    sessions
+WHERE
+    sessions.sent = 0 
+    AND sessions.`show` = 1 
+    AND sessions.disqualified = 0 
+    AND sessions.post <> ''
+    AND sessions.university <> ''
+    AND SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'verification_score"":', -1), ',', 1) = 0 
+    AND sessions.expire > DATE_FORMAT(NOW(), '%Y-%m-01')"
+"121023  0:16:02",1.058692,0.000062,0,18411,1350976562,"SELECT id,`return`,university FROM sessions WHERE disqualified=1 AND reason='Awaiting Status' AND sent_date > DATE_SUB(CURDATE(), INTERVAL 15 DAY)"
+"121023  0:16:34",32.666955,0.000129,125,1043804,1350976594,"SELECT /* Memcached:Remaining_Allocations*/
+    allocations.id,
+    allocations.allocation
+FROM
+    allocations,
+    programs
+LEFT JOIN sessions ON (
+    sessions.sent=1
+    AND sessions.`show`=1
+    AND sessions.disqualified=0
+    AND sessions.sent_date > DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    AND sessions.program_id=programs.id
+)
+WHERE
+    allocations.id=programs.allocation_id
+    AND allocations.pause=0
+GROUP BY
+    allocations.id
+HAVING
+    COUNT(DISTINCT sessions.id) < allocations.allocation"
+"121023  0:16:35",33.569357,0.000092,468,1241758,1350976595,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:16:40",39.078935,0.000199,16539,8077543,1350976600,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:16:45",103.456372,0.000183,1493,6450362,1350976605,"SELECT /* Memcached:allocations_by_source */
+    COUNT(DISTINCT sessions.id),
+    allocations_referrals.allocation,
+    allocations_referrals.percent,
+    allocations.id,
+    allocations_referrals.hardcap,
+    allocations_referrals.referral_name
+FROM
+    allocations_referrals
+INNER JOIN allocations ON (
+    allocations.id = allocations_referrals.allocation_id
+)
+INNER JOIN programs ON (
+    programs.allocation_id = allocations.id
+)
+LEFT JOIN sessions ON(
+    sessions.program_id = programs.id
+    AND sessions.affiliate = allocations_referrals.referral_name
+    AND sessions.sent = 1
+    AND sessions.show = 1
+    AND sessions.disqualified = 0
+    AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+)
+GROUP BY
+    allocations.id,
+    allocations_referrals.referral_name"
+
+"121023  0:18:49",47.971393,0.000132,468,1241758,1350976729,"SELECT /* Memcached:leads_allocations */
+    COUNT(DISTINCT sessions.id),
+    allocations.allocation,
+    allocations.filldays,
+    allocations.id,
+    allocations.pause
+FROM
+    allocations
+    JOIN programs ON (
+        programs.allocation_id=allocations.id
+    )
+    LEFT JOIN sessions ON (
+        sessions.program_id=programs.id
+        AND sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.sent_date >= DATE_FORMAT(CURDATE(), ""%Y-%m-01 00:00:00"")
+    )
+GROUP BY
+    allocations.id"
+"121023  0:20:03",2.182453,0.000059,0,18411,1350976803,"SELECT id,`return`,university FROM sessions WHERE disqualified=1 AND reason='Awaiting Status' AND sent_date > DATE_SUB(CURDATE(), INTERVAL 15 DAY)"
+"121023  0:20:06",65.139625,0.000211,16539,8077543,1350976806,"SELECT /* Memcached:Allocations_Simple_Current_Month */
+    `allocations`.id,
+    `allocations`.name,
+    `allocations`.allocation,
+    `allocations`.updated,
+    `allocations`.filldays,
+    `allocations`.daycap,
+    `universities`.active,
+    COUNT(sessions.id), SUM(IF(BINARY(UPPER(SUBSTRING(sessions.affiliate,1,1)))=BINARY(SUBSTRING(sessions.affiliate,1,1)),1,0)),
+    100*COUNT(sessions.id)/`allocations`.allocation AS perc,
+    `affiliates_price`.allocation,
+    affiliates.name,
+    `allocations`.pause,
+    `allocations`.price
+FROM
+    `allocations`,
+    `universities`,
+    paul.`affiliates_price`,
+    affiliates,
+    `programs` LEFT JOIN sessions ON
+        sessions.sent=1
+        AND sessions.`show`=1
+        AND sessions.disqualified=0
+        AND sessions.program_id=`programs`.id
+        AND DATE_FORMAT(sessions.sent_date, '%c-%Y') = '10-2012'
+WHERE
+    `allocations`.id=`programs`.allocation_id
+    AND `programs`.university_id=`universities`.id
+    AND `affiliates_price`.allocation_id=`allocations`.id
+    AND `affiliates_price`.affiliate_id=affiliates.id
+    
+GROUP BY
+    `allocations`.id,
+    `affiliates_price`.id
+ORDER BY
+    `allocations`.name"
+"121023  0:20:17",15.974654,0.000100,0,29632,1350976817,"SELECT
+    sessions.id,
+    sessions.email,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason,
+    sessions.affiliate,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'program"":""', -1), '""', 1) as program,
+    sessions.data
+FROM
+    sessions
+WHERE
+    sessions.sent = 0
+    AND sessions.`show` = 1
+    AND sessions.disqualified = 0
+    AND sessions.post <> ''
+    AND sessions.reason = ''
+    AND sessions.expire > DATE_SUB(NOW(), INTERVAL 15 DAY)"
+,15.994900,0.000114,0,29632,1350976817,"SELECT
+    sessions.id,
+    sessions.university,
+    sessions.post,
+    sessions.zip,
+    sessions.reason
+FROM
+    sessions
+WHERE
+    sessions.sent = 0 
+    AND sessions.`show` = 1 
+    AND sessions.disqualified = 0 
+    AND sessions.post <> ''
+    AND sessions.university <> ''
+    AND SUBSTRING_INDEX(SUBSTRING_INDEX(data, 'verification_score"":', -1), ',', 1) = 0 
+    AND sessions.expire > DATE_FORMAT(NOW(), '%Y-%m-01')"

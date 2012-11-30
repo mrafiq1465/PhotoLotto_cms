@@ -1,0 +1,31 @@
+body 
+{
+	background-color:#d5deed;
+	padding:0;
+	margin:0;
+	font-family:tahoma,arial,verdana;
+}
+
+.container {margin: 0 auto;padding:0;width:954px;}
+.clear {clear:both;}
+
+/*RAF-please add your CSS here /////////////////////////////// */
+.homepromoleft {float:left;width:671px;}
+.homepromoright {float:left;background-color:#3c4043;width:280px;padding:0px;color:#fff;height: 355px; }
+
+/*RAF-please add your CSS here /////////////////////////////// */
+
+/*NAV ITEMS /////////////////////////////// */
+div#nav{width:914px;height:20px;padding:10px 20px;margin-bottom:15px;background-color:#fef9f3;}
+.menu, .menu ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  z-index: 100;
+}
+
+.menu li {float:left;margin-right:30px;color:#007b78;}
+.menu li a {font-weight:normal;font-size:0.9em;text-decoration:none;color:#007b78;}
+.menu li a:hover, .menu li.active a {color:#dcc39e;}
+/*NAV ITEMS /////////////////////////////// */

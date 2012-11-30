@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title></title>
+<link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset.css" type="text/css">
+<link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssfonts/cssfonts.css" type="text/css">
+<link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/cssgrids.css" type="text/css">
+
+
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+
+<style>
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0 auto;
+    background: rgb(49,114,170); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(49,114,170,1) 0%, rgba(138,187,215,1) 46%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(49,114,170,1)), color-stop(46%,rgba(138,187,215,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(49,114,170,1) 0%,rgba(138,187,215,1) 46%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(49,114,170,1) 0%,rgba(138,187,215,1) 46%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(49,114,170,1) 0%,rgba(138,187,215,1) 46%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(top, rgba(49,114,170,1) 0%,rgba(138,187,215,1) 46%,rgba(255,255,255,1) 100%); /* W3C */
+    font-family: Verdana;
+}
+
+h1 {
+    color: #555;
+    font-size: 240%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: .5em;
+}
+
+dl {
+    width: 80%;
+}
+dt, dd {
+    display: inline-block
+}
+
+dd {
+    border: 1px solid #999;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: .2em;
+}
+
+
+dd input[type=text], dd input[type=password] {
+    border: none;
+    padding: .5em .2em;
+    outline: none;
+    width: 15em;
+}
+
+dd input[type=text]:focus, dd input[type=password]:focus {
+    background-color: #FFFFCC;
+}
+
+
+dd.personname  input {
+    width: 12em;
+}
+
+
+dd.mobile {
+    padding-left: .4em;
+    background-color: #eee;
+    width: 15em;
+    text-align: right;
+}
+
+dd.mobile input.three {
+    width: 3em;
+    padding-left: .5em;
+}
+dd.mobile input.four {
+    width: 4em;
+    padding-left: .5em;
+}
+
+dd.mobile input.seven {
+    width: 11.9em;
+    padding-left: .5em;
+}
+
+label {
+    display: block;
+    width: 10em;
+    margin-left: 2em;
+}
+
+.contents {
+    min-height: 100%;
+    width: 960px;
+    margin: 0 auto;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    background-color: #fff;
+}
+
+.header {
+    padding: 1em;
+}
+
+.formfield {
+    padding: .5em;
+    width: 95%;
+}
+
+.formerror {
+    display:none;
+    padding: .4em 0 .8em 0;
+    margin-left: 15.5em;
+}
+
+.error .formerror {
+    display: block;
+    color: #cc0000;
+    font-size: .8em;
+}
+
+.info .formerror {
+    display: block;
+    color: #999;
+    font-size: .8em;
+}
+
+.displayedccode {
+    font-size: .8em;
+}
+
+
+.error input {
+    background-color: #FFCCCC;
+}
+
+.buttonpad {
+    border: none;
+}
+
+.buttonpad input[type=button] {
+    background-color: #ddd;
+    border-color: #999;
+    border: 1px solid;
+    padding: .4em 1em;
+    color: #666;
+    font-weight:bold;
+}
+
+
+.buttonpad input[type=button]:active {
+    background-color: #ccc;
+}
+
+
+.buttonpad input[type=button].next {
+    background-color: #5B74A8;
+    border-color: #333 #333 #111;
+    padding: .4em 1.4em;
+    color: #fff;
+}
+
+
+.buttonpad input[type=button]:active.next {
+    background-color: #1D4088;
+}
+
+.passwordmeter {
+    position:relative;
+    top: .5em;
+}
+.passwordstrength {
+    font-size: 85%;
+    color: #999;
+    border: none;
+    position:relative;
+    top: .5em;
+}
+.weak {
+    display: inline-block;
+    height: .8em;
+    width: 1.6em;
+    border: 1px solid #666;
+    background-color: #FFFF99;
+    margin: 0;
+}
+
+
+    /* word bubbles */
+.bubble {
+    display: block;
+    width: 20em;
+    position: relative;
+    padding: .5em 1em;
+    color: #666;
+    background: #eee;
+}
+
+.dialog {
+    display: block;
+    width: 22em;
+    position: relative;
+    padding: 0;
+    color: #666;
+    background: #eee;
+}
+
+.selectionbox {
+    background: #eee;
+    border-color: #333 #333 #111;
+    border: 1px solid;
+    color: #666;
+    background: #eee;
+    width: 80%;
+}
+
+.bottom:before {
+    content:"";
+    position: absolute;
+    bottom: -5px; /* value = - nub border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 5px 5px 0 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #eee transparent;
+}
+
+.top:before {
+    content:"";
+    position: absolute;
+    top: -5px; /* value = - nub border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 0 5px 5px 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #eee transparent;
+}
+
+
+.left:before {
+    content:"";
+    position: absolute;
+    top: 10px; /* controls vertical position */
+    left: -5px; /* value = - nub border width / controls horizontal position*/
+    border-width: 5px 5px 5px 0; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: transparent #eee;
+}
+
+
+.right:before {
+    content:"";
+    position: absolute;
+    top: 10px; /* controls vertical position */
+    right: -5px; /* value = - nub border width / controls horizontal position*/
+    border-width: 5px 0 5px 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: transparent #eee;
+}
+
+
+.topbordered {
+    border: 1px solid #999; /* value = - nub border width */
+    background-color: #fff;
+}
+
+    /* inserts a pointer nub above/under masking nub */
+.topbordered:before {
+    content:"";
+    position: absolute;
+    top: -6px; /* value = - nub border width + parent box border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 0 5px 5px 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #999 transparent;
+}
+
+    /* inserts masking nub above/over pointer nub */
+.topbordered:after {
+    content:"";
+    position: absolute;
+    top: -5px; /* value = - nub border width - parent box border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 0 5px 5px 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #fff transparent;
+}
+
+
+.bottombordered {
+    border: 1px solid #999; /* value = - nub border width */
+    background-color: #fff;
+}
+
+    /* inserts a pointer nub above/under masking nub */
+.bottombordered:before {
+    content:"";
+    position: absolute;
+    bottom: -6px; /* value = - nub border width + parent box border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 5px 5px 0 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #999 transparent;
+}
+
+    /* inserts masking nub above/over pointer nub */
+.bottombordered:after {
+    content:"";
+    position: absolute;
+    bottom: -5px; /* value = - nub border width - parent box border width / controls vertical position */
+    left: 10px; /* controls horizontal position */
+    border-width: 5px 5px 0 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #eee transparent;
+}
+
+.innertitlebar {
+    background-color: #1D4088;
+    padding: .5em;
+    color: #fff;
+}
+
+.innertop {
+    background-color: #fff;
+    padding: .5em;
+    min-height: 6em;
+}
+
+.innersub {
+    background-color: #eee;
+    padding: 1em .5em;
+}
+
+.selectionbox .innertop {
+    min-height: 15em;
+}
+
+
+.innerbot {
+    background-color: #eee;
+    padding: .5em;
+}
+
+
+.weirdo {
+    width: 0;
+    border-width: 20px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: red blue;
+    margin: 1em;
+}
+
+.weirdobox {
+    height: 20px;
+    width: 20px;
+    border-width: 20px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: red blue;
+    margin: 1em;
+}
+
+.triangle {
+    width: 0;
+    border-width: 10px 0 10px 10px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: transparent #ccc;
+    margin: 1em;
+}
+
+.triangle.small {
+    border-width: 5px 0 5px 5px; /* vary these values to change the angle of the vertex */
+}
+
+.triangle.large {
+    border-width: 20px 0 20px 20px; /* vary these values to change the angle of the vertex */
+}
+
+.circle {
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    background-color: #ccc;
+    width: 20px;
+    height: 20px;
+    margin: 1em;
+}
+
+.ring {
+    -webkit-border-radius:16px;
+    -moz-border-radius:16px;
+    border-radius:16px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    width: 16px;
+    height: 16px;
+    margin: 1em;
+}
+
+.diamond {
+    border: 1px solid #ccc;
+    background-color: #eee;
+    width: 32px;
+    height: 32px;
+    margin: .5em;
+    /* CSS tranform: rotate */
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+
+.tag {
+    width: 8em;
+    height: 2em;
+    position: relative;
+    color: #999;
+    background: #eee;
+    margin: 1em;
+    border: 1px solid #999;
+}
+
+.innertag {
+    position:absolute;
+    top:50%;
+    height:1em;
+    margin-top:-.7em;
+    margin-left:.4em;
+}
+
+.tag:before {
+    content:"";
+    position: absolute;
+    top: 0px; /* controls vertical position */
+    left: -1.1em; /* value = - nub border width / controls horizontal position*/
+    border-width: 1em 1em 1em 0; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: transparent #999;
+}
+.tag:after {
+    content:"";
+    position: absolute;
+    top: 0px; /* controls vertical position */
+    left: -1em; /* value = - nub border width / controls horizontal position*/
+    border-width: 1em 1em 1em 0; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: transparent #eee;
+}
+
+
+.foobar {
+    padding: .5em 1em;
+    border: 1px solid #999;z
+background-color: #eee;
+    width: 8em;
+    height: 1.5em;
+    cursor: pointer;
+    color: #666;
+}
+
+.foobar:hover {
+    background-color: #ddd;
+}
+
+.foobar:active {
+    background-color: #ccc;
+}
+
+
+.foobarselect {
+    position: relative;
+    bottom: 1.5em;
+    left: -1em;
+    width: 11em;
+    opacity: 0;
+}
+
+.foobarselect:active {
+    position: relative;
+    bottom: -0.5em;
+    left: 0.5em;
+}
+
+
+.nub {
+    float: right;
+    content:"";
+    width: 0;
+    border-width: 5px 5px 0 5px; /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #000 transparent;
+    margin: 0;
+    bottom: -5px;
+    position: relative;
+}
+
+
+.z1  {
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    width: 300px;
+    height: 500px;
+    background-color: red;
+    z-index: 2000;
+}
+
+
+.z2  {
+    position: absolute;
+    top: 200px;
+    left: 400px;
+    width: 500px;
+    height: 300px;
+    background-color: blue;
+    z-index: 0;
+}
+
+
+    /* css 3 tricks */
+.unused {
+    /* css3 gradient */
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
+    background:-moz-linear-gradient(#f9d835, #f3961c);
+    background:-o-linear-gradient(#f9d835, #f3961c);
+    background:linear-gradient(#f9d835, #f3961c);
+
+    /* rounded corners */
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+
+    /* drop shadow */
+    -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
+    box-shadow: 10px 10px 5px #888;
+
+    /* CSS tranform: rotate */
+    -moz-transform:rotate(120deg);
+    -webkit-transform:rotate(120deg);
+    transform:rotate(120deg);
+}
+
+</style>
+
+</head>
+<body>
+<div class="contents yui3-g">
+
+    <div class="yui3-u-1">
+        <div class="header">
+            <h1>Popups</h1>
+            <p>This is a cheat-sheet for UED/PMs to use as a reference for word bubbles, tool tips, and dialogs.</p>
+        </div>
+    </div>
+
+    <div class="yui3-u-1">
+        <div class="header">
+            <div class="yui3-g">
+                <div class="yui3-u-1-2">
+                    <div class="bubble bottom">
+                        This is an example of a word bubble with the nub on the bottom
+                    </div>
+                </div>
+                <div class="yui3-u-1-2">
+                    <div class="bubble top" >
+                        another word box
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="yui3-u-1">
+        <div class="header">
+            <div class="yui3-g">
+                <div class="yui3-u-1-2">
+                    <div class="bubble left">
+                        This is an example of a word bubble with the nub on the left
+                    </div>
+                </div>
+                <div class="yui3-u-1-2">
+                    <div class="bubble right">
+                        This is an example of a word bubble with the nub on the right
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="yui3-u-1">
+        <div class="header">
+            <div class="yui3-g">
+                <div class="yui3-u-1-2">
+                    <div class="bubble topbordered " style="padding: 10px; margin: 0;">
+                        <textarea style="border:none; width: 100%; height: 70px; text-align: top; resize: none;height:100px; max-height:100px;" placeholder="hi there Raf"></textarea>
+
+                    </div>
+                    <br>
+                    <div class="bubble bottombordered" style="background-color: #eee;">
+                        This is an example of a word bubble with the nub on the bottom and outlined frame w/ gray background
+                    </div>
+                </div>
+                <div class="yui3-u-1-2">
+                    <div class="dialog bottombordered">
+                        <div class="innertop">This is a dialog box with two buttons</div>
+                        <div class="innerbot">
+                            <div class="buttonpad" style="text-align: right;">
+                                <input type="button" id="cancel" name="cancel" class="cancel" value="cancel">
+                                <input type="button" id="next" name="next" class="next" value="next">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="yui3-u-1">
+        <div class="header">
+            <div class="selectionbox">
+                <div class="innertitlebar">Selection Title</div>
+                <div class="innersub">additional controls go here</div>
+                <div class="innertop">This is a select box</div>
+                <div class="innerbot">
+                    <div class="buttonpad" style="text-align: right;">
+                        <input type="button" id="cancel" name="cancel" class="cancel" value="close">
+                        <input type="button" id="next" name="next" class="next" value="select">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
