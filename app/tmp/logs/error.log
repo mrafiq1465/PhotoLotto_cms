@@ -592,3 +592,17 @@
 2012-11-09 10:33:15 Error: [MissingControllerException] Controller class App.jsController could not be found.
 #0 /Applications/MAMP/htdocs/SyntaxPerfect/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2012-11-30 11:53:44 Error: [MissingViewException] View file "/var/www/vhosts/sites/PhotoLotto_cms/app/View/Events/index.ctp" is missing.
+#0 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/View/View.php(473): View->_getViewFileName(NULL)
+#1 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#2 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#4 /var/www/vhosts/sites/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-11-30 12:42:16 Error: [MissingViewException] View file "/var/www/vhosts/sites/PhotoLotto_cms/app/View/Events/index.ctp" is missing.
+#0 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/View/View.php(473): View->_getViewFileName(NULL)
+#1 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#2 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#4 /var/www/vhosts/sites/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
