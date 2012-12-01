@@ -6,7 +6,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		Systax Perfect home page
+		PhotoLotto Admin
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
@@ -31,10 +31,10 @@
 			</div>
             <nav id="top_nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Works</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">New Company</a></li>
+                    <li><a href="#">Manage Companies</a></li>
+                    <li><a href="#">New Event</a></li>
+                    <li><a href="#">Manage Events</a></li>
                 </ul>
             </nav>
 		</header>
@@ -49,34 +49,17 @@
     <footer>
           <section>
               <address id="address">
-                  suite#3203, 695 Tasman Drive,
-                  Sunnyvale, CA-94089, USA
+                  Sydney, Australia
               </address>
               <address id="phone">
               </address>
               <div id="copyright">
 
               </div>
-              <nav id="social">
-                <ul>
-                    <li>
-                        <a></a>
-                    </li>
-                    <li>
-                        <a></a>
-                    </li>
-                    <li>
-                        <a></a>
-                    </li>
-                    <li>
-                        <a></a>
-                    </li>
-                </ul>
-              </nav>
+
           </section>
 
     </footer>
 
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
