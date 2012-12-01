@@ -1,7 +1,7 @@
 <? echo $this->Form->create('Event'); ?>
 
 <? echo $this->Form->input('name', array('label' => 'Name')); ?>
-<? echo $this->Form->input('company_id', array('label' => 'Company')); ?>
+<? echo $this->Form->input('company_id'); ?>
 <? echo $this->Form->input('shortdescription', array('label' => 'Short Description')); ?>
 <? echo $this->Form->input('gpslat', array('label' => 'Latitude')); ?>
 <? echo $this->Form->input('gpslong', array('label' => 'Longitude')); ?>

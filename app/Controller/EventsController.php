@@ -48,7 +48,8 @@ class EventsController extends AppController {
 			}
 		}
 		$users = $this->Event->User->find('list');
-		$this->set(compact('users'));
+		$companies = $this->Event->Company->find('list');
+		$this->set(compact('users','companies'));
 	}
 
 /**
@@ -100,6 +101,23 @@ class EventsController extends AppController {
 		$this->Session->setFlash(__('Event was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+    public function eventlist(){
+        $this->autoRender = false;
+        $params = array_keys($_GET);
+        if(!empty($params)) $params_formatted = array('fields' => $params);
+        $options = array(
+            'recursive' => -1
+        );
+        if(!empty($params)){
+            $options = array_merge($options,$params_formatted);
+        }
+        $events = $this->Event->find('all', $options);
+        echo json_encode($events);
+    }
+
+
+
 
 /**
  * admin_index method
