@@ -32,6 +32,14 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    public $helpers = array(
+        'Session',
+        'Html'      => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+        'Form'      => array('className' => 'TwitterBootstrap.BootstrapForm'),
+        'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
+    );
+    
     // If current user is not logged in, prompt for login
     function requireLogin() {
         if (!$this->Session->check('User')) {
@@ -65,7 +73,7 @@ class AppController extends Controller {
     // Returns true if logged in user is admin, false if not
     function isAdmin() {
         // if the logged in user is the admin
-        return ($this->Session->read('User.name')=='admin') ? true : false ;
+        return ($this->Session->read('User.name')=='admin') ? TRUE : FALSE ;
     }
 
     // called before every single action

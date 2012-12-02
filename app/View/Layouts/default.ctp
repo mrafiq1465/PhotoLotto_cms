@@ -1,19 +1,41 @@
 <?php echo $this->Html->docType('html5');?>
-<html>
+
+<html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<title>
-		PhotoLotto Admin
-	</title>
-    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+    <title><?php echo $title_for_layout; ?></title>
+
+
+    <!--  meta info -->
+    <?php
+    echo $this->Html->meta(array("name"    => "viewport",
+                                 "content" => "width=device-width,  initial-scale=1.0"));
+    ?>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- styles -->
+    <?php
+        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('style');
+    ?>
+
+    <!-- scripts -->
     <?php
 
         echo $this->Html->meta('favicon.ico','/favicon.ico', array('type' => 'icon'));
 
-		echo $this->Html->css('reset');
-		echo $this->Html->css('style');
+        echo $this->Html->script(
+            array(
+                'http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js',
+                'bootstrap.min'
+            ));
 
-		//echo $this->Html->script('jquery.tools.min');
         echo $this->Html->script('main');
 
 
@@ -24,42 +46,38 @@
 
 </head>
 <body>
-	<div id="container">
-		<header >
-			<div id="logo">
+	<div id="container" class="container">
 
-			</div>
-            <nav id="top_nav">
-                <ul>
-                    <li><a href="#">New Company</a></li>
-                    <li><a href="#">Manage Companies</a></li>
-                    <li><a href="#">New Event</a></li>
-                    <li><a href="#">Manage Events</a></li>
-                </ul>
-            </nav>
-		</header>
+        <!-- Navbar ============================================= -->
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container1">
+                    <a class="btn btn-navbar" data-toggle="collapse"
+                       data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/">PhotoLotto</a>
+                    <a href="/users/logout" class="pull-right">Logout</a>
+                </div>
+            </div>
+        </div>
 
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-
-
+        <div id="row">
+            <?php echo $this->Session->flash(); ?>
+            <?php echo $this->fetch('content'); ?>
+        </div>
+        
+        <footer id="footer">
+            <address id="address">
+                Sydney, Australia
+            </address>
+        </footer>
 	</div>
-    <footer>
-          <section>
-              <address id="address">
-                  Sydney, Australia
-              </address>
-              <address id="phone">
-              </address>
-              <div id="copyright">
 
-              </div>
 
-          </section>
-
-    </footer>
+    <?php echo $this->element('sql_dump'); ?>
 
 </body>
 </html>
