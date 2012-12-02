@@ -12,5 +12,4 @@
 
 <div id="password" >
     <? echo $this->Form->input('email_password', array('label' => 'Email')); ?>
-
 </div>
