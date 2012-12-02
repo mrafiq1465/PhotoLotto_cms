@@ -85,5 +85,15 @@ class AppController extends Controller {
         }
     }
 
+    function calculate_distance(){
+
+
+        App::import('Vendor', 'geography');
+        $Geography = new Geography();
+
+
+        return $Geography->mToKm($Geography->getDistance(-30, 150, -31, 160));
+
+    }
 
 }

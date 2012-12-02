@@ -18,6 +18,7 @@ class EventsController extends AppController {
  */
 	public function index() {
 		$this->Event->recursive = 0;
+
         $this->set('events', $this->paginate());
 
 	}
@@ -108,6 +109,8 @@ class EventsController extends AppController {
 	}
 
     public function eventlist(){
+        $distance = $this->calculate_distance();
+        var_dump($distance);
         $this->autoRender = false;
         $params = array_keys($_GET);
         if(!empty($params)) $params_formatted = array('fields' => $params);
