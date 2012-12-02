@@ -1,5 +1,3 @@
-
-
 <?php echo $this->Form->create('Post');?>
 
 <? echo $this->Form->input('email', array('label' => 'Email')); ?>

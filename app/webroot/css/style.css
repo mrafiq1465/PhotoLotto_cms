@@ -1,7 +1,16 @@
+/* line 3, ../sass/style.scss */
 body {
-    padding-top: 40px;
+  padding-top: 40px;
 }
 
+/* line 7, ../sass/style.scss */
+.simple {
+  -webkit-border-radius: 4px 4px;
+  -moz-border-radius: 4px / 4px;
+  border-radius: 4px / 4px;
+}
+
+/* line 11, ../sass/style.scss */
 .navbar .navbar-inner {
-    padding: 0 20px;
+  padding: 0 20px;
 }
