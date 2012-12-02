@@ -1,20 +1,19 @@
-<?php
-
-?>
-<!DOCTYPE html>
+<?php echo $this->Html->docType('html5');?>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		PhotoLotto Admin
 	</title>
-	<?php
-		echo $this->Html->meta('icon');
+    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+    <?php
+
+        echo $this->Html->meta('favicon.ico','/favicon.ico', array('type' => 'icon'));
 
 		echo $this->Html->css('reset');
 		echo $this->Html->css('style');
 
-		echo $this->Html->script('jquery.tools.min');
+		//echo $this->Html->script('jquery.tools.min');
         echo $this->Html->script('main');
 
 
@@ -22,6 +21,7 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+
 </head>
 <body>
 	<div id="container">

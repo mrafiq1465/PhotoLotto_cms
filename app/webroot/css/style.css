@@ -45,3 +45,11 @@ section.slider {
     height:200px;
     border: 1px solid #ff55fc;
 }
+
+#password {
+    background-color: #ccc;
+    width: 200px;
+    height: 200px;
+    display: none;
+
+}

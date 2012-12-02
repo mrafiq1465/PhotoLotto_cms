@@ -5,9 +5,13 @@ App::uses('AppController', 'Controller');
  *
  * @property Event $Event
  */
+
+
 class EventsController extends AppController {
 
-/**
+    //var $helpers = Array('Form', 'Tinymce');
+
+    /**
  * index method
  *
  * @return void

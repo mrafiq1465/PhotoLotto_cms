@@ -620,3 +620,56 @@
 #3 /var/www/vhosts/sites/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
 #4 /var/www/vhosts/sites/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 {main}
+2012-12-01 13:41:16 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 13:43:21 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 13:46:17 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 13:47:32 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 13:50:14 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 13:50:21 Error: [MissingHelperException] Helper class TinymceHelper could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(862): HelperCollection->load('Tinymce', Array)
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/View/View.php(469): View->loadHelpers()
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#3 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#4 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
+#5 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-12-01 18:08:56 Error: [MissingActionException] Action UsersController::forget_passwoer() could not be found.
+#0 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/MAMP/htdocs/PhotoLotto_cms/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot/index.php(94): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

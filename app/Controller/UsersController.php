@@ -160,5 +160,14 @@ class UsersController extends AppController {
         $this->redirect('/');
     }
 
+    function send_password() {
+
+        $email = $this->data['email'];
+
+        $response['status'] = 'success';
+        echo json_encode($response);
+        exit();
+    }
+
 }
 
