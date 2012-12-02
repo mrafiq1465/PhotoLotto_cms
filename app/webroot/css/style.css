@@ -14,3 +14,27 @@ body {
 .navbar .navbar-inner {
   padding: 0 20px;
 }
+
+ul.event_list,ul.company_list {
+   padding: 0;
+    margin: 0;
+}
+
+ul.event_list li {
+    width: 100px;
+    float: left;
+}
+
+ul.company_list li {
+    width: 50px;
+    float: left;
+}
+
+ul.company_list li.name {
+    width: 500px;
+    float: left;
+}
+
+#footer {
+    clear: both;
+}

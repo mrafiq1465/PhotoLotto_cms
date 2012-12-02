@@ -21,6 +21,7 @@
 
     <!-- styles -->
     <?php
+        echo $this->Html->css('reset');
         echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('style');
     ?>
@@ -71,13 +72,13 @@
         
         <footer id="footer">
             <address id="address">
-                Sydney, Australia
+
             </address>
         </footer>
 	</div>
 
 
-    <?php echo $this->element('sql_dump'); ?>
+    <?php // echo $this->element('sql_dump'); ?>
 
 </body>
 </html>
