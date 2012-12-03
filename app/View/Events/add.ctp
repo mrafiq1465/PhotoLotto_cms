@@ -5,8 +5,8 @@
 <? echo $this->Form->input('shortdescription', array('label' => 'Short Description')); ?>
 <? echo $this->Form->input('gpslat', array('label' => 'Latitude')); ?>
 <? echo $this->Form->input('gpslong', array('label' => 'Longitude')); ?>
-<input name="data[Event][date_start]" type="date" />
-<input name="data[Event][date_end]" type="date" />
+<input name="data[Event][date_start]" type="date"  value="Today" />
+<input name="data[Event][date_end]" type="date"  value="Today" />
 
 <? echo $this->Form->input('filter', array('label' => 'Filter')); ?>
 <? echo $this->Form->input('facebook_msg', array('label' => 'Facebook Message')); ?>
