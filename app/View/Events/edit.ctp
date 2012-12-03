@@ -1,10 +1,10 @@
 <? echo $this->Form->create('Event', array('type' => 'file')); ?>
 
 <? echo $this->Form->input('name', array('label' => 'Name')); ?>
-<? echo $this->Form->input('company_id'); ?>
 <?php $eventtype = array('generic'=>'generic', 'location-based'=>'location-based');
-      echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'generic'));
+echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'generic'));
 ?>
+<? echo $this->Form->input('company_id'); ?>
 <? echo $this->Form->input('shortdescription', array('label' => 'Short Description')); ?>
 <? echo $this->Form->input('gpslat', array('label' => 'Latitude')); ?>
 <? echo $this->Form->input('gpslong', array('label' => 'Longitude')); ?>
