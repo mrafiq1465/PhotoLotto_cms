@@ -113,6 +113,7 @@ class EventsController extends AppController {
                     $this->request->data['Event']['img_overlay_1'] = $overlay1_path;
                 }
 
+                $this->Event->save($this->request->data);
                 $this->Session->setFlash(__('The event has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {

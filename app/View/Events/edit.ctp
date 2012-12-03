@@ -22,8 +22,8 @@ echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'ge
 
 <img src="<?=$this->data['Event']['img_thumb']?>">
 <? echo $this->Form->file('img_thumb'); ?>
-<img src="<?=$this->data['Event']['overlay_image1']?>">
-<? echo $this->Form->file('overlay_image1'); ?>
+<img src="<?=$this->data['Event']['img_overlay_1']?>">
+<? echo $this->Form->file('img_overlay_1'); ?>
 
 <? echo $this->Form->end('Add'); ?>
 
