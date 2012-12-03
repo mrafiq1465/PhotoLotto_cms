@@ -85,7 +85,7 @@ class AppController extends Controller {
         }
     }
 
-    function calculate_distance(){
+    function calculate_distance($lat1,$long1,$lat2,$long2){
 
 
         App::import('Vendor', 'geography');
