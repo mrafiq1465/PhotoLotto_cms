@@ -105,7 +105,7 @@ class UsersController extends AppController {
 
     function login() {
         if ($this->isLoggedin()) {
-            $this->redirect('/users/profile');
+            $this->redirect('/events');
             exit;
         }
 
@@ -114,41 +114,33 @@ class UsersController extends AppController {
 
             $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
                 'OR' => array(
-                    array('User.name' => $this->data['User']['name']),
-                    array('User.email' => $this->data['User']['name'])
+                    array('User.name' => $this->data['User']['email']),
+                    array('User.email' => $this->data['User']['email'])
                 )
             )));
 
             if(!empty($dbuser) && ($dbuser['User']['password'] == $this->data['User']['password'] )){
-                $this->User->save($dbuser);
-
                 // write the username to a session
 
                 $this->Session->write($dbuser);
                 // redirect the user
                 //$this->Session->setFlash('You have successfully logged in.'); // Richard asked us to remove this message 2008-10-02 JB
-                if ($this->Session->check('goto')) {
+                /*if ($this->Session->check('goto')) {
                     $url = $this->Session->read('goto');
                     $this->Session->delete('goto');
                 } else {
                     $url = $this->data['User']['goto'];
-                }
+                }*/
 
-                $url = (empty($url)) ? '/' : $url;
-                if ($dbuser['User']['username'] == 'admin'){
+                $url = (empty($url)) ? '/events' : $url;
+                /*if ($dbuser['User']['username'] == 'admin'){
                     $this->redirect('/admin/');
-                }
+                }*/
                 $this->redirect($url);
             }
             else {
                 $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
             }
-        }
-        if (!$this->Session->check('goto')) {
-            $this->Session->write('goto', $this->referer());
-            $this->set('goto', $this->referer());
-        } else {
-            $this->set('goto', $this->Session->read('goto'));
         }
     }
 

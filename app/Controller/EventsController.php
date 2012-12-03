@@ -46,7 +46,28 @@ class EventsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Event->create();
-			if ($this->Event->save($this->request->data)) {
+            if(isset($this->request->data['Event']['img_thumb'])) {
+                $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
+                $this->request->data['Event']['img_thumb'] = '';
+            }
+            if(isset($this->request->data['Event']['overlay_image1']['tmp_name'])){
+                $overlay1_path_uploaded = $this->request->data['Event']['overlay_image1']['tmp_name'];
+                $this->request->data['Event']['overlay_image1'] = '';
+            }
+            if ($this->Event->save($this->request->data)) {
+                if(isset($this->request->data['Event']['img_thumb'])){
+                    $thumb_path = '/img/events/' . $this->Event->id . '_thumb.jpg';
+                    move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
+                    $this->request->data['Event']['img_thumb'] = $thumb_path;
+                }
+                if(isset($this->request->data['Event']['overlay_image1'])){
+                    $overlay1_path = '/img/events/' . $this->Event->id . '_overlay1.jpg';
+                    move_uploaded_file($overlay1_path_uploaded,WWW_ROOT . $overlay1_path);
+                    $this->request->data['Event']['overlay_image1'] = $overlay1_path;
+                }
+
+                $this->Event->save($this->request->data);
+
 				$this->Session->setFlash(__('The event has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -71,8 +92,28 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash(__('The event has been saved'));
+            if(isset($this->request->data['Event']['img_thumb'])) {
+                $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
+                $this->request->data['Event']['img_thumb'] = '';
+            }
+            if(isset($this->request->data['Event']['overlay_image1']['tmp_name'])){
+                $overlay1_path_uploaded = $this->request->data['Event']['overlay_image1']['tmp_name'];
+                $this->request->data['Event']['overlay_image1'] = '';
+            }
+
+            if ($this->Event->save($this->request->data)) {
+                if(isset($this->request->data['Event']['img_thumb'])){
+                    $thumb_path = '/img/events/' . $this->Event->id . '_thumb.jpg';
+                    move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
+                    $this->request->data['Event']['img_thumb'] = $thumb_path;
+                }
+                if(isset($this->request->data['Event']['overlay_image1'])){
+                    $overlay1_path = '/img/events/' . $this->Event->id . '_overlay1.jpg';
+                    move_uploaded_file($overlay1_path_uploaded,WWW_ROOT . $overlay1_path);
+                    $this->request->data['Event']['overlay_image1'] = $overlay1_path;
+                }
+
+                $this->Session->setFlash(__('The event has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
@@ -109,7 +150,6 @@ class EventsController extends AppController {
 	}
 
     public function eventlist(){
-
         $this->autoRender = false;
         $params = array_keys($_GET);
         if(!empty($params)) $params_formatted = array('fields' => $params);
@@ -163,8 +203,11 @@ class EventsController extends AppController {
             $i++;
 
         }
-        //$events_array = Set::sort($events_array, '{n}.distance', 'desc');
+        $events_array = Set::sort($events_array, '{n}.distance', 'asc');
         //$events_array = Set::sort($events_array, '{n}.{s}.{n}', 'SORT_ASC');
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
         echo json_encode($events_array);
     }
 

@@ -20,7 +20,9 @@ echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'ge
 <? echo $this->Form->input('html_after', array('label' => 'HTML After')); ?>
 <? echo $this->Form->input('stage', array('label' => 'Stage')); ?>
 
+<img src="<?=$this->data['Event']['img_thumb']?>">
 <? echo $this->Form->file('img_thumb'); ?>
+<img src="<?=$this->data['Event']['overlay_image1']?>">
 <? echo $this->Form->file('overlay_image1'); ?>
 
 <? echo $this->Form->end('Add'); ?>

@@ -34,21 +34,27 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $helpers = array(
-        'Session',
         'Html'      => array('className' => 'TwitterBootstrap.BootstrapHtml'),
         'Form'      => array('className' => 'TwitterBootstrap.BootstrapForm'),
         'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
     );
-    
+
+    public $components = array(
+        'Session',
+        'Cookie',
+        'RequestHandler',
+    );
+
+
     // If current user is not logged in, prompt for login
     function requireLogin() {
         if (!$this->Session->check('User')) {
             // clear session var for where we were before going to login form
-            $this->Session->del('goto');
+            $this->Session->delete('goto');
 
             // set flash message and redirect
             $this->Session->setFlash('You need to be logged in to access this area', FALSE, FALSE, 'login');
-            $this->redirect('/users/login/',301);
+            $this->redirect('/users/login/');
             exit();
         }
     }
@@ -78,10 +84,19 @@ class AppController extends Controller {
 
     // called before every single action
     function beforeFilter() {
+
+        $excluded = array(
+            array('users','login'),
+            array('events','eventlist'),
+        );
+
+        $login_req = !in_array(array($this->params->params['controller'],$this->params->params['action']),$excluded);
         // if admin pages are being requested
-        if(isset($this->params['admin'])) {
+        if(isset($this->params->params['prefix']) && $this->params->params['prefix'] == 'admin') {
             // require the admin to be logged in
             $this->requireAdmin();
+        } elseif($login_req) {
+            $this->requireLogin();
         }
     }
 

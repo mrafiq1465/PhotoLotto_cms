@@ -24,13 +24,13 @@ foreach($events as $event){
     </ul>
    </li>
    <li>
-       <?php echo $this->Html->link('Export','/event/export/'.$event['Event']['id'], array('class' => '')); ?>
+       <?php echo $this->Html->link('Export','/events/export/'.$event['Event']['id'], array('class' => '')); ?>
    </li>
     <li>
-        <?php echo $this->Html->link('Edit','/event/edit/'.$event['Event']['id'], array('class' => '')); ?>
+        <?php echo $this->Html->link('Edit','/events/edit/'.$event['Event']['id'], array('class' => '')); ?>
     </li>
     <li>
-        <?php echo $this->Html->link('Delete','/event/delete/'.$event['Event']['id'], array('class' => '')); ?>
+        <?php echo $this->Html->link('Delete','/events/delete/'.$event['Event']['id'], array('class' => '')); ?>
     </li>
 <?php
 }
