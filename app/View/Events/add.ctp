@@ -21,7 +21,7 @@ echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'ge
 <? echo $this->Form->input('stage', array('label' => 'Stage')); ?>
 
 <? echo $this->Form->file('img_thumb'); ?>
-<? echo $this->Form->file('overlay_image1'); ?>
+<? echo $this->Form->file('img_overlay_1'); ?>
 
 <? echo $this->Form->end('Add'); ?>
 
