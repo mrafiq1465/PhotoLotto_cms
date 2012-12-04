@@ -228,3 +228,16 @@ a.caldisabled {
     background-color:#333;
     color:#fff;
 }
+
+.list table {
+    width: 90%;
+}
+.list td {
+    padding: 10px;
+}
+.list tr.odd {
+    background-color: #dcdcdc;
+}
+.list tr.even {
+    background-color: #a3a3a3;
+}

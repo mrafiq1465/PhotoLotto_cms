@@ -46,6 +46,8 @@ class EventsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Event->create();
+            $user_data = $this->Session->read('User');
+            $this->request->data['Event']['updated_by'] = $user_data['id'];
             if(isset($this->request->data['Event']['img_thumb'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
                 $this->request->data['Event']['img_thumb'] = '';
@@ -74,9 +76,8 @@ class EventsController extends AppController {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Event->User->find('list');
 		$companies = $this->Event->Company->find('list');
-		$this->set(compact('users','companies'));
+		$this->set(compact('companies'));
 	}
 
 /**
@@ -92,12 +93,15 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+            $user_data = $this->Session->read('User');
+            $this->request->data['Event']['updated_by'] = $user_data['id'];
+
             if(isset($this->request->data['Event']['img_thumb'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
             if(isset($this->request->data['Event']['img_overlay_1']['tmp_name'])){
-                $overlay1_path_uploaded = $this->request->data['Event']['overlay_image1']['tmp_name'];
+                $overlay1_path_uploaded = $this->request->data['Event']['img_overlay_1']['tmp_name'];
                 $this->request->data['Event']['img_overlay_1'] = '';
             }
 
@@ -136,7 +140,7 @@ class EventsController extends AppController {
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
+			//throw new MethodNotAllowedException();
 		}
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {

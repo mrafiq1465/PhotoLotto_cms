@@ -83,7 +83,7 @@ class CompaniesController extends AppController {
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
+			//throw new MethodNotAllowedException();
 		}
 		$this->Company->id = $id;
 		if (!$this->Company->exists()) {
