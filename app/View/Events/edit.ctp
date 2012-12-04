@@ -21,13 +21,13 @@ echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' =>
 <? echo $this->Form->input('stage', array('label' => 'Stage')); ?>
 
 <label class="control-label">Thumbnail</label>
-<img src="<?=$this->data['Event']['img_thumb']?>" style="width: 100px;height: 100px;"><br>
+<img src="<?=$this->data['Event']['img_thumb']?>" style="max-height: 100px;"><br>
 <? echo $this->Form->file('img_thumb'); ?><br>
 <label class="control-label">Overlay Images</label>
 <? for ($i = 1; $i <= 5; $i++) {
     if (isset($this->data['Event']["img_overlay_$i"])) {
         ?>
-    <img src="<?=$this->data['Event']["img_overlay_$i"]?>" style="width: 100px;height: 100px;"><br>
+    <img src="<?=$this->data['Event']["img_overlay_$i"]?>" style="max-height: 100px;"><br>
     <? echo $this->Form->file("img_overlay_$i"); ?><br>
     <? } ?>
 <? } ?>
