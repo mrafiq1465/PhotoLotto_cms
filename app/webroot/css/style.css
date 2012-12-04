@@ -241,3 +241,11 @@ a.caldisabled {
 .list tr.even {
     background-color: #a3a3a3;
 }
+
+#add_more_image {
+    background-image: url(../img/glyphicons-halflings.png);
+    background-position: -405px 225px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}

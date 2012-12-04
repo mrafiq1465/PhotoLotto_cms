@@ -18,12 +18,14 @@ echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'ge
 <?// echo $tinymce->input('html_before'); ?>
 <? echo $this->Form->input('html_before', array('label' => 'HTML Before')); ?>
 <? echo $this->Form->input('html_after', array('label' => 'HTML After')); ?>
-<? echo $this->Form->input('stage', array('label' => 'Stage')); ?>
+<? echo $this->Form->select('stage', array('' => '---Select One---','a' => 'a', 'b' => 'b', 'c' => 'c')); ?>
+<? echo $this->Form->input('status', array('label' => 'Status')); ?>
 
-<? echo $this->Form->file('img_thumb'); ?>
+<label class="control-label">Thumbnail</label>
+<? echo $this->Form->file('img_thumb'); ?><br>
+<label class="control-label">Overlay Images</label>
 <? echo $this->Form->file('img_overlay_1'); ?>
+<a href="javascript:void(0);" id="add_more_image"></a>
 
 <? echo $this->Form->end('Add'); ?>
-
-
 

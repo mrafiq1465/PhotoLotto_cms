@@ -52,20 +52,25 @@ class EventsController extends AppController {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
-            if(isset($this->request->data['Event']['img_overlay_1']['tmp_name'])){
-                $overlay1_path_uploaded = $this->request->data['Event']['overlay_image1']['tmp_name'];
-                $this->request->data['Event']['img_overlay_1'] = '';
+            for($i=1;$i<=5;$i++){
+                if(isset($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
+                    $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
+                    $this->request->data['Event']["img_overlay_$i"] = '';
+                }
             }
+
             if ($this->Event->save($this->request->data)) {
                 if(isset($this->request->data['Event']['img_thumb'])){
                     $thumb_path = '/img/events/' . $this->Event->id . '_thumb.jpg';
                     move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
                     $this->request->data['Event']['img_thumb'] = $thumb_path;
                 }
-                if(isset($this->request->data['Event']['img_overlay_1'])){
-                    $overlay1_path = '/img/events/' . $this->Event->id . '_overlay1.jpg';
-                    move_uploaded_file($overlay1_path_uploaded,WWW_ROOT . $overlay1_path);
-                    $this->request->data['Event']['img_overlay_1'] = $overlay1_path;
+                for($i=1;$i<=5;$i++){
+                    if(isset($this->request->data['Event']["img_overlay_$i"])){
+                        $overlay_path = '/img/events/' . $this->Event->id . "_overlay$i.jpg";
+                        move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path);
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
+                    }
                 }
 
                 $this->Event->save($this->request->data);
@@ -100,9 +105,11 @@ class EventsController extends AppController {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
-            if(isset($this->request->data['Event']['img_overlay_1']['tmp_name'])){
-                $overlay1_path_uploaded = $this->request->data['Event']['img_overlay_1']['tmp_name'];
-                $this->request->data['Event']['img_overlay_1'] = '';
+            for($i=1;$i<=5;$i++){
+                if(isset($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
+                    $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
+                    $this->request->data['Event']["img_overlay_$i"] = '';
+                }
             }
 
             if ($this->Event->save($this->request->data)) {
@@ -111,10 +118,12 @@ class EventsController extends AppController {
                     move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
                     $this->request->data['Event']['img_thumb'] = $thumb_path;
                 }
-                if(isset($this->request->data['Event']['img_overlay_1'])){
-                    $overlay1_path = '/img/events/' . $this->Event->id . '_overlay1.jpg';
-                    move_uploaded_file($overlay1_path_uploaded,WWW_ROOT . $overlay1_path);
-                    $this->request->data['Event']['img_overlay_1'] = $overlay1_path;
+                for($i=1;$i<=5;$i++){
+                    if(isset($this->request->data['Event']["img_overlay_$i"])){
+                        $overlay_path = '/img/events/' . $this->Event->id . "_overlay$i.jpg";
+                        move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path);
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
+                    }
                 }
 
                 $this->Event->save($this->request->data);

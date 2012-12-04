@@ -44,4 +44,19 @@ $(document).ready(function() {
         firstDay: 1                  	// which day starts a week. 0 = sunday, 1 = monday etc..
     });
 
+    var num = $('[id^=EventImgOverlay]').length;
+    if(num == 5) {
+        $('#add_more_image').remove();
+    }
+
+    $('#add_more_image').click(function(){
+        var $this = $(this);
+        num = $('[id^=EventImgOverlay]').length+1;
+        $this.before('<br><input type="file" id="EventImgOverlay'+num+'" name="data[Event][img_overlay_'+num+']">');
+        if(num == 5){
+            $this.remove();
+        }
+    });
+
+
 });
