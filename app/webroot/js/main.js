@@ -1,10 +1,10 @@
 
 $(document).ready(function() {
 
-    $(".forgot_password").click(function(e) {
+    /*$(".forgot_password").click(function(e) {
         alert('test');
         //$("#password").overlay().load();
-    });
+    });*/
 /*
     $("#password").overlay({
         top: 260,

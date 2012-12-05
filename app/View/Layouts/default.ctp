@@ -1,3 +1,6 @@
+<?php 
+$bodyclass = $this->params['controller'] . '_' . $this->params['action'];
+?>
 <?php echo $this->Html->docType('html5');?>
 
 <html lang="en">
@@ -47,9 +50,10 @@
 	?>
 
 </head>
-<body>
+<body class="<?php echo $bodyclass ?>">
 	<div id="container" class="container">
 
+        <?php if ($bodyclass !== 'users_login'): ?>
         <!-- Navbar ============================================= -->
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -65,6 +69,7 @@
                 </div>
             </div>
         </div>
+            <?php endif; ?>
 
         <div id="row">
             <?php echo $this->Session->flash(); ?>

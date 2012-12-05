@@ -18,7 +18,7 @@
         echo $this->Form->input('states', array('options' => $states, 'default' => 'nsw'));
         ?>
     </section>
-    <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Edit',)); ?>
+    <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Edit')); ?>
 
 </section>
 
