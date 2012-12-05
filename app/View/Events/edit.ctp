@@ -1,3 +1,7 @@
+<section class="list">
+    <?=$this->element('menu', array(
+    "heading" => "Edit Event"
+));?>
 <? echo $this->Form->create('Event', array('type' => 'file')); ?>
 
 <? echo $this->Form->input('name', array('label' => 'Name')); ?>

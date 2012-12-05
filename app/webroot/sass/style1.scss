@@ -135,3 +135,21 @@ section.list {
 #logout_btn {
     margin-top: 10px;
 }
+#form-container {
+    background: #eeeeee;
+    padding: 20px;
+}
+
+#form-container + .control-group {
+    padding: 10px 20px;
+    text-align: right;
+}
+
+input.span2 {
+    margin-left: 10px;
+}
+#CompanyAddForm {
+    .control-group {
+        margin-bottom: 5px;
+    }
+}

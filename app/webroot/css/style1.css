@@ -163,3 +163,25 @@ section.list {
 #logout_btn {
   margin-top: 10px;
 }
+
+/* line 138, ../sass/style1.scss */
+#form-container {
+  background: #eeeeee;
+  padding: 20px;
+}
+
+/* line 143, ../sass/style1.scss */
+#form-container + .control-group {
+  padding: 10px 20px;
+  text-align: right;
+}
+
+/* line 148, ../sass/style1.scss */
+input.span2 {
+  margin-left: 10px;
+}
+
+/* line 152, ../sass/style1.scss */
+#CompanyAddForm .control-group {
+  margin-bottom: 5px;
+}
