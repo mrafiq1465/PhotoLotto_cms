@@ -58,5 +58,14 @@ $(document).ready(function() {
         }
     });
 
+    $('.del-btn').each(function(){
+        $(this).click(function(){
+            var ans = confirm('Do you want to delete ' + $(this).attr('item_name') + ' from list?');
+            if(!ans){
+                return false;
+            }
+        });
+    });
+
 
 });

@@ -40,7 +40,7 @@
                 <?=$this->Html->link('<i class="icon-pencil"></i> ', '/events/edit/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-trash"></i> ', '/events/delete/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-trash"></i> ', '/events/delete/' . $event['Event']['id'], array('class' => 'del-btn', 'item_name'=> $event['Event']['name'], 'escape' => FALSE)); ?>
             </td>
         </tr>
             <? } ?>

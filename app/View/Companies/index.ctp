@@ -19,7 +19,7 @@
                 <?=$this->Html->link('<i class="icon-pencil"></i> ', '/companies/edit/' . $company['Company']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-trash"></i> ', '/companies/delete/' . $company['Company']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-trash"></i> ', '/companies/delete/' . $company['Company']['id'], array('class' => 'del-btn', 'item_name'=> $company['Company']['name'], 'escape' => FALSE)); ?>
             </td>
         </tr>
             <? } ?>
