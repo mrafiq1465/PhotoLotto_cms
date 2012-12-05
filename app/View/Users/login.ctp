@@ -228,19 +228,19 @@ input.input {
     </footer>
 </div>
 <!--Modal-->
-<div class="modal hide fade" id="modall">
+<!--<div class="modal hide fade" id="modall">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Reset Password</h3>
     </div>
     <div class="modal-body">
-        <? echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input')); ?>
+        <?/* echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input')); */?>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn">Close</a>
         <a href="#" class="btn btn-primary">Reset</a>
     </div>
-</div>
+</div>-->
 
 <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Sign In'));?>
 

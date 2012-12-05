@@ -12,8 +12,8 @@ echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' =>
 <? echo $this->Form->input('shortdescription', array('label' => 'Short Description')); ?>
 <? echo $this->Form->input('gpslat', array('label' => 'Latitude')); ?>
 <? echo $this->Form->input('gpslong', array('label' => 'Longitude')); ?>
-<input name="data[Event][date_start]" type="date"/>
-<input name="data[Event][date_end]" type="date"/>
+<input name="data[Event][date_start]" value="<?=$this->data['Event']['date_start']?>" type="date"/>
+<input name="data[Event][date_end]" value="<?=$this->data['Event']['date_end']?>" type="date"/>
 
 <? echo $this->Form->input('filter', array('label' => 'Filter')); ?>
 <? echo $this->Form->input('facebook_msg', array('label' => 'Facebook Message')); ?>
