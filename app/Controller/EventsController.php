@@ -19,7 +19,7 @@ class EventsController extends AppController {
 	public function index() {
 		$this->Event->recursive = 0;
 
-        $this->set('events', $this->paginate());
+        $this->set('events', $this->paginate(null,array('Event.status' => 1)));
 
 	}
 
@@ -155,7 +155,7 @@ class EventsController extends AppController {
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
 		}
-		if ($this->Event->delete()) {
+		if ($this->Event->saveField('status',0)) {
 			$this->Session->setFlash(__('Event deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
