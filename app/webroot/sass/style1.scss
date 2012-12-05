@@ -1,0 +1,137 @@
+@import "compass/css3";
+
+body {
+    padding-top: 40px;
+}
+
+.simple {
+    @include border-radius(4px, 4px);
+}
+
+.navbar .navbar-inner {
+    padding: 0 20px;
+}
+
+.table {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.table tbody tr td {
+    padding-bottom: 13px;
+    padding-top: 13px;
+}
+
+.table-bordered thead tr {
+    background-color: #E6E6E6;
+    background-image: linear-gradient(to bottom, #EEEEEE, #DADADA);
+    background-repeat: repeat-x;
+}
+
+.table-bordered thead tr th {
+    border-left: 1px solid #F1F1F1;
+    border-right: 1px solid #CCCCCC;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    color: #444444;
+    font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.table-bordered thead tr th:first-child {
+    border-left-color: #CCCCCC;
+}
+
+.table-bordered thead tr th:last-child {
+    border-right: medium none;
+}
+
+.table-bordered tbody tr:first-child td {
+    border-top-color: #CCCCCC;
+}
+
+.table-bordered tbody tr td {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #DDDDDD;
+}
+
+.table-bordered tbody tr td:first-child {
+    border-left-color: #DDDDDD;
+}
+
+.table-bordered tbody tr td:last-child {
+    border-right: medium none;
+}
+
+.table-bordered thead tr {
+    background: -moz-linear-gradient(center top, #EEEEEE 0%, #DADADA 100%) repeat scroll 0 0 transparent;
+}
+
+.table-bordered thead th {
+    border-left: 1px solid #F1F1F1;
+    border-right: 1px solid #CCCCCC;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    color: #444444;
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.table-bordered thead th:first-child {
+    border-left-color: #CCCCCC;
+}
+
+.table-bordered thead th:last-child {
+    border-right: medium none;
+}
+
+.table-bordered tbody td {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #DDDDDD;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-bordered tbody tr td:first-child {
+    border-left-color: #DDDDDD;
+}
+
+.table-bordered tbody tr td:last-child {
+    border-right: medium none;
+}
+
+#main-nav {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 22px;
+    padding: 0;
+    position: relative;
+}
+
+#main-nav > li {
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-tabs {
+    border-bottom: none ;
+}
+.nav-tabs > li > a {
+    background-color: #EEEEEE;
+    text-decoration: none;
+    border-color: #ccc #ccc #DDDDDD;
+    margin: 0;
+    border-bottom: none;
+}
+
+section.list {
+    margin-top: 30px;
+}
+#logout_btn {
+    margin-top: 10px;
+}

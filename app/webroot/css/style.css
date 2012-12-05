@@ -229,7 +229,7 @@ a.caldisabled {
     color:#fff;
 }
 
-.list table {
+/*.list table {
     width: 90%;
 }
 .list td {
@@ -240,7 +240,7 @@ a.caldisabled {
 }
 .list tr.even {
     background-color: #a3a3a3;
-}
+}*/
 
 #add_more_image {
     background-image: url(../img/glyphicons-halflings.png);

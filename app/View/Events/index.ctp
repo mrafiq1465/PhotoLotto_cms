@@ -1,41 +1,49 @@
-<?php
-//print "<pre>";
-//print_r($events);
-//print "<pre>";
+<section class="list">
+    <?=$this->element('menu', array(
+        "heading" => "Manage Events"
+    ));?>
 
-//echo $this->Html->nestedList($events);
-?>
-<div class="list">
-    <table>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Thumb</th>
+            <th>Details</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
         <? foreach ($events as $k => $event) { ?>
-        <tr class="<?=($k%2==0)?'odd':'even'?>">
-            <td>
-                <img src="<?=$event['Event']['img_thumb']; ?>" alt="Image thumb" width="90px" height="60px"/>
+        <tr class="<?=($k % 2 == 0) ? 'odd' : 'even'?>">
+            <td class="span3">
+                <img src="<?=$event['Event']['img_thumb']; ?>" alt="Image thumb" width="90px" height="60px" />
+            </td>
+            <td class="span5">
+                <div class="details">
+                    <h5><?=$event['Event']['name'];  ?> </h5>
+
+                    <div class="info">
+                        <?=$event['Event']['shortdescription'];  ?>
+                    </div>
+                </div>
+            </td>
+            <td class="span2">
+                <div class="event_status"><?=$event['Event']['stage'];  ?></div>
+                <div class="event_start_date"><?=$event['Event']['date_start'];  ?></div>
             </td>
             <td>
-                <table>
-                    <tr>
-                        <td><?=$event['Event']['name'];  ?> </td>
-                        <td><?=$event['Event']['shortdescription'];  ?> </td>
-                    </tr>
-                </table>
+                <?=$this->Html->link('<i class="icon-share"></i> ', '/events/export/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
-                <ul>
-                    <td><?=$event['Event']['stage'];  ?> </td>
-                    <td><?=$event['Event']['date_start'];  ?> </td>
-                </ul>
+                <?=$this->Html->link('<i class="icon-pencil"></i> ', '/events/edit/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
-                <?=$this->Html->link('Export', '/events/export/' . $event['Event']['id'], array('class' => '')); ?>
-            </td>
-            <td>
-                <?=$this->Html->link('Edit', '/events/edit/' . $event['Event']['id'], array('class' => '')); ?>
-            </td>
-            <td>
-                <?=$this->Html->link('Delete', '/events/delete/' . $event['Event']['id'], array('class' => '')); ?>
+                <?=$this->Html->link('<i class="icon-trash"></i> ', '/events/delete/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
         </tr>
-        <? } ?>
+            <? } ?>
+        </tbody>
     </table>
-</div>
+</section>

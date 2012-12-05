@@ -24,6 +24,7 @@
         echo $this->Html->css('reset');
         echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('style');
+        echo $this->Html->css('style1');
     ?>
 
     <!-- scripts -->
@@ -60,7 +61,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="/">PhotoLotto</a>
-                    <a href="/users/logout" class="pull-right">Logout</a>
+                    <a href="/users/logout" class="pull-right" id="logout_btn">Logout</a>
                 </div>
             </div>
         </div>
