@@ -1,6 +1,6 @@
 <section class="list">
     <?=$this->element('menu', array(
-    "heading" => "Create New Company"
+    "heading" => "Create New Event"
 ));?>
 <? echo $this->Form->create('Event', array('type' => 'file')); ?>
 

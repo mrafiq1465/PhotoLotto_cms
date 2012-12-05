@@ -96,7 +96,7 @@ class AppController extends Controller {
             // require the admin to be logged in
             $this->requireAdmin();
         } elseif($login_req) {
-            #$this->requireLogin();
+            $this->requireLogin();
         }
     }
 
