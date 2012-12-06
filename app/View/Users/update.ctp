@@ -1,3 +1,8 @@
+
+<section class="list">
+    <?=$this->element('menu', array(
+    "heading" => "Update User"
+));?>
 <? echo $this->Form->create('User'); ?>
 
 <? echo $this->Form->input('name', array('label' => 'Name')); ?>
