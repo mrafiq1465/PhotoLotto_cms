@@ -22,7 +22,7 @@ echo $this->Form->input('eventtype', array('options'=>$eventtype, 'default'=>'ge
 <?// echo $tinymce->input('html_before'); ?>
 <? echo $this->Form->input('html_before', array('label' => 'HTML Before')); ?>
 <? echo $this->Form->input('html_after', array('label' => 'HTML After')); ?>
-<? echo $this->Form->select('stage', array('' => '---Select One---','a' => 'a', 'b' => 'b', 'c' => 'c')); ?>
+<? echo $this->Form->select('stage', array('' => '---Select One---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
 <? echo $this->Form->input('status', array('label' => 'Status')); ?>
 
 <label class="control-label">Thumbnail</label>

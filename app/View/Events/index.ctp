@@ -31,7 +31,7 @@
             </td>
             <td class="span2">
                 <div class="event_status"><?=$event['Event']['stage'];  ?></div>
-                <div class="event_start_date"><?=$event['Event']['date_start'];  ?></div>
+                <div class="event_start_date"><?=  date('M, d, Y', strtotime($event['Event']['date_start']));  ?></div>
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/events/export/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
