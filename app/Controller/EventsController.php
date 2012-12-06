@@ -63,13 +63,13 @@ class EventsController extends AppController {
                 if(isset($this->request->data['Event']['img_thumb'])){
                     $thumb_path = '/img/events/' . $this->Event->id . '_thumb.jpg';
                     move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
-                    $this->request->data['Event']['img_thumb'] = $_SERVER['HTTP_HOST'] . $thumb_path;
+                    $this->request->data['Event']['img_thumb'] = $thumb_path;
                 }
                 for($i=1;$i<=5;$i++){
                     if(isset($this->request->data['Event']["img_overlay_$i"])){
                         $overlay_path = '/img/events/' . $this->Event->id . "_overlay$i.jpg";
                         move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path);
-                        $this->request->data['Event']["img_overlay_$i"] = $_SERVER['HTTP_HOST'] . $overlay_path;
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
                     }
                 }
 
@@ -116,13 +116,13 @@ class EventsController extends AppController {
                 if(isset($this->request->data['Event']['img_thumb'])){
                     $thumb_path = '/img/events/' . $this->Event->id . '_thumb.jpg';
                     move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
-                    $this->request->data['Event']['img_thumb'] = $_SERVER['HTTP_HOST'] . $thumb_path;
+                    $this->request->data['Event']['img_thumb'] = $thumb_path;
                 }
                 for($i=1;$i<=5;$i++){
                     if(isset($this->request->data['Event']["img_overlay_$i"])){
                         $overlay_path = '/img/events/' . $this->Event->id . "_overlay$i.jpg";
                         move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path);
-                        $this->request->data['Event']["img_overlay_$i"] = $_SERVER['HTTP_HOST'] . $overlay_path;
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
                     }
                 }
 
