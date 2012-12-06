@@ -90,7 +90,13 @@ class AppController extends Controller {
             array('events','eventlist'),
         );
 
+        $excluded_url = array(
+            'eventslist/'
+        );
+
         $login_req = !in_array(array($this->params->params['controller'],$this->params->params['action']),$excluded);
+        if($login_req) $login_req = !in_array($this->params->url, $excluded_url);
+        
         // if admin pages are being requested
         if(isset($this->params->params['prefix']) && $this->params->params['prefix'] == 'admin') {
             // require the admin to be logged in
