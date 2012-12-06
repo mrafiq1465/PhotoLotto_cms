@@ -31,10 +31,10 @@
             </td>
             <td class="span2">
                 <div class="event_status"><?=$event['Event']['stage'];  ?></div>
-                <div class="event_start_date"><?=  date('M, d, Y', strtotime($event['Event']['date_start']));  ?></div>
+                <div class="event_start_date"><?=  date('d/m/y', strtotime($event['Event']['date_start']));  ?></div>
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-share"></i> ', '/events/export/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-share"></i> ', '/events/report/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-pencil"></i> ', '/events/edit/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>

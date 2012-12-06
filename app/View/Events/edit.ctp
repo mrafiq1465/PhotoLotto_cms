@@ -22,9 +22,9 @@ echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' =>
 <? // echo $tinymce->input('html_before'); ?>
 <? echo $this->Form->input('html_before', array('label' => 'HTML Before')); ?>
 <? echo $this->Form->input('html_after', array('label' => 'HTML After')); ?>
-<? echo $this->Form->select('stage', array('a' => 'a','b' => 'b','c' => 'c',)); ?>
+<? echo $this->Form->select('stage', array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
 
-<label class="control-label">Thumbnail</label>
+    <label class="control-label">Thumbnail</label>
 <img src="<?=$this->data['Event']['img_thumb']?>" style="max-height: 100px;"><br>
 <? echo $this->Form->file('img_thumb'); ?><br>
 <label class="control-label">Overlay Images</label>

@@ -152,6 +152,16 @@ class UsersController extends AppController {
         $this->redirect('/');
     }
 
+    public function update() {
+
+    }
+
+    public function add() {
+
+        $roles = $this->User->Role->find('list');
+        $this->set(compact('roles'));
+    }
+
     function send_password() {
 
         $email = $this->data['email'];

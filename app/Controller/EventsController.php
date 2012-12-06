@@ -139,6 +139,12 @@ class EventsController extends AppController {
 		$this->set(compact('companies'));
 	}
 
+    public function report($id = null) {
+        $this->Event->id = $id;
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+    }
 /**
  * delete method
  *
