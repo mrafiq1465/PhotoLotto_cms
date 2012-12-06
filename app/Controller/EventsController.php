@@ -192,7 +192,7 @@ class EventsController extends AppController {
              $events_array[$i]['twitter_msg'] = $event['Event']['twitter_msg'];
              $events_array[$i]['html_before'] = $event['Event']['html_before'];
              $events_array[$i]['html_after'] = $event['Event']['html_after'];
-             $events_array[$i]['img_thumb'] = $event['Event']['img_thumb'];
+             $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['img_thumb'];
              if(!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong'])){
                 $events_array[$i]['distance'] = $this->calculate_distance($params[0],$params[1],$event['Event']['gpslat'],$event['Event']['gpslong']);
              }
@@ -200,19 +200,19 @@ class EventsController extends AppController {
                  $events_array[$i]['distance'] = 0;
              }
              if(!empty( $event['Event']['img_overlay_1'])){
-                $events_array[$i]['img_overlay_1'] = $event['Event']['img_overlay_1'];
+                $events_array[$i]['img_overlay_1'] = FULL_BASE_URL . $event['Event']['img_overlay_1'];
              }
              if(!empty( $event['Event']['img_overlay_2'])){
-                $events_array[$i]['img_overlay_2'] = $event['Event']['img_overlay_2'];
+                $events_array[$i]['img_overlay_2'] = FULL_BASE_URL . $event['Event']['img_overlay_2'];
              }
              if(!empty( $event['Event']['img_overlay_3'])){
-                $events_array[$i]['img_overlay_3'] = $event['Event']['img_overlay_3'];
+                $events_array[$i]['img_overlay_3'] = FULL_BASE_URL . $event['Event']['img_overlay_3'];
              }
              if(!empty( $event['Event']['img_overlay_4'])){
-                $events_array[$i]['img_overlay_4'] = $event['Event']['img_overlay_4'];
+                $events_array[$i]['img_overlay_4'] = FULL_BASE_URL . $event['Event']['img_overlay_4'];
              }
              if(!empty( $event['Event']['img_overlay_5'])){
-                $events_array[$i]['img_overlay_5'] = $event['Event']['img_overlay_5'];
+                $events_array[$i]['img_overlay_5'] = FULL_BASE_URL . $event['Event']['img_overlay_5'];
              }
             $i++;
 
