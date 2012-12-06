@@ -46,7 +46,7 @@ ul.company_list li.name {
    http://flowplayer.org/tools/dateinput/index.html#skinning */
 
 /* the input field */
-.date {
+/*.date {
     border:1px solid #ccc;
     font-size:18px;
     padding:4px;
@@ -55,14 +55,14 @@ ul.company_list li.name {
 
     -moz-box-shadow:0 0 10px #eee inset;
     -webkit-box-shadow:0 0 10px #eee inset;
-}
+}*/
 
 /* calendar root element */
 /* For the details, see:
    http://flowplayer.org/tools/dateinput/index.html#skinning */
 
 /* the input field */
-.date {
+/*.date {
     border:1px solid #ccc;
     font-size:18px;
     padding:4px;
@@ -71,7 +71,7 @@ ul.company_list li.name {
 
     -moz-box-shadow:0 0 10px #eee inset;
     -webkit-box-shadow:0 0 10px #eee inset;
-}
+}*/
 
 /* calendar root element */
 #calroot {

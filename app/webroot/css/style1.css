@@ -164,24 +164,36 @@ section.list {
   margin-top: 10px;
 }
 
-/* line 138, ../sass/style1.scss */
-#form-container {
+/* line 139, ../sass/style1.scss */
+#form-container,
+.controlGroup {
   background: #eeeeee;
   padding: 20px;
+  margin-bottom: 10px;
 }
 
-/* line 143, ../sass/style1.scss */
+/* line 145, ../sass/style1.scss */
 #form-container + .control-group {
   padding: 10px 20px;
   text-align: right;
 }
 
-/* line 148, ../sass/style1.scss */
+/* line 150, ../sass/style1.scss */
 input.span2 {
   margin-left: 10px;
 }
 
-/* line 152, ../sass/style1.scss */
+/* line 154, ../sass/style1.scss */
 #CompanyAddForm .control-group {
+  margin-bottom: 5px;
+}
+
+/* line 158, ../sass/style1.scss */
+#EventGpslat {
+  margin-left: 0;
+}
+
+/* line 163, ../sass/style1.scss */
+#EventAddForm .control-group {
   margin-bottom: 5px;
 }
