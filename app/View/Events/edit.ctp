@@ -22,7 +22,7 @@ echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' =>
 <? // echo $tinymce->input('html_before'); ?>
 <? echo $this->Form->input('html_before', array('label' => 'HTML Before')); ?>
 <? echo $this->Form->input('html_after', array('label' => 'HTML After')); ?>
-<? echo $this->Form->input('stage', array('label' => 'Stage')); ?>
+<? echo $this->Form->select('stage', array('a' => 'a','b' => 'b','c' => 'c',)); ?>
 
 <label class="control-label">Thumbnail</label>
 <img src="<?=$this->data['Event']['img_thumb']?>" style="max-height: 100px;"><br>
