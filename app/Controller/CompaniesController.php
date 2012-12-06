@@ -14,7 +14,7 @@ class CompaniesController extends AppController {
  */
 	public function index() {
 		$this->Company->recursive = 0;
-		$this->set('companies', $this->paginate());
+		$this->set('companies', $this->paginate(null,array('Company.status' => 1)));
 	}
 
 /**
@@ -89,7 +89,7 @@ class CompaniesController extends AppController {
 		if (!$this->Company->exists()) {
 			throw new NotFoundException(__('Invalid company'));
 		}
-		if ($this->Company->delete()) {
+		if ($this->Company->saveField('status',0)) {
 			$this->Session->setFlash(__('Company deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
