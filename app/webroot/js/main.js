@@ -67,5 +67,15 @@ $(document).ready(function() {
         });
     });
 
+    //Popover control
+    var $form = $("#EventAddForm, #EventEditForm");
+    $('a.pop', $form)
+        .popover({
+            html : true
+        })
+        .on('click', function (e) {
+            e.preventDefault();
+        });
+    $('select', $form).addClass('span4');
 
 });
