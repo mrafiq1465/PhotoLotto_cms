@@ -1,6 +1,4 @@
 <?php
-
-
 App::uses('AppController', 'Controller');
 /**
  * Users Controller
@@ -10,23 +8,23 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
 /**
- * admin_index method
+ * index method
  *
  * @return void
  */
-	public function admin_index() {
+	public function index() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
 
 /**
- * admin_view method
+ * view method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -35,11 +33,11 @@ class UsersController extends AppController {
 	}
 
 /**
- * admin_add method
+ * add method
  *
  * @return void
  */
-	public function admin_add() {
+	public function add() {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -50,17 +48,18 @@ class UsersController extends AppController {
 			}
 		}
 		$roles = $this->User->Role->find('list');
-		$this->set(compact('roles'));
+		$companies = $this->User->Company->find('list');
+		$this->set(compact('roles', 'companies'));
 	}
 
 /**
- * admin_edit method
+ * edit method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -76,18 +75,19 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->read(null, $id);
 		}
 		$roles = $this->User->Role->find('list');
-		$this->set(compact('roles'));
+		$companies = $this->User->Company->find('list');
+		$this->set(compact('roles', 'companies'));
 	}
 
 /**
- * admin_delete method
+ * delete method
  *
  * @throws MethodNotAllowedException
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
@@ -152,32 +152,6 @@ class UsersController extends AppController {
         $this->redirect('/');
     }
 
-    public function update() {
-
-    }
-
-    public function delete($id = null) {
-        if (!$this->request->is('post')) {
-            //throw new MethodNotAllowedException();
-        }
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid event'));
-        }
-        if ($this->User->saveField('status',0)) {
-            $this->Session->setFlash(__('User deleted'));
-            $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('User was not deleted'));
-        $this->redirect(array('action' => 'index'));
-    }
-
-    public function add() {
-
-        $roles = $this->User->Role->find('list');
-        $this->set(compact('roles'));
-    }
-
     function send_password() {
 
         $email = $this->data['email'];
@@ -188,4 +162,3 @@ class UsersController extends AppController {
     }
 
 }
-

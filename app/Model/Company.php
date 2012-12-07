@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * Company Model
  *
  * @property Event $Event
+ * @property User $User
  */
 class Company extends AppModel {
 
@@ -25,6 +26,19 @@ class Company extends AppModel {
 	public $hasMany = array(
 		'Event' => array(
 			'className' => 'Event',
+			'foreignKey' => 'company_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'User' => array(
+			'className' => 'User',
 			'foreignKey' => 'company_id',
 			'dependent' => false,
 			'conditions' => '',
