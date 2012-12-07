@@ -249,3 +249,11 @@ a.caldisabled {
     width: 20px;
     height: 20px;
 }
+
+.delete_image {
+    background-image: url(../img/glyphicons-halflings.png);
+    background-position: -429px 225px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}

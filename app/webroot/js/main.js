@@ -67,5 +67,14 @@ $(document).ready(function() {
         });
     });
 
+    $('.delete_image').each(function(){
+        $(this).click(function(){
+            var dataName = $(this).attr('data-name');
+            $("img[data-name="+ dataName + "]").remove();
+            $(this).before('<input type="hidden" name=data[Event]['+ dataName+ '_delete]" value="delete" />');
+            $(this).remove();
+        });
+    })
+
 
 });
