@@ -7,7 +7,7 @@
 #
 # Host: academicearthdb.cwnf7l7s0tqx.us-west-2.rds.amazonaws.com (MySQL 5.5.20-log)
 # Database: photolotto
-# Generation Time: 2012-12-06 05:14:22 +0000
+# Generation Time: 2012-12-07 06:40:51 +0000
 # ************************************************************
 
 
@@ -45,8 +45,8 @@ LOCK TABLES `companies` WRITE;
 
 INSERT INTO `companies` (`id`, `name`, `address1`, `address2`, `phone`, `postcode`, `state`, `updated_by`, `created`, `updated`, `status`)
 VALUES
-	(1,'FlyDigital','Sydney, Australia','','4054645645','1111',NULL,0,'0000-00-00 00:00:00','2012-12-03 23:51:12',NULL),
-	(2,'Photo Lotto','Sydney, Australia','','22222222','2222',NULL,0,'2012-12-03 23:51:59','2012-12-03 23:51:59',NULL);
+	(1,'FlyDigital','Sydney, Australia','','4054645645','1111',NULL,0,'0000-00-00 00:00:00','2012-12-05 21:22:57',1),
+	(2,'Photo Lotto','Sydney, Australia','','22222222','2222',NULL,0,'2012-12-03 23:51:59','2012-12-03 23:51:59',1);
 
 /*!40000 ALTER TABLE `companies` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -62,6 +62,7 @@ CREATE TABLE `event_actions` (
   `event_id` int(11) NOT NULL,
   `phone_id` varchar(64) DEFAULT NULL,
   `action_name` varchar(64) DEFAULT NULL,
+  `photo` varchar(128) DEFAULT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -109,8 +110,10 @@ LOCK TABLES `events` WRITE;
 INSERT INTO `events` (`id`, `name`, `company_id`, `shortdescription`, `eventtype`, `gpslat`, `gpslong`, `date_start`, `date_end`, `updated_by`, `filter`, `facebook_msg`, `facebook_url`, `twitter_msg`, `html_before`, `html_after`, `stage`, `img_thumb`, `img_overlay_1`, `img_overlay_2`, `img_overlay_3`, `img_overlay_4`, `img_overlay_5`, `status`, `created`, `updated`)
 VALUES
 	(1,'test 1',1,'test ','location-based','1','1','2012-12-14 00:00:00','2012-12-31 00:00:00',1,1,'test','test','test','test','test','test','/img/events/1_thumb.jpg','/img/events/1_overlay1.jpg',NULL,NULL,NULL,NULL,1,'2012-01-01 00:00:00','2012-12-03 22:20:58'),
-	(2,'test 2',2,'test',NULL,'100','120','2012-01-01 00:00:00','2012-01-01 00:00:00',1,1,'test','test','test','test','tes','prod','test.jpg','test.jpg','test.jpg','test.jpg',NULL,NULL,1,'2012-01-01 00:00:00','2012-01-01 00:00:00'),
-	(3,'Event test 1',1,'test description','generic','100','110','2012-12-06 00:00:00','2013-01-10 00:00:00',NULL,1,'facebook message','http://fb.','twitter message','HTML Before\r\n','HTML After\r\n','prod','/img/events/3_thumb.jpg','/img/events/3_overlay1.jpg',NULL,NULL,NULL,NULL,1,'2012-12-03 23:55:16','2012-12-03 23:55:17');
+	(2,'test 2',2,'test',NULL,'100','120','2012-01-01 00:00:00','2012-01-01 00:00:00',1,1,'test','test','test','test','tes','prod','test.jpg','test.jpg','test.jpg','test.jpg',NULL,NULL,1,'2012-01-01 00:00:00','2012-12-05 23:41:41'),
+	(3,'Event test 1',1,'test description','generic','100','110','2012-12-06 00:00:00','2013-01-10 00:00:00',NULL,1,'facebook message','http://fb.','twitter message','HTML Before\r\n','HTML After\r\n','prod','/img/events/3_thumb.jpg','/img/events/3_overlay1.jpg',NULL,NULL,NULL,NULL,1,'2012-12-03 23:55:16','2012-12-03 23:55:17'),
+	(4,'event Amazon',2,'Short Description','location-based','100','-37','2012-12-13 00:00:00','2012-12-28 00:00:00',1,1,'Facebook Message','Facebook URL','Twitter Message','HTML Before','<html>\r\n</html>','b','/img/events/4_thumb.jpg','/img/events/4_overlay1.jpg','/img/events/4_overlay2.jpg','/img/events/4_overlay3.jpg','/img/events/4_overlay4.jpg','/img/events/4_overlay5.jpg',1,'2012-12-05 23:32:44','2012-12-05 23:45:39'),
+	(5,'test amazon 2',1,'test amazzon 2','location-based','233','-333','2012-12-07 00:00:00','2012-12-20 00:00:00',1,1,'asdf','asdf','asdf','asdfa','sdfa','Scheduled','/img/events/5_thumb.jpg','/img/events/5_overlay1.jpg','/img/events/5_overlay2.jpg',NULL,NULL,NULL,1,'2012-12-05 23:54:00','2012-12-05 23:54:01');
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -147,6 +150,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
@@ -159,9 +163,9 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `status`, `created`, `updated`)
+INSERT INTO `users` (`id`, `role_id`, `company_id`, `name`, `email`, `password`, `status`, `created`, `updated`)
 VALUES
-	(1,1,'Rafiqul Islam','mrafiq1465@yahoo.com','password',1,NULL,NULL);
+	(1,1,NULL,'Rafiqul Islam','mrafiq1465@yahoo.com','password',1,NULL,NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

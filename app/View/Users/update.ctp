@@ -9,6 +9,7 @@
 <? echo $this->Form->input('password', array('label' => 'Old Password')); ?>
 <? echo $this->Form->input('password', array('label' => 'New Password')); ?>
 <? echo $this->Form->input('password', array('label' => 'Confirm New Password')); ?>
-
+<? echo $this->Form->input('role_id'); ?>
+<? echo $this->Form->input('company_id'); ?>
 
 <? echo $this->Form->end('Edit'); ?>

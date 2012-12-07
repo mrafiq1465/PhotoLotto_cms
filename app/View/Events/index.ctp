@@ -15,6 +15,12 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td>
+                <? echo $this->Form->input('company_id'); ?>
+            </td>
+        </tr>
+
         <? foreach ($events as $k => $event) { ?>
         <tr class="<?=($k % 2 == 0) ? 'odd' : 'even'?>">
             <td class="span3">

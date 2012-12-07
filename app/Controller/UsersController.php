@@ -156,6 +156,22 @@ class UsersController extends AppController {
 
     }
 
+    public function delete($id = null) {
+        if (!$this->request->is('post')) {
+            //throw new MethodNotAllowedException();
+        }
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+        if ($this->User->saveField('status',0)) {
+            $this->Session->setFlash(__('User deleted'));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('User was not deleted'));
+        $this->redirect(array('action' => 'index'));
+    }
+
     public function add() {
 
         $roles = $this->User->Role->find('list');

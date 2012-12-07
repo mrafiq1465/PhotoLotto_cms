@@ -143,8 +143,15 @@ $options = array(
             <div class="span7">
                 <?= $this->Form->textarea('description', array('placeholder' => 'Description (60 character Limit)', 'class' => 'span7' ));?>
             </div>
-        </div>
 
+
+        </div>
+        <div class="control-group">
+            <?php $eventtype = array('generic' => 'generic', 'location-based' => 'location-based');
+            echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' => 'generic'));
+            ?>
+            <? echo $this->Form->input('company_id'); ?>
+        </div>
 
     </fieldset>
     <fieldset class="controlGroup">
@@ -159,6 +166,7 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Filters</h4>
+        <? echo $this->Form->select('stage', array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
 
         <div class="switch pull-right">
             <input type="radio" checked="checked" id="filter_on" value="filter_on" name="data[Event][filter]" class="switch-input">
@@ -170,9 +178,10 @@ $options = array(
 
     </fieldset>
     <fieldset class="controlGroup controls-row">
-        <h4>Facebook</h4>
-        <?= $this->Form->input('facebook_msg', array('placeholder' => 'Message Text','label' => false, 'div' => false, 'class' => 'span6')); ?>
-        <?= $this->Form->input('facebook_url', array('placeholder' => 'Link','label' => false, 'div' => false, 'class' => 'span5')); ?>
+        <h4>Social Media</h4>
+        <?= $this->Form->input('facebook_msg', array('placeholder' => 'Facebook Message','label' => false, 'div' => false, 'class' => 'span6')); ?>
+        <?= $this->Form->input('facebook_url', array('placeholder' => 'Facebook Link','label' => false, 'div' => false, 'class' => 'span5')); ?>
+        <?= $this->Form->input('facebook_msg', array('placeholder' => 'Twitter Message','label' => false, 'div' => false, 'class' => 'span6')); ?>
     </fieldset>
     <fieldset class="controlGroup">
         <h4>HTML Before Upload</h4>
