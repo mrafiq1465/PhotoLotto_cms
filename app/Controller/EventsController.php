@@ -231,6 +231,14 @@ class EventsController extends AppController {
         echo json_encode($events_array);
     }
 
+    public  function eventaction(){
+        $params = array_keys($_GET);
+        if(!empty($params)) $params_formatted = array('fields' => $params);
+        $options = array(
+            'recursive' => 0,
+            'status' => 1
+        );
+    }
 /**
  * admin_index method
  *

@@ -107,7 +107,7 @@ class AppController extends Controller {
         $Geography = new Geography();
 
 
-        return $Geography->mToKm($Geography->getDistance(-30, 150, -31, 160));
+        return $Geography->mToKm($Geography->getDistance($lat1,$long1,$lat2,$long2));
 
     }
 
