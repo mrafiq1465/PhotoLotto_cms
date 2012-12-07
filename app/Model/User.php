@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * User Model
  *
  * @property Role $Role
+ * @property Company $Company
  */
 class User extends AppModel {
 
@@ -30,12 +31,12 @@ class User extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-        'Company' => array(
-            'className' => 'Company',
-            'foreignKey' => 'company_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
+		'Company' => array(
+			'className' => 'Company',
+			'foreignKey' => 'company_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
 	);
 }
