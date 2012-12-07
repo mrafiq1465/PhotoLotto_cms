@@ -7,7 +7,7 @@
 #
 # Host: academicearthdb.cwnf7l7s0tqx.us-west-2.rds.amazonaws.com (MySQL 5.5.20-log)
 # Database: photolotto
-# Generation Time: 2012-12-07 06:40:51 +0000
+# Generation Time: 2012-12-07 19:25:11 +0000
 # ************************************************************
 
 
@@ -61,6 +61,7 @@ CREATE TABLE `event_actions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `phone_id` varchar(64) DEFAULT NULL,
+  `phone_type` varchar(32) DEFAULT NULL,
   `action_name` varchar(64) DEFAULT NULL,
   `photo` varchar(128) DEFAULT NULL,
   `created` datetime NOT NULL,
@@ -113,7 +114,8 @@ VALUES
 	(2,'test 2',2,'test',NULL,'100','120','2012-01-01 00:00:00','2012-01-01 00:00:00',1,1,'test','test','test','test','tes','prod','test.jpg','test.jpg','test.jpg','test.jpg',NULL,NULL,1,'2012-01-01 00:00:00','2012-12-05 23:41:41'),
 	(3,'Event test 1',1,'test description','generic','100','110','2012-12-06 00:00:00','2013-01-10 00:00:00',NULL,1,'facebook message','http://fb.','twitter message','HTML Before\r\n','HTML After\r\n','prod','/img/events/3_thumb.jpg','/img/events/3_overlay1.jpg',NULL,NULL,NULL,NULL,1,'2012-12-03 23:55:16','2012-12-03 23:55:17'),
 	(4,'event Amazon',2,'Short Description','location-based','100','-37','2012-12-13 00:00:00','2012-12-28 00:00:00',1,1,'Facebook Message','Facebook URL','Twitter Message','HTML Before','<html>\r\n</html>','b','/img/events/4_thumb.jpg','/img/events/4_overlay1.jpg','/img/events/4_overlay2.jpg','/img/events/4_overlay3.jpg','/img/events/4_overlay4.jpg','/img/events/4_overlay5.jpg',1,'2012-12-05 23:32:44','2012-12-05 23:45:39'),
-	(5,'test amazon 2',1,'test amazzon 2','location-based','233','-333','2012-12-07 00:00:00','2012-12-20 00:00:00',1,1,'asdf','asdf','asdf','asdfa','sdfa','Scheduled','/img/events/5_thumb.jpg','/img/events/5_overlay1.jpg','/img/events/5_overlay2.jpg',NULL,NULL,NULL,1,'2012-12-05 23:54:00','2012-12-05 23:54:01');
+	(5,'test amazon 2',1,'test amazzon 2','location-based','233','-333','2012-12-07 00:00:00','2012-12-20 00:00:00',1,1,'asdf','asdf','asdf','asdfa','sdfa','Scheduled','/img/events/5_thumb.jpg','/img/events/5_overlay1.jpg','/img/events/5_overlay2.jpg',NULL,NULL,NULL,1,'2012-12-05 23:54:00','2012-12-05 23:54:01'),
+	(6,'',NULL,NULL,NULL,'','',NULL,NULL,2,1,'','',NULL,'html_before_on','html_after_off',NULL,'/img/events/6_thumb.jpg','/img/events/6_overlay1.jpg','/img/events/6_overlay2.jpg','/img/events/6_overlay3.jpg','/img/events/6_overlay4.jpg',NULL,1,'2012-12-07 08:16:45','2012-12-07 08:16:45');
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -165,7 +167,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `role_id`, `company_id`, `name`, `email`, `password`, `status`, `created`, `updated`)
 VALUES
-	(1,1,NULL,'Rafiqul Islam','mrafiq1465@yahoo.com','password',1,NULL,NULL);
+	(1,1,NULL,'Rafiqul Islam','mrafiq1465@yahoo.com','password',1,NULL,NULL),
+	(2,2,1,'Stefan Druray','stefan@flydigital.com.au','password',1,NULL,NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
