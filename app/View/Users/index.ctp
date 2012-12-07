@@ -23,7 +23,7 @@
                 <?=$this->Html->link('<i class="icon-pencil"></i> ', '/users/update/' . $user['User']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-trash"></i> ', '/users/delete/' . $user['User']['id'], array('class' => 'del-btn', 'item_name'=> $company['User']['name'], 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-trash"></i> ', '/users/delete/' . $user['User']['id'], array('class' => 'del-btn', 'item_name'=> $user['User']['name'], 'escape' => FALSE)); ?>
             </td>
         </tr>
             <? } ?>
