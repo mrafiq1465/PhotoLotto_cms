@@ -49,6 +49,11 @@ $options = array(
             </div>
             <div class="span7">
                 <? echo $this->Form->file('img_thumb', array('class' => 'span5')); ?>
+                <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
+                           data-placement="bottom" rel="popover" class="pop" href="#"
+                           data-original-title="Image Requirements">
+                            <i class="icon-question-sign"></i>
+                        </a>
             </div>
         </div>
         <div class="control-group">
