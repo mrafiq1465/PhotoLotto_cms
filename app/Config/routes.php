@@ -31,7 +31,7 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/eventlist/*', array('controller' => 'events', 'action' => 'eventlist'));
-    Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'eventaction'));
+    Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

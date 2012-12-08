@@ -3,7 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Event Model
  *
+ * @property Company $Company
  * @property User $User
+ * @property EventAction $EventAction
  */
 class Event extends AppModel {
 
@@ -23,19 +25,41 @@ class Event extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Company' => array(
+			'className' => 'Company',
+			'foreignKey' => 'company_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'updated_by',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-        'Company' => array(
-            'className' => 'Company',
-            'foreignKey' => 'company_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-    );
+		)
+	);
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'EventAction' => array(
+			'className' => 'EventAction',
+			'foreignKey' => 'event_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }

@@ -250,13 +250,22 @@ class EventsController extends AppController {
         echo json_encode($events_array);
     }
 
-    public  function eventaction(){
-        $params = array_keys($_GET);
-        if(!empty($params)) $params_formatted = array('fields' => $params);
-        $options = array(
-            'recursive' => 0,
-            'status' => 1
-        );
+    public function event_action(){
+        $this->autoRender = false;
+        if(!empty($_GET)){
+            $success = $this->Event->EventAction->save(array(
+                'EventAction' => array(
+                    'event_id' => $_GET['event_id'],
+                    'phone_type' => $_GET['phone_type'],
+                    'action_name' => $_GET['action'],
+                    'phone_id' => $_GET['phone_id'],
+                    'photo' => $_GET['photo'],
+                )
+            ));
+        }
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
+        echo json_encode(array('response' => !empty($success)));
     }
 /**
  * admin_index method
