@@ -24,7 +24,7 @@ class EventsController extends AppController {
             $events = $this->paginate(null,array($event_conditions));
         } else {
             $event_conditions['Event.status'] = 1;
-            $event_conditions['Event.updated_by'] = 1;
+           // $event_conditions['Event.updated_by'] = 1;
             $events = $this->paginate(null,$event_conditions);
         }
         $companies = $this->Event->Company->find('list');
@@ -207,8 +207,9 @@ class EventsController extends AppController {
         //var_dump($events);
         $events_array = array();
         $i=0;
-        $overlay_img_count = 0;
+
         foreach($events as $event){
+             $overlay_img_count = 0;
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
              $events_array[$i]['shortdescription'] = $event['Event']['shortdescription'];
