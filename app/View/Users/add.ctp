@@ -4,11 +4,14 @@
 ));?>
 
 <? echo $this->Form->create('User'); ?>
+    <section id="form-container">
+    <h3>User Details</h3>
+        <? echo $this->Form->input('name', array('label' => FALSE, 'placeholder' => 'Name')); ?>
+        <? echo $this->Form->input('password', array('label' => FALSE, 'placeholder' => 'Password')); ?>
+        <? echo $this->Form->input('password', array('label' => FALSE, 'placeholder' => 'Confirm Password')); ?>
+        <? echo $this->Form->input('role_id'); ?>
+        <? echo $this->Form->input('company_id'); ?>
+    </section>
+    <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Create',)); ?>
 
-<? echo $this->Form->input('name', array('label' => 'Name')); ?>
-<? echo $this->Form->input('password', array('label' => ' Password')); ?>
-<? echo $this->Form->input('password', array('label' => 'Confirm Password')); ?>
-<? echo $this->Form->input('role_id'); ?>
-<? echo $this->Form->input('company_id'); ?>
-
-<? echo $this->Form->end('Add'); ?>
+</section>

@@ -14,13 +14,14 @@
         </tr>
         </thead>
         <tbody>
+
         <? foreach ($users as $k => $user) { ?>
         <tr class="<?=($k % 2 == 0) ? 'odd' : 'even'?>">
             <td class="name span8"><?php echo $user['User']['name'];  ?> </td>
-            <td class="name span8"><?php echo $user['User']['Company']['name'];  ?> </td>
-            <td class="name span8"><?php echo $user['User']['Role']['name'];  ?> </td>
+            <td class="name span8"><?php echo $user['Company']['name'];  ?> </td>
+            <td class="name span8"><?php echo $user['Role']['name'];  ?> </td>
             <td>
-                <?=$this->Html->link('<i class="icon-pencil"></i> ', '/users/update/' . $user['User']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-pencil"></i> ', '/users/edit/' . $user['User']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-trash"></i> ', '/users/delete/' . $user['User']['id'], array('class' => 'del-btn', 'item_name'=> $user['User']['name'], 'escape' => FALSE)); ?>
