@@ -7,6 +7,7 @@
     <section id="form-container">
         <h3>User Details</h3>
         <? echo $this->Form->input('name', array('label' => FALSE, 'placeholder' => 'Name')); ?>
+        <? echo $this->Form->input('email', array('label' => FALSE, 'placeholder' => 'Email')); ?>
         <? echo $this->Form->input('role_id'); ?>
         <? echo $this->Form->input('company_id'); ?>
     </section>
