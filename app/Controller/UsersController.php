@@ -41,13 +41,26 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->User->create();
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
+            $users = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
+            if(!empty($users)){
+                $this->Session->setFlash(__('The email already taken. Please, choose another.'));
+                $error_exist = true;
+            }
+            if($this->request->data['User']['password'] != $this->request->data['User']['password2']){
+                $this->Session->setFlash(__('Passwords don\'t match. Please, try again.'));
+                $error_exist = true;
+            }
+            if(empty($error_exist)){
+                $this->User->create();
+                $this->request->data['User']['status'] = 1;
+                if ($this->User->save($this->request->data)) {
+                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                }
+            }
+
 		}
 		$roles = $this->User->Role->find('list');
 		$companies = $this->User->Company->find('list');
