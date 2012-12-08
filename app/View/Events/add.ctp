@@ -13,7 +13,7 @@ $options = array(
     <?=$this->element('menu', array("heading" => "Create New Event"));?>
 
     <? echo $this->Form->create('Event', $options); ?>
-    <fieldset class="controlGroup">
+    <fieldset class="controlGroup" style="display: none;">
         <div class="control-group row">
             <div class="span4"> <!--#TODO generate it via CakePHP-->
                 <select name="what" id="what">
