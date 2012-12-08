@@ -17,7 +17,7 @@
         <tbody>
         <tr>
             <td>
-                <? echo $this->Form->input('company_id'); ?>
+                <? echo $this->Form->input('company_id', array('options' => $companies, 'default' => !empty($_GET['company'])?$_GET['company']:'')); ?>
             </td>
         </tr>
 
@@ -53,3 +53,15 @@
         </tbody>
     </table>
 </section>
+
+<script type="text/javascript">
+$(function(){
+    $('#company_id').change(function(){
+        if($(this).val() != ''){
+            window.location.href= '/events/?company=' + $(this).val();
+        } else {
+            window.location.href= '/events/';
+        }
+    })
+});
+</script>

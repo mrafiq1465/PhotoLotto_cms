@@ -70,14 +70,13 @@ $options = array(
                 </div>
             </div>
             <div class="span7">
-                <?= $this->Form->textarea('description', array('placeholder' => 'Description (60 character Limit)', 'class' => 'span7','row' => 2 ));?>
+                <?= $this->Form->textarea('shortdescription', array('placeholder' => 'Description (60 character Limit)', 'class' => 'span7','row' => 2 ));?>
             </div>
 
 
         </div>
         <div class="control-group">
-            <?php $eventtype = array('generic' => 'generic', 'location-based' => 'location-based');
-            echo $this->Form->input('eventtype', array('options' => $eventtype, 'default' => 'generic'));
+            <?=$this->Form->input('eventtype', array('options' => array('generic' => 'Generic', 'location-based' => 'Location-based'), 'default' => 'generic'));
             ?>
             <? echo $this->Form->input('company_id'); ?>
         </div>
@@ -95,12 +94,12 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Filters</h4>
-        <? echo $this->Form->select('stage', array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
+        <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'))); ?>
 
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="filter_on" value="filter_on" name="data[Event][filter]" class="switch-input">
+            <input type="radio" checked="checked" id="filter_on" value="1" name="data[Event][filter]" class="switch-input">
             <label class="switch-label switch-label-off" for="filter_on">On</label>
-            <input type="radio" id="filter_off" value="filter_off" name="data[Event][filter]" class="switch-input">
+            <input type="radio" id="filter_off" value="0" name="data[Event][filter]" class="switch-input">
             <label class="switch-label switch-label-on" for="filter_off">Off</label>
             <span class="switch-selection"></span>
         </div>
@@ -116,9 +115,9 @@ $options = array(
         <h4>HTML Before Upload</h4>
         <?= $this->Form->textarea('html_before', array('placeholder' => 'HTML Before', 'class' => 'span6','row' => 2 ));?>
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="html_before_on" value="html_before_on" name="data[Event][html_before]" class="switch-input">
+            <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
             <label class="switch-label switch-label-off" for="html_before_on">On</label>
-            <input type="radio" id="html_before_off" value="html_before_off" name="data[Event][html_before]" class="switch-input">
+            <input type="radio" id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
             <label class="switch-label switch-label-on" for="html_before_off">Off</label>
             <span class="switch-selection"></span>
         </div>
@@ -127,9 +126,9 @@ $options = array(
         <h4>HTML After Upload</h4>
         <?= $this->Form->textarea('html_after', array('placeholder' => 'HTML After', 'class' => 'span6', 'row' => 2 ));?>
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="html_after_on" value="html_after_on" name="data[Event][html_after]" class="switch-input">
+            <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
             <label class="switch-label switch-label-off" for="html_after_on">On</label>
-            <input type="radio" id="html_after_off" value="html_after_off" name="data[Event][html_after]" class="switch-input">
+            <input type="radio" id="html_after_off" value="0" name="data[Event][html_after_on]" class="switch-input">
             <label class="switch-label switch-label-on" for="html_after_off">Off</label>
             <span class="switch-selection"></span>
         </div>

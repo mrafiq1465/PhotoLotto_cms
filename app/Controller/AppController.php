@@ -62,12 +62,16 @@ class AppController extends Controller {
     // If current user is not admin, prompt for login
     function requireAdmin() {
         // if the admin session hasn't been set
-        if ($this->Session->read('User.username')!='admin') {
+        if ($this->Session->read('User.role_id') != 1) {
             // set flash message and redirect
             $this->Session->setFlash('You need to be an administrator to access this area');
             $this->redirect('/users/login/');
             exit();
         }
+    }
+
+    function user_id(){
+        return $this->Session->read('User.id');
     }
 
     // Returns logged in status of current user as true/false
