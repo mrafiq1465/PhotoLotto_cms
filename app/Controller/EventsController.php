@@ -207,6 +207,7 @@ class EventsController extends AppController {
         //var_dump($events);
         $events_array = array();
         $i=0;
+        $overlay_img_count = 0;
         foreach($events as $event){
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
@@ -226,19 +227,26 @@ class EventsController extends AppController {
              }
              if(!empty( $event['Event']['img_overlay_1'])){
                 $events_array[$i]['img_overlay_1'] = FULL_BASE_URL . $event['Event']['img_overlay_1'];
+                 $overlay_img_count ++;
              }
              if(!empty( $event['Event']['img_overlay_2'])){
                 $events_array[$i]['img_overlay_2'] = FULL_BASE_URL . $event['Event']['img_overlay_2'];
+                 $overlay_img_count ++;
              }
              if(!empty( $event['Event']['img_overlay_3'])){
                 $events_array[$i]['img_overlay_3'] = FULL_BASE_URL . $event['Event']['img_overlay_3'];
+                 $overlay_img_count ++;
              }
              if(!empty( $event['Event']['img_overlay_4'])){
                 $events_array[$i]['img_overlay_4'] = FULL_BASE_URL . $event['Event']['img_overlay_4'];
+                 $overlay_img_count ++;
              }
              if(!empty( $event['Event']['img_overlay_5'])){
                 $events_array[$i]['img_overlay_5'] = FULL_BASE_URL . $event['Event']['img_overlay_5'];
+                 $overlay_img_count ++;
              }
+            $events_array[$i]['number_of_overlay'] = $overlay_img_count;
+
             $i++;
 
         }
