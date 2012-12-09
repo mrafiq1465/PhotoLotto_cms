@@ -222,8 +222,6 @@ class EventsController extends AppController {
              $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['img_thumb'];
 
             if(!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong']) && !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong'])){
-
-                 var_dump($this->request->query['gpslat'],$this->request->query['gpslong'],$event['Event']['gpslat'],$event['Event']['gpslong']);
                  $events_array[$i]['distance'] = $this->calculate_distance($this->request->query['gpslat'],$this->request->query['gpslong'],$event['Event']['gpslat'],$event['Event']['gpslong']) . ' km';
              }
              else {
