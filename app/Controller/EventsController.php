@@ -60,25 +60,25 @@ class EventsController extends AppController {
             $this->request->data['Event']['updated_by'] = $user_data['id'];
             if(isset($this->request->data['Event']['img_thumb'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
+                $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
             for($i=1;$i<=5;$i++){
                 if(isset($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
                     $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
+                    $overlay_path_uploaded_name[] = '/img/events/' . $this->Event->id . "-$i-" . $this->request->data['Event']["img_overlay_$i"]['name'];
                     $this->request->data['Event']["img_overlay_$i"] = '';
                 }
             }
 
             if ($this->Event->save($this->request->data)) {
                 if(isset($this->request->data['Event']['img_thumb'])){
-                    $thumb_path = '/img/events/' . $this->Event->id . $this->request->data['Event']['img_thumb']['name'];
-                    move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path);
-                    $this->request->data['Event']['img_thumb'] = $thumb_path;
+                    move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . $thumb_path_uploaded_name);
+                    $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
                 }
                 for($i=1;$i<=5;$i++){
                     if(isset($this->request->data['Event']["img_overlay_$i"])){
-                        $overlay_path = '/img/events/' . $this->Event->id . "-$i-" . $this->request->data['Event']["img_overlay_$i"]['name'];
-                        move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path);
+                        move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path_uploaded_name[$i-1]);
                         $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
                     }
                 }
@@ -113,6 +113,7 @@ class EventsController extends AppController {
 
             if(!empty($this->request->data['Event']['img_thumb']['tmp_name'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
+                $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . $this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             } else {
                 unset($this->request->data['Event']['img_thumb']);
@@ -120,6 +121,7 @@ class EventsController extends AppController {
             for($i=1;$i<=5;$i++){
                 if(!empty($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
                     $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
+                    $overlay_path_uploaded_name[] = '/img/events/' . $this->Event->id . "-$i-" . $this->request->data['Event']["img_overlay_$i"]['name'];
                     $this->request->data['Event']["img_overlay_$i"] = '';
                 } else {
                     unset($this->request->data['Event']["img_overlay_$i"]);
@@ -128,17 +130,15 @@ class EventsController extends AppController {
 
             if ($this->Event->save($this->request->data)) {
                 if (!empty($thumb_path_uploaded)) {
-                    $thumb_path = '/img/events/' . $this->Event->id . $this->request->data['Event']['img_thumb']['name'];
-                    move_uploaded_file($thumb_path_uploaded, WWW_ROOT . $thumb_path);
-                    $this->request->data['Event']['img_thumb'] = $thumb_path;
+                    move_uploaded_file($thumb_path_uploaded, WWW_ROOT . $thumb_path_uploaded_name);
+                    $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
                 } elseif (!empty($this->request->data['Event']['img_thumb_delete'])) {
                     $this->request->data['Event']['img_thumb'] = '';
                 }
                 for ($i = 1; $i <= 5; $i++) {
                     if (!empty($overlay_path_uploaded[$i - 1])) {
-                        $overlay_path = '/img/events/' . $this->Event->id . "-$i-" . $this->request->data['Event']["img_overlay_$i"]['name'];
-                        move_uploaded_file($overlay_path_uploaded[$i - 1], WWW_ROOT . $overlay_path);
-                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
+                        move_uploaded_file($overlay_path_uploaded[$i - 1], WWW_ROOT . $overlay_path_uploaded_name[$i-1]);
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path_uploaded_name[$i-1];
 
                     } elseif (!empty($this->request->data['Event']["img_overlay_{$i}_delete"])) {
                         $this->request->data['Event']["img_overlay_$i"] = '';
