@@ -73,12 +73,14 @@ class EventsController extends AppController {
 
             if ($this->Event->save($this->request->data)) {
                 if(isset($this->request->data['Event']['img_thumb'])){
-                    move_uploaded_file( $thumb_path_uploaded ,WWW_ROOT . '/img/events/' . $this->Event->id . '-' . $thumb_path_uploaded_name);
+                    $thumb_path_uploaded_name = WWW_ROOT . '/img/events/' . $this->Event->id . '-' . $thumb_path_uploaded_name;
+                    move_uploaded_file( $thumb_path_uploaded , $thumb_path_uploaded_name);
                     $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
                 }
                 for($i=1;$i<=5;$i++){
                     if(isset($this->request->data['Event']["img_overlay_$i"])){
-                        move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . '/img/events/' . $this->Event->id . "-$i-" . $overlay_path_uploaded_name[$i-1]);
+                        $overlay_path_uploaded_name[$i-1] = WWW_ROOT . '/img/events/' . $this->Event->id . "-$i-" . $overlay_path_uploaded_name[$i-1];
+                        move_uploaded_file($overlay_path_uploaded[$i-1],$overlay_path_uploaded_name[$i-1]);
                         $this->request->data['Event']["img_overlay_$i"] = $overlay_path_uploaded_name[$i-1];
                     }
                 }
