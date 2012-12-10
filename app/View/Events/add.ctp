@@ -134,7 +134,7 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Event Status</h4>
-        <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'))); ?>
+        <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Scheduled' => 'Scheduled', 'Draft' => 'Draft'))); ?>
     </fieldset>
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Add',)); ?>
 
