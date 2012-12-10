@@ -60,7 +60,7 @@ class EventsController extends AppController {
             $this->request->data['Event']['updated_by'] = $user_data['id'];
             if(isset($this->request->data['Event']['img_thumb'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
-                $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
+                $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . '-' .$this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
             for($i=1;$i<=5;$i++){
@@ -79,7 +79,7 @@ class EventsController extends AppController {
                 for($i=1;$i<=5;$i++){
                     if(isset($this->request->data['Event']["img_overlay_$i"])){
                         move_uploaded_file($overlay_path_uploaded[$i-1],WWW_ROOT . $overlay_path_uploaded_name[$i-1]);
-                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path;
+                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path_uploaded_name[$i-1];
                     }
                 }
 
@@ -113,7 +113,7 @@ class EventsController extends AppController {
 
             if(!empty($this->request->data['Event']['img_thumb']['tmp_name'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
-                $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . $this->request->data['Event']['img_thumb']['name'];
+                $thumb_path_uploaded_name = '/img/events/' . $this->Event->id .'-' . $this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             } else {
                 unset($this->request->data['Event']['img_thumb']);
