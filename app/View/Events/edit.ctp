@@ -106,7 +106,6 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Filters</h4>
-        <? echo $this->Form->select('stage', array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
 
         <div class="switch pull-right">
             <input type="radio" checked="checked" id="filter_on" value="1" name="data[Event][filter]" class="switch-input">
@@ -144,6 +143,10 @@ $options = array(
             <label class="switch-label switch-label-on" for="html_after_off">Off</label>
             <span class="switch-selection"></span>
         </div>
+    </fieldset>
+    <fieldset class="controlGroup">
+        <h4>Event Status</h4>
+        <? echo $this->Form->select('stage', array('' => '---Select Stage---','Running' => 'Running', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft')); ?>
     </fieldset>
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Update',)); ?>
 

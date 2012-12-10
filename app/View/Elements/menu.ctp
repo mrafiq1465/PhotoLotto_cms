@@ -4,6 +4,11 @@ $controller = $this->params['controller'];
 
 $items = array(
     array(
+        'action'     => 'add',
+        'controller' => 'users',
+        'title'      => 'New User'
+    ),
+    array(
         'action'     => 'index',
         'controller' => 'users',
         'title'      => 'Manage Users'
