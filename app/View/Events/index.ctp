@@ -36,7 +36,21 @@
                 </div>
             </td>
             <td class="span2">
-                <div class="event_status"><?=$event['Event']['stage'];  ?></div>
+                <?
+                    $now = time();
+                    if(strtoupper($event['Event']['stage']) == 'SCHEDULED'){
+                        if($now > strtotime($event['Event']['date_start']) && $now < strtotime($event['Event']['date_end']) ){
+                            $status = 'RUNNING';
+                        } elseif ($now < strtotime($event['Event']['date_start']) ){
+                            $status = 'SCHEDULED';
+                        } else {
+                            $status = 'CLOSED';
+                        }
+                    } else {
+                        $status = 'DRAFT';
+                    }
+                ?>
+                <div class="event_status"><?=$status?></div>
                 <div class="event_start_date"><?=  date('d/m/y', strtotime($event['Event']['date_start']));  ?></div>
             </td>
             <td>
