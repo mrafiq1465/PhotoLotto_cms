@@ -92,12 +92,22 @@ class AppController extends Controller {
         $excluded = array(
             array('users','login'),
             array('events','eventlist'),
+            array('users','send_password'),
+        );
+
+        $included_admin = array(
+            array('users', 'add'),
+            array('users', 'index'),
+            array('users', 'delete'),
         );
 
         $login_req = !in_array(array($this->params->params['controller'],$this->params->params['action']),$excluded);
+        $login_req_admin = in_array(array($this->params->params['controller'],$this->params->params['action']), $included_admin);
         // if admin pages are being requested
         if(isset($this->params->params['prefix']) && $this->params->params['prefix'] == 'admin') {
             // require the admin to be logged in
+            $this->requireAdmin();
+        } elseif($login_req_admin) {
             $this->requireAdmin();
         } elseif($login_req) {
             $this->requireLogin();

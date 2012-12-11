@@ -78,6 +78,13 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+        if(!$this->isAdmin()){
+            if($this->user_id() != $id){
+                $this->Session->setFlash(__('Access denied.'));
+                $this->logout();
+                $this->redirect('/users/login/');
+            }
+        }
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
