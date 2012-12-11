@@ -64,7 +64,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/">PhotoLotto</a>
+                    <a class="brand" href="/">Pixta</a>
                     <a href="/users/logout" class="pull-right" id="logout_btn">Logout</a>
                 </div>
             </div>
