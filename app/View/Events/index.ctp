@@ -51,7 +51,11 @@
                     }
                 ?>
                 <div class="event_status"><?=$status?></div>
-                <div class="event_start_date"><?=  date('d/m/y', strtotime($event['Event']['date_start']));  ?></div>
+                <div class="event_start_date"><?
+                    if($status != 'DRAFT'){
+                        echo date('d/m/y', strtotime($event['Event']['date_start']));
+                    }
+                    ?></div>
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/events/report/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
