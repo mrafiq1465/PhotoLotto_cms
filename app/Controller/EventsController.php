@@ -165,6 +165,62 @@ class EventsController extends AppController {
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
+
+        $event = $this->Event->read(null, $id);
+        $event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.event_id' => $id)));
+        $now = time();
+        if(strtoupper($event['Event']['stage']) == 'SCHEDULED'){
+            if($now > strtotime($event['Event']['date_start']) && $now < strtotime($event['Event']['date_end']) ){
+                $event['Event']['status'] = 'RUNNING';
+            } elseif ($now < strtotime($event['Event']['date_start']) ){
+                $event['Event']['status'] = 'SCHEDULED';
+            } else {
+                $event['Event']['status'] = 'CLOSED';
+            }
+        } else {
+            $event['Event']['status'] = 'DRAFT';
+        }
+
+        $this->set(compact('event', 'event_actions'));
+    }
+
+    public function download_submissions($event_id = null, $event_action_id = null){
+        $this->autoRender = false;
+        if (!empty($event_action_id)) {
+            $this->Event->EventAction->id = $event_action_id;
+            if (!$this->Event->EventAction->exists()) {
+                throw new NotFoundException(__('Invalid event'));
+            }
+        }
+        $this->Event->id = $event_id;
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+        $rows[] = array_keys($this->Event->EventAction->getColumnTypes());
+        if(empty($event_action_id)){
+            $event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.event_id' => $event_id)));
+        } else {
+            $event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.id' => $event_action_id)));
+        }
+        foreach ($event_actions as $event_action) {
+            $rows[] = $event_action['EventAction'];
+        }
+
+        //todo: very bad memory hungry code... will have to fix it soon ...
+
+        $temp_file_name = '/tmp/' . mt_rand(1,1000000000) . '.csv';
+        $fp = fopen($temp_file_name, 'w');
+        foreach($rows as $row){
+            fputcsv($fp, $row);
+        }
+        fclose($fp);
+        $FileName = 'Event-submissions-' . date("d-m-y").'.csv';
+        header('Content-Disposition: inline; filename="'.$temp_file_name.'"');
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-length: ".filesize($temp_file_name));
+        header('Content-Type: application/excel');
+        header('Content-Disposition: attachment; filename="'.$FileName.'"');
+        readfile($temp_file_name);
     }
 /**
  * delete method
@@ -279,97 +335,5 @@ class EventsController extends AppController {
         $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
         echo json_encode(array('response' => !empty($success)));
     }
-/**
- * admin_index method
- *
- * @return void
- */
-	public function admin_index() {
-		$this->Event->recursive = 0;
-		$this->set('events', $this->paginate());
-	}
 
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
-			throw new NotFoundException(__('Invalid event'));
-		}
-		$this->set('event', $this->Event->read(null, $id));
-	}
-
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Event->create();
-			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash(__('The event has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Event->User->find('list');
-		$this->set(compact('users'));
-	}
-
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_edit($id = null) {
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
-			throw new NotFoundException(__('Invalid event'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash(__('The event has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
-			}
-		} else {
-			$this->request->data = $this->Event->read(null, $id);
-		}
-		$users = $this->Event->User->find('list');
-		$this->set(compact('users'));
-	}
-
-/**
- * admin_delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
-			throw new NotFoundException(__('Invalid event'));
-		}
-		if ($this->Event->delete()) {
-			$this->Session->setFlash(__('Event deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Event was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
 }
