@@ -23,6 +23,11 @@
             </td>
         </tr>
             <? } ?>
+        <tr>
+            <td colspan="3" style="text-align: right;">
+                <a href="/companies/export">Export All</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </section>
