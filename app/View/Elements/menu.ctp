@@ -16,12 +16,12 @@ $items = array(
     array(
         'action'     => 'add',
         'controller' => 'companies',
-        'title'      => 'New Company'
+        'title'      => 'New Client'
     ),
     array(
         'action'     => 'index',
         'controller' => 'companies',
-        'title'      => 'Manage Companies'
+        'title'      => 'Manage Clients'
     ), array(
         'action'     => 'add',
         'controller' => 'events',

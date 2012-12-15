@@ -1,6 +1,6 @@
 <section class="list">
     <?=$this->element('menu', array(
-    "heading" => "Manage Companies"
+    "heading" => "Manage Clients"
 ));?>
 
     <table class="table table-bordered table-striped">
@@ -8,7 +8,7 @@
         <tr>
             <th>Details</th>
             <th>Edit</th>
-            <th>Delete</th>            
+            <th width="150px;">Delete &nbsp;&nbsp;&nbsp;&nbsp;  <a href="/companies/export">Export All</a></th>
         </tr>
         </thead>
         <tbody>
@@ -23,11 +23,6 @@
             </td>
         </tr>
             <? } ?>
-        <tr>
-            <td colspan="3" style="text-align: right;">
-                <a href="/companies/export">Export All</a>
-            </td>
-        </tr>
         </tbody>
     </table>
 </section>

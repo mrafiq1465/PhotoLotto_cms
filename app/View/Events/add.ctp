@@ -106,9 +106,9 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup controls-row">
         <h4>Social Media</h4>
-        <?= $this->Form->input('facebook_msg', array('placeholder' => 'Facebook Message','label' => false, 'div' => false, 'class' => 'span6')); ?>
+        <?= $this->Form->input('facebook_msg', array('placeholder' => 'Facebook Message: maxlength 420 chars','label' => false, 'div' => false, 'class' => 'span6')); ?>
         <?= $this->Form->input('facebook_url', array('placeholder' => 'Facebook Link','label' => false, 'div' => false, 'class' => 'span5')); ?>
-        <?= $this->Form->input('twitter_msg', array('placeholder' => 'Twitter Message','label' => false, 'div' => false, 'class' => 'span6')); ?>
+        <?= $this->Form->input('twitter_msg', array('placeholder' => 'Twitter Message: maxlength 120 chars','label' => false, 'div' => false, 'class' => 'span6')); ?>
     </fieldset>
     <fieldset class="controlGroup">
         <h4>HTML Before Upload</h4>

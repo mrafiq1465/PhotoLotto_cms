@@ -1,11 +1,11 @@
 <section class="list">
     <?=$this->element('menu', array(
-    "heading" => "Edit Company"
+    "heading" => "Edit Client"
 ));?>
 
     <? echo $this->Form->create('Company'); ?>
     <section id="form-container">
-        <h3>Company Details</h3>
+        <h3>Client Details</h3>
         <? echo $this->Form->input('name', array('label' => FALSE, 'placeholder' => 'Name')); ?>
         <div class="control-group">
             <? echo $this->Form->input('address1', array('label' => FALSE, 'div' => FALSE, 'placeholder' => 'Address 1')); ?>
