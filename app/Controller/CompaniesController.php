@@ -125,7 +125,7 @@ class CompaniesController extends AppController {
             fputcsv($fp, $row);
         }
         fclose($fp);
-        $FileName = 'Event-submissions-' . date("d-m-y").'.csv';
+        $FileName = 'Client-submissions-' . date("d-m-y").'.csv';
         header('Content-Disposition: inline; filename="'.$temp_file_name.'"');
         header("Content-Transfer-Encoding: Binary");
         header("Content-length: ".filesize($temp_file_name));
