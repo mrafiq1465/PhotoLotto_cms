@@ -11,6 +11,9 @@ class EventsController extends AppController {
 
     //var $helpers = Array('Form', 'Tinymce');
 
+    public $components = array('RequestHandler');
+    public $helpers = array('Text');
+
     /**
  * index method
  *
@@ -45,6 +48,13 @@ class EventsController extends AppController {
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
 		}
+        if ($this->RequestHandler->isRss() ) {
+            $event = $this->Event->read(null, $id);
+            // You should import Sanitize
+
+
+            return $this->set(compact('event'));
+        }
 		$this->set('event', $this->Event->read(null, $id));
 	}
 
