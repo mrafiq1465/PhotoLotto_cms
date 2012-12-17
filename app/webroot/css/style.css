@@ -364,3 +364,6 @@ textarea + .switch {
 .span7 .switch {
     margin-top: 0;
 }
+.icon-rss {
+    background-position: -456px 0;
+}

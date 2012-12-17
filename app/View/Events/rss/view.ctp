@@ -12,8 +12,8 @@ App::uses('Sanitize', 'Utility');
 $postTime = strtotime($event['Event']['created']);
 
 $postLink = array(
-    'controller' => 'posts',
-    'action' => 'view',
+    'controller' => 'event',
+    'action' => 'edit',
     $event['Event']['id']
 );
 
@@ -32,14 +32,12 @@ $item = array(
     'title' => $event['Event']['name'],
     'link' => $postLink,
     'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
-    'description' => $bodyText,
     'pubDate' => $event['Event']['created']
 );
-$item['description'] .= '<br><img src="'. FULL_BASE_URL . $event['Event']['img_thumb'] . '" />';
-
 if(!empty($event['Event']['img_thumb'])){
     $item['eventThumbnail'] = FULL_BASE_URL . $event['Event']['img_thumb'];
 }
+$item['Client'] = $event['Company']['name'];
 for($i=1;$i<=5;$i++){
     $item["OverlayImage$i"] = FULL_BASE_URL . $event['Event']["img_overlay_$i"];
 }
