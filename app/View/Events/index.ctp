@@ -66,6 +66,9 @@
             <td>
                 <?=$this->Html->link('<i class="icon-trash"></i> ', '/events/delete/' . $event['Event']['id'], array('class' => 'del-btn', 'item_name'=> $event['Event']['name'], 'escape' => FALSE)); ?>
             </td>
+            <td>
+                <?=$this->Html->link('<i class="icon-rss"></i> ', '/events/rss/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+            </td>
         </tr>
             <? } ?>
         </tbody>
