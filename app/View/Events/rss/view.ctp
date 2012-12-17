@@ -12,7 +12,7 @@ App::uses('Sanitize', 'Utility');
 $postTime = strtotime($event['Event']['created']);
 
 $postLink = array(
-    'controller' => 'event',
+    'controller' => 'events',
     'action' => 'edit',
     $event['Event']['id']
 );
