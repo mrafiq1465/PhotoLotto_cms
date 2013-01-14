@@ -34,6 +34,25 @@ $(document).ready(function() {
         });
     });
 
+    $('#resetPassword').click(function(e){
+
+        var email = $('#email').val();
+
+        $.ajax({
+            type:"POST",
+            url:'/users/send_password',
+            data:{'data[email]':email },
+            dataType:"json",
+            success:function (json) {
+                if (json.success !== undefined) {
+                    $('#loginModal .modal-body .error').text(json.success).show();
+                } else {
+                    $('#loginModal .modal-body .error').text(json.error).show();
+                }
+            }
+        });
+    });
+
     $(":date").dateinput({
         format: 'yyyy-mm-dd',	// the format displayed for the user
         selectors: true,             	// whether month/year dropdowns are shown
@@ -78,13 +97,18 @@ $(document).ready(function() {
 
     //Popover control
     var $form = $("#EventAddForm, #EventEditForm");
-    $('a.pop', $form)
-        .popover({
-            html : true
-        })
-        .on('click', function (e) {
-            e.preventDefault();
-        });
+    $('a.pop', $form).click(function(){
+        return false;
+    });
+
+    $('a.pop', $form).mouseenter(function(){
+        $(this).popover('show');
+    });
+
+    $('a.pop', $form).mouseout(function(){
+        $(this).popover('hide');
+    });
+
     $('select', $form).addClass('span4');
 
 });

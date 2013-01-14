@@ -192,19 +192,23 @@ class UsersController extends AppController {
     }
 
     function send_password() {
+        $this->autoRender = false;
         if ($this->request->is('post') || $this->request->is('put')) {
             $email = $this->request->data['email'];
+            if (empty($email)) {
+                echo json_encode(array('error' => 'Email is not valid'));
+            }
             $user = $this->User->find('first', array('recursive' => -1, 'conditions' => array('email' => $email)));
-            if(empty($user)){
-                $this->Session->setFlash(__('The user could not be found. Please, try again.'));
+            if (empty($user)) {
+                echo json_encode(array('error' => 'The user could not be found. Please, try again.'));
             } else {
                 $content = "The password for login is : " . $user['User']['password'];
                 $this->Email->to = $user['User']['email'];
                 $this->Email->from = 'mrafiq1465@gmail.com';
                 $this->Email->subject = 'Login Information';
-                $success = $this->Email->send($content,null,null);
-                if($success) $this->Session->setFlash(__('Login information has been sent to the email address.'));
-                else $this->Session->setFlash(__('Unknown error. Please try again.'));
+                $success = $this->Email->send($content, null, null);
+                if ($success) echo json_encode(array('success' => 'Password sent to the mail address.'));
+                else echo json_encode(array('error' => 'Email could not be sent.'));
             }
         }
     }

@@ -24,8 +24,8 @@ $bodyText = $this->Text->stripLinks($bodyText);
 $bodyText = Sanitize::stripAll($bodyText);
 $bodyText = $this->Text->truncate($bodyText, 400, array(
     'ending' => '...',
-    'exact'  => true,
-    'html'   => true,
+    'exact' => true,
+    'html' => true,
 ));
 
 $item = array(
@@ -34,12 +34,20 @@ $item = array(
     'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
     'pubDate' => $event['Event']['created']
 );
-if(!empty($event['Event']['img_thumb'])){
+if (!empty($event['Event']['img_thumb'])) {
     $item['eventThumbnail'] = FULL_BASE_URL . $event['Event']['img_thumb'];
 }
 $item['Client'] = $event['Company']['name'];
-for($i=1;$i<=5;$i++){
-    $item["OverlayImage$i"] = FULL_BASE_URL . $event['Event']["img_overlay_$i"];
+for ($i = 1; $i <= 5; $i++) {
+    if (!empty($event['Event']["img_overlay_$i"])) $item["OverlayImage$i"] = FULL_BASE_URL . $event['Event']["img_overlay_$i"];
 }
-echo  $this->Rss->item(array(), $item );
+
+for ($i = 1; $i <= count($event['EventAction']); $i++) {
+    $item["app_photo_$i"] = array(
+        'device' => $event['EventAction'][$i - 1]['phone_type'],
+        'url' => S3_IMG_URL . $event['EventAction'][$i - 1]['photo'],
+        'date' => date('m-d-Y', strtotime($event['EventAction'][$i - 1]['created'])),
+    );
+}
+echo  $this->Rss->item(array(), $item);
 
