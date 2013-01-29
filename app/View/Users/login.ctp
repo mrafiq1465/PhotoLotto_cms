@@ -239,6 +239,7 @@ input.input {
     </div>
     <div class="modal-body">
         <? echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input', 'required'=>"required", 'type' => 'email')); ?>
+        <p class="error" style="display: none"></p>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>

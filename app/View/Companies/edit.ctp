@@ -18,7 +18,7 @@
         <? echo $this->Form->input('address2', array('label' => FALSE, 'placeholder' => 'Address 2')); ?>
         <? echo $this->Form->input('phone', array('label' => FALSE, 'placeholder' => 'Phone')); ?>
         <?php $states = array('nsw' => 'NSW', 'vic' => 'VIC', 'qld' => 'QLD', 'wa' => 'WA', 'nt' => 'NT', 'tas' => 'TAS', 'act' => 'ACT');
-        echo $this->Form->input('states', array('options' => $states, 'default' => 'nsw'));
+        echo $this->Form->input('state', array('options' => $states, 'default' => 'nsw'));
         ?>
     </section>
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Edit')); ?>

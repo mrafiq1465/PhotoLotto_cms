@@ -1,41 +1,7 @@
 
 $(document).ready(function() {
 
-    /*$(".forgot_password").click(function(e) {
-        alert('test');
-        //$("#password").overlay().load();
-    });*/
-/*
-    $("#password").overlay({
-        top: 260,
-        mask: {
-            color: '#fff',
-            loadSpeed: 200,
-            opacity: 0.5
-        },
-        closeOnClick: false,
-        load: true
-    });
-*/
-    $('#send_password').click(function(e){
-
-        var email = $('#email_password').val();
-
-        $.ajax({
-            type:"POST",
-            url:'/users/send_password',
-            data:{'data[email]':email },
-            dataType:"json",
-            success:function (json) {
-                if (json.status == 'success') {
-
-                }
-            }
-        });
-    });
-
     $('.blacklist').change(function(e){
-
 
         var id = $(this).attr('id');
         var blacklist = 0;
@@ -49,9 +15,27 @@ $(document).ready(function() {
             data:{'data[id]':id, 'data[blacklist]':blacklist},
             dataType:"json",
             success:function (json) {
-                alert(json.status);
                 if (json.status == 'success') {
 
+                }
+            }
+        });
+    });
+
+    $('#resetPassword').click(function(e){
+
+        var email = $('#email').val();
+
+        $.ajax({
+            type:"POST",
+            url:'/users/send_password',
+            data:{'data[email]':email },
+            dataType:"json",
+            success:function (json) {
+                if (json.success !== undefined) {
+                    $('#loginModal .modal-body .error').text(json.success).show();
+                } else {
+                    $('#loginModal .modal-body .error').text(json.error).show();
                 }
             }
         });
@@ -102,13 +86,18 @@ $(document).ready(function() {
 
     //Popover control
     var $form = $("#EventAddForm, #EventEditForm");
-    $('a.pop', $form)
-        .popover({
-            html : true
-        })
-        .on('click', function (e) {
-            e.preventDefault();
-        });
+    $('a.pop', $form).click(function(){
+        return false;
+    });
+
+    $('a.pop', $form).mouseenter(function(){
+        $(this).popover('show');
+    });
+
+    $('a.pop', $form).mouseout(function(){
+        $(this).popover('hide');
+    });
+
     $('select', $form).addClass('span4');
 
 });
