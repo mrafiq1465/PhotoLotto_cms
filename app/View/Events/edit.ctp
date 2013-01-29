@@ -62,6 +62,10 @@ $options = array(
                 </div>
             </div>
             <div class="span7">
+                <? if (!empty($this->data['Event']['public_logo'])) { ?>
+                <img src="<?=$this->data['Event']['public_logo']?>" data-name="public_logo" style="max-height: 100px;">
+                <a href="javascript:void(0);" data-name="public_logo" class="delete_image"></a><br>
+                <? } ?>
                 <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
                 <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
                    data-placement="bottom" rel="popover" class="pop" href="#"
