@@ -2,13 +2,11 @@
 $(document).ready(function() {
 
     $('.blacklist').change(function(e){
-
         var id = $(this).attr('id');
         var blacklist = 0;
         if($(this).attr('checked') == 'checked') {
             blacklist =1;
         }
-
         $.ajax({
             type:"POST",
             url:'/events/photo_update',
@@ -16,16 +14,13 @@ $(document).ready(function() {
             dataType:"json",
             success:function (json) {
                 if (json.status == 'success') {
-
                 }
             }
         });
     });
 
     $('#resetPassword').click(function(e){
-
         var email = $('#email').val();
-
         $.ajax({
             type:"POST",
             url:'/users/send_password',
