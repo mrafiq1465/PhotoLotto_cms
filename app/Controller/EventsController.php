@@ -391,16 +391,17 @@ class EventsController extends AppController {
     }
 
     function photo_update() {
+        $this->autoRender = false;
 
-            $event_action_id = $this->request->data['id'];
-            $blacklist = $this->request->data['blacklist'];
+        $event_action_id = $this->request->data['id'];
+        $blacklist = $this->request->data['blacklist'];
 
-            $success = $this->Event->EventAction->save(array(
-                'EventAction' => array(
-                    'id' => $event_action_id,
-                    'blacklist' => $blacklist,
-                )
-            ));
+        $this->Event->EventAction->id = $event_action_id;
+        $success = $this->Event->EventAction->save(array(
+            'EventAction' => array(
+                'blacklist' => $blacklist,
+            )
+        ));
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
