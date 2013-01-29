@@ -185,3 +185,4 @@ CakeLog::config('error', array(
  * Load Twitter Bootstrap Plugin
  */
 CakePlugin::load('TwitterBootstrap');
+Configure::load('config');

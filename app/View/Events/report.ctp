@@ -15,9 +15,16 @@
     </section>
     <div class="submission_list">
         <ul>
-            <? foreach($event_actions as $event_action) { ?>
+            <? foreach($event_actions as $event_action) {
+              $blacklist = '';
+            if($event_action['EventAction']['blacklist']){
+                $blacklist = "checked";
+              }
+            ?>
             <li>
-                <?="<pre>" . print_r($event_action, true) . "</pre>"; ?>
+                <img src="<?php echo S3_IMG_URL.'/'.$event_action['EventAction']['photo']; ?>" alt="" />
+                <input class="blacklist" id="<?php echo $event_action['EventAction']['id']; ?>" type="checkbox" <?php echo $blacklist; ?>  /> BlackList
+                <br /><br />
                 <a href="/events/download_submissions/<?=$event['Event']['id']?>/<?=$event_action['EventAction']['id']?>">Export</a>
             </li>
             <? } ?>

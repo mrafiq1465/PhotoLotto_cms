@@ -73,6 +73,11 @@ class EventsController extends AppController {
                 $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
+            if(isset($this->request->data['Event']['public_logo'])) {
+                $thumb_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
+                $thumb_path_uploaded_name = $this->request->data['Event']['public_logo']['name'];
+                $this->request->data['Event']['public_logo'] = '';
+            }
             for($i=1;$i<=5;$i++){
                 if(isset($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
                     $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
@@ -115,7 +120,7 @@ class EventsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		$this->Event->id = $id;
+        $this->Event->id = $id;
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
 		}
@@ -129,6 +134,13 @@ class EventsController extends AppController {
                 $this->request->data['Event']['img_thumb'] = '';
             } else {
                 unset($this->request->data['Event']['img_thumb']);
+            }
+            if(!empty($this->request->data['Event']['public_logo']['tmp_name'])) {
+                $public_logo_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
+                $public_logo_path_uploaded_name = '/img/events/' . $this->Event->id .'-' . $this->request->data['Event']['public_logo']['name'];
+                $this->request->data['Event']['public_logo'] = '';
+            } else {
+                unset($this->request->data['Event']['public_logo']);
             }
             for($i=1;$i<=5;$i++){
                 if(!empty($this->request->data['Event']["img_overlay_$i"]['tmp_name'])){
@@ -147,6 +159,13 @@ class EventsController extends AppController {
                 } elseif (!empty($this->request->data['Event']['img_thumb_delete'])) {
                     $this->request->data['Event']['img_thumb'] = '';
                 }
+                if (!empty($public_logo_path_uploaded)) {
+                    move_uploaded_file($thumb_path_uploaded, WWW_ROOT . $public_logo_path_uploaded_name);
+                    $this->request->data['Event']['public_logo'] = $public_logo_path_uploaded_name;
+                } elseif (!empty($this->request->data['Event']['public_logo_delete'])) {
+                    $this->request->data['Event']['public_logo'] = '';
+                }
+
                 for ($i = 1; $i <= 5; $i++) {
                     if (!empty($overlay_path_uploaded[$i - 1])) {
                         move_uploaded_file($overlay_path_uploaded[$i - 1], WWW_ROOT . $overlay_path_uploaded_name[$i-1]);
@@ -170,7 +189,21 @@ class EventsController extends AppController {
 		$this->set(compact('companies'));
 	}
 
+    public function event_custom($id = null) {
+
+
+        $event = $this->Event->find('first', array(
+            'conditions' => array('Event.name' => $id)
+        ));
+        $this->set(compact('event', 'event'));
+
+        //$event = $this->Event->read(null, $id);
+        //$event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.event_id' => $id)));
+
+    }
+
     public function report($id = null) {
+
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
@@ -280,6 +313,7 @@ class EventsController extends AppController {
              $overlay_img_count = 0;
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
+            $events_array[$i]['event_type'] = $event['Event']['eventtype'];
              $events_array[$i]['shortdescription'] = $event['Event']['shortdescription'];
              $events_array[$i]['company_name'] = $event['Company']['name'];
              $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'];
@@ -331,6 +365,8 @@ class EventsController extends AppController {
     public function event_action(){
         $this->autoRender = false;
         if(!empty($_GET)){
+            $this->request->data = $this->Event->read(null, $_GET['event_id']);
+
             $success = $this->Event->EventAction->save(array(
                 'EventAction' => array(
                     'event_id' => $_GET['event_id'],
@@ -338,11 +374,28 @@ class EventsController extends AppController {
                     'action_name' => $_GET['action'],
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
+                    'blacklist' => $this->request->data['Event']['auto_moderate'],
                 )
             ));
         }
         $this->response->type('json');
         $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
+        echo json_encode(array('response' => !empty($success)));
+    }
+
+    function photo_update() {
+
+            $event_action_id = $this->request->data['id'];
+            $blacklist = $this->request->data['blacklist'];
+
+            $success = $this->Event->EventAction->save(array(
+                'EventAction' => array(
+                    'id' => $event_action_id,
+                    'blacklist' => $blacklist,
+                )
+            ));
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
     }
 

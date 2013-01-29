@@ -13,34 +13,6 @@ $options = array(
     <?=$this->element('menu', array("heading" => "Edit Event"));?>
 
     <? echo $this->Form->create('Event', $options); ?>
-    <fieldset class="controlGroup" style="display: none;">
-        <div class="control-group row">
-            <div class="span4"> <!--#TODO generate it via CakePHP-->
-                <select name="what" id="what">
-                    <option value="some value">Polite in public 1</option>
-                    <option value="some value">Polite in public 2</option>
-                    <option value="some value">Polite in public 3</option>
-                </select>
-            </div>
-            <div class="span7">
-                <div class="switch span3">
-                    <input type="radio" class="switch-input" name="data[Event][whatever]" value="whatever_on" id="whatever_on" checked="checked">
-                    <label for="whatever_on" class="switch-label switch-label-off">On</label>
-                    <input type="radio" class="switch-input" name="data[Event][whatever]" value="whatever_off" id="whatever_off">
-                    <label for="whatever_off" class="switch-label switch-label-on">Off</label>
-                    <span class="switch-selection"></span>
-                </div>
-                <div class="switch span3" style="margin-left:100px;">
-                    <input type="radio" class="switch-input" name="data[Event][whatever1]" value="whatever1_on" id="whatever1_on" checked="checked">
-                    <label for="whatever1_on" class="switch-label switch-label-off">Dedicated</label>
-                    <input type="radio" class="switch-input" name="data[Event][whatever1]" value="whatever1_off" id="whatever1_off">
-                    <label for="whatever1_off" class="switch-label switch-label-on">Generic</label>
-                    <span class="switch-selection"></span>
-                </div>
-            </div>
-        </div>
-
-    </fieldset>
     <fieldset class="controlGroup">
         <h4>Event Details</h4>
         <div class="control-group row">
@@ -79,9 +51,27 @@ $options = array(
 
 
         </div>
-        <div class="control-group">
-            <?=$this->Form->input('eventtype', array('options' => array('generic' => 'Generic', 'location-based' => 'Location-based'), 'default' => 'generic')); ?>
-            <?=$this->Form->input('company_id'); ?>
+        <div class="control- row">
+            <div class="span4">
+                <div class="control-group">
+                    <?=$this->Form->input('eventtype', array('options' => array('generic' => 'Generic', 'location-based' => 'Location-based'), 'default' => 'generic'));
+                    ?>
+                </div>
+                <div class="control-group">
+                    <? echo $this->Form->input('company_id'); ?>
+                </div>
+            </div>
+            <div class="span7">
+                <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
+                <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
+                   data-placement="bottom" rel="popover" class="pop" href="#"
+                   data-original-title="Image Requirements">
+                    <i class="icon-question-sign"></i>
+                </a>
+                <br />
+                <?= $this->Form->textarea('public_description', array('placeholder' => 'Public Description', 'class' => 'span7','row' => 2 ));?>
+
+            </div>
         </div>
 
     </fieldset>
@@ -105,13 +95,13 @@ $options = array(
         <a href="javascript:void(0);" id="add_more_image" class="pull-right"></a>
     </fieldset>
     <fieldset class="controlGroup">
-        <h4>Filters</h4>
+        <h4>Auto Moderate</h4>
 
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="filter_on" value="1" name="data[Event][filter]" class="switch-input">
-            <label class="switch-label switch-label-off" for="filter_on">On</label>
-            <input type="radio" id="filter_off" value="0" name="data[Event][filter]" class="switch-input">
-            <label class="switch-label switch-label-on" for="filter_off">Off</label>
+            <input type="radio" checked="checked" id="auto_moderate_on" value="1" name="data[Event][auto_moderate]" class="switch-input">
+            <label class="switch-label switch-label-off" for="auto_moderate_on">On</label>
+            <input type="radio" id="auto_moderate_off" value="0" name="data[Event][auto_moderate]" class="switch-input">
+            <label class="switch-label switch-label-on" for="auto_moderate_off">Off</label>
             <span class="switch-selection"></span>
         </div>
 

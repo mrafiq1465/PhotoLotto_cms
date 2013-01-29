@@ -34,6 +34,30 @@ $(document).ready(function() {
         });
     });
 
+    $('.blacklist').change(function(e){
+
+
+        var id = $(this).attr('id');
+        var blacklist = 0;
+        if($(this).attr('checked') == 'checked') {
+            blacklist =1;
+        }
+
+        $.ajax({
+            type:"POST",
+            url:'/events/photo_update',
+            data:{'data[id]':id, 'data[blacklist]':blacklist},
+            dataType:"json",
+            success:function (json) {
+                alert(json.status);
+                if (json.status == 'success') {
+
+                }
+            }
+        });
+
+    });
+
     $(":date").dateinput({
         format: 'yyyy-mm-dd',	// the format displayed for the user
         selectors: true,             	// whether month/year dropdowns are shown
