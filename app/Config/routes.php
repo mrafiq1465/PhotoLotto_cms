@@ -41,7 +41,20 @@
     Router::connect('/events/add', array('controller' => 'events', 'action' => 'add'));
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
+    Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
+    Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('event_id' => 'event_id','event_action_id'=>'event_action_id'));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
+    Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
+    Router::connect('/companies', array('controller' => 'companies', 'action' => 'index'));
+    Router::connect('/companies/add', array('controller' => 'companies', 'action' => 'add'));
+    Router::connect('/companies/edit/:id', array('controller' => 'companies', 'action' => 'edit'),array('pass' => array('id')));
+    Router::connect('/companies/delete/:id', array('controller' => 'companies', 'action' => 'delete'),array('pass' => array('id')));
+    Router::connect('/users', array('controller' => 'users', 'action' => 'index'));
+    Router::connect('/users/add', array('controller' => 'users', 'action' => 'add'));
+    Router::connect('/users/edit/:id', array('controller' => 'users', 'action' => 'edit'),array('pass' => array('id')));
+    Router::connect('/users/delete/:id', array('controller' => 'users', 'action' => 'delete'),array('pass' => array('id')));
+    Router::connect('/users/logout', array('controller' => 'users', 'action' => 'logout'));
+    Router::connect('/users/send_password', array('controller' => 'users', 'action' => 'send_password'));
 
     Router::connect('/*', array('controller' => 'events', 'action' => 'event_custom'), array('pass' => array('*')));
 

@@ -20,7 +20,8 @@ class EventsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Event->recursive = 0;
+
+        $this->Event->recursive = 0;
         $event_conditions = array();
         if(isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
         if($this->isAdmin()){
