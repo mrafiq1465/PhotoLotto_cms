@@ -69,6 +69,9 @@
             <td>
                 <?=$this->Html->link('<i class="icon-rss"></i> ', '/events/rss/' . $event['Event']['id'], array('target' => '_blank', 'class' => '', 'escape' => FALSE)); ?>
             </td>
+            <td>
+                <?=$this->Html->link('<i class="icon-pencil"></i> ', $event['Event']['name'], array('target' => '_blank', 'class' => '', 'escape' => FALSE)); ?>
+            </td>
         </tr>
             <? } ?>
         </tbody>
