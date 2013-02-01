@@ -122,6 +122,10 @@ $options = array(
         </div>
     </fieldset>
     <fieldset class="controlGroup">
+        <h4>Terms & Conditions</h4>
+        <?= $this->Form->textarea('t_c', array('placeholder' => 'Terms and Conditions', 'class' => 'span6', 'row' => 2 ));?>
+    </fieldset>
+    <fieldset class="controlGroup">
         <h4>Event Status</h4>
         <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Scheduled' => 'Scheduled', 'Draft' => 'Draft'))); ?>
     </fieldset>
