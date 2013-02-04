@@ -16,7 +16,9 @@ $options = array(
     <fieldset class="controlGroup">
         <h4>Event Details</h4>
         <div class="control-group row">
+
             <div class="span4">
+                <h5>Event Name</h5>
                 <? echo $this->Form->input('name', array('label' => false, 'div' => false,'placeholder' => 'Event Name', 'class' => 'span4')); ?>
             </div>
             <div class="span7">
@@ -25,7 +27,7 @@ $options = array(
                 <a href="javascript:void(0);" data-name="img_thumb" class="delete_image"></a><br>
                 <? } ?>
                 <? echo $this->Form->file('img_thumb', array('class' => 'span5')); ?>
-                <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
+                <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
@@ -33,19 +35,24 @@ $options = array(
             </div>
         </div>
         <div class="control-group">
+            <h5>Latitude</h5>
             <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => 'span2')); ?>
+            <h5>Longitude</h5>
             <? echo $this->Form->input('gpslong', array('div' => false,'placeholder' => 'Longitude', 'class' => 'span2')); ?>
         </div>
         <div class="control-group row">
             <div class="span4">
                 <div class="control-group">
+                    <h5>Start Date</h5>
                     <input name="data[Event][date_start]" value="<?=$this->data['Event']['date_start']?>" type="date" placeholder="Start Date" class="span4" />
                 </div>
                 <div class="control-group">
+                    <h5>End Date</h5>
                     <input name="data[Event][date_end]" value="<?=$this->data['Event']['date_end']?>" type="date" placeholder="End Date" class="span4" />
                 </div>
             </div>
             <div class="span7">
+                <h5>Description (60 character Limit)</h5>
                 <?= $this->Form->textarea('shortdescription', array('placeholder' => 'Description (60 character Limit)', 'class' => 'span7','row' => 2 ));?>
             </div>
 
@@ -54,10 +61,12 @@ $options = array(
         <div class="control- row">
             <div class="span4">
                 <div class="control-group">
+                    <h5>Event Type</h5>
                     <?=$this->Form->input('eventtype', array('options' => array('generic' => 'Generic', 'location-based' => 'Location-based'), 'default' => 'generic'));
                     ?>
                 </div>
                 <div class="control-group">
+                   <h5>Company Name</h5>
                     <? echo $this->Form->input('company_id'); ?>
                 </div>
             </div>
@@ -67,12 +76,13 @@ $options = array(
                 <a href="javascript:void(0);" data-name="public_logo" class="delete_image"></a><br>
                 <? } ?>
                 <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
-                <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
+                <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
                 </a>
                 <br />
+                <h5>Description (Public)</h5>
                 <?= $this->Form->textarea('public_description', array('placeholder' => 'Public Description', 'class' => 'span7','row' => 2 ));?>
 
             </div>
@@ -81,7 +91,7 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Overlay Images <span>(maximum 5)</span></h4>
-        <a data-content="- Image Dimentions: <br>- Image Type: JPG, GIF."
+        <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
            data-placement="bottom" rel="popover" class="pop" href="#"
            data-original-title="Image Requirements">
             <i class="icon-question-sign"></i>

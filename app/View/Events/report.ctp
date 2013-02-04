@@ -3,11 +3,6 @@
     <section id="form-container">
         <ul>
             <li>Event name:<?=$event['Event']['name']?></li>
-            <form action="/events/reports/<?=$event['Event']['id']?>" method="post">
-                <li>Start date: <input name="data[Event][date_start]" type="date" value=""/></li>
-                <li>End date: <input name="data[Event][date_end]" type="date" value=""/></li>
-                <input type="submit" value="Filter" name="submit"/>
-            </form>
             <li>Status: <?=$event['Event']['status']?></li>
             <li><?=count($event_actions)?> Submissions</li>
             <li><a href="/events/download_submissions/<?=$event['Event']['id']?>">Export all</a></li>

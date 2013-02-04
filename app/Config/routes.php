@@ -34,6 +34,7 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 
+
     Router::connect('/users/login/', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/eventlist/*', array('controller' => 'events', 'action' => 'eventlist'));
@@ -42,6 +43,7 @@
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
     Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
+    Router::connect('/events/download_submissions/:event_id/', array('controller' => 'events', 'action' => 'download_submissions'),array('event_id' => 'event_id'));
     Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('event_id' => 'event_id','event_action_id'=>'event_action_id'));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
