@@ -32,8 +32,7 @@ $options = array(
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
                 </a>
-            </div>
-            <div class="span7">
+                <br>
                 <? if (!empty($this->data['Event']['img_thumb_small'])) { ?>
                 <img src="<?=$this->data['Event']['img_thumb_small']?>" data-name="img_thumb_small" style="max-height: 100px;">
                 <a href="javascript:void(0);" data-name="img_thumb_small" class="delete_image"></a><br>
