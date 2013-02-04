@@ -31,7 +31,8 @@
                     <h5><?=$event['Event']['name'];  ?> </h5>
 
                     <div class="info">
-                        <?=$event['Event']['shortdescription'];  ?>
+                        <?=$event['Event']['shortdescription_line_1'];  ?><br>
+                        <?=$event['Event']['shortdescription_line_2'];  ?>
                     </div>
                 </div>
             </td>

@@ -322,14 +322,31 @@ class EventsController extends AppController {
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
              $events_array[$i]['event_type'] = $event['Event']['eventtype'];
-             $events_array[$i]['shortdescription'] = $event['Event']['shortdescription'];
+             $events_array[$i]['shortdescription_line_1'] = $event['Event']['shortdescription_line_1'];
+             $events_array[$i]['shortdescription_line_2'] = $event['Event']['shortdescription_line_2'];
              $events_array[$i]['company_name'] = $event['Company']['name'];
              $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'];
              $events_array[$i]['facebook_url'] = $event['Event']['facebook_url'];
              $events_array[$i]['twitter_msg'] = $event['Event']['twitter_msg'];
-             $events_array[$i]['html_before'] = $event['Event']['html_before'];
-             $events_array[$i]['html_after'] = $event['Event']['html_after'];
-             $events_array[$i]['t_c'] = $event['Event']['t_c'];
+             if($event['Event']['html_before_on'] == 1) {
+                $events_array[$i]['html_before'] = $event['Event']['html_before'];
+             }
+             else {
+                 $events_array[$i]['html_before'] = '';
+             }
+             if($event['Event']['html_after_on'] == 1) {
+                $events_array[$i]['html_after'] = $event['Event']['html_after'];
+             }
+             else {
+                $events_array[$i]['html_after'] = '';
+             }
+             if($event['Event']['t_c_on'] == 1) {
+                $events_array[$i]['t_c'] = $event['Event']['t_c'];
+             }
+             else {
+                $events_array[$i]['t_c'] = '';
+             }
+
              $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['img_thumb'];
 
             if(!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong']) && !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong'])){
