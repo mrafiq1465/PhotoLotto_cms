@@ -29,7 +29,8 @@
     Router::connect('/events/rss/:id', array('controller' => 'events', 'action' => 'view', 'ext' => 'rss' ),
         array('pass' => array('id'), 'id' => '[a-zA-Z-0-9-]*') );
 
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/', array('controller' => 'events', 'action' => 'index', 'home'));
+	Router::connect('/index', array('controller' => 'events', 'action' => 'index', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -43,8 +44,8 @@
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
     Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
-    Router::connect('/events/download_submissions/:event_id/', array('controller' => 'events', 'action' => 'download_submissions'),array('event_id' => 'event_id'));
-    Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('event_id' => 'event_id','event_action_id'=>'event_action_id'));
+    Router::connect('/events/download_submissions/:event_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id')));
+    Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id','event_action_id')));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
     Router::connect('/companies', array('controller' => 'companies', 'action' => 'index'));

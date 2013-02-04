@@ -12,6 +12,8 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -61,18 +63,23 @@
 
             <td>
                 <?=$this->Html->link('<i class="icon-pencil"></i>', '/events/edit/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <br>edit
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-trash"></i> ', '/events/delete/' . $event['Event']['id'], array('class' => 'del-btn', 'item_name'=> $event['Event']['name'], 'escape' => FALSE)); ?>
+                <br>delete
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-rss"></i> ', '/events/rss/' . $event['Event']['id'], array('target' => '_blank', 'class' => '', 'escape' => FALSE)); ?>
+                <br>RSS
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-folder-open"></i> ', '/events/report/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <br>edit uploaded images
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/' . $event['Event']['name'], array('class' => '', 'escape' => FALSE)); ?>
+                <br>view custom page
             </td>
 
         </tr>
