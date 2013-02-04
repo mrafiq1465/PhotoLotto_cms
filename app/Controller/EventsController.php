@@ -74,6 +74,11 @@ class EventsController extends AppController {
                 $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
                 $this->request->data['Event']['img_thumb'] = '';
             }
+            if(isset($this->request->data['Event']['img_thumb_small'])) {
+                $thumb_small_path_uploaded = $this->request->data['Event']['img_thumb_small']['tmp_name'];
+                $thumb_small_path_uploaded_name = $this->request->data['Event']['img_thumb_small']['name'];
+                $this->request->data['Event']['img_thumb_small'] = '';
+            }
             if(isset($this->request->data['Event']['public_logo'])) {
                 $public_logo_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
                 $public_logo_path_uploaded_name = $this->request->data['Event']['public_logo']['name'];
@@ -98,6 +103,11 @@ class EventsController extends AppController {
                     $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $thumb_path_uploaded_name;
                     move_uploaded_file( $thumb_path_uploaded , WWW_ROOT . $thumb_path_uploaded_name);
                     $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
+                }
+                if(isset($this->request->data['Event']['img_thumb_small'])){
+                    $thumb_small_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $thumb_small_path_uploaded_name;
+                    move_uploaded_file( $thumb_small_path_uploaded , WWW_ROOT . $thumb_small_path_uploaded_name);
+                    $this->request->data['Event']['img_thumb_small'] = $thumb_small_path_uploaded_name;
                 }
 
                 for($i=1;$i<=5;$i++){
@@ -143,6 +153,13 @@ class EventsController extends AppController {
             } else {
                 unset($this->request->data['Event']['img_thumb']);
             }
+            if(!empty($this->request->data['Event']['img_thumb_small']['tmp_name'])) {
+                $thumb_small_path_uploaded = $this->request->data['Event']['img_thumb_small']['tmp_name'];
+                $thumb_small_path_uploaded_name = '/img/events/' . $this->Event->id .'-' . $this->request->data['Event']['img_thumb_small']['name'];
+                $this->request->data['Event']['img_thumb_small'] = '';
+            } else {
+                unset($this->request->data['Event']['img_thumb_small']);
+            }
             if(!empty($this->request->data['Event']['public_logo']['tmp_name'])) {
                 $public_logo_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
                 $public_logo_path_uploaded_name = '/img/events/' . $this->Event->id .'-' . $this->request->data['Event']['public_logo']['name'];
@@ -166,6 +183,12 @@ class EventsController extends AppController {
                     $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
                 } elseif (!empty($this->request->data['Event']['img_thumb_delete'])) {
                     $this->request->data['Event']['img_thumb'] = '';
+                }
+                if (!empty($thumb_small_path_uploaded)) {
+                    move_uploaded_file($thumb_small_path_uploaded, WWW_ROOT . $thumb_small_path_uploaded_name);
+                    $this->request->data['Event']['img_thumb_small'] = $thumb_small_path_uploaded_name;
+                } elseif (!empty($this->request->data['Event']['img_thumb_small_delete'])) {
+                    $this->request->data['Event']['img_thumb_small'] = '';
                 }
                 if (!empty($public_logo_path_uploaded)) {
                     move_uploaded_file($public_logo_path_uploaded, WWW_ROOT . $public_logo_path_uploaded_name);

@@ -27,6 +27,14 @@ $options = array(
                             <i class="icon-question-sign"></i>
                         </a>
             </div>
+            <div class="span7">
+                <? echo $this->Form->file('img_thumb_small', array('class' => 'span5')); ?>
+                <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
+                           data-placement="bottom" rel="popover" class="pop" href="#"
+                           data-original-title="Image Requirements">
+                            <i class="icon-question-sign"></i>
+                        </a>
+            </div>
         </div>
         <div class="control-group">
             <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => 'span2')); ?>
