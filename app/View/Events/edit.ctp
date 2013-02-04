@@ -89,24 +89,31 @@ $options = array(
                 </a>
             </div>
         </div>
-        <div class="span4">
-            <div class="control-group">
+
+        <div class="control-group row">
+            <div class="span4">
                 <h5>Phone Number</h5>
-                <input name="data[Event][public_phone_number]" type="date" placeholder="Phone Number" class="span4" />
+                <input name="data[Event][public_phone_number]" type="text" placeholder="Phone Number" class="span4" />
             </div>
-            <div class="control-group">
+            </div>
+            <div class="control-group row">
+                <div class="span4">
                 <h5>Email</h5>
-                <input name="data[Event][public_email]" type="date" placeholder="Email" class="span4" />
-            </div>
-            <div class="control-group">
+                <input name="data[Event][public_email]" type="text" placeholder="Email" class="span4" />
+                </div>
+                </div>
+                <div class="control-group row">
+                    <div class="span4">
                 <h5>Address</h5>
-                <input name="data[Event][public_address]" type="date" placeholder="Address" class="span4" />
+                <input name="data[Event][public_address]" type="text" placeholder="Address" class="span4" />
+                    </div>
             </div>
-            <div class="control-group">
+                    <div class="control-group row">
+                        <div class="span4">
                 <h5>Description</h5>
                 <?= $this->Form->textarea('public_description', array('placeholder' => 'Public Description', 'class' => 'span7','row' => 4 ));?>
+                </div>
             </div>
-        </div>
 
     </fieldset>
 
