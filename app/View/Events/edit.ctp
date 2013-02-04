@@ -27,7 +27,7 @@ $options = array(
                 <a href="javascript:void(0);" data-name="img_thumb" class="delete_image"></a><br>
                 <? } ?>
                 <? echo $this->Form->file('img_thumb', array('class' => 'span5')); ?>
-                <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
+                <a data-content="Image Dimensions: 300 x 250 pixels.  Image Type: jpg/gif."
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
@@ -76,7 +76,7 @@ $options = array(
                 <a href="javascript:void(0);" data-name="public_logo" class="delete_image"></a><br>
                 <? } ?>
                 <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
-                <a data-content="- Image Dimensions:-               Image Type: JPG, GIF.            Recommended sizes (eg: 300 x 250 pixels)"
+                <a data-content="Image Dimensions: 176 x 196 pixels.  Image Type: jpg/gif."
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
@@ -91,7 +91,7 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Overlay Images <span>(maximum 5)</span></h4>
-        <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
+        <a data-content="Image Dimensions: 300 x 250 pixels.  Image Type: jpg/gif."
            data-placement="bottom" rel="popover" class="pop" href="#"
            data-original-title="Image Requirements">
             <i class="icon-question-sign"></i>
