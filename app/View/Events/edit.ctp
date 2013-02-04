@@ -52,11 +52,11 @@ $options = array(
                 </div>
             </div>
             <div class="span7">
-                <h5>Description (60 character Limit)</h5>
-                <?= $this->Form->textarea('shortdescription', array('placeholder' => 'Description (60 character Limit)', 'class' => 'span7','row' => 2 ));?>
+                <h5>Description Line 1 (60 character Limit)</h5>
+                <?= $this->Form->textarea('shortdescription_line_1', array('placeholder' => 'Description Line 1 (60 character Limit)', 'class' => 'span7','row' => 1 ));?>
+                <h5>Description Line 2 (60 character Limit)</h5>
+                <?= $this->Form->textarea('shortdescription_line_2', array('placeholder' => 'Description Line 2 (60 character Limit)', 'class' => 'span7','row' => 1 ));?>
             </div>
-
-
         </div>
         <div class="control- row">
             <div class="span4">
@@ -70,25 +70,46 @@ $options = array(
                     <? echo $this->Form->input('company_id'); ?>
                 </div>
             </div>
+        </div>
+    </fieldset>
+    <fieldset class="controlGroup">
+        <h4>Custom Event Page Details</h4>
+        <div class="control-group row">
+            <div class="span4">
+                <h5>Public Event Name</h5>
+                <? echo $this->Form->input('public_event_name', array('label' => false, 'div' => false,'placeholder' => 'Public Event Name', 'class' => 'span4')); ?>
+            </div>
             <div class="span7">
-                <? if (!empty($this->data['Event']['public_logo'])) { ?>
-                <img src="<?=$this->data['Event']['public_logo']?>" data-name="public_logo" style="max-height: 100px;">
-                <a href="javascript:void(0);" data-name="public_logo" class="delete_image"></a><br>
-                <? } ?>
+                <h5>Public Event Logo</h5>
                 <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
                 <a data-content="Image Dimensions: 176 x 196  Image Type: jpg/gif"
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
                 </a>
-                <br />
-                <h5>Description (Public)</h5>
-                <?= $this->Form->textarea('public_description', array('placeholder' => 'Public Description', 'class' => 'span7','row' => 2 ));?>
-
+            </div>
+        </div>
+        <div class="span4">
+            <div class="control-group">
+                <h5>Phone Number</h5>
+                <input name="data[Event][public_phone_number]" type="date" placeholder="Phone Number" class="span4" />
+            </div>
+            <div class="control-group">
+                <h5>Email</h5>
+                <input name="data[Event][public_email]" type="date" placeholder="Email" class="span4" />
+            </div>
+            <div class="control-group">
+                <h5>Address</h5>
+                <input name="data[Event][public_address]" type="date" placeholder="Address" class="span4" />
+            </div>
+            <div class="control-group">
+                <h5>Description</h5>
+                <?= $this->Form->textarea('public_description', array('placeholder' => 'Public Description', 'class' => 'span7','row' => 4 ));?>
             </div>
         </div>
 
     </fieldset>
+
     <fieldset class="controlGroup">
         <h4>Overlay Images <span>(maximum 5)</span></h4>
         <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
@@ -127,7 +148,7 @@ $options = array(
         <?= $this->Form->input('twitter_msg', array('placeholder' => 'Twitter Message: maxlength 120 chars','label' => false, 'div' => false, 'class' => 'span6')); ?>
     </fieldset>
     <fieldset class="controlGroup">
-        <h4>HTML Before Upload</h4>
+        <h4>HTML Before Upload (a link to your mobile friendly web page to appear BEFORE sharing)</h4>
         <?= $this->Form->textarea('html_before', array('placeholder' => 'HTML Before', 'class' => 'span6','row' => 2 ));?>
         <div class="switch pull-right">
             <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
@@ -138,7 +159,7 @@ $options = array(
         </div>
     </fieldset>
     <fieldset class="controlGroup">
-        <h4>HTML After Upload</h4>
+        <h4>HTML After Upload (a link to your mobile friendly web page to appear AFTER sharing)</h4>
         <?= $this->Form->textarea('html_after', array('placeholder' => 'HTML After', 'class' => 'span6', 'row' => 2 ));?>
         <div class="switch pull-right">
             <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
@@ -149,8 +170,15 @@ $options = array(
         </div>
     </fieldset>
     <fieldset class="controlGroup">
-        <h4>Terms & Conditions</h4>
+        <h4>Terms & Conditions (paste in your Terms and Conditions here)</h4>
         <?= $this->Form->textarea('t_c', array('placeholder' => 'Terms and Conditions', 'class' => 'span6', 'row' => 2 ));?>
+        <div class="switch pull-right">
+            <input type="radio" checked="checked" id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
+            <label class="switch-label switch-label-off" for="t_c_on">On</label>
+            <input type="radio" id="t_c_off" value="0" name="data[Event][t_c_off]" class="switch-input">
+            <label class="switch-label switch-label-on" for="t_c_off">Off</label>
+            <span class="switch-selection"></span>
+        </div>
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Event Status</h4>
