@@ -36,9 +36,9 @@ $options = array(
         </div>
         <div class="control-group">
             <h5>Latitude</h5>
-            <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => 'span2')); ?>
+            <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => '')); ?>
             <h5>Longitude</h5>
-            <? echo $this->Form->input('gpslong', array('div' => false,'placeholder' => 'Longitude', 'class' => 'span2')); ?>
+            <? echo $this->Form->input('gpslong', array('div' => false,'placeholder' => 'Longitude', 'class' => '')); ?>
         </div>
         <div class="control-group row">
             <div class="span4">
@@ -76,7 +76,7 @@ $options = array(
                 <a href="javascript:void(0);" data-name="public_logo" class="delete_image"></a><br>
                 <? } ?>
                 <? echo $this->Form->file('public_logo', array('class' => 'span5')); ?>
-                <a data-content="- Image Dimensions:- Image Type: JPG, GIF. Recommended sizes (eg: 300 x 250 pixels)"
+                <a data-content="- Image Dimensions:-               Image Type: JPG, GIF.            Recommended sizes (eg: 300 x 250 pixels)"
                    data-placement="bottom" rel="popover" class="pop" href="#"
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
