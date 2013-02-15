@@ -1,5 +1,3 @@
-<?php print_r($event);
-die(); ?>
 <style type="text/css">
     #view_nav {
         height: 76px;
