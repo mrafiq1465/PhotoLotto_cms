@@ -1,3 +1,5 @@
+<?php print_r($event);
+die(); ?>
 <style type="text/css">
     #view_nav {
         height: 76px;
@@ -123,20 +125,25 @@
 <script type="text/javascript" src="/js/jquery.cycle.js"></script>
 <script type="text/javascript">
     $(function () {
-        function defaultTask(e) {
-            e.preventDefault();
-            $("#view_nav").toggleClass('inactive active');
-        } 
-        
+        var $viewNav = $("#view_nav");        
         var slides = $('.row.detail');
         
-        $("#navtoggle").on('click', defaultTask);
+        $("#view_nav > ul").on({
+            mouseenter : function () {                
+                $viewNav.removeClass().addClass('active');
+            },
+            mouseleave : function () {
+                $viewNav.removeClass().addClass('inactive');
+            }
+        });
         
         $("#detail, #grid").on('click', function (e) {
             var detail = $(".row.detail");
             var grid = $(".row.grid");
             var _id = $(this).attr('id');
-            defaultTask(e);
+            
+            e.preventDefault();
+            $viewNav.removeClass().addClass('inactive');
 
             if ($("#gallery").find("." + _id).is(':visible')) return;
 
