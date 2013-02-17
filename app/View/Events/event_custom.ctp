@@ -70,6 +70,42 @@
         width: 640px;
         height: 640px;
     }
+    #top {
+        clear: both;
+        float: left;
+        height: 100px;
+    }
+    #top #logo {
+       float: left;
+       width: 270px;
+    }
+    #top #desc {
+        float: left;
+        width: 300px;
+    }
+    #top #desc ul {
+
+    }
+    #top #desc ul li.name{
+       font-size: 14px;
+       font-weight: bold;
+    }
+    #top #desc ul li.desc{
+        font-size: 12px;
+    }
+    #top #phone{
+        float: left;
+        position: relative;
+        top:20px;
+        width: 370px;
+    }
+
+    #top #phone ul {
+
+    }
+    #top #phone ul li{
+
+    }
 </style>
 <nav id="view_nav" class="inactive clearfix">
     
@@ -80,13 +116,23 @@
     </ul>
 </nav>
 <div id="top">
-    <img src="<?php echo $event['Event']['public_logo']; ?>" alt="" />
+    <div id="logo">
+        <img src="<?php echo $event['Event']['public_logo']; ?>" alt="" />
+    </div>
+    <div id="desc">
+        <ul>
+            <li class="name"><?php echo $event['Event']['public_event_name']; ?></li>
+            <li class="desc"><?php echo $event['Event']['public_description']; ?></li>
+        </ul>
+    </div>
+    <div id="phone">
+        <ul>
+            <li>p. <?php echo $event['Event']['public_phone_number']; ?></li>
+            <li>e. <?php echo $event['Event']['public_email']; ?></li>
+            <li>a. <?php echo $event['Event']['public_address']; ?></li>
+        </ul>
 
-    <?php
-    //var_dump($event);
-    echo $event['Event']['public_description'];
-    ?>
-
+    </div>
 </div>
 
 <div id="gallery">

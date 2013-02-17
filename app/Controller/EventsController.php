@@ -20,7 +20,6 @@ class EventsController extends AppController {
  * @return void
  */
 	public function index() {
-
         $this->Event->recursive = 0;
         $event_conditions = array();
         if(isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
@@ -200,7 +199,7 @@ class EventsController extends AppController {
 
     public function event_custom($id = null) {
 
-
+        $this->layout = 'event';
         $event = $this->Event->find('first', array(
             'conditions' => array('Event.name' => $id)
         ));
