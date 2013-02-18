@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: 127.0.0.1 (MySQL 5.5.9)
+# Host: syntaxperfect.cmgtpxgnqaqn.us-west-1.rds.amazonaws.com (MySQL 5.5.27-log)
 # Database: photolotto
-# Generation Time: 2013-01-29 05:27:11 +0000
+# Generation Time: 2013-02-18 04:51:10 +0000
 # ************************************************************
 
 
@@ -82,14 +82,20 @@ LOCK TABLES `event_actions` WRITE;
 
 INSERT INTO `event_actions` (`id`, `event_id`, `phone_id`, `blacklist`, `phone_type`, `action_name`, `photo`, `created`)
 VALUES
-	(1,1,'1231231',1,'IOS','album','i_20121217181812.jpg','2012-12-08 12:56:33'),
-	(2,2,'9711db979907e2b6ee6870e9ca54207e3471d082',1,'IOS','save_to_album','i_20121217181812.jpg','2012-12-17 04:20:33'),
-	(3,1,'twertwertw',0,'IOS','album','i_20130121140209.jpg','2013-01-21 15:38:50'),
-	(4,1,'',1,'IOS','','','2013-01-28 18:53:39'),
-	(5,5,'1234123',1,'IOS','album','test.jpg','2013-01-28 19:01:43'),
-	(6,6,'1234123',0,'IOS','album','test.jpg','2013-01-28 19:02:25'),
-	(7,6,'1234123',0,'IOS','album','test.jpg','2013-01-28 19:36:35'),
-	(8,6,'1234123',0,'IOS','album','test.jpg','2013-01-28 19:36:38');
+	(165,5,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','post_to_facebook','i_20130217112628.jpg','2013-02-17 11:26:47'),
+	(166,6,'63e41e59e235bd8dc690a355a2432bef576ea88c',0,'IOS','(null)','i_20130218083920.jpg','2013-02-17 13:39:36'),
+	(167,4,'c73a6680bd3661481a8b3ccf497fdae7f5abd9c0',0,'IOS','(null)','i_20130218085346.jpg','2013-02-17 13:53:57'),
+	(168,5,'b424300557f83c540e8aae18576921fa1a2a9c23',0,'IOS','(null)','i_20130218115224.jpg','2013-02-17 16:52:37'),
+	(169,6,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','(null)','i_20130217173322.jpg','2013-02-17 17:33:35'),
+	(170,5,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','(null)','i_20130217173459.jpg','2013-02-17 17:35:11'),
+	(171,5,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','(null)','i_20130217173816.jpg','2013-02-17 17:38:30'),
+	(172,6,'63e41e59e235bd8dc690a355a2432bef576ea88c',0,'IOS','(null)','i_20130218124744.jpg','2013-02-17 17:48:00'),
+	(173,5,'b424300557f83c540e8aae18576921fa1a2a9c23',0,'IOS','(null)','i_20130218125945.jpg','2013-02-17 17:59:54'),
+	(174,4,'b424300557f83c540e8aae18576921fa1a2a9c23',0,'IOS','(null)','i_20130218130435.jpg','2013-02-17 18:04:44'),
+	(175,5,'b424300557f83c540e8aae18576921fa1a2a9c23',0,'IOS','post_to_facebook','i_20130218131055.jpg','2013-02-17 18:15:04'),
+	(176,6,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','(null)','i_20130217185111.jpg','2013-02-17 18:51:23'),
+	(177,6,'f0ceb72e6743a0d812fb6e74ed0b3af8aef28f3d',0,'IOS','(null)','i_20130217185552.jpg','2013-02-17 18:56:06'),
+	(178,6,'63e41e59e235bd8dc690a355a2432bef576ea88c',0,'IOS','save_to_album','i_20130218135608.jpg','2013-02-17 18:56:22');
 
 /*!40000 ALTER TABLE `event_actions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -104,7 +110,8 @@ CREATE TABLE `events` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
-  `shortdescription` varchar(255) DEFAULT NULL,
+  `shortdescription_line_1` varchar(60) DEFAULT NULL,
+  `shortdescription_line_2` varchar(60) DEFAULT NULL,
   `eventtype` varchar(32) DEFAULT NULL,
   `gpslat` varchar(50) DEFAULT NULL,
   `gpslong` varchar(50) DEFAULT NULL,
@@ -116,7 +123,11 @@ CREATE TABLE `events` (
   `facebook_url` varchar(500) DEFAULT NULL,
   `twitter_msg` varchar(120) DEFAULT NULL,
   `html_before` text,
+  `html_before_on` tinyint(1) DEFAULT NULL,
   `html_after` text,
+  `html_after_on` tinyint(1) DEFAULT NULL,
+  `t_c` text,
+  `t_c_on` tinyint(1) DEFAULT NULL,
   `stage` varchar(10) DEFAULT NULL,
   `img_thumb` varchar(100) DEFAULT NULL,
   `img_overlay_1` varchar(100) DEFAULT NULL,
@@ -125,7 +136,11 @@ CREATE TABLE `events` (
   `img_overlay_4` varchar(100) DEFAULT NULL,
   `img_overlay_5` varchar(100) DEFAULT NULL,
   `public_logo` varchar(100) DEFAULT NULL,
+  `public_event_name` varchar(200) DEFAULT NULL,
   `public_description` text,
+  `public_phone_number` varchar(32) DEFAULT NULL,
+  `public_email` varchar(64) DEFAULT NULL,
+  `public_address` varchar(200) DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
@@ -135,14 +150,11 @@ CREATE TABLE `events` (
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
 
-INSERT INTO `events` (`id`, `name`, `company_id`, `shortdescription`, `eventtype`, `gpslat`, `gpslong`, `date_start`, `date_end`, `updated_by`, `auto_moderate`, `facebook_msg`, `facebook_url`, `twitter_msg`, `html_before`, `html_after`, `stage`, `img_thumb`, `img_overlay_1`, `img_overlay_2`, `img_overlay_3`, `img_overlay_4`, `img_overlay_5`, `public_logo`, `public_description`, `status`, `created`, `updated`)
+INSERT INTO `events` (`id`, `name`, `company_id`, `shortdescription_line_1`, `shortdescription_line_2`, `eventtype`, `gpslat`, `gpslong`, `date_start`, `date_end`, `updated_by`, `auto_moderate`, `facebook_msg`, `facebook_url`, `twitter_msg`, `html_before`, `html_before_on`, `html_after`, `html_after_on`, `t_c`, `t_c_on`, `stage`, `img_thumb`, `img_overlay_1`, `img_overlay_2`, `img_overlay_3`, `img_overlay_4`, `img_overlay_5`, `public_logo`, `public_event_name`, `public_description`, `public_phone_number`, `public_email`, `public_address`, `status`, `created`, `updated`)
 VALUES
-	(1,'Test Event 1',2,'Event Description','generic','-30','155','2013-01-10 00:00:00','2013-01-30 00:00:00',1,0,'Fb message','http://facebook.com','TW message','http://sheldonbrown.com/web_sample1.html','http://sheldonbrown.com/web_sample1.htmlHTML After','Scheduled','/img/events/1_thumb.jpg','','/img/events/1_overlay2.jpg','','','','Test Event 1 logo','Test Event 1 description',1,'2012-12-08 12:43:09','2013-01-10 10:40:53'),
-	(2,'Test Event 2',1,'Test Desc','generic','-30','150','2012-12-29 00:00:00','2013-01-26 00:00:00',2,1,'Fb message','http://facebook.com','TW message','test','test','Running','/img/events/2_thumb.jpg','/img/events/2_overlay1.jpg','/img/events/2_overlay2.jpg',NULL,NULL,NULL,'Test Event 1 logo','Test Event 1 description',1,'2012-12-08 12:45:06','2012-12-08 12:45:06'),
-	(3,'Test Event 3',1,'Test Description','generic','-30','150','2012-12-10 00:00:00','2012-12-29 00:00:00',1,1,'Fb message','http://facebook.com','TW message','<html>\r\n<title>Page title</title>\r\n<body>\r\n This is a test page Before HTML\r\n</body>\r\n</htm>','<html>\r\n<title>Page title</title>\r\n<body>\r\n This is a test page After HTML\r\n</body>\r\n</htm>','Scheduled','/img/events/3_thumb.jpg','/img/events/3_overlay1.jpg','/img/events/3_overlay2.jpg','/img/events/3_overlay3.jpg','/img/events/3_overlay4.jpg','/img/events/3_overlay5.jpg',NULL,NULL,1,'2012-12-09 23:39:28','2012-12-10 23:26:27'),
-	(4,'test 8',1,'','generic','','',NULL,NULL,1,1,'','','','','','Draft','/img/events/4-image-1-1y7ed.png','/img/events/4-1-image-1-1y7ed.png','/img/events/4-2-image-2-cda0j.png','/img/events/4-3-image-5gd0m.png',NULL,NULL,NULL,NULL,1,'2012-12-10 10:14:42','2013-01-13 22:11:18'),
-	(5,'I\'m at the Grounds of Alexandria',7,'#thegrounds','location-based','-33.911063','151.19359','2013-01-13 00:00:00','2013-01-30 00:00:00',1,1,'Eat this!','www.thegrounds.com.au','#thegrounds','','','Scheduled','/img/events/5-Untitled-1.png','/img/events/5-1-image-1-1y7ed.png','/img/events/5-2-image-2-cda0j.png','/img/events/5-3-image-5gd0m.png',NULL,NULL,NULL,NULL,1,'2012-12-17 16:54:27','2013-01-13 22:06:03'),
-	(6,'Test Raf',6,'wertwert','location-based','105','106','2013-01-31 00:00:00','2013-02-27 00:00:00',1,0,'asfdasdf','werqw','sadfasdfa','dfssdfg','fsdfasd','Scheduled','/Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot//img/events/6-eye3.png','/Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot//img/events/6-1-eye1.png','/Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot//img/events/6-2-eye2-31nwl.png','/Applications/MAMP/htdocs/PhotoLotto_cms/app/webroot//img/events/6-3-eye3.png',NULL,NULL,'','asdfasdfa',1,'2013-01-28 18:31:19','2013-01-28 18:31:19');
+	(4,'JOSH TEST',1,'','','generic','','',NULL,'2013-02-04 00:00:00',2,1,'Welcome to PIXTA','','','',0,'<!DOCTYPE html>\r\n<html>\r\n<body>\r\n\r\n<form name=\"input\" action=\"html_form_action.asp\" method=\"get\">\r\n<input type=\"checkbox\" name=\"vehicle\" value=\"Bike\">I have a bike<br>\r\n<input type=\"checkbox\" name=\"vehicle\" value=\"Car\">I have a car \r\n<br><br>\r\n<input type=\"submit\" value=\"Submit\">\r\n</form> \r\n\r\n<p>If you click the \"Submit\" button, the form-data will be sent to a page called \"html_form_action.asp\".</p>\r\n\r\n</body>\r\n</html>\r\n\r\n',1,'',1,'Draft','/img/events/4-POLITElogo.png','/img/events/4-1-Chinese.png','/img/events/4-2-HOMEBAKE.png','/img/events/4-3-JIMBEAM.png','/img/events/4-4-THEGROUNDS.png','/img/events/4-5-garden-floral.png',NULL,'','','','','',1,'2012-12-10 10:14:42','2013-02-11 20:30:07'),
+	(5,'I\'m at the Grounds of Alexandria',7,'#thegrounds\r\nCoffee!!!',NULL,'location-based','-33.911063','151.19359','2013-02-04 00:00:00','2013-02-04 00:00:00',2,1,'Eat this!','http://groundsroasters.com/','#thegrounds','http://stage01.degreeamerica.com/index.html',NULL,'http://www.google.com.au',NULL,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris ligula, varius et malesuada sed, adipiscing id arcu. Aliquam tincidunt tincidunt nisl, eu tincidunt neque ornare vitae. Proin lacinia pellentesque cursus. Sed fermentum lacus ac dolor fringilla tempus nec at odio. Nullam congue aliquam nisi quis hendrerit. Morbi neque magna, hendrerit a congue ut, molestie vitae eros. Sed ultrices dolor consectetur nisl lacinia et adipiscing lectus euismod. Vestibulum congue sagittis est, et adipiscing leo egestas at. Fusce sagittis quam vitae metus dictum in commodo dui consequat. Duis non pellentesque turpis. Nullam luctus placerat purus, nec congue nibh ullamcorper quis.\r\n\r\nSed tempor metus ac ipsum blandit luctus et eget massa. Aenean venenatis turpis eu urna molestie non sollicitudin lectus facilisis. Duis tincidunt quam sit amet leo sagittis accumsan. Donec erat sapien, facilisis at porta at, mollis at sapien. Vestibulum sem nulla, tempus a facilisis eget, ullamcorper sagittis urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris condimentum magna sed eros ultrices nec consequat ante facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed a velit at erat egestas mattis non ut urna. Quisque ullamcorper tempor est id tempor. Cras ornare auctor sem quis adipiscing. Nullam sed massa at libero aliquet blandit ut ac orci. In feugiat, risus sit amet adipiscing pretium, dolor neque posuere risus, ut luctus eros risus ut ante. Ut dapibus, ante id ornare pharetra, magna turpis tincidunt nisi, et dapibus purus elit at nibh.',NULL,'Scheduled','/img/events/5-Untitled-1.png','/img/events/5-1-image-1-1y7ed.png','/img/events/5-2-image-2-cda0j.png','/img/events/5-3-image-5gd0m.png',NULL,NULL,'/img/events/5-5-Untitled-8.png','I\'m at the Grounds of Alexandria','Made with Skill & Precision','12345678','raf@flydigital.com.au','Surryhills, Sydney',0,'2012-12-17 16:54:27','2013-02-03 16:56:33'),
+	(6,'Fly Digital Test Event',1,'Fly Digital first line','Fly Digital second line','location-based','-33.879537','151.105957','2013-02-18 00:00:00','2013-02-18 00:00:00',2,1,'Facebook message from the admin suite here','http://www.flydigital.com.au','Twitter message from the admin suite here','http://www.flydigital.com.au',1,'http://www.flydigital.com.au',1,'These are our terms and conditions',1,'Scheduled','/img/events/6-7.jpg','/img/events/6-1-overlay1.png',NULL,NULL,NULL,NULL,'/img/events/6-facebook.png','Custom Event Name','Welcome to our public event page','','','',1,'2013-02-03 19:28:41','2013-02-17 19:03:38');
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;

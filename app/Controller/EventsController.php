@@ -20,7 +20,6 @@ class EventsController extends AppController {
  * @return void
  */
 	public function index() {
-
         $this->Event->recursive = 0;
         $event_conditions = array();
         if(isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
@@ -200,7 +199,7 @@ class EventsController extends AppController {
 
     public function event_custom($id = null) {
 
-
+        $this->layout = 'event';
         $event = $this->Event->find('first', array(
             'conditions' => array('Event.name' => $id)
         ));
@@ -308,21 +307,18 @@ class EventsController extends AppController {
                 'Event.status' => 1,
             ),
         );
-        //echo "<pre>" . print_r($options, true) . "</pre>";
-       /*
-        if(!empty($params)){
-            $options = array_merge($options,$params_formatted);
-        }
-       */
-       // var_dump($params_formatted);
 
         $events = $this->Event->find('all', $options);
         //var_dump($events);
         $events_array = array();
         $i=0;
 
+       //we need to show the events that has status =1 & date_end >= today's date.
+
         foreach($events as $event){
-             $overlay_img_count = 0;
+            //var_dump($event['Event']['date_end']);
+
+            $overlay_img_count = 0;
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
              $events_array[$i]['event_type'] = $event['Event']['eventtype'];
