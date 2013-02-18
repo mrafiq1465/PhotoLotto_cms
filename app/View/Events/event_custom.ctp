@@ -120,9 +120,6 @@
         width: 300px;
         margin-top: 10px;
     }
-    #desc ul {
-
-    }
 
     #desc ul li{
         font-size: 12px;
@@ -133,9 +130,6 @@
         margin-top: 10px;
     }
 
-    #phone ul {
-
-    }
     #phone ul li{
 
     }
@@ -145,9 +139,7 @@
         top:-20px;
         left: 0px;
     }
-    #app_store ul {
-
-    }
+ 
     #app_store ul li{
         margin-top: 10px;
     }
