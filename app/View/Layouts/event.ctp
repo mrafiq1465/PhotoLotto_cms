@@ -50,7 +50,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
     ?>
 
 </head>
-<body style="padding: 0px;" >
+<body style="padding: 0px;" id="event">
 <div id="container" class="container">
 
     <div id="row">

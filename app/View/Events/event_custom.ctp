@@ -1,4 +1,12 @@
 <style type="text/css">
+    .bs {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    #event .container {
+        width: 1024px;
+    }
     #view_nav {
         height: 76px;
     }
@@ -47,18 +55,17 @@
     }
     #gallery {
         padding: 30px;
-        float: left;
+        /*float: left;*/
         background-color: #f2f2f2;
-        width: 880px;
         height: auto;
     }
     .grid img{
-        width: 172px;
-        height: 172px;
+        width: 176px;
+        height: 176px;
     }
 
     .grid .span2 {
-        width: 172px;
+        width: 176px;
         margin-bottom: 20px;
     }
     
@@ -76,20 +83,20 @@
     }
     #top {
         clear: both;
-        float: left;
-        height: 125px;
-        width: 880px;
+        /*float: left;*/
+        height: 165px;
         background-color: #363533;
         color: #fff;
         padding: 20px 30px 20px 30px;
         position: relative;
+        z-index: -1;
     }
      #logo {
        float: left;
        width: 176px;
        height: 176px;
-       position: relative;
-       top: -60px;
+       position: absolute;
+       top: -40px;
     }
     #logo img {
         width: 176px !important;
@@ -153,48 +160,55 @@
         <li><a href="#" id="grid"></a></li>
     </ul>
 </nav>
-<div id="top">
+<div id="top" class="bs">
     <div id="logo">
         <img src="<?php echo $event['Event']['public_logo']; ?>" alt="" />
     </div>
-    <div id="heading">
-        <ul>
-            <li class="name"><?php echo $event['Event']['public_event_name']; ?>
-            </li>
-            <li class="fb">
-                <fb:like href="http://<?= $_SERVER['HTTP_HOST'] . $this->here; ?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count"  show_faces="false" font=""></fb:like>
-            </li>
-            <li class="tw">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="" data-via="pixta" data-text="Check out this subject:" data-hashtags="pixta">Tweet</a>
-            </li>
+    <div class="mid" style="overflow:hidden;margin-left:176px;">
+        <div id="heading">
+            <ul>
+                <li class="name"><?php echo $event['Event']['public_event_name']; ?>
+                </li>
+                <li class="fb">
+                    <fb:like href="http://<?= $_SERVER['HTTP_HOST'] . $this->here; ?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count" show_faces="false" font=""></fb:like>
+                </li>
+                <li class="tw">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="" data-via="pixta" data-text="Check out this subject:" data-hashtags="pixta">Tweet</a>
+                </li>
 
-        </ul>
-    </div>
-    <div id="desc">
-        <ul>
-            <li><?php echo $event['Event']['public_description']; ?></li>
-        </ul>
-    </div>
-    <div id="phone">
-        <ul>
-            <li><b>p.</b> <?php echo $event['Event']['public_phone_number']; ?></li>
-            <li><b>e.</b> <?php echo $event['Event']['public_email']; ?></li>
-            <li><b>a.</b> <?php echo $event['Event']['public_address']; ?></li>
-        </ul>
+            </ul>
+        </div>
+        <div id="desc">
+            <ul>
+                <li><?php echo $event['Event']['public_description']; ?></li>
+            </ul>
+        </div>
+        <div id="phone">
+            <ul>
+                <li>
+                    <b>p.</b> <?php echo $event['Event']['public_phone_number']; ?>
+                </li>
+                <li><b>e.</b> <?php echo $event['Event']['public_email']; ?>
+                </li>
+                <li><b>a.</b> <?php echo $event['Event']['public_address']; ?>
+                </li>
+            </ul>
 
-    </div>
-    <div id="app_store">
-        <ul>
-            <li><a href="#"><img src="/img/app_store.jpeg" alt="Apple store"></a>
-            </li>
-            <li>
-                <a href="#"><img src="/img/google_play.jpeg" alt="google play">
-            </li>
-        </ul>
-    </div>
+        </div>
+        <div id="app_store">
+            <ul>
+                <li>
+                    <a href="#"><img src="/img/app_store.jpeg" alt="Apple store"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/img/google_play.jpeg" alt="google play"></a>
+                </li>
+            </ul>
+        </div>
+    </div>    
 </div>
 
-<div id="gallery">
+<div id="gallery" class="bs">
     <div class="grid row">
         
     <?php
@@ -242,6 +256,7 @@
         
         $("#detail, #grid").on('click', function (e) {
             var detail = $(".row.detail");
+            var gallery = detail.parent();
             var grid = $(".row.grid");
             var _id = $(this).attr('id');
             
@@ -253,10 +268,12 @@
             if (_id === 'detail') {
                 detail.show();
                 grid.hide();
+                gallery.css('height', '680');
                 slides.cycle();
-            } else {                
+            } else {
                 slides.cycle('stop');
                 grid.show();
+                gallery.css('height', 'auto');
                 detail.hide();
             }
         });
