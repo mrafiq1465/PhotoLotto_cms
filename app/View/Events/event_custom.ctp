@@ -82,7 +82,7 @@
         background-color: #363533;
         color: #fff;
         padding: 20px 30px 20px 30px;
-        z-index: -1;
+        position: relative;
     }
      #logo {
        float: left;
