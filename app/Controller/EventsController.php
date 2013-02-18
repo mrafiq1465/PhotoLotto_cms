@@ -305,20 +305,20 @@ class EventsController extends AppController {
             'recursive' => 0,
             'status' => 1
         );
-       /*
-        if(!empty($params)){
-            $options = array_merge($options,$params_formatted);
-        }
-       */
-       // var_dump($params_formatted);
+
+        $today = date("Y-m-d");
 
         $events = $this->Event->find('all', $options);
         //var_dump($events);
         $events_array = array();
         $i=0;
 
+       //we need to show the events that has status =1 & date_end >= today's date.
+
         foreach($events as $event){
-             $overlay_img_count = 0;
+            //var_dump($event['Event']['date_end']);
+
+            $overlay_img_count = 0;
              $events_array[$i]['id'] = $event['Event']['id'];
              $events_array[$i]['name'] = $event['Event']['name'];
              $events_array[$i]['event_type'] = $event['Event']['eventtype'];

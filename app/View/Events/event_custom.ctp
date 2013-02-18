@@ -139,7 +139,7 @@
         top:-20px;
         left: 0px;
     }
- 
+
     #app_store ul li{
         margin-top: 10px;
     }

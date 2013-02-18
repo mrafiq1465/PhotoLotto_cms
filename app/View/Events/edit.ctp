@@ -119,7 +119,7 @@ $options = array(
 
     <fieldset class="controlGroup">
         <h4>Overlay Images <span>(maximum 5)</span></h4>
-        <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
+        <a data-content="Image Dimensions: 640 x 640  Image Type: png"
            data-placement="bottom" rel="popover" class="pop" href="#"
            data-original-title="Image Requirements">
             <i class="icon-question-sign"></i>
