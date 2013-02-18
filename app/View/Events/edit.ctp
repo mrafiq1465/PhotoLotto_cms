@@ -32,17 +32,6 @@ $options = array(
                    data-original-title="Image Requirements">
                     <i class="icon-question-sign"></i>
                 </a>
-                <br>
-                <? if (!empty($this->data['Event']['img_thumb_small'])) { ?>
-                <img src="<?=$this->data['Event']['img_thumb_small']?>" data-name="img_thumb_small" style="max-height: 100px;">
-                <a href="javascript:void(0);" data-name="img_thumb_small" class="delete_image"></a><br>
-                <? } ?>
-                <? echo $this->Form->file('img_thumb_small', array('class' => 'span5')); ?>
-                <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
-                   data-placement="bottom" rel="popover" class="pop" href="#"
-                   data-original-title="Image Requirements">
-                    <i class="icon-question-sign"></i>
-                </a>
             </div>
         </div>
         <div class="control-group">
@@ -136,12 +125,12 @@ $options = array(
             <i class="icon-question-sign"></i>
         </a>
         <? for ($i = 1; $i <= 5; $i++) { ?>
-        <? if (!empty($this->data['Event']["img_overlay_$i"])) { ?>
-            <img src="<?=$this->data['Event']["img_overlay_$i"]?>" data-name="<?="img_overlay_$i"?>"
-                 style="max-height: 100px;">
-            <a href="javascript:void(0);" data-name="<?="img_overlay_$i"?>" class="delete_image"></a><br>
-            <? } ?>
-        <? if($i <=2) { ?>
+            <? if (!empty($this->data['Event']["img_overlay_$i"])) { ?>
+                <img src="<?=$this->data['Event']["img_overlay_$i"]?>" data-name="<?="img_overlay_$i"?>"
+                     style="max-height: 100px;">
+                <a href="javascript:void(0);" data-name="<?="img_overlay_$i"?>" class="delete_image"></a>
+                <? echo $this->Form->file("img_overlay_$i", array('style' => 'display:none;')); ?><br>
+            <? } else {?>
             <? echo $this->Form->file("img_overlay_$i"); ?><br>
             <? } ?>
         <? } ?>

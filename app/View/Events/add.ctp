@@ -8,7 +8,7 @@ $options = array(
 );
 ?>
 
-<section class="list">
+<section class="list" xmlns="http://www.w3.org/1999/html">
     <!--Menu-->
     <?=$this->element('menu', array("heading" => "Create New Event"));?>
 
@@ -26,13 +26,6 @@ $options = array(
                            data-original-title="Image Requirements">
                             <i class="icon-question-sign"></i>
                         </a>
-                <br>
-                <? echo $this->Form->file('img_thumb_small', array('class' => 'span5')); ?>
-                <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
-                   data-placement="bottom" rel="popover" class="pop" href="#"
-                   data-original-title="Image Requirements">
-                    <i class="icon-question-sign"></i>
-                </a>
             </div>
 
         </div>
@@ -111,13 +104,14 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Overlay Images <span>(maximum 5)</span></h4>
-        <? echo $this->Form->file('img_overlay_1'); ?>
         <a data-content="Image Dimensions: 300 x 250  Image Type: jpg/gif"
            data-placement="bottom" rel="popover" class="pop" href="#"
            data-original-title="Image Requirements">
             <i class="icon-question-sign"></i>
         </a>
-        <a href="javascript:void(0);" id="add_more_image" class="pull-right"></a>
+        <? for ($i=1; $i<=5; $i++) { ?>
+        <? echo $this->Form->file("img_overlay_$i"); ?><br/>
+        <? } ?>
     </fieldset>
     <fieldset class="controlGroup">
         <h4>Auto Moderate</h4>

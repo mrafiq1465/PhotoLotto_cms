@@ -52,15 +52,6 @@ $(document).ready(function() {
         $('#add_more_image').remove();
     }
 
-    $('#add_more_image').click(function(){
-        var $this = $(this);
-        num = $('[id^=EventImgOverlay]').length+1;
-        $this.before('<br><input type="file" id="EventImgOverlay'+num+'" name="data[Event][img_overlay_'+num+']">');
-        if(num == 5){
-            $this.remove();
-        }
-    });
-
     $('.del-btn').each(function(){
         $(this).click(function(){
             var ans = confirm('Do you want to delete ' + $(this).attr('item_name') + ' from list?');
@@ -75,6 +66,8 @@ $(document).ready(function() {
             var dataName = $(this).attr('data-name');
             $("img[data-name="+ dataName + "]").remove();
             $(this).before('<input type="hidden" name=data[Event]['+ dataName+ '_delete]" value="delete" />');
+            var overlayNumber = dataName.substr(12);
+            $('#EventImgOverlay'+ overlayNumber).show();
             $(this).remove();
         });
     })
