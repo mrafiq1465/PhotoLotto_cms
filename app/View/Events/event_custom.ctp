@@ -46,8 +46,11 @@
         z-index: 10;
     }
     #gallery {
-        margin-top: 30px;
+        padding: 30px;
         float: left;
+        background-color: #f2f2f2;
+        width: 880px;
+        height: auto;
     }
     .grid img{
         width: 172px;
@@ -75,31 +78,59 @@
         clear: both;
         float: left;
         height: 125px;
-        width: 940px;
+        width: 880px;
+        background-color: #363533;
+        color: #fff;
+        padding: 20px 30px 20px 30px;
+        z-index: -1;
     }
      #logo {
        float: left;
-       width: 270px;
+       width: 176px;
+       height: 176px;
+       position: relative;
+       top: -60px;
     }
+    #logo img {
+        width: 176px !important;
+        height: 176px !important;
+    }
+    #heading {
+        width: 550px;
+        float: left;
+    }
+    #heading ul li.name {
+        width: auto;
+        margin-right: 20px;
+        float: left;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    #heading ul li.fb {
+        width:100px;
+        float: left;
+    }
+    #heading ul li.tw {
+        width:100px;
+        float: left;
+    }
+
     #desc {
         float: left;
         width: 300px;
+        margin-top: 10px;
     }
     #desc ul {
 
     }
-    #desc ul li.name{
-       font-size: 14px;
-       font-weight: bold;
-    }
-    #desc ul li.desc{
+
+    #desc ul li{
         font-size: 12px;
     }
     #phone{
         float: left;
-        position: relative;
-        top:20px;
-        width: 350px;
+        width: 240px;
+        margin-top: 10px;
     }
 
     #phone ul {
@@ -108,6 +139,19 @@
     #phone ul li{
 
     }
+    #app_store {
+        float: left;
+        position: relative;
+        top:-20px;
+        left: 0px;
+    }
+    #app_store ul {
+
+    }
+    #app_store ul li{
+        margin-top: 10px;
+    }
+
 </style>
 <nav id="view_nav" class="inactive clearfix">
     
@@ -121,10 +165,22 @@
     <div id="logo">
         <img src="<?php echo $event['Event']['public_logo']; ?>" alt="" />
     </div>
+    <div id="heading">
+        <ul>
+            <li class="name"><?php echo $event['Event']['public_event_name']; ?>
+            </li>
+            <li class="fb">
+                <fb:like href="http://<?= $_SERVER['HTTP_HOST'] . $this->here; ?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count"  show_faces="false" font=""></fb:like>
+            </li>
+            <li class="tw">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="" data-via="pixta" data-text="Check out this subject:" data-hashtags="pixta">Tweet</a>
+            </li>
+
+        </ul>
+    </div>
     <div id="desc">
         <ul>
-            <li class="name"><?php echo $event['Event']['public_event_name']; ?></li>
-            <li class="desc"><?php echo $event['Event']['public_description']; ?></li>
+            <li><?php echo $event['Event']['public_description']; ?></li>
         </ul>
     </div>
     <div id="phone">
@@ -134,6 +190,15 @@
             <li><b>a.</b> <?php echo $event['Event']['public_address']; ?></li>
         </ul>
 
+    </div>
+    <div id="app_store">
+        <ul>
+            <li><a href="#"><img src="/img/events/app_store.jpeg" alt="Apple store"></a>
+            </li>
+            <li>
+                <a href="#"><img src="/img/events/google_play.jpeg" alt="google play">
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -204,4 +269,21 @@
             }
         });
     });
+</script>
+
+<? $FB = Configure::read('facebook'); ?>
+<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=<?= $FB['appId']; ?>"></script>
+<script type="text/javascript">_ga.trackFacebook();</script>
+
+<!-- Twitter Scripts -->
+<script>twttr = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script type="text/javascript">
+    (function($){
+        $(window).load(function() {
+            twttr.ready(function (twttr) {
+                //event bindings
+                _ga.trackTwitter();
+            });
+        });
+    })(jQuery);
 </script>
