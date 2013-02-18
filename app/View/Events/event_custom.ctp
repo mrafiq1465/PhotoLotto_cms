@@ -129,9 +129,9 @@
     </div>
     <div id="phone">
         <ul>
-            <li>p. <?php echo $event['Event']['public_phone_number']; ?></li>
-            <li>e. <?php echo $event['Event']['public_email']; ?></li>
-            <li>a. <?php echo $event['Event']['public_address']; ?></li>
+            <li><b>p.</b> <?php echo $event['Event']['public_phone_number']; ?></li>
+            <li><b>e.</b> <?php echo $event['Event']['public_email']; ?></li>
+            <li><b>a.</b> <?php echo $event['Event']['public_address']; ?></li>
         </ul>
 
     </div>
