@@ -124,7 +124,7 @@
 
     #desc {
         float: left;
-        width: 300px;
+        width: 320px;
         margin-top: 10px;
     }
 
@@ -133,7 +133,7 @@
     }
     #phone{
         float: left;
-        width: 240px;
+        width: 300px;
         margin-top: 10px;
     }
 
