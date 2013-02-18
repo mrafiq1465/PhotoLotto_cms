@@ -47,6 +47,7 @@
     }
     #gallery {
         margin-top: 30px;
+        float: left;
     }
     .grid img{
         width: 172px;
@@ -73,37 +74,38 @@
     #top {
         clear: both;
         float: left;
-        height: 100px;
+        height: 125px;
+        width: 940px;
     }
-    #top #logo {
+     #logo {
        float: left;
        width: 270px;
     }
-    #top #desc {
+    #desc {
         float: left;
         width: 300px;
     }
-    #top #desc ul {
+    #desc ul {
 
     }
-    #top #desc ul li.name{
+    #desc ul li.name{
        font-size: 14px;
        font-weight: bold;
     }
-    #top #desc ul li.desc{
+    #desc ul li.desc{
         font-size: 12px;
     }
-    #top #phone{
+    #phone{
         float: left;
         position: relative;
         top:20px;
-        width: 370px;
+        width: 350px;
     }
 
-    #top #phone ul {
+    #phone ul {
 
     }
-    #top #phone ul li{
+    #phone ul li{
 
     }
 </style>
