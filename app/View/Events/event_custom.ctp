@@ -193,10 +193,10 @@
     </div>
     <div id="app_store">
         <ul>
-            <li><a href="#"><img src="/img/events/app_store.jpeg" alt="Apple store"></a>
+            <li><a href="#"><img src="/img/app_store.jpeg" alt="Apple store"></a>
             </li>
             <li>
-                <a href="#"><img src="/img/events/google_play.jpeg" alt="google play">
+                <a href="#"><img src="/img/google_play.jpeg" alt="google play">
             </li>
         </ul>
     </div>
