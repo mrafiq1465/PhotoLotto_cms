@@ -140,9 +140,9 @@ $options = array(
         <h4>Auto Moderate</h4>
 
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="auto_moderate_on" value="1" name="data[Event][auto_moderate]" class="switch-input">
+            <input type="radio" <?=(!empty($this->data['Event']['auto_moderate']))?'checked="checked"':''?> id="auto_moderate_on" value="1" name="data[Event][auto_moderate]" class="switch-input">
             <label class="switch-label switch-label-off" for="auto_moderate_on">On</label>
-            <input type="radio" id="auto_moderate_off" value="0" name="data[Event][auto_moderate]" class="switch-input">
+            <input type="radio" <?=(empty($this->data['Event']['auto_moderate']))?'checked="checked"':''?> id="auto_moderate_off" value="0" name="data[Event][auto_moderate]" class="switch-input">
             <label class="switch-label switch-label-on" for="auto_moderate_off">Off</label>
             <span class="switch-selection"></span>
         </div>
