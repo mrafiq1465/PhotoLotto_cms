@@ -198,6 +198,7 @@ class EventsController extends AppController
         } else {
             $this->request->data = $this->Event->read(null, $id);
         }
+
         $companies = $this->Event->Company->find('list');
         $this->set(compact('companies'));
     }

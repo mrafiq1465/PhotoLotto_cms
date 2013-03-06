@@ -56,7 +56,7 @@
                 <div class="event_status"><?=$status?></div>
                 <div class="event_start_date"><?
                     if($status != 'DRAFT'){
-                        echo date('d/m/y', strtotime($event['Event']['date_start']));
+                        echo date('d/m/y', strtotime($event['Event']['date_end']));
                     }
                     ?></div>
             </td>

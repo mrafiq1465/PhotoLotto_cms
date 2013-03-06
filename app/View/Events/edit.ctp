@@ -93,19 +93,19 @@ $options = array(
         <div class="control-group row">
             <div class="span4">
                 <h5>Phone Number</h5>
-                <input name="data[Event][public_phone_number]" type="text" placeholder="Phone Number" class="span4" />
+                <? echo $this->Form->input('public_phone_number', array('div' => false,'placeholder' => 'Phone Number', 'class' => 'span4')); ?>
             </div>
             </div>
             <div class="control-group row">
                 <div class="span4">
                 <h5>Email</h5>
-                <input name="data[Event][public_email]" type="text" placeholder="Email" class="span4" />
+                    <? echo $this->Form->input('public_email', array('div' => false,'placeholder' => 'Email', 'class' => 'span4')); ?>
                 </div>
                 </div>
                 <div class="control-group row">
                     <div class="span4">
                 <h5>Address</h5>
-                <input name="data[Event][public_address]" type="text" placeholder="Address" class="span4" />
+                        <? echo $this->Form->input('public_address', array('div' => false,'placeholder' => 'Addressr', 'class' => 'span4')); ?>
                     </div>
             </div>
                     <div class="control-group row">
