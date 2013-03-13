@@ -372,7 +372,7 @@ class EventsController extends AppController
                 }
             }
 
-            $events_array[$i]['number_of_overlay'] = $overlay_img_count;
+            $events_array[$i]['number_of_overlay'] = $overlay_img_count-1;
 
             $i++;
 
