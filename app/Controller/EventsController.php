@@ -308,6 +308,22 @@ class EventsController extends AppController
         $this->redirect(array('action' => 'index'));
     }
 
+    public function duplicate($id = null)
+    {
+        $this->Event->id = $id;
+        $new_record = $this->Event->findById($this->Event->id);
+        unset($new_record['Event']['id']);
+
+        $this->Event->create();
+
+        if ($this->Event->save($new_record)){
+            $this->redirect(array('action' => 'index'));
+        }
+        else {
+            // throw new Exception(__('Error in creating event));
+        }
+    }
+
     public function eventlist()
     {
         $this->autoRender = false;
@@ -328,8 +344,7 @@ class EventsController extends AppController
         //we need to show the events that has status =1 & date_end >= today's date.
 
         foreach ($events as $event) {
-            //var_dump($event['Event']['date_end']);
-
+           
             $overlay_img_count = 0;
             $events_array[$i]['id'] = $event['Event']['id'];
             $events_array[$i]['name'] = $event['Event']['name'];
