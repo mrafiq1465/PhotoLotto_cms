@@ -31,6 +31,7 @@
 
 	Router::connect('/', array('controller' => 'events', 'action' => 'index', 'home'));
 	Router::connect('/index', array('controller' => 'events', 'action' => 'index', 'home'));
+Router::connect('/events', array('controller' => 'events', 'action' => 'index', 'home')); 
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

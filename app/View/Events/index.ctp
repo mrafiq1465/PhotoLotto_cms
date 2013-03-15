@@ -75,11 +75,11 @@
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-folder-open"></i> ', '/events/report/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
-                <br>edit uploaded images
+                <br>images
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/' . $event['Event']['name'], array('class' => '', 'escape' => FALSE)); ?>
-                <br>view custom page
+                <br>event page
             </td>
 
         </tr>
