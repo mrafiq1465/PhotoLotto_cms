@@ -44,6 +44,7 @@ Router::connect('/events', array('controller' => 'events', 'action' => 'index', 
     Router::connect('/events/add', array('controller' => 'events', 'action' => 'add'));
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
+    Router::connect('/events/duplicate/:id', array('controller' => 'events', 'action' => 'duplicate'),array('pass' => array('id')));
     Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
     Router::connect('/events/download_submissions/:event_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id')));
     Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id','event_action_id')));
