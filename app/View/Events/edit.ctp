@@ -34,6 +34,13 @@ $options = array(
                 </a>
             </div>
         </div>
+        <div class="control-group row">
+            <div class="span4">
+                <h5>Geo Address</h5>
+                <? echo $this->Form->input('geo_address', array('label' => false, 'div' => false,'placeholder' => 'Geo Address', 'class' => 'span4')); ?>
+            </div>
+        </div>
+
         <div class="control-group">
             <h5>Latitude</h5>
             <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => '')); ?>
@@ -194,3 +201,26 @@ $options = array(
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Update',)); ?>
 
 </section>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#EventGeoAddress').change(function(){
+            var geocoder = new google.maps.Geocoder();
+
+            var address = $('#EventGeoAddress').val();
+            var location = '';
+            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK)
+                {
+                    $('#EventGpslat').val(results[0].geometry.location.lat());
+                    $('#EventGpslong').val(results[0].geometry.location.lng());
+                }
+                else {
+                    alert('Address is not right. Please use right adrees to convert.');
+                }
+            });
+        });
+    });
+
+</script>

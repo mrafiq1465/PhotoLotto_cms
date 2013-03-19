@@ -29,9 +29,14 @@ $options = array(
             </div>
 
         </div>
-        <div class="control-group">
-            <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => 'span2')); ?>
-            <? echo $this->Form->input('gpslong', array('div' => false,'placeholder' => 'Longitude', 'class' => 'span2')); ?>
+        <div class="control-group row">
+            <div class="span4">
+                <? echo $this->Form->input('geo_address', array('label' => false, 'div' => false,'placeholder' => 'Geo Address', 'class' => 'span4')); ?>
+            </div>
+            <div class="span7">
+                <? echo $this->Form->input('gpslat', array('div' => false,'placeholder' => 'Latitude', 'class' => 'span2')); ?>
+                <? echo $this->Form->input('gpslong', array('div' => false,'placeholder' => 'Longitude', 'class' => 'span2')); ?>
+            </div>
         </div>
         <div class="control-group row">
             <div class="span4">
@@ -171,3 +176,26 @@ $options = array(
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Add',)); ?>
 
 </section>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#EventGeoAddress').change(function(){
+            var geocoder = new google.maps.Geocoder();
+
+            var address = $('#EventGeoAddress').val();
+            var location = '';
+            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK)
+                {
+                    $('#EventGpslat').val(results[0].geometry.location.lat());
+                    $('#EventGpslong').val(results[0].geometry.location.lng());
+                }
+                else {
+                    alert('Address is not right. Please use right adrees to convert.');
+                }
+            });
+        });
+    });
+
+</script>
