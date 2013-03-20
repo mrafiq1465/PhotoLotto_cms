@@ -165,9 +165,9 @@ $options = array(
         <h4>HTML Before Upload (a link to your mobile friendly web page to appear BEFORE sharing)</h4>
         <?= $this->Form->textarea('html_before', array('placeholder' => 'HTML Before', 'class' => 'span6','row' => 2 ));?>
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
+            <input type="radio" <?=(!empty($this->data['Event']['html_before_on']))?'checked="checked"':''?> id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
             <label class="switch-label switch-label-off" for="html_before_on">On</label>
-            <input type="radio" id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
+            <input type="radio" <?=(empty($this->data['Event']['html_before_on']))?'checked="checked"':''?>id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
             <label class="switch-label switch-label-on" for="html_before_off">Off</label>
             <span class="switch-selection"></span>
         </div>
