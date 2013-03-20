@@ -196,6 +196,28 @@ $options = array(
                 }
             });
         });
+
+        $('#EventHtmlBefore').change(function(){
+            if(!url_validation($('#EventHtmlBefore').val())){
+                alert('Please add http:// with the url');
+                $('#EventHtmlBefore').val('');
+            }
+        });
+        $('#EventHtmlAfter').change(function(){
+            if(!url_validation($('#EventHtmlAfter').val())){
+                alert('Please add http:// with the url');
+                $('#EventHtmlAfter').val('');
+            }
+        });
+
+
+        function url_validation(url){
+            var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            if (pattern.test(url)) {
+                return true;
+            }
+            return false;
+        }
     });
 
 </script>
