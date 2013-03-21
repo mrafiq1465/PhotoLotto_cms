@@ -174,11 +174,11 @@ $options = array(
     </fieldset>
     <fieldset class="controlGroup">
         <h4>HTML After Upload (a link to your mobile friendly web page to appear AFTER sharing)</h4>
-        <?= $this->Form->textarea('html_after', array('placeholder' => 'HTML After', 'class' => 'span6', 'row' => 2 ));?>
+        <?= $this->Form->textarea('html_after', array('placeholder' => 'HTML After', 'class' => 'span6','row' => 2 ));?>
         <div class="switch pull-right">
-            <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
+            <input type="radio" <?=(!empty($this->data['Event']['html_after_on']))?'checked="checked"':''?> id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
             <label class="switch-label switch-label-off" for="html_after_on">On</label>
-            <input type="radio" id="html_after_off" value="0" name="data[Event][html_after_on]" class="switch-input">
+            <input type="radio" <?=(empty($this->data['Event']['html_after_on']))?'checked="checked"':''?>id="html_after_off" value="0" name="data[Event][html_after_on]" class="switch-input">
             <label class="switch-label switch-label-on" for="html_after_off">Off</label>
             <span class="switch-selection"></span>
         </div>
