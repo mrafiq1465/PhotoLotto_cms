@@ -69,7 +69,7 @@ $options = array(
             <div class="span4">
                 <div class="control-group">
                     <h5>Event Type</h5>
-                    <?=$this->Form->input('eventtype', array('options' => array('generic' => 'Generic', 'location-based' => 'Location-based'), 'default' => 'generic'));
+                    <?=$this->Form->input('eventtype', array('options' => array('pixta-play' => 'PIXTA Play','National' => 'National' ,'location-based' => 'Location Based'), 'default' => 'pixta-play'));
                     ?>
                 </div>
                 <div class="control-group">
