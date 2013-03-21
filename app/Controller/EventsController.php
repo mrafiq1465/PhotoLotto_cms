@@ -344,7 +344,7 @@ class EventsController extends AppController
         //we need to show the events that has status =1 & date_end >= today's date.
 
         foreach ($events as $event) {
-           
+
             $overlay_img_count = 0;
             $events_array[$i]['id'] = $event['Event']['id'];
             $events_array[$i]['name'] = $event['Event']['name'];
@@ -373,7 +373,11 @@ class EventsController extends AppController
 
             $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['img_thumb'];
 
-            if (!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong']) && !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong'])) {
+            if (!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong']) &&
+                !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong']) &&
+                $this->request->query['gpslat'] != '0.000000' && $this->request->query['gpslong'] != '0.000000' &&
+                $this->request->query['gpslat'] != '0' && $this->request->query['gpslong'] != '0' &&
+                $event['Event']['eventtype'] == 'location-based' ) {
                 $events_array[$i]['distance'] = $this->calculate_distance($this->request->query['gpslat'], $this->request->query['gpslong'], $event['Event']['gpslat'], $event['Event']['gpslong']) . ' km';
             } else {
                 $events_array[$i]['distance'] = 0;
