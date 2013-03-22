@@ -50,12 +50,12 @@ $options = array(
         <div class="control-group row">
             <div class="span4">
                 <div class="control-group">
-                    <h5>Start Date</h5>
-                    <input name="data[Event][date_start]" value="<?=$this->data['Event']['date_start']?>" type="date" placeholder="Start Date" class="span4" />
+                    <h5>Start Date</h5><?php App::uses('CakeTime', 'Utility'); ?>
+                    <input name="data[Event][date_start]" value="<?=CakeTime::format('Y-m-d',$this->data['Event']['date_start'])?>" type="date" placeholder="Start Date" class="span4" />
                 </div>
                 <div class="control-group">
                     <h5>End Date</h5>
-                    <input name="data[Event][date_end]" value="<?=$this->data['Event']['date_end']?>" type="date" placeholder="End Date" class="span4" />
+                    <input name="data[Event][date_end]" value="<?=CakeTime::format('Y-m-d',$this->data['Event']['date_end'])?>" type="date" placeholder="End Date" class="span4" />
                 </div>
             </div>
             <div class="span7">
