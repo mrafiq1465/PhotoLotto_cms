@@ -88,4 +88,9 @@ $(document).ready(function() {
 
     $('select', $form).addClass('span4');
 
+    $('#event-menu a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
 });

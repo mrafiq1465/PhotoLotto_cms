@@ -68,6 +68,8 @@ class EventsController extends AppController
      */
     public function add()
     {
+        $this->layout='event';
+
         if ($this->request->is('post')) {
             $this->Event->create();
             $user_data = $this->Session->read('User');
@@ -134,6 +136,7 @@ class EventsController extends AppController
     public function edit($id = null)
     {
         $this->Event->id = $id;
+        $this->layout='event';
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
