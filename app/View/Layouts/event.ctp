@@ -32,6 +32,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
     <!-- styles -->
     <?php
     echo $this->Html->css('main');
+    echo $this->Html->css('bootstrap-fileupload.min');
     ?>
 
     <!-- scripts -->
@@ -43,6 +44,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
         array(
             'http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js',
             'bootstrap.min',
+            'bootstrap-fileupload.min',
             'modernizr.min.js'
         ));
 

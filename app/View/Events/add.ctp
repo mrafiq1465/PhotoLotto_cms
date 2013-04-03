@@ -1,3 +1,16 @@
+<?php
+/**
+ * @var $this View
+ */
+$options = array(
+    'type' => 'file',
+    'inputDefaults' => array(
+        'label' => false,
+        'div' => false, //don't work? why?
+        'class' => 'span12',
+    )
+);
+?>
 <div id="secondary" class="pull-left">
     <h2>Campaign Creator</h2>
     <nav id="event-menu">
@@ -12,22 +25,20 @@
 <div id="primary">
 <div class="tab-content" id="event_tabs">
 <section id="event_details" class="tab-pane fade in active">
+    <? echo $this->Form->create('Event', $options); ?>
     <div class="row-fluid">
         <div class="span7">
             <h3>Event Details</h3>
 
             <div class="row-fluid row-event-name">
                 <label for="event_name">Event Name <span>(60 characters max.)</span></label>
-                <input class="span12" placeholder="Event Name" name="event_name" id="event_name"
-                       type="text" />
+                <?= $this->Form->input('name', array('div' => false, 'placeholder' => 'Event Name',)); ?>
             </div>
 
             <div class="row-fluid">
                 <label for="event_description1">Event Description <span>(60 characters max. per line)</span></label>
-                <input class="span12" placeholder="Description 1: e.g. Brand the moment!"
-                       name="event_description" id="event_description1" type="text" />
-                <input class="span12" placeholder="Description 2: e.g. #PIXTA" name="event_description"
-                       id="event_description2" type="text" />
+                <?= $this->Form->input('shortdescription_line_1', array('div' => false, 'placeholder' => 'Description 1: e.g. Brand the moment!',));?>
+                <?= $this->Form->input('shortdescription_line_2', array('div' => false, 'placeholder' => 'Description 2: e.g. #PIXTA',));?>
             </div>
 
             <div class="row-fluid">
@@ -35,20 +46,23 @@
                     <label for="event_description1">Event/Company Logo <span>(100kb max.)</span></label>
 
                     <div class="row-fluid">
-                        <div class="span7">
-                            <input class="span12" placeholder="Description 1: e.g. Brand the moment!"
-                                   name="event_description" id="event_description11" type="text" />
-                        </div>
-                        <div class="span5">
-                            <input class="span12" placeholder="Description 2: e.g. #PIXTA"
-                                   name="event_description" id="event_description21" type="text" />
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image"/></div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                            <div>
+                                <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
+                                    <?= $this->Form->file('public_logo'); ?>
+                                </span>
+                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="span5">
-            <img src="/images/iphone.jpg" alt="iPhone" />
+            <img src="/images/iphone.jpg" alt="iPhone"/>
         </div>
     </div>
     <div class="row-fluid">
@@ -60,14 +74,11 @@
         <div class="span7">
             <div class="row-fluid">
                 <label for="start_date">Start Date</label>
-                <input class="span12" placeholder="Please choose a start date" name="start_date"
-                       id="start_date"
-                       type="date" />
+                <?=$this->Form->input('date_start', array('div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
             <div class="row-fluid">
                 <label for="end_date">End Date</label>
-                <input class="span12" placeholder="Please choose a end date" name="end_date" id="end_date"
-                       type="date" />
+                <?=$this->Form->input('date_end', array('div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
         </div>
         <div class="span5">
@@ -89,34 +100,31 @@
         <div class="span7">
             <div class="row-fluid">
                 <label for="address">Address</label>
-                <input class="span12" placeholder="e.g. 38/110 Bourke Rd, Alexandria, NSW, 2015" type="text"
-                       name="address" id="address" />
+                <?=$this->Form->input('public_address', array('div' => false, 'placeholder' => 'e.g. 38/110 Bourke Rd, Alexandria, NSW, 2015',)) ?>
             </div>
             <div class="row-fluid">
                 <label for="latitude">Latitude</label>
-                <input class="span12" placeholder="e.g. -33.887072" type="text" name="latitude"
-                       id="latitude" />
+                <?=$this->Form->input('gpslat', array('div' => false, 'placeholder' => 'e.g. -33.887072',));?>
             </div>
             <div class="row-fluid">
                 <label for="longitude">Longitude</label>
-                <input class="span12" placeholder="e.g. 151.20741999999996" type="text" name="longitude"
-                       id="longitude" />
+                <?=$this->Form->input('gpslong', array('div' => false, 'placeholder' => 'e.g. -33.887072',));?>
             </div>
             <div class="row-fluid">
                 <div class="span12">
                     <div class="row-fluid">
                         <div class="span7">
                             <label for="event_type">Event Type</label>
-                            <select class="span12" name="event_type" id="event_type">
-                                <option value="option1">Some Option1</option>
-                                <option value="option2">Some Option2</option>
-                                <option value="option3">Some Option3</option>
-                            </select>
+                            <?=$this->Form->input('eventtype', array('options' => array(
+                                'pixta-play' => 'PIXTA Play',
+                                'National' => 'National',
+                                'location-based' => 'Location Based'),
+                                'default' => 'pixta-play'));?>
                         </div>
                         <div class="span5">
                             <label for="event_radius">Radius <span>(in kilometres)</span></label>
                             <input class="span12" id="event_radius" placeholder="5" name="event_radius"
-                                   type="text" />
+                                   type="text"/>
                         </div>
                     </div>
                 </div>
@@ -142,53 +150,58 @@
             </p>
 
             <p>Your designs will be integrated
-               with consumer photos and can
-               incorporate graphics, logos and other
-               brand messages.</p>
+                with consumer photos and can
+                incorporate graphics, logos and other
+                brand messages.</p>
 
             <aside class="help">
                 <div>Dimensions: 600 x 600 <br>Image type: PNG</div>
                 <div>For best results use simple graphics
-                     and logo placements. Always upload
-                     files with transparent backgrounds.
+                    and logo placements. Always upload
+                    files with transparent backgrounds.
                 </div>
 
             </aside>
 
-            <div class="row-fluid"><input id="EventImgOverlay1" name="data[Event][img_overlay_1]"
-                                          type="file" /></div>
-            <div class="row-fluid"><input id="EventImgOverlay2" name="data[Event][img_overlay_2]"
-                                          type="file" /></div>
-            <div class="row-fluid"><input id="EventImgOverlay3" name="data[Event][img_overlay_3]"
-                                          type="file" /></div>
-            <div class="row-fluid"><input id="EventImgOverlay4" name="data[Event][img_overlay_4]"
-                                          type="file" /></div>
-            <div class="row-fluid"><input id="EventImgOverlay5" name="data[Event][img_overlay_5]"
-                                          type="file" /></div>
+            <div class="row-fluid">
+                <?=$this->Form->file('img_overlay_1', array('div' => false)); ?>
+            </div>
+            <div class="row-fluid">
+                <?=$this->Form->file('img_overlay_2', array('div' => false)); ?>
+            </div>
+            <div class="row-fluid">
+                <?=$this->Form->file('img_overlay_3', array('div' => false)); ?>
+            </div>
+            <div class="row-fluid">
+                <?=$this->Form->file('img_overlay_4', array('div' => false)); ?>
+            </div>
+            <div class="row-fluid">
+                <?=$this->Form->file('img_overlay_5', array('div' => false)); ?>
+            </div>
 
             <div class="row-fluid row-upload">
-                <button class="btn primary">Upload</button>
+                <button class="btn primary" type="button">Upload</button>
             </div>
 
         </div>
         <div class="span7">
             <div class="row-fluid">
                 <div class="img-container span12 big">
-                    <img src="/images/dummy.jpg" alt="dummy" />
+                    <img src="/images/dummy.jpg" alt="dummy"/>
                 </div>
             </div>
             <div class="row-fluid">
                 <div class="span12">
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy" /><a href="#" class="delete">x</a></div>
+                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy" /><a href="#" class="delete">x</a></div>
+                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy" /><a href="#" class="delete">x</a></div>
+                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy" /><a href="#" class="delete">x</a></div>
+                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy" /><a href="#" class="delete">x</a></div>
+                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
                 </div>
 
             </div>
@@ -202,15 +215,18 @@
 
             <div class="row-fluid row-facebook">
                 <label for="facebook_message">Facebook</label>
-                <input class="span12" id="facebook_message" name="facebook_message"
-                       placeholder="Facebook message: e.g. Brand the moment #PIXTA" type="text" />
-                <input class="span12" id="facebook_link" name="facebook_name"
-                       placeholder="Facebook link: e.g. www.pixta.com.au" type="text" />
+                <?=$this->Form->input('facebook_msg', array(
+                    'div' => false,
+                    'placeholder' => 'Facebook message: e.g. Brand the moment #PIXTA')); ?>
+                <?=$this->Form->input('facebook_url', array(
+                    'div' => false,
+                    'placeholder' => 'Facebook link: e.g. www.pixta.com.au')); ?>
             </div>
             <div class="row-fluid">
                 <label for="twitter_message">Twitter</label>
-                <input class="span12" id="twitter_message" name="twitter_message"
-                       placeholder="Twitter message: e.g. Brand the moment #PIXTA" type="text" />
+                <?=$this->Form->input('twitter_msg', array(
+                    'div' => false,
+                    'placeholder' => 'Twitter message: e.g. Brand the moment #PIXTA')); ?>
             </div>
         </div>
 
@@ -227,7 +243,7 @@
             <div class="row-fluid">
                 <label for="content_before_upload">Content Before Upload</label>
                 <input class="span12" type="text" name="content_before_upload" id="content_before_upload"
-                       placeholder="http://" />
+                       placeholder="http://"/>
 
                 <div class="switch pull-right">
                     <input type="radio" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
@@ -240,7 +256,7 @@
             <div class="row-fluid">
                 <label for="content_after_upload">Content After Upload</label>
                 <input class="span12" type="text" name="content_after_upload" id="content_after_upload"
-                       placeholder="http://" />
+                       placeholder="http://"/>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
@@ -255,9 +271,9 @@
         <div class="span5">
             <aside class="help">
                 <div>Please provide links to your
-                     mobile friendly web pages to
-                     appear before/after the user
-                     uploads their photo.
+                    mobile friendly web pages to
+                    appear before/after the user
+                    uploads their photo.
                 </div>
 
                 <div>
@@ -272,7 +288,7 @@
         <div class="span7">
             <div class="row-fluid">
                 <label for="EventTC">Terms & Conditions</label>
-                <input class="span12" type="text" name="data[Event][t_c]" id="EventTC" placeholder="http://" />
+                <input class="span12" type="text" name="data[Event][t_c]" id="EventTC" placeholder="http://"/>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
@@ -286,8 +302,8 @@
         <div class="span5">
             <aside class="help">
                 <div>Please provide a link to any
-                     Terms & Conditions you would
-                     like to include with your event.
+                    Terms & Conditions you would
+                    like to include with your event.
                 </div>
 
                 <div>
@@ -326,10 +342,7 @@
         <div class="span7">
             <div class="row-fluid">
                 <label for="event_status">Event Status</label>
-                <select class="span12" name="event_status" id="event_status">
-                    <option value="01">Schd01</option>
-                    <option value="02">Schd02</option>
-                </select>
+                <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Scheduled' => 'Scheduled', 'Draft' => 'Draft'), 'div' => false)); ?>
             </div>
         </div>
         <div class="span5">
@@ -345,7 +358,7 @@
     <div class="row-fluid">
         <div class="span7">
             <div class="row-fluid">
-                <button class="btn btn-large btn-block btn-primary" type="button">Save</button>
+                <?=$this->Form->end(array('class' => 'btn btn-large btn-block btn-primary', 'label' => 'Add',))?>
             </div>
         </div>
     </div>
