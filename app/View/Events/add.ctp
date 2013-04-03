@@ -74,11 +74,11 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <label for="start_date">Start Date</label>
-                <?=$this->Form->input('date_start', array('div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                <?=$this->Form->input('date_start', array('empty' => true, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
             <div class="row-fluid">
                 <label for="end_date">End Date</label>
-                <?=$this->Form->input('date_end', array('div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                <?=$this->Form->input('date_end', array('empty' => true, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
         </div>
         <div class="span5">
@@ -164,19 +164,19 @@ $options = array(
             </aside>
 
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_1', array('div' => false)); ?>
+                <?=$this->Form->file('img_overlay_1', array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_2', array('div' => false)); ?>
+                <?=$this->Form->file('img_overlay_2', array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_3', array('div' => false)); ?>
+                <?=$this->Form->file('img_overlay_3', array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_4', array('div' => false)); ?>
+                <?=$this->Form->file('img_overlay_4', array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_5', array('div' => false)); ?>
+                <?=$this->Form->file('img_overlay_5', array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
 
             <div class="row-fluid row-upload">
@@ -187,21 +187,27 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <div class="img-container span12 big">
-                    <img src="/images/dummy.jpg" alt="dummy"/>
+                    <img id="overlay-img-selected" src="/images/dummy.jpg" alt="dummy"/>
                 </div>
             </div>
             <div class="row-fluid">
                 <div class="span12">
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
+                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                        <a href="#" class="overlay-delete delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
+                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                        <a href="#" class="overlay-delete delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
+                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                        <a href="#" class="overlay-delete delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
+                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                        <a href="#" class="overlay-delete delete">x</a></div>
                     <div class="img-container span2 small">
-                        <img src="/images/dummy.jpg" alt="dummy"/><a href="#" class="delete">x</a></div>
+                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                        <a href="#" class="overlay-delete delete">x</a>
+                    </div>
                 </div>
 
             </div>
@@ -246,9 +252,9 @@ $options = array(
                        placeholder="http://"/>
 
                 <div class="switch pull-right">
-                    <input type="radio" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
+                    <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
                     <label class="switch-label switch-label-off" for="html_before_on">On</label>
-                    <input type="radio" checked="checked" id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
+                    <input type="radio" id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
                     <label class="switch-label switch-label-on" for="html_before_off">Off</label>
                     <span class="switch-selection"></span>
                 </div>
@@ -342,7 +348,7 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <label for="event_status">Event Status</label>
-                <? echo $this->Form->select('stage', array('options' => array('' => '---Select Stage---','Scheduled' => 'Scheduled', 'Draft' => 'Draft'), 'div' => false)); ?>
+                <? echo $this->Form->select('stage', array('' => '---Select Stage---', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'), array('div' => false)); ?>
             </div>
         </div>
         <div class="span5">
@@ -364,3 +370,42 @@ $options = array(
     </div>
 </section>
 </div>
+
+<script>
+    $(function () {
+        $('.overlay-img-upload').change(function (e, invoked) {
+            if (invoked == 'clear') return;
+            var index = $('.overlay-img-upload').index($(this));
+            var file = e.target.files !== undefined ? e.target.files[0] : (e.target.value ? { name: e.target.value.replace(/^.+\\/, '') } : null);
+
+            if (!file) {
+                this.clear();
+                return;
+            }
+
+            if ((typeof file.type !== "undefined" ? file.type.match('image.*') : file.name.match(/\.(gif|png|jpe?g)$/i)) && typeof FileReader !== "undefined") {
+                var reader = new FileReader()
+                reader.onload = function (e) {
+                    $('.overlay-img-container').eq(index).attr('src', e.target.result);
+                    if (index == 0) {
+                        $('#overlay-img-selected').attr('src', e.target.result);
+                    }
+                }
+
+                reader.readAsDataURL(file)
+            }
+        });
+
+        $('.overlay-img-container').click(function(){
+            $('#overlay-img-selected').attr('src', $(this).attr('src'));
+        });
+
+        $('.overlay-delete').click(function(e){
+            var index = $('.overlay-delete').index($(this));
+            $('.overlay-img-upload').eq(index).val('');
+            $('.overlay-img-container').eq(index).attr('src', '');
+            e.preventDefault();
+        });
+
+    })
+</script>

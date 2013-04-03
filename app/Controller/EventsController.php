@@ -72,8 +72,31 @@ class EventsController extends AppController
 
         if ($this->request->is('post')) {
             $this->Event->create();
+
             $user_data = $this->Session->read('User');
+
             $this->request->data['Event']['updated_by'] = $user_data['id'];
+
+            if (!empty($this->data['Event']['date_start']) ||
+            count(array_filter($this->data['Event']['date_start'])) < count($this->data['Event']['date_start'])
+            ) {
+                $this->data['Event']['date_start'] = $this->data['Event']['date_start']['year'] . "-" .
+                    $this->data['Event']['date_start']['month'] . "-" .
+                    $this->data['Event']['date_start']['day'];
+            } else {
+                $this->data['Event']['date_start'] = '';
+            }
+
+            if (!empty($this->data['Event']['date_end']) ||
+            count(array_filter($this->data['Event']['date_end'])) < count($this->data['Event']['date_end'])
+            ) {
+                $this->data['Event']['date_end'] = $this->data['Event']['date_end']['year'] . "-" .
+                    $this->data['Event']['date_end']['month'] . "-" .
+                    $this->data['Event']['date_end']['day'];
+            } else {
+                $this->data['Event']['date_end'] = '';
+            }
+
             if (isset($this->request->data['Event']['img_thumb'])) {
                 $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
                 $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
