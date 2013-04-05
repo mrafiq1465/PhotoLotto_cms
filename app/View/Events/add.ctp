@@ -364,7 +364,7 @@ $options = array(
     <div class="row-fluid">
         <div class="span7">
             <div class="row-fluid">
-                <?=$this->Form->end(array('class' => 'btn btn-large btn-block btn-primary', 'label' => 'Add',))?>
+                <?=$this->Form->end(array('id' => 'submitBtn', 'class' => 'btn btn-large btn-block btn-primary', 'label' => 'Add',))?>
             </div>
         </div>
     </div>
@@ -384,27 +384,37 @@ $options = array(
             }
 
             if ((typeof file.type !== "undefined" ? file.type.match('image.*') : file.name.match(/\.(gif|png|jpe?g)$/i)) && typeof FileReader !== "undefined") {
-                var reader = new FileReader()
+                var reader = new FileReader();
                 reader.onload = function (e) {
                     $('.overlay-img-container').eq(index).attr('src', e.target.result);
                     if (index == 0) {
                         $('#overlay-img-selected').attr('src', e.target.result);
                     }
-                }
+                };
 
-                reader.readAsDataURL(file)
+                reader.readAsDataURL(file);
             }
         });
 
-        $('.overlay-img-container').click(function(){
+        $('.overlay-img-container').click(function () {
             $('#overlay-img-selected').attr('src', $(this).attr('src'));
         });
 
-        $('.overlay-delete').click(function(e){
+        $('.overlay-delete').click(function (e) {
             var index = $('.overlay-delete').index($(this));
             $('.overlay-img-upload').eq(index).val('');
             $('.overlay-img-container').eq(index).attr('src', '');
             e.preventDefault();
+        });
+
+        $('#submitBtn').click(function () {
+            var index = $('.tab-pane').index($('.tab-pane:visible'));
+            if (index + 1 == $('.tab-pane').length) {
+                return true;
+            } else {
+                $('#event-menu a').eq(index + 1).click();
+                return false;
+            }
         });
 
     })
