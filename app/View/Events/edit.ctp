@@ -31,19 +31,19 @@ $options = array(
             <h3>Event Details</h3>
 
             <div class="row-fluid row-event-name">
-                <label for="event_name">Event Name <span>(60 characters max.)</span></label>
+                <label for="name">Event Name <span>(60 characters max.)</span></label>
                 <?= $this->Form->input('name', array('div' => false, 'placeholder' => 'Event Name',)); ?>
             </div>
 
             <div class="row-fluid">
-                <label for="event_description1">Event Description <span>(60 characters max. per line)</span></label>
+                <label for="shortdescription_line_1">Event Description <span>(60 characters max. per line)</span></label>
                 <?= $this->Form->input('shortdescription_line_1', array('div' => false, 'placeholder' => 'Description 1: e.g. Brand the moment!',));?>
                 <?= $this->Form->input('shortdescription_line_2', array('div' => false, 'placeholder' => 'Description 2: e.g. #PIXTA',));?>
             </div>
 
             <div class="row-fluid">
                 <div class="span12">
-                    <label for="event_description1">Event/Company Logo <span>(100kb max.)</span></label>
+                    <label for="public_logo">Event/Company Logo <span>(100kb max.)</span></label>
 
                     <div class="row-fluid">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -196,7 +196,7 @@ $options = array(
             <h3>Social Media</h3>
 
             <div class="row-fluid row-facebook">
-                <label for="facebook_message">Facebook</label>
+                <label for="facebook_msg">Facebook</label>
                 <?=$this->Form->input('facebook_msg', array(
                     'div' => false,
                     'placeholder' => 'Facebook message: e.g. Brand the moment #PIXTA')); ?>
@@ -205,7 +205,7 @@ $options = array(
                     'placeholder' => 'Facebook link: e.g. www.pixta.com.au')); ?>
             </div>
             <div class="row-fluid">
-                <label for="twitter_message">Twitter</label>
+                <label for="twitter_msg">Twitter</label>
                 <?=$this->Form->input('twitter_msg', array(
                     'div' => false,
                     'placeholder' => 'Twitter message: e.g. Brand the moment #PIXTA')); ?>
@@ -223,8 +223,8 @@ $options = array(
     <div class="row-fluid">
         <div class="span7">
             <div class="row-fluid">
-                <label for="content_before_upload">Content Before Upload</label>
-                <input class="span12" type="text" name="content_before_upload" id="content_before_upload"
+                <label for="html_before">Content Before Upload</label>
+                <input class="span12" type="text" name="html_before" id="html_before"
                        placeholder="http://"/>
 
                 <div class="switch pull-right">
@@ -236,8 +236,8 @@ $options = array(
                 </div>
             </div>
             <div class="row-fluid">
-                <label for="content_after_upload">Content After Upload</label>
-                <input class="span12" type="text" name="content_after_upload" id="content_after_upload"
+                <label for="html_after">Content After Upload</label>
+                <input class="span12" type="text" name="html_after" id="html_after"
                        placeholder="http://"/>
 
                 <div class="switch pull-right">
@@ -269,8 +269,8 @@ $options = array(
     <div class="row-fluid">
         <div class="span7">
             <div class="row-fluid">
-                <label for="EventTC">Terms & Conditions</label>
-                <input class="span12" type="text" name="data[Event][t_c]" id="EventTC" placeholder="http://"/>
+                <label for="t_c">Terms & Conditions</label>
+                <input class="span12" type="text" name="data[Event][t_c]" id="t_c" placeholder="http://"/>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
