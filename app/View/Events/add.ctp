@@ -163,26 +163,11 @@ $options = array(
 
             </aside>
 
+            <? for ($i=1; $i<=5; $i++) { ?>
             <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_1', array('div' => false, 'class' => 'overlay-img-upload')); ?>
+                <?=$this->Form->file("img_overlay_$i", array('div' => false, 'class' => 'overlay-img-upload')); ?>
             </div>
-            <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_2', array('div' => false, 'class' => 'overlay-img-upload')); ?>
-            </div>
-            <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_3', array('div' => false, 'class' => 'overlay-img-upload')); ?>
-            </div>
-            <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_4', array('div' => false, 'class' => 'overlay-img-upload')); ?>
-            </div>
-            <div class="row-fluid">
-                <?=$this->Form->file('img_overlay_5', array('div' => false, 'class' => 'overlay-img-upload')); ?>
-            </div>
-
-            <div class="row-fluid row-upload">
-                <button class="btn primary" type="button">Upload</button>
-            </div>
-
+            <? } ?>
         </div>
         <div class="span7">
             <div class="row-fluid">
@@ -192,22 +177,12 @@ $options = array(
             </div>
             <div class="row-fluid">
                 <div class="span12">
-                    <div class="img-container span2 small">
-                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
-                        <a href="#" class="overlay-delete delete">x</a></div>
-                    <div class="img-container span2 small">
-                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
-                        <a href="#" class="overlay-delete delete">x</a></div>
-                    <div class="img-container span2 small">
-                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
-                        <a href="#" class="overlay-delete delete">x</a></div>
-                    <div class="img-container span2 small">
-                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
-                        <a href="#" class="overlay-delete delete">x</a></div>
-                    <div class="img-container span2 small">
-                        <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
-                        <a href="#" class="overlay-delete delete">x</a>
-                    </div>
+                    <?for ($i=1; $i<=5; $i++) { ?>
+                        <div class="img-container span2 small">
+                            <img class="overlay-img-container" src="/images/dummy.jpg" alt="dummy"/>
+                            <a href="#" class="overlay-delete delete">x</a>
+                        </div>
+                    <? } ?>
                 </div>
 
             </div>
@@ -416,6 +391,5 @@ $options = array(
                 return false;
             }
         });
-
     })
 </script>

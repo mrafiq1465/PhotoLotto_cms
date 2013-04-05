@@ -20,8 +20,7 @@ class EventsController extends AppController
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
         $this->Event->recursive = 0;
         $event_conditions = array();
         if (isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
@@ -45,8 +44,7 @@ class EventsController extends AppController
      * @param string $id
      * @return void
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
@@ -61,14 +59,32 @@ class EventsController extends AppController
         $this->set('event', $this->Event->read(null, $id));
     }
 
+    function process_upload($event_id, $field) {
+        if (isset($this->request->data['Event'][$field]['error']) && $this->request->data['Event'][$field]['error'] == 0) {
+            $uploaded_file = $this->request->data['Event'][$field]['tmp_name'];
+            $uploaded_file_name = $this->request->data['Event'][$field]['name'];
+            $uploaded_file_name = '/img/events/' . $event_id . '-' . $uploaded_file_name;
+            if (!move_uploaded_file($uploaded_file, WWW_ROOT . $uploaded_file_name)) {
+                throw new NotFoundException(__('Permission not available in upload directory'));
+            }
+            ;
+            $this->request->data['Event'][$field] = $uploaded_file_name;
+        } elseif (is_array($this->request->data['Event'][$field]) && $this->request->data['Event'][$field]['error'] <> 0) {
+            unset($this->request->data['Event'][$field]);
+        } elseif (isset($this->request->data['Event'][$field . "_delete"])) {
+            $this->request->data[$field] = '';
+        }
+
+
+    }
+
     /**
      * add method
      *
      * @return void
      */
-    public function add()
-    {
-        $this->layout='event';
+    public function add() {
+        $this->layout = 'event';
 
         if ($this->request->is('post')) {
             $this->Event->create();
@@ -78,7 +94,7 @@ class EventsController extends AppController
             $this->request->data['Event']['updated_by'] = $user_data['id'];
 
             if (!empty($this->request->data['Event']['date_start']) ||
-            count(array_filter($this->request->data['Event']['date_start'])) < count($this->request->data['Event']['date_start'])
+                count(array_filter($this->request->data['Event']['date_start'])) < count($this->request->data['Event']['date_start'])
             ) {
                 $this->request->data['Event']['date_start'] = $this->request->data['Event']['date_start']['year'] . "-" .
                     $this->request->data['Event']['date_start']['month'] . "-" .
@@ -88,7 +104,7 @@ class EventsController extends AppController
             }
 
             if (!empty($this->request->data['Event']['date_end']) ||
-            count(array_filter($this->request->data['Event']['date_end'])) < count($this->request->data['Event']['date_end'])
+                count(array_filter($this->request->data['Event']['date_end'])) < count($this->request->data['Event']['date_end'])
             ) {
                 $this->request->data['Event']['date_end'] = $this->request->data['Event']['date_end']['year'] . "-" .
                     $this->request->data['Event']['date_end']['month'] . "-" .
@@ -97,46 +113,19 @@ class EventsController extends AppController
                 $this->request->data['Event']['date_end'] = '';
             }
 
-            if (isset($this->request->data['Event']['img_thumb'])) {
-                $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
-                $thumb_path_uploaded_name = $this->request->data['Event']['img_thumb']['name'];
-                $this->request->data['Event']['img_thumb'] = '';
-            }
 
-            if (isset($this->request->data['Event']['public_logo'])) {
-                $public_logo_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
-                $public_logo_path_uploaded_name = $this->request->data['Event']['public_logo']['name'];
-                $this->request->data['Event']['public_logo'] = '';
-            }
+            $temp_data = $this->request->data['Event'];
+            unset($this->request->data['Event']['public_logo']);
             for ($i = 1; $i <= 5; $i++) {
-                if (isset($this->request->data['Event']["img_overlay_$i"]['tmp_name'])) {
-                    $overlay_path_uploaded[] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
-                    $overlay_path_uploaded_name[] = $this->request->data['Event']["img_overlay_$i"]['name'];
-                    $this->request->data['Event']["img_overlay_$i"] = '';
-                }
+                unset($this->request->data['Event']["img_overlay_$i"]);
             }
 
             if ($this->Event->save($this->request->data)) {
-                if (isset($this->request->data['Event']['public_logo'])) {
-                    $public_logo_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $public_logo_path_uploaded_name;
-                    move_uploaded_file($public_logo_path_uploaded, WWW_ROOT . $public_logo_path_uploaded_name);
-                    $this->request->data['Event']['public_logo'] = $public_logo_path_uploaded_name;
-                }
-
-                if (isset($this->request->data['Event']['img_thumb'])) {
-                    $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $thumb_path_uploaded_name;
-                    move_uploaded_file($thumb_path_uploaded, WWW_ROOT . $thumb_path_uploaded_name);
-                    $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
-                }
-
+                $this->request->data['Event'] = array_merge($this->request->data['Event'], $temp_data);
+                $this->process_upload($this->Event->id, 'public_logo');
                 for ($i = 1; $i <= 5; $i++) {
-                    if (isset($this->request->data['Event']["img_overlay_$i"])) {
-                        $overlay_path_uploaded_name[$i - 1] = '/img/events/' . $this->Event->id . "-$i-" . $overlay_path_uploaded_name[$i - 1];
-                        move_uploaded_file($overlay_path_uploaded[$i - 1], WWW_ROOT . $overlay_path_uploaded_name[$i - 1]);
-                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path_uploaded_name[$i - 1];
-                    }
+                    $this->process_upload($this->Event->id, "img_overlay_$i");
                 }
-
                 $this->Event->save($this->request->data);
 
                 $this->Session->setFlash(__('The event has been saved'));
@@ -156,10 +145,9 @@ class EventsController extends AppController
      * @param string $id
      * @return void
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $this->Event->id = $id;
-        $this->layout='event';
+        $this->layout = 'event';
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
@@ -167,55 +155,13 @@ class EventsController extends AppController
             $user_data = $this->Session->read('User');
             $this->request->data['Event']['updated_by'] = $user_data['id'];
 
-            if (!empty($this->request->data['Event']['img_thumb']['tmp_name'])) {
-                $thumb_path_uploaded = $this->request->data['Event']['img_thumb']['tmp_name'];
-                $thumb_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $this->request->data['Event']['img_thumb']['name'];
-                $this->request->data['Event']['img_thumb'] = '';
-            } else {
-                unset($this->request->data['Event']['img_thumb']);
-            }
-            if (!empty($this->request->data['Event']['public_logo']['tmp_name'])) {
-                $public_logo_path_uploaded = $this->request->data['Event']['public_logo']['tmp_name'];
-                $public_logo_path_uploaded_name = '/img/events/' . $this->Event->id . '-' . $this->request->data['Event']['public_logo']['name'];
-                $this->request->data['Event']['public_logo'] = '';
-            } else {
-                unset($this->request->data['Event']['public_logo']);
-            }
+            $this->process_upload($id, 'public_logo');
             for ($i = 1; $i <= 5; $i++) {
-                if (!empty($this->request->data['Event']["img_overlay_$i"]['tmp_name'])) {
-                    $overlay_path_uploaded[$i] = $this->request->data['Event']["img_overlay_$i"]['tmp_name'];
-                    $overlay_path_uploaded_name[$i] = '/img/events/' . $this->Event->id . "-$i-" . $this->request->data['Event']["img_overlay_$i"]['name'];
-                    $this->request->data['Event']["img_overlay_$i"] = '';
-                } else {
-                    unset($this->request->data['Event']["img_overlay_$i"]);
-                }
+                $this->process_upload($id, "img_overlay_$i");
             }
+
 
             if ($this->Event->save($this->request->data)) {
-                if (!empty($thumb_path_uploaded)) {
-                    move_uploaded_file($thumb_path_uploaded, WWW_ROOT . $thumb_path_uploaded_name);
-                    $this->request->data['Event']['img_thumb'] = $thumb_path_uploaded_name;
-                } elseif (!empty($this->request->data['Event']['img_thumb_delete'])) {
-                    $this->request->data['Event']['img_thumb'] = '';
-                }
-                if (!empty($public_logo_path_uploaded)) {
-                    move_uploaded_file($public_logo_path_uploaded, WWW_ROOT . $public_logo_path_uploaded_name);
-                    $this->request->data['Event']['public_logo'] = $public_logo_path_uploaded_name;
-                } elseif (!empty($this->request->data['Event']['public_logo_delete'])) {
-                    $this->request->data['Event']['public_logo'] = '';
-                }
-
-                for ($i = 1; $i <= 5; $i++) {
-                    if (!empty($overlay_path_uploaded[$i])) {
-                        move_uploaded_file($overlay_path_uploaded[$i], WWW_ROOT . $overlay_path_uploaded_name[$i]);
-                        $this->request->data['Event']["img_overlay_$i"] = $overlay_path_uploaded_name[$i];
-
-                    } elseif (!empty($this->request->data['Event']["img_overlay_{$i}_delete"])) {
-                        $this->request->data['Event']["img_overlay_$i"] = '';
-                    }
-                }
-
-                $this->Event->save($this->request->data);
                 $this->Session->setFlash(__('The event has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -229,8 +175,7 @@ class EventsController extends AppController
         $this->set(compact('companies'));
     }
 
-    public function event_custom($id = null)
-    {
+    public function event_custom($id = null) {
 
         $this->layout = 'event';
         $event = $this->Event->find('first', array(
@@ -243,8 +188,7 @@ class EventsController extends AppController
 
     }
 
-    public function report($id = null)
-    {
+    public function report($id = null) {
 
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
@@ -269,8 +213,7 @@ class EventsController extends AppController
         $this->set(compact('event', 'event_actions'));
     }
 
-    public function download_submissions($event_id = null, $event_action_id = null)
-    {
+    public function download_submissions($event_id = null, $event_action_id = null) {
         $this->autoRender = false;
         if (!empty($event_action_id)) {
             $this->Event->EventAction->id = $event_action_id;
@@ -317,8 +260,7 @@ class EventsController extends AppController
      * @param string $id
      * @return void
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         if (!$this->request->is('post')) {
             //throw new MethodNotAllowedException();
         }
@@ -334,24 +276,21 @@ class EventsController extends AppController
         $this->redirect(array('action' => 'index'));
     }
 
-    public function duplicate($id = null)
-    {
+    public function duplicate($id = null) {
         $this->Event->id = $id;
         $new_record = $this->Event->findById($this->Event->id);
         unset($new_record['Event']['id']);
 
         $this->Event->create();
 
-        if ($this->Event->save($new_record)){
+        if ($this->Event->save($new_record)) {
             $this->redirect(array('action' => 'index'));
-        }
-        else {
+        } else {
             // throw new Exception(__('Error in creating event));
         }
     }
 
-    public function eventlist()
-    {
+    public function eventlist() {
         $this->autoRender = false;
         $params = array_keys($_GET);
         if (!empty($params)) $params_formatted = array('fields' => $params);
@@ -403,21 +342,22 @@ class EventsController extends AppController
                 !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong']) &&
                 $this->request->query['gpslat'] != '0.000000' && $this->request->query['gpslong'] != '0.000000' &&
                 $this->request->query['gpslat'] != '0' && $this->request->query['gpslong'] != '0' &&
-                $event['Event']['eventtype'] == 'location-based' ) {
+                $event['Event']['eventtype'] == 'location-based'
+            ) {
                 $events_array[$i]['distance'] = $this->calculate_distance($this->request->query['gpslat'], $this->request->query['gpslong'], $event['Event']['gpslat'], $event['Event']['gpslong']) . ' km';
             } else {
                 $events_array[$i]['distance'] = 0;
             }
 
             $overlay_img_count = 1;
-            for ($j=1; $j<=5; $j++) {
+            for ($j = 1; $j <= 5; $j++) {
                 if (!empty($event['Event']["img_overlay_$j"])) {
                     $events_array[$i]["img_overlay_$overlay_img_count"] = FULL_BASE_URL . $event['Event']["img_overlay_$j"];
                     $overlay_img_count++;
                 }
             }
 
-            $events_array[$i]['number_of_overlay'] = $overlay_img_count-1;
+            $events_array[$i]['number_of_overlay'] = $overlay_img_count - 1;
 
             $i++;
 
@@ -430,8 +370,7 @@ class EventsController extends AppController
         echo json_encode($events_array);
     }
 
-    public function event_action()
-    {
+    public function event_action() {
         $this->autoRender = false;
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
@@ -452,8 +391,7 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    function photo_update()
-    {
+    function photo_update() {
         $this->autoRender = false;
 
         $event_action_id = $this->request->data['id'];
