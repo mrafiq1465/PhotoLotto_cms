@@ -77,24 +77,24 @@ class EventsController extends AppController
 
             $this->request->data['Event']['updated_by'] = $user_data['id'];
 
-            if (!empty($this->data['Event']['date_start']) ||
-            count(array_filter($this->data['Event']['date_start'])) < count($this->data['Event']['date_start'])
+            if (!empty($this->request->data['Event']['date_start']) ||
+            count(array_filter($this->request->data['Event']['date_start'])) < count($this->request->data['Event']['date_start'])
             ) {
-                $this->data['Event']['date_start'] = $this->data['Event']['date_start']['year'] . "-" .
-                    $this->data['Event']['date_start']['month'] . "-" .
-                    $this->data['Event']['date_start']['day'];
+                $this->request->data['Event']['date_start'] = $this->request->data['Event']['date_start']['year'] . "-" .
+                    $this->request->data['Event']['date_start']['month'] . "-" .
+                    $this->request->data['Event']['date_start']['day'];
             } else {
-                $this->data['Event']['date_start'] = '';
+                $this->request->data['Event']['date_start'] = '';
             }
 
-            if (!empty($this->data['Event']['date_end']) ||
-            count(array_filter($this->data['Event']['date_end'])) < count($this->data['Event']['date_end'])
+            if (!empty($this->request->data['Event']['date_end']) ||
+            count(array_filter($this->request->data['Event']['date_end'])) < count($this->request->data['Event']['date_end'])
             ) {
-                $this->data['Event']['date_end'] = $this->data['Event']['date_end']['year'] . "-" .
-                    $this->data['Event']['date_end']['month'] . "-" .
-                    $this->data['Event']['date_end']['day'];
+                $this->request->data['Event']['date_end'] = $this->request->data['Event']['date_end']['year'] . "-" .
+                    $this->request->data['Event']['date_end']['month'] . "-" .
+                    $this->request->data['Event']['date_end']['day'];
             } else {
-                $this->data['Event']['date_end'] = '';
+                $this->request->data['Event']['date_end'] = '';
             }
 
             if (isset($this->request->data['Event']['img_thumb'])) {
