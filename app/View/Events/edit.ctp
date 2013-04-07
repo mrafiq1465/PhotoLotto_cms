@@ -124,7 +124,7 @@ $options = array(
                         </div>
                         <div class="span5">
                             <label for="event_radius">Radius <span>(in kilometres)</span></label>
-                            <?=$this->Form->input('event_radius', array('div' => false, 'placeholder' => '5',));?>
+                            <?=$this->Form->input('event_radius', array('div' => false, 'placeholder' => '25',));?>
                         </div>
                     </div>
                 </div>
@@ -432,6 +432,7 @@ $options = array(
 <script type="text/javascript">
     $(document).ready(function() {
         $('#EventPublicAddress').change(function(){
+            
             var geocoder = new google.maps.Geocoder();
 
             var address = $('#EventPublicAddress').val();
