@@ -11,6 +11,7 @@ $options = array(
     )
 );
 ?>
+
 <div id="secondary" class="pull-left">
     <h2>Campaign Creator</h2>
     <nav id="event-menu">
@@ -18,7 +19,8 @@ $options = array(
             <li class="active"><a href="#event_details">Event Details</a></li>
             <li><a href="#overlay_images">Overlay Images</a></li>
             <li><a href="#social-media">Social Media</a></li>
-            <li><a href="#campaign-settings">Campaign Settings </a></li>
+            <li><a href="#campaign-settings">Campaign Settings</a></li>
+            <li><a href="#custom-page">Custom Page</a></li>
         </ul>
     </nav>
 </div>
@@ -74,11 +76,11 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <label for="date_start">Start Date</label>
-                <?=$this->Form->input('date_start', array('empty' => true, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                <?=$this->Form->input('date_start', array('empty' => false, 'div' => false, 'minYear'=>date('Y'), 'maxYear'=>date('Y')+10, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
             <div class="row-fluid">
                 <label for="date_end">End Date</label>
-                <?=$this->Form->input('date_end', array('empty' => true, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                <?=$this->Form->input('date_end', array('empty' => false, 'minYear'=>date('Y'), 'maxYear'=>date('Y')+10, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
             </div>
         </div>
         <div class="span5">
@@ -123,8 +125,7 @@ $options = array(
                         </div>
                         <div class="span5">
                             <label for="event_radius">Radius <span>(in kilometres)</span></label>
-                            <input class="span12" id="event_radius" placeholder="5" name="event_radius"
-                                   type="text"/>
+                            <?=$this->Form->input('event_radius', array('div' => false, 'placeholder' => '25',));?>
                         </div>
                     </div>
                 </div>
@@ -223,8 +224,7 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <label for="html_before">Content Before Upload</label>
-                <input class="span12" type="text" name="html_before" id="html_before"
-                       placeholder="http://"/>
+                <?=$this->Form->input('html_before', array('div' => false, 'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
@@ -236,8 +236,7 @@ $options = array(
             </div>
             <div class="row-fluid">
                 <label for="html_after">Content After Upload</label>
-                <input class="span12" type="text" name="html_after" id="html_after"
-                       placeholder="http://"/>
+                <?=$this->Form->input('html_after', array('div' => false, 'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
@@ -269,7 +268,7 @@ $options = array(
         <div class="span7">
             <div class="row-fluid">
                 <label for="t_c">Terms & Conditions</label>
-                <input class="span12" type="text" name="data[Event][t_c]" id="t_c" placeholder="http://"/>
+                <?=$this->Form->input('t_c', array('div' => false, 'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
                     <input type="radio" checked="checked" id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
@@ -334,6 +333,40 @@ $options = array(
         </div>
     </div>
 </section>
+<section id="custom-page" class="tab-pane fade">
+    <div class="row-fluid">
+        <div class="span7">
+            <h3>Custom Page</h3>
+
+            <div class="row-fluid">
+                <label for="public_event_name">Public Event Name</label>
+                <? echo $this->Form->input('public_event_name', array('label' => false, 'div' => false,'placeholder' => 'Public Event Name', 'class' => 'span12')); ?>
+
+            </div>
+
+            <div class="row-fluid">
+                <label for="public_phone_number">Phone Number</label>
+                <?=$this->Form->input('public_phone_number', array(
+                'div' => false,
+                'placeholder' => 'Phone Number')); ?>
+            </div>
+            <div class="row-fluid">
+                <label for="public_email">Email</label>
+                <?=$this->Form->input('public_email', array(
+                'div' => false,
+                'placeholder' => 'Email')); ?>
+            </div>
+            <div class="row-fluid">
+                <label for="public_description">Public Description</label>
+                <?=$this->Form->input('public_description', array(
+                'div' => false,
+                'placeholder' => 'Public Description')); ?>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 </div>
 <section id="decisions">
     <div class="row-fluid">
@@ -392,4 +425,48 @@ $options = array(
             }
         });
     })
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#EventPublicAddress').change(function(){
+            var geocoder = new google.maps.Geocoder();
+
+            var address = $('#EventPublicAddress').val();
+            var location = '';
+            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK)
+                {
+                    $('#EventGpslat').val(results[0].geometry.location.lat());
+                    $('#EventGpslong').val(results[0].geometry.location.lng());
+                }
+                else {
+                    alert('Address is not right. Please use right adrees to convert.');
+                }
+            });
+        });
+
+        $('#EventHtmlBefore').change(function(){
+            if(!url_validation($('#EventHtmlBefore').val())){
+                alert('Please add http:// with the url');
+                $('#EventHtmlBefore').val('');
+            }
+        });
+        $('#EventHtmlAfter').change(function(){
+            if(!url_validation($('#EventHtmlAfter').val())){
+                alert('Please add http:// with the url');
+                $('#EventHtmlAfter').val('');
+            }
+        });
+
+
+        function url_validation(url){
+            var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            if (pattern.test(url)) {
+                return true;
+            }
+            return false;
+        }
+    });
+
 </script>

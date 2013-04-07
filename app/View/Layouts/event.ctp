@@ -45,12 +45,11 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
             'http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js',
             'bootstrap.min',
             'bootstrap-fileupload.min',
-            'modernizr.min.js'
+            'modernizr.min.js',
+            'https://maps.googleapis.com/maps/api/js?v=3.10&key=AIzaSyBW5aBgUYAO3tHMt_NtfJKHK5w2EFLeDPY&sensor=false'
         ));
 
     echo $this->Html->script('main');
-
-
     echo $this->fetch('meta');
     echo $this->fetch('css');
     echo $this->fetch('script');
@@ -62,11 +61,14 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
 <section id="header">
     <div class="container">
         <div class="row">
-            <div class="span4"><a href="/"><img src="/images/logo.png" alt="Logo" /></a></div>
+            <div class="span4"><a href="/"><img src="/images/logo.png" alt="Logo" /></a>
+
+            </div>
         </div>
     </div>
 </section>
 <section id="main">
+
 <div class="container clearfix">
 <?php echo $this->Session->flash(); ?>
 <?php echo $this->fetch('content'); ?>
