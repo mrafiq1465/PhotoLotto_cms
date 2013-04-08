@@ -6555,7 +6555,7 @@ textarea + .switch {
 }
 
 .myCustomClass {
-    max-width: 1350px;
+    max-width: 1350px !important;
     min-width: 0;
     padding: 10px;
 }
