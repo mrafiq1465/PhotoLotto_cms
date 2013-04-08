@@ -392,6 +392,30 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    public function event_email() {
+        $this->autoRender = false;
+        if (!empty($_GET)) {
+            $this->request->data = $this->Event->read(null, $_GET['event_id']);
+
+            $success = $this->Event->EventEmail->save(array(
+                'EventAction' => array(
+                    'event_id' => $_GET['event_id'],
+                    'phone_type' => $_GET['phone_type'],
+                    'action_name' => $_GET['action'],
+                    'phone_id' => $_GET['phone_id'],
+                    'photo' => $_GET['photo'],
+                    'email_from' => $_GET['email_from'],
+                    'email_to' => $_GET['email_to'],
+                    'subject' => $_GET['subject'],
+                )
+            ));
+        }
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
+        echo json_encode(array('response' => !empty($success)));
+    }
+
+
     function photo_update() {
         $this->autoRender = false;
 
