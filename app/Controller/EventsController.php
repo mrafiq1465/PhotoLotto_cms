@@ -398,17 +398,33 @@ class EventsController extends AppController
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
 
             $success = $this->Event->EventEmail->save(array(
-                'EventAction' => array(
+                'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
                     'phone_type' => $_GET['phone_type'],
                     'action_name' => $_GET['action'],
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
-                    'email_from' => $_GET['email_from'],
+                    'email_from' => 'no-reply@pixta.com.au',
                     'email_to' => $_GET['email_to'],
                     'subject' => $_GET['subject'],
+                    'message' => $_GET['message'],
                 )
             ));
+
+            if (empty($_GET['email_to'])) {
+                die(json_encode(array('error' => 'email not given')));
+            }
+            else {
+                App::uses('CakeEmail', 'Network/Email');
+                $email = new CakeEmail();
+                $email->from('no-reply@pixta.com.au');
+                $email->to($_GET['email_to']);
+                $email->subject($_GET['subject']);
+                $email->attachments(s3_img_url.$_GET['photo']);
+                $email->send($_GET['message']);
+              //  $this->ajax_response(array('success' => true));
+            }
+
         }
         $this->response->type('json');
         $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
