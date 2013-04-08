@@ -420,7 +420,7 @@ class EventsController extends AppController
                 $email->from('no-reply@pixta.com.au');
                 $email->to($_GET['email_to']);
                 $email->subject($_GET['subject']);
-                $email->attachments(s3_img_url.$_GET['photo']);
+                //$email->attachments(s3_img_url.$_GET['photo']);
                 $email->send($_GET['message']);
               //  $this->ajax_response(array('success' => true));
             }
