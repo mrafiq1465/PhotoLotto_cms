@@ -93,4 +93,127 @@ $(document).ready(function() {
         $(this).tab('show');
     });
 
+    //tooltips on event add and edit
+    if ($('.icon-query').length) {
+        $('.icon-query').qtip({
+            content: {
+                text: function (api) {
+                    return $(this).siblings().html();
+                }
+            },
+            style: {
+                classes: 'myCustomClass qtip-tipsy qtip-shadow',
+                tip: {
+                    corner: true,
+                    width: 10,
+                    height: 10,
+                    offset: 10 // Give it 5px offset from the side of the tooltip
+                }
+            },
+            position: {
+                my: 'top right',  // Position my top left...
+                at: 'bottom center' // at the bottom right of...
+            }
+        });
+    }
 });
+
+var validateElement = {
+    isValid: function (element) {
+        var isValid = true;
+        var $element = $(element);
+        var id = $element.attr('id');
+        var name = $element.attr('name');
+        var value = $element.val();
+        var corners = ['left center', 'right center'];
+
+        // <input> uses type attribute as written in tag
+        // <textarea> has intrinsic type of 'textarea'
+        // <select> has intrinsic type of 'select-one' or 'select-multiple'
+        var type = $element[0].type.toLowerCase();
+
+        switch (type) {
+            case 'text':
+            case 'textarea':
+            case 'password':
+                if (value.length == 0 ||
+                    value.replace(/\s/g, '').length == 0) {
+                    isValid = false;
+                    if ($element.attr('id') === 'EventShortdescriptionLine2') {
+                        isValid = true;
+                    }
+                }
+                break;
+            case 'select-one':
+            case 'select-multiple':
+                if (!value) {
+                    isValid = false;
+                }
+                break;
+            case 'checkbox':
+            case 'radio':
+                if ($('input[name="' + name +
+                    '"]:checked').length == 0) {
+                    isValid = false;
+                }
+                break;
+        } // close switch()
+
+        if (!isValid) {
+            $element.qtip('destroy');
+            var errorTxt = "This field is required";
+            // Apply the tooltip only if it isn't valid
+            $element.qtip({
+                overwrite: false,
+                content: errorTxt,
+                position: {
+                    my: corners[ 0 ],
+                    at: corners[ 1],
+                    viewport: $(window)
+                },
+                show: {
+                    event: false,
+                    ready: true
+                },
+                hide: {
+                    target: $('#event-menu li:not(.active)'),
+                    event: 'click'
+                },
+                style: {
+                    classes: 'qtip-red' // Make it red... the classic error colour!
+                }
+            })
+
+                // If we have a tooltip on this element already, just update its content
+                .qtip('option', 'content.text', errorTxt);
+        }
+
+        // If the error is empty, remove the qTip
+        else {
+            $element.qtip('destroy');
+        }/*
+        // instead of $(selector).method we are going to use $(selector)[method]
+        // choose the right method, but choose wisely
+        var method = isValid ? 'removeClass' : 'addClass';
+        // show error message [addClass]
+        // hide error message [removeClass]
+        $('#errorMessage_' + name)[method]('showErrorMessage');
+        if (type == 'checkbox' || type == 'radio') {
+            // if radio button or checkbox, find all inputs with the same name
+            $('input[name="' + name + '"]').each(function () {
+                // update each input elements <label> tag, (this==<input>)
+                $('label[for="' + this.id + '"]')[method]('error');
+            });
+        } else {
+            // all other elements just update one <label>
+            $('label[for="' + id + '"]')[method]('error');
+        }*/
+        // after initial validation, allow elements to re-validate on change
+        $element
+            .off('change.isValid')
+            .on('change.isValid', function () {
+                validateElement.isValid(this);
+            });
+        return isValid;
+    }
+};

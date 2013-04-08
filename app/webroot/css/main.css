@@ -6553,3 +6553,9 @@ textarea + .switch {
 .span7 .switch {
   margin-top: 0;
 }
+
+.myCustomClass {
+    max-width: 1350px;
+    min-width: 0;
+    padding: 10px;
+}

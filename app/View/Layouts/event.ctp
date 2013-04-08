@@ -32,6 +32,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
     <!-- styles -->
     <?php
     echo $this->Html->css('main');
+    echo $this->Html->css('jquery.qtip');
     echo $this->Html->css('bootstrap-fileupload.min');
     ?>
 
@@ -46,6 +47,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
             'bootstrap.min',
             'bootstrap-fileupload.min',
             'modernizr.min.js',
+            'jquery.qtip.js',
             'https://maps.googleapis.com/maps/api/js?v=3.10&key=AIzaSyBW5aBgUYAO3tHMt_NtfJKHK5w2EFLeDPY&sensor=false'
         ));
 

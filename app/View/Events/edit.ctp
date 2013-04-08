@@ -32,7 +32,7 @@ $options = array(
             <h3>Event Details</h3>
 
             <div class="row-fluid row-event-name">
-                <label for="name">Event Name <span>(60 characters max.)</span></label>
+                <label for="EventName">Event Name <span>(60 characters max.)</span></label>
                 <?= $this->Form->input('name', array('div' => false, 'placeholder' => 'Event Name',)); ?>
             </div>
 
@@ -124,7 +124,7 @@ $options = array(
                         </div>
                         <div class="span5">
                             <label for="event_radius">Radius <span>(in kilometres)</span></label>
-                            <?=$this->Form->input('event_radius', array('div' => false, 'placeholder' => '25',));?>
+                            <?=$this->Form->input('event_radius', array('div' => false, 'placeholder' => '25', "type"=>"text"));?>
                         </div>
                     </div>
                 </div>
@@ -227,9 +227,9 @@ $options = array(
                 <?=$this->Form->input('html_before', array('div' => false,'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
-                    <input type="radio" checked="checked" id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
+                    <input type="radio" <?=(!empty($this->data['Event']['html_before_on'])) ? 'checked="checked"' : ''?> id="html_before_on" value="1" name="data[Event][html_before_on]" class="switch-input">
                     <label class="switch-label switch-label-off" for="html_before_on">On</label>
-                    <input type="radio" id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
+                    <input type="radio" <?=(empty($this->data['Event']['html_before_on'])) ? 'checked="checked"' : ''?> id="html_before_off" value="0" name="data[Event][html_before_on]" class="switch-input">
                     <label class="switch-label switch-label-on" for="html_before_off">Off</label>
                     <span class="switch-selection"></span>
                 </div>
@@ -239,9 +239,9 @@ $options = array(
                 <?=$this->Form->input('html_after', array('div' => false,'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
-                    <input type="radio" checked="checked" id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
+                    <input type="radio" <?=(!empty($this->data['Event']['html_after_on'])) ? 'checked="checked"' : ''?> id="html_after_on" value="1" name="data[Event][html_after_on]" class="switch-input">
                     <label class="switch-label switch-label-off" for="html_after_on">On</label>
-                    <input type="radio" id="html_after_off" value="0" name="data[Event][html_after_on]" class="switch-input">
+                    <input type="radio" <?=(empty($this->data['Event']['html_after_on'])) ? 'checked="checked"' : ''?> id="html_after_off" value="0" name="data[Event][html_after_on]" class="switch-input">
                     <label class="switch-label switch-label-on" for="html_after_off">Off</label>
                     <span class="switch-selection"></span>
                 </div>
@@ -258,6 +258,9 @@ $options = array(
 
                 <div>
                     <span class="icon-query pull-right"></span>
+
+                    <div class="hide"><img src='/images/tooltip_img_1.jpg'/></div>
+
                     Hover here to see exactly
                     how this will appear:
                 </div>
@@ -271,9 +274,9 @@ $options = array(
                 <?=$this->Form->input('t_c', array('div' => false,'placeholder' => 'http://')); ?>
 
                 <div class="switch pull-right">
-                    <input type="radio" checked="checked" id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
+                    <input type="radio" <?=(!empty($this->data['Event']['t_c_on'])) ? 'checked="checked"' : ''?> id="t_c_on" value="1" name="data[Event][t_c_on]" class="switch-input">
                     <label class="switch-label switch-label-off" for="t_c_on">On</label>
-                    <input type="radio" id="t_c_off" value="0" name="data[Event][t_c_off]" class="switch-input">
+                    <input type="radio" <?=(empty($this->data['Event']['t_c_on'])) ? 'checked="checked"' : ''?> id="t_c_off" value="0" name="data[Event][t_c_on]" class="switch-input">
                     <label class="switch-label switch-label-on" for="t_c_off">Off</label>
                     <span class="switch-selection"></span>
                 </div>
@@ -288,6 +291,9 @@ $options = array(
 
                 <div>
                     <span class="icon-query pull-right"></span>
+
+                    <div class="hide"><img src='/images/tooltip_img_2.jpg'/></div>
+
                     Hover here to see exactly
                     how this will appear:
                 </div>
@@ -302,9 +308,9 @@ $options = array(
                 </div>
                 <div class="span6">
                     <div class="switch pull-right">
-                        <input type="radio" checked="checked" id="auto_moderate_on" value="1" name="data[Event][auto_moderate]" class="switch-input">
+                        <input type="radio" <?=(!empty($this->data['Event']['auto_moderate'])) ? 'checked="checked"' : ''?> id="auto_moderate_on" value="1" name="data[Event][auto_moderate]" class="switch-input">
                         <label class="switch-label switch-label-off" for="auto_moderate_on">On</label>
-                        <input type="radio" id="auto_moderate_off" value="0" name="data[Event][auto_moderate]" class="switch-input">
+                        <input type="radio" <?=(empty($this->data['Event']['auto_moderate'])) ? 'checked="checked"' : ''?> id="auto_moderate_off" value="0" name="data[Event][auto_moderate]" class="switch-input">
                         <label class="switch-label switch-label-on" for="auto_moderate_off">Off</label>
                         <span class="switch-selection"></span>
                     </div>
@@ -417,14 +423,40 @@ $options = array(
             e.preventDefault();
         });
 
+
+        function validateTab($tab) {
+            var isErrorFree = true;
+            $tab.find(":input:not(:file):not(input[type=hidden])").each(function () {
+                if (validateElement.isValid(this) == false) {
+                    isErrorFree = false;
+                }
+            });
+            return isErrorFree;
+        }
+
         $('#submitBtn').click(function () {
-            var index = $('.tab-pane').index($('.tab-pane:visible'));
-            if (index + 1 == $('.tab-pane').length) {
-                return true;
-            } else {
-                $('#event-menu a').eq(index + 1).click();
-                return false;
+            var $tabPanes = $('.tab-pane');
+            var isValidTab = false;
+            var $tab = $('.tab-pane:visible');
+            var index = $tabPanes.index($tab);
+
+            $tabPanes.each(function (i) {
+                isValidTab = validateTab($(this));
+                if (isValidTab === false) {
+                    $('#event-menu a').eq(i).click();
+                    return false;
+                }
+            });
+
+            if (isValidTab) {
+                if (index + 1 == $tabPanes.length) {
+                    return true;
+                } else {
+                    $('#event-menu a').eq(index + 1).click();
+                }
             }
+            return false;
+
         });
     })
 </script>
