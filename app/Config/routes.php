@@ -49,6 +49,7 @@ Router::connect('/events', array('controller' => 'events', 'action' => 'index', 
     Router::connect('/events/download_submissions/:event_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id')));
     Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id','event_action_id')));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
+    Router::connect('/eventemail/*', array('controller' => 'events', 'action' => 'event_email'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
     Router::connect('/companies', array('controller' => 'companies', 'action' => 'index'));
     Router::connect('/companies/add', array('controller' => 'companies', 'action' => 'add'));
