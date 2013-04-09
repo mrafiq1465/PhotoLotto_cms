@@ -423,6 +423,8 @@ class EventsController extends AppController
                 $email->template('event_email', 'event_email');
                 $email->viewVars(array('photo' => $_GET['phone_id']));
                 $email->viewVars(array('message' =>  $_GET['message']));
+                $email->emailFormat('both');
+
                 //$email->attachments(s3_img_url.$_GET['photo']);
 
                 $email->send($_GET['message']);
