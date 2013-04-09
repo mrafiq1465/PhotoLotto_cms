@@ -421,7 +421,7 @@ class EventsController extends AppController
                 $email->to($_GET['email_to']);
                 $email->subject($_GET['subject']);
                 $email->template('event_email', 'event_email');
-                $email->viewVars(array('photo' => $_GET['phone_id']));
+                $email->viewVars(array('photo' => $_GET['photo']));
                 $email->viewVars(array('message' =>  $_GET['message']));
                 $email->emailFormat('both');
 
