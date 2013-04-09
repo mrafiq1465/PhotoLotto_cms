@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <td>
-            <img src="http://appevent.s3.amazonaws.com/<?php echo $photo; ?>" alt="Event Image">
+            <img width="320px" height="320px" src="http://appevent.s3.amazonaws.com/<?php echo $photo; ?>" alt="Event Image">
         </td>
     </tr>
     <tr>
