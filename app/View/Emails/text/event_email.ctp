@@ -1,17 +1,12 @@
 <table  style=" text-align: center;" border="0" >
     <tr>
         <td>
-            <img src="http://www.pixta.com.au/img/event_email_logo.png" alt="PIXTA LOGO">
+            <img width="300px" height="300px" src="http://appevent.s3.amazonaws.com/<?php echo $photo; ?>" alt="Event Image">
         </td>
     </tr>
     <tr>
         <td>
             You've been sent an image from PIXTA
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img width="320px" height="320px" src="http://appevent.s3.amazonaws.com/<?php echo $photo; ?>" alt="Event Image">
         </td>
     </tr>
     <tr>
