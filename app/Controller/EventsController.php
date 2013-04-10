@@ -417,13 +417,18 @@ class EventsController extends AppController
             else {
                 $to=preg_split("([, ;\n])", $_GET['email_to']);
 
+                $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+                $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
+                fwrite($save_file, $image);
+                fclose($save_file);
+
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
                 $email->from('no-reply@pixta.com.au');
                 $email->to($to);
                 $email->subject($_GET['subject']);
                 $email->template('event_email', 'event_email');
-                $email->attachments = array('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+                $email->attachments(array('img/email_image/'.$_GET['photo']));
                 $email->viewVars(array('photo' => $_GET['photo']));
                 $email->viewVars(array('message' =>  $_GET['message']));
                 $email->emailFormat('both');
@@ -437,6 +442,17 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    public function download($link){
+
+        $params = array(
+            'download' => true,
+            'mimeType' => 'jpg',
+            'extension' => array('pdf','zip','txt'),
+            'path' => $link
+        );
+
+        $this->set($params);
+    }
 
     function photo_update() {
         $this->autoRender = false;
