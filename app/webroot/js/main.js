@@ -86,7 +86,7 @@ $(document).ready(function() {
         $(this).popover('hide');
     });
 
-    $('select', $form).addClass('span4');
+    $('select:not(#EventEventtype)', $form).addClass('span4');
 
     $('#event-menu a').click(function (e) {
         e.preventDefault();
