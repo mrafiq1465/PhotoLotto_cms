@@ -415,20 +415,20 @@ class EventsController extends AppController
                 die(json_encode(array('error' => 'email not given')));
             }
             else {
+                $to=preg_split("([, ;\n])", $_GET['email_to']);
+
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
                 $email->from('no-reply@pixta.com.au');
-                $email->to($_GET['email_to']);
+                $email->to($to);
                 $email->subject($_GET['subject']);
                 $email->template('event_email', 'event_email');
+                $email->attachments = array('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
                 $email->viewVars(array('photo' => $_GET['photo']));
                 $email->viewVars(array('message' =>  $_GET['message']));
                 $email->emailFormat('both');
 
-                //$email->attachments(s3_img_url.$_GET['photo']);
-
                 $email->send($_GET['message']);
-              //  $this->ajax_response(array('success' => true));
             }
 
         }
