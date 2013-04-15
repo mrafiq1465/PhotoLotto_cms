@@ -212,9 +212,14 @@
     <div class="grid row">
         
     <?php
-
-    foreach ($event['EventAction'] as $ev) {
+    $top_id = false;
+    foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
         if ($ev['blacklist'] != 1) {
+
+            if(!$top_id){
+                $photo_id = $ev['id'];
+                $top_id = true;
+            }
             ?>
                 <div class="span2">
                     <img src="<?php echo S3_IMG_URL . '/' . $ev['photo']; ?>" alt="" /></div>                
@@ -222,11 +227,13 @@
         }
     }
     ?>
+        <input type="hidden" id="event_id" value="<?php echo $event['Event']['id']; ?>" />
+        <input type="hidden" id="top_image" value="<? echo  $photo_id?>" />
     </div> <!--grid-->
     <div class="detail row">
         <?php
 
-        foreach ($event['EventAction'] as $ev) {
+        foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
             if ($ev['blacklist'] != 1) {
                 ?>
                 <div class="span12">
@@ -277,6 +284,27 @@
                 detail.hide();
             }
         });
+
+
+        setInterval(function () {
+            update_image();
+        },10000);
+
+        function update_image() {
+            var event_action_id = $('#top_image').val();
+            var event_id = $('#event_id').val();
+            $.ajax({
+                type: "POST",
+                url: "/events/action_image",
+                data: { 'data[event_id]' : event_id, 'data[event_action_id]' : event_action_id},
+                success: function (resp) {
+                  //alert(resp);
+                   // resp = $.parseJSON(resp);
+                }
+            });
+
+        }
+
     });
 </script>
 

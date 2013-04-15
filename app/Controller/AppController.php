@@ -96,6 +96,7 @@ class AppController extends Controller {
             array('events','event_custom'),
             array('events','event_action'),
             array('events','event_email'),
+            array('events','action_image')
         );
 
         $included_admin = array(

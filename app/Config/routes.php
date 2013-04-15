@@ -31,7 +31,7 @@
 
 	Router::connect('/', array('controller' => 'events', 'action' => 'index', 'home'));
 	Router::connect('/index', array('controller' => 'events', 'action' => 'index', 'home'));
-Router::connect('/events', array('controller' => 'events', 'action' => 'index', 'home')); 
+    Router::connect('/events', array('controller' => 'events', 'action' => 'index', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -42,6 +42,7 @@ Router::connect('/events', array('controller' => 'events', 'action' => 'index', 
 	Router::connect('/eventlist/*', array('controller' => 'events', 'action' => 'eventlist'));
     Router::connect('/events', array('controller' => 'events', 'action' => 'index'));
     Router::connect('/events/add', array('controller' => 'events', 'action' => 'add'));
+    Router::connect('/events/action_image', array('controller' => 'events', 'action' => 'action_image'));
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
     Router::connect('/events/duplicate/:id', array('controller' => 'events', 'action' => 'duplicate'),array('pass' => array('id')));

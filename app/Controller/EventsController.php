@@ -52,7 +52,7 @@ class EventsController extends AppController
         if ($this->RequestHandler->isRss()) {
             $event = $this->Event->read(null, $id);
             // You should import Sanitize
-
+           var_dump($event);
 
             return $this->set(compact('event'));
         }
@@ -179,9 +179,10 @@ class EventsController extends AppController
 
         $this->layout = 'event';
         $event = $this->Event->find('first', array(
-            'conditions' => array('Event.name' => $id)
+            'conditions' => array('Event.name' => $id),
         ));
-        $this->set(compact('event', 'event'));
+
+         $this->set(compact('event', 'event'));
 
         //$event = $this->Event->read(null, $id);
         //$event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.event_id' => $id)));
@@ -442,18 +443,6 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    public function download($link){
-
-        $params = array(
-            'download' => true,
-            'mimeType' => 'jpg',
-            'extension' => array('pdf','zip','txt'),
-            'path' => $link
-        );
-
-        $this->set($params);
-    }
-
     function photo_update() {
         $this->autoRender = false;
 
@@ -471,5 +460,21 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    function action_image() {
+        $this->autoRender = false;
+
+        $event_id = $this->request->data['event_id'];
+        $event_action_id = $this->request->data['event_action_id'];
+
+        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id, 'EventAction.id >' => $event_action_id, 'EventAction.blacklist !=' => 1), 'order' => array('EventAction.id' => 'desc')));
+
+        echo "<pre>";
+        print_r($event_actions);
+        echo "</pre>";
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => json_encode($event_actions)));
+    }
 
 }
