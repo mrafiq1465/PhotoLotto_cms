@@ -117,11 +117,16 @@ $options = array(
                     <div class="row-fluid">
                         <div class="span7">
                             <label for="eventtype">Event Type</label>
-                            <?=$this->Form->input('eventtype', array('options' => array(
-                                'pixta-play' => 'PIXTA Play',
-                                'National' => 'National',
-                                'location-based' => 'Location Based'),
-                                'default' => 'pixta-play'));?>
+                            <?=$this->Form->input('eventtype',
+                                array(
+                                    'div' => false,
+                                    'class'=> 'span12',
+                                    'options' => array(
+                                        'pixta-play' => 'PIXTA Play',
+                                        'National' => 'National',
+                                        'location-based' => 'Location Based'),
+                                        'default' => 'pixta-play'
+                                ));?>
                         </div>
                         <div class="span5">
                             <label for="event_radius">Radius <span>(in kilometres)</span></label>
@@ -385,6 +390,7 @@ $options = array(
 
 <script>
     $(function () {
+        window.EventStep = [];
         $('.overlay-img-upload').change(function (e, invoked) {
             if (invoked == 'clear') return;
             var index = $('.overlay-img-upload').index($(this));
@@ -420,13 +426,30 @@ $options = array(
         });
 
         function validateTab($tab) {
+            if ($tab.attr('id') === 'campaign-settings') return true;
+
             var isErrorFree = true;
-            $tab.find(":input:not(:file):not(input[type=hidden])").each(function () {
+            $tab.find(":input:not(:file):not(input[type=hidden]):not(#EventEventRadius)").each(function () {
                 if (validateElement.isValid(this) == false) {
                     isErrorFree = false;
                 }
             });
             return isErrorFree;
+        }
+
+        function checkStep(index) {
+            // 0 means its in the array
+            // -1 means not in array
+            var alreadyDone = true;
+            if ($.inArray(index, EventStep) === -1 ) {
+                EventStep.push(index);
+                alreadyDone = false;
+            }
+            return alreadyDone;
+        }
+
+        function allStepsDone() {
+            return !!((EventStep.length === 5));
         }
 
         $('#submitBtn').click(function () {
@@ -435,22 +458,39 @@ $options = array(
             var $tab = $('.tab-pane:visible');
             var index = $tabPanes.index($tab);
 
-            $tabPanes.each(function (i) {
-                isValidTab = validateTab($(this));
-                if (isValidTab === false) {
-                    $('#event-menu a').eq(i).click();
-                    return false;
-                }
-            });
-
-            if (isValidTab) {
-                if (index + 1 == $tabPanes.length) {
-                    return true;
-                } else {
-                    $('#event-menu a').eq(index + 1).click();
+            function checkAllSteps() {
+                $tabPanes.each(function (i) {
+                    isValidTab = validateTab($(this));
+                    if (isValidTab === false) {
+                        $('#event-menu a').eq(i).click();
+                        return false;
+                    }
+                });
+                if (isValidTab) {
+                    if (index + 1 == $tabPanes.length) {
+                        return true;
+                    } else {
+                        $('#event-menu a').eq(index + 1).click();
+                        return false;
+                    }
                 }
             }
-            return false;
+
+            if ( allStepsDone() ) {
+                checkAllSteps();
+            } else {
+                isValidTab = validateTab($tab);
+                //campaign-settings bypass
+                if (isValidTab) {
+                    checkStep(index);
+                    if (index + 1 == $tabPanes.length) {
+                        checkAllSteps();
+                    } else {
+                        $('#event-menu a').eq(index + 1).click();
+                    }
+                }
+                return false;
+            }
 
         });
     })
