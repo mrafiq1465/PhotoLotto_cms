@@ -466,7 +466,7 @@ class EventsController extends AppController
         $event_id = $this->request->data['event_id'];
         $event_action_id = $this->request->data['event_action_id'];
 
-        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id, 'EventAction.id >' => $event_action_id, 'EventAction.blacklist !=' => 1), 'order' => array('EventAction.id' => 'desc')));
+        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id, 'EventAction.id >' => $event_action_id, 'EventAction.blacklist !=' => 1), 'order' => array('EventAction.id' => 'asc')));
 
         //print_r($event_actions);
 
