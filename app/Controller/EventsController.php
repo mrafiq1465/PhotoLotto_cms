@@ -177,7 +177,7 @@ class EventsController extends AppController
 
     public function event_custom($id = null) {
 
-        $this->layout = 'event';
+        $this->layout = 'event2';
         $event = $this->Event->find('first', array(
             'conditions' => array('Event.name' => $id),
         ));
