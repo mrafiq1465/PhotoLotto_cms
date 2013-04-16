@@ -345,7 +345,7 @@
                     var eventActions = response.response;
                     var latest = '';
                     var grid='', detail='';
-                    if (eventActions.length) {
+                    if (eventActions && eventActions.length) {
                         $.each(eventActions, function (index, item) {
                             grid += "<div class='item'>" +
                                 "<img src='" + S3_IMG_URL + item.EventAction.photo +
