@@ -147,12 +147,15 @@
             }
         });
 
+        var isWorking = false;
 
         setInterval(function () {
+            if (isWorking) return;
             update_image();
         },10000);
 
         function update_image() {
+            isWorking = true;
             var event_action_id = $('#top_image').val();
             var event_id = $('#event_id').val();
             var S3_IMG_URL = '<?php echo S3_IMG_URL; ?>/';
@@ -182,9 +185,12 @@
                         $(grid).hide().prependTo($(".grid")).fadeIn();
                         //add to detail
                         $(detail).hide().prependTo($(".detail")).fadeIn();
+                        isWorking = false;
                         if (latest) {
                             $('#top_image').val(latest);
                         }
+                    } else {
+                        isWorking = false;
                     }
                 }
             });
