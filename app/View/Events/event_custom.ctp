@@ -123,8 +123,8 @@
     }
 
     #desc {
-        float: left;
-        width: 320px;
+       /* float: left;
+        width: 320px;*/
         margin-top: 10px;
     }
 
@@ -141,18 +141,36 @@
 
     }
     #app_store {
-        float: left;
-        position: relative;
-        top:-20px;
-        left: 0px;
+    }
+
+    #app_store ul {
+        margin: 0;
     }
 
     #app_store ul li{
+        float: left;
+        list-style: none outside none;
         margin-top: 10px;
+        width: 49%;
+    }
+
+    #app_store ul li:first-child {
+        margin-right: 2%;
+    }
+    #company_info {
+        background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+        border-radius: 5px 5px 5px 5px;
+        color: white;
+        font-size: 12px;
+        padding: 30px;
+        position: absolute;
+        right: 45px;
+        top: 45px;
+        width: 280px;
     }
 
 </style>
-<nav id="view_nav" class="inactive clearfix">
+<!--<nav id="view_nav" class="inactive clearfix">
     
     <ul>
         <li><a href="#" id="navtoggle"></a></li>
@@ -162,15 +180,15 @@
 </nav>
 <div id="top" class="bs">
     <div id="logo">
-        <img src="<?php echo $event['Event']['public_logo']; ?>" alt="" />
+        <img src="<?php /*echo $event['Event']['public_logo']; */?>" alt="" />
     </div>
     <div class="mid" style="overflow:hidden;margin-left:176px;">
         <div id="heading">
             <ul>
-                <li class="name"><?php echo $event['Event']['public_event_name']; ?>
+                <li class="name"><?php /*echo $event['Event']['public_event_name']; */?>
                 </li>
                 <li class="fb">
-                    <fb:like href="http://<?= $_SERVER['HTTP_HOST'] . $this->here; ?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count" show_faces="false" font=""></fb:like>
+                    <fb:like href="http://<?/*= $_SERVER['HTTP_HOST'] . $this->here; */?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count" show_faces="false" font=""></fb:like>
                 </li>
                 <li class="tw">
                     <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="" data-via="pixta" data-text="Check out this subject:" data-hashtags="pixta">Tweet</a>
@@ -180,17 +198,17 @@
         </div>
         <div id="desc">
             <ul>
-                <li><?php echo $event['Event']['public_description']; ?></li>
+                <li><?php /*echo $event['Event']['public_description']; */?></li>
             </ul>
         </div>
         <div id="phone">
             <ul>
                 <li>
-                    <b>p.</b> <?php echo $event['Event']['public_phone_number']; ?>
+                    <b>p.</b> <?php /*echo $event['Event']['public_phone_number']; */?>
                 </li>
-                <li><b>e.</b> <?php echo $event['Event']['public_email']; ?>
+                <li><b>e.</b> <?php /*echo $event['Event']['public_email']; */?>
                 </li>
-                <li><b>a.</b> <?php echo $event['Event']['public_address']; ?>
+                <li><b>a.</b> <?php /*echo $event['Event']['public_address']; */?>
                 </li>
             </ul>
 
@@ -206,6 +224,31 @@
             </ul>
         </div>
     </div>    
+</div>-->
+
+<div id="company_info" class="bs">
+    <div id="elogo">
+        <img src="<?php echo $event['Event']['public_logo'];  ?>" alt="<?php echo $event['Event']['public_event_name']; ?>"/>
+    </div>
+    <div id="desc">
+        <?php echo $event['Event']['public_description']; ?>
+    </div>
+    <div id="app_store">
+        <ul class="clearfix">
+            <li>
+                <a href="#"><img src="/img/app_store.png" alt="Apple store"></a>
+            </li>
+            <li>
+                <a href="#"><img src="/img/google_play.png" alt="google play"></a>
+            </li>
+        </ul>
+    </div>
+    <nav id="view_nav_section" class="inactive clearfix">
+        <ul>
+            <li><a href="#" id="detail">detail</a></li>
+            <li><a href="#" id="grid">grid</a></li>
+        </ul>
+    </nav>
 </div>
 
 <div id="gallery" class="bs">
@@ -221,7 +264,7 @@
                 $top_id = true;
             }
             ?>
-                <div class="span2">
+                <div class="item">
                     <img src="<?php echo S3_IMG_URL . '/' . $ev['photo']; ?>" alt="" /></div>                
             <?php
         }
@@ -251,8 +294,8 @@
     $(function () {
         var $viewNav = $("#view_nav");        
         var slides = $('.row.detail');
-        
-        $("#view_nav > ul").on({
+
+        $viewNav.find("> ul").on({
             mouseenter : function () {                
                 $viewNav.removeClass().addClass('active');
             },
@@ -293,13 +336,37 @@
         function update_image() {
             var event_action_id = $('#top_image').val();
             var event_id = $('#event_id').val();
+            var S3_IMG_URL = '<?php echo S3_IMG_URL; ?>/';
             $.ajax({
                 type: "POST",
                 url: "/events/action_image",
                 data: { 'data[event_id]' : event_id, 'data[event_action_id]' : event_action_id},
-                success: function (resp) {
-                  //alert(resp);
-                   // resp = $.parseJSON(resp);
+                success: function (response) {
+                    var eventActions = response.response;
+                    var latest = '';
+                    var grid='', detail='';
+                    if (eventActions.length) {
+                        $.each(eventActions, function (index, item) {
+                            grid += "<div class='item'>" +
+                                "<img src='" + S3_IMG_URL + item.EventAction.photo +
+                                "'/>" +
+                                "</div>";
+                            detail += "<div class='span12'>" +
+                                "<img src='" + S3_IMG_URL + item.EventAction.photo +
+                                "'/>" +
+                                "</div>";
+
+                            latest = item.EventAction.id;
+
+                        });
+                        //add to grid
+                        $(grid).hide().prependTo($(".grid")).fadeIn();
+                        //add to detail
+                        $(detail).hide().prependTo($(".detail")).fadeIn();
+                        if (latest) {
+                            $('#top_image').val(latest);
+                        }
+                    }
                 }
             });
 

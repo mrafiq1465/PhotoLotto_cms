@@ -468,13 +468,11 @@ class EventsController extends AppController
 
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id, 'EventAction.id >' => $event_action_id, 'EventAction.blacklist !=' => 1), 'order' => array('EventAction.id' => 'desc')));
 
-        echo "<pre>";
-        print_r($event_actions);
-        echo "</pre>";
+        //print_r($event_actions);
 
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
-        echo json_encode(array('response' => json_encode($event_actions)));
+        echo json_encode(array('response' => $event_actions));
     }
 
 }
