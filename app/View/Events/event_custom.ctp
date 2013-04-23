@@ -145,12 +145,15 @@
 </script>
 
 <? $FB = Configure::read('facebook');?>
-<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=<?/*= $FB['appId']; */?>"></script>
+<!--div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=<?/*= $FB['appId']; */?>"></script>
 <script type="text/javascript">_ga.trackFacebook();</script>
 
 <!-- Twitter Scripts -->
-<script>twttr = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script>
+  //  twttr = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
 <script type="text/javascript">
+   /*
     (function($){
         $(window).load(function() {
             twttr.ready(function (twttr) {
@@ -159,4 +162,5 @@
             });
         });
     })(jQuery);
-</script>
+    */
+</script-->
