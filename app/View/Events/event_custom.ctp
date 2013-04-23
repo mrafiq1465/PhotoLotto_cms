@@ -1,59 +1,4 @@
 
-<!--<nav id="view_nav" class="inactive clearfix">
-    
-    <ul>
-        <li><a href="#" id="navtoggle"></a></li>
-        <li><a href="#" id="detail"></a></li>
-        <li><a href="#" id="grid"></a></li>
-    </ul>
-</nav>
-<div id="top" class="bs">
-    <div id="logo">
-        <img src="<?php /*echo $event['Event']['public_logo']; */?>" alt="" />
-    </div>
-    <div class="mid" style="overflow:hidden;margin-left:176px;">
-        <div id="heading">
-            <ul>
-                <li class="name"><?php /*echo $event['Event']['public_event_name']; */?>
-                </li>
-                <li class="fb">
-                    <fb:like href="http://<?/*= $_SERVER['HTTP_HOST'] . $this->here; */?>?utm_campaign=facebooksharebtn&utm_source=facebook&utm_medium=social" send="false" width="160" data-layout="button_count" show_faces="false" font=""></fb:like>
-                </li>
-                <li class="tw">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="" data-via="pixta" data-text="Check out this subject:" data-hashtags="pixta">Tweet</a>
-                </li>
-
-            </ul>
-        </div>
-        <div id="desc">
-            <ul>
-                <li><?php /*echo $event['Event']['public_description']; */?></li>
-            </ul>
-        </div>
-        <div id="phone">
-            <ul>
-                <li>
-                    <b>p.</b> <?php /*echo $event['Event']['public_phone_number']; */?>
-                </li>
-                <li><b>e.</b> <?php /*echo $event['Event']['public_email']; */?>
-                </li>
-                <li><b>a.</b> <?php /*echo $event['Event']['public_address']; */?>
-                </li>
-            </ul>
-
-        </div>
-        <div id="app_store">
-            <ul>
-                <li>
-                    <a href="#"><img src="/img/app_store.png" alt="Apple store"></a>
-                </li>
-                <li>
-                    <a href="#"><img src="/img/google_play.png" alt="google play"></a>
-                </li>
-            </ul>
-        </div>
-    </div>    
-</div>-->
 <nav id="view_nav_section" class="inactive clearfix">
     <a href="#" id="detail">detail</a>
     <a href="#" id="grid">grid</a>
@@ -86,6 +31,7 @@
         
     <?php
     $top_id = false;
+    $photo_id = '';
     foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
         if ($ev['blacklist'] != 1) {
 
