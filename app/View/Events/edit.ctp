@@ -204,6 +204,7 @@ $options = array(
                 <label for="facebook_msg">Facebook</label>
                 <?=$this->Form->input('facebook_msg', array(
                     'div' => false,
+                    'class' => 'not_required span12',
                     'placeholder' => 'Facebook message: e.g. Brand the moment #PIXTA')); ?>
                 <?=$this->Form->input('facebook_url', array(
                     'div' => false,
@@ -213,7 +214,8 @@ $options = array(
                 <label for="twitter_msg">Twitter</label>
                 <?=$this->Form->input('twitter_msg', array(
                     'div' => false,
-                    'placeholder' => 'Twitter message: e.g. Brand the moment #PIXTA')); ?>
+                    'class' => 'not_required span12',
+                    'placeholder' => 'Twitter message: e.g. Brand the moment #PIXTA1')); ?>
             </div>
         </div>
 
@@ -359,12 +361,14 @@ $options = array(
                 <label for="public_phone_number">Phone Number</label>
                 <?=$this->Form->input('public_phone_number', array(
                 'div' => false,
+                    'class' => 'not_required span12',
                 'placeholder' => 'Phone Number')); ?>
             </div>
             <div class="row-fluid">
                 <label for="public_email">Email</label>
                 <?=$this->Form->input('public_email', array(
                 'div' => false,
+                    'class' => 'not_required span12',
                 'placeholder' => 'Email')); ?>
             </div>
             <div class="row-fluid">
@@ -435,7 +439,7 @@ $options = array(
             if ($tab.attr('id') === 'campaign-settings') return true;
 
             var isErrorFree = true;
-            $tab.find(":input:not(:file):not(input[type=hidden]):not(#EventEventRadius)").each(function () {
+            $tab.find(":input:not(:file):not(input[type=hidden]):not(#EventEventRadius):not(.not_required)").each(function () {
                 if (validateElement.isValid(this) == false) {
                     isErrorFree = false;
                 }

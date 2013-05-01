@@ -9,6 +9,10 @@
 }
 body {
     background: #000000;
+    font-family: Arial, Helvetica, serif;
+}
+#desc {
+    margin-top: 10px;
 }
 #event_info {
     width: 276px;
