@@ -318,7 +318,7 @@ class EventsController extends AppController
             $events_array[$i]['shortdescription_line_1'] = $event['Event']['shortdescription_line_1'];
             $events_array[$i]['shortdescription_line_2'] = $event['Event']['shortdescription_line_2'];
             $events_array[$i]['company_name'] = $event['Company']['name'];
-            $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'];
+            $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'] .' '. $event['Event']['facebook_url'];
             $events_array[$i]['facebook_url'] = $event['Event']['facebook_url'];
             $events_array[$i]['twitter_msg'] = $event['Event']['twitter_msg'];
             if ($event['Event']['html_before_on'] == 1) {
