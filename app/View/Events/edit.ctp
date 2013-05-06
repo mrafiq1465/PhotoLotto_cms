@@ -204,10 +204,10 @@ $options = array(
                 <label for="facebook_msg">Facebook</label>
                 <?=$this->Form->input('facebook_msg', array(
                     'div' => false,
-                    'class' => 'not_required span12',
                     'placeholder' => 'Facebook message: e.g. Brand the moment #PIXTA')); ?>
                 <?=$this->Form->input('facebook_url', array(
                     'div' => false,
+                    'class' => 'not_required span12',
                     'placeholder' => 'Facebook link: e.g. www.pixta.com.au')); ?>
             </div>
             <div class="row-fluid">
