@@ -17,7 +17,7 @@
               }
             ?>
             <li>
-                <img src="<?php echo S3_IMG_URL.'/'.$event_action['EventAction']['photo']; ?>" alt="" />
+                <img src="<?php echo S3_IMG_URL.'/'.$event_action['EventAction']['photo']; ?>" width="300px" height="300px"  alt="" />
                 <input class="blacklist" id="<?php echo $event_action['EventAction']['id']; ?>" type="checkbox" <?php echo $blacklist; ?>  /> BlackList
                 <br /><br />
                 <a href="/events/download_submissions/<?=$event['Event']['id']?>/<?=$event_action['EventAction']['id']?>">Export</a>
