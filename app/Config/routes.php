@@ -52,6 +52,7 @@
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/eventemail/*', array('controller' => 'events', 'action' => 'event_email'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
+    Router::connect('/events/photo_update_all', array('controller' => 'events', 'action' => 'photo_update_all'));
     Router::connect('/companies', array('controller' => 'companies', 'action' => 'index'));
     Router::connect('/companies/add', array('controller' => 'companies', 'action' => 'add'));
     Router::connect('/companies/edit/:id', array('controller' => 'companies', 'action' => 'edit'),array('pass' => array('id')));
