@@ -19,6 +19,59 @@ $(document).ready(function() {
         });
     });
 
+    $('.blacklist_all').change(function(e){
+        var id = $(this).attr('id');
+        var blacklist = 0;
+        if($(this).attr('checked') == 'checked') {
+
+            $('.approve_all').prop('checked', false);
+            $('.blacklist').prop('checked', true);
+            blacklist =1;
+
+            $.ajax({
+                type:"POST",
+                url:'/events/photo_update_all',
+                data:{'data[event_id]':id, 'data[blacklist]':blacklist},
+                dataType:"json",
+                success:function (json) {
+                    if (json.status == 'success') {
+                    }
+                }
+            });
+        }
+        else {
+            $('.blacklist').prop('checked', false);
+        }
+
+    });
+
+    $('.approve_all').change(function(e){
+        var id = $(this).attr('id');
+        var blacklist = 0;
+
+        if($(this).attr('checked') == 'checked') {
+
+            $('.blacklist_all').prop('checked', false);
+            $('.blacklist').prop('checked', false);
+            blacklist =0;
+
+
+             $.ajax({
+                 type:"POST",
+                 url:'/events/photo_update_all',
+                 data:{'data[event_id]':id, 'data[blacklist]':blacklist},
+                 dataType:"json",
+                 success:function (json) {
+                     if (json.status == 'success') {
+                        }
+                     }
+              });
+
+        }
+
+    });
+
+
     $('#resetPassword').click(function(e){
         var email = $('#email').val();
         $.ajax({

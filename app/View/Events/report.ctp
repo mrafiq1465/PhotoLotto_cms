@@ -5,7 +5,15 @@
             <li>Event name:<?=$event['Event']['name']?></li>
             <li>Status: <?=$event['Event']['status']?></li>
             <li><?=count($event_actions)?> Submissions</li>
-            <li><a href="/events/download_submissions/<?=$event['Event']['id']?>">Export all</a></li>
+
+            <li>
+                <input class="blacklist_all" id="<?php echo $event['Event']['id']; ?>" type="checkbox" />
+                Blacklist all images below
+            </li>
+            <li>
+                <input class="approve_all" id="<?php echo $event['Event']['id']; ?>" type="checkbox" />
+                Approve (remove from Blacklist) all images below
+            </li>
         </ul>
     </section>
     <div class="submission_list">

@@ -460,6 +460,37 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    function photo_update_all() {
+        $this->autoRender = false;
+
+        $event_id = $this->request->data['event_id'];
+        $blacklist = $this->request->data['blacklist'];
+
+        /*
+        $this->Event->EventAction->event_id = $event_id;
+
+         $this->Event->EventAction->save(array(
+            'EventAction' => array(
+                'event_id' => $event_id,
+                'blacklist' => $blacklist,
+            )
+        ));
+*/
+        $sql = "update event_actions set blacklist = '$blacklist' where event_id = '$event_id'";
+
+        App::uses('ConnectionManager', 'Model');
+        $db = ConnectionManager::getDataSource('default');
+        $db->rawQuery($sql);
+
+        //var_dump($success);
+
+        $success = true;
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => !empty($success)));
+
+    }
+
     function action_image() {
         $this->autoRender = false;
 
