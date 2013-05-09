@@ -258,6 +258,17 @@ class EventsController extends AppController
 
         $this->Event->id = $event_id;
 
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+
+        $event = $this->Event->read(null, $event_id);
+        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
+
+
+        print_r($event_actions);
+
+
 
     }
 
