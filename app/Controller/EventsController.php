@@ -253,6 +253,14 @@ class EventsController extends AppController
         readfile($temp_file_name);
     }
 
+    public function download_image($event_id = null) {
+        $this->autoRender = false;
+
+        $this->Event->id = $event_id;
+
+
+    }
+
     /**
      * delete method
      *

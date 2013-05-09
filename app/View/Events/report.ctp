@@ -14,6 +14,9 @@
                 <input class="approve_all" id="<?php echo $event['Event']['id']; ?>" type="checkbox" />
                 Approve (remove from Blacklist) all images below
             </li>
+            <li>
+                <a href="/events/download_image/<?=$event['Event']['id']?>">download images</a>
+            </li>
         </ul>
     </section>
     <div class="submission_list">

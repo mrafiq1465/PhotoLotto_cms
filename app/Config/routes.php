@@ -49,6 +49,7 @@
     Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
     Router::connect('/events/download_submissions/:event_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id')));
     Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id','event_action_id')));
+    Router::connect('/events/download_image/:event_id', array('controller' => 'events', 'action' => 'download_image'),array('pass' => array('event_id')));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/eventemail/*', array('controller' => 'events', 'action' => 'event_email'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
