@@ -265,8 +265,40 @@ class EventsController extends AppController
         $event = $this->Event->read(null, $event_id);
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
 
+        $zip = new ZipArchive();
+        $filename = '../tmp/image-zips/' . mt_rand(1, 1000000000) . '.zip';
 
-        print_r($event_actions);
+        //$fp = fopen($temp_file_name, 'w');
+
+        if ($zip->open($filename, ZIPARCHIVE::CREATE)!==TRUE) {
+            exit("cannot open <$filename>\n");
+        }
+
+        set_time_limit(count($event_actions) * 10);
+        ini_set('memory_limit', '512M');
+
+        foreach ($event_actions as $ea) {
+            $url = 'http://appevent.s3.amazonaws.com/'. $ea['EventAction']['photo'];
+            $data = file_get_contents($url, false);
+            if ($data === false) {
+                die('could not read from url - ' . $url);
+            }
+            $zip->addFromString($ea['EventAction']['photo'], $data);
+        }
+
+        //echo "numfiles: " . $zip->numFiles . "\n";
+        //echo "status:" . $zip->status . "\n";
+        $zip->close();
+
+        $FileName = 'Event-images-' . date("d-m-y") . '.zip';
+        header('Content-Disposition: inline; filename="' . $filename . '"');
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-length: " . filesize($filename));
+        header('Content-Type: application/excel');
+        header('Content-Disposition: attachment; filename="' . $FileName . '"');
+        readfile($filename);
+
+        //print_r($event_actions);
 
 
 
