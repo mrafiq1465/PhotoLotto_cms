@@ -280,10 +280,9 @@ class EventsController extends AppController
         foreach ($event_actions as $ea) {
             $url = 'http://appevent.s3.amazonaws.com/'. $ea['EventAction']['photo'];
             $data = file_get_contents($url, false);
-            if ($data === false) {
-                die('could not read from url - ' . $url);
+            if ($data !== false) {
+                $zip->addFromString($ea['EventAction']['photo'], $data);
             }
-            $zip->addFromString($ea['EventAction']['photo'], $data);
         }
 
         //echo "numfiles: " . $zip->numFiles . "\n";
