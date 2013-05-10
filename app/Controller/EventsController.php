@@ -293,7 +293,7 @@ class EventsController extends AppController
         header('Content-Disposition: inline; filename="' . $filename . '"');
         header("Content-Transfer-Encoding: Binary");
         header("Content-length: " . filesize($filename));
-        header('Content-Type: application/excel');
+        header('Content-Type: application/zip');
         header('Content-Disposition: attachment; filename="' . $FileName . '"');
         readfile($filename);
 
