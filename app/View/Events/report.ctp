@@ -15,7 +15,7 @@
                 Approve (remove from Blacklist) all images below
             </li>
             <li>
-                <a href="/events/download_image/<?=$event['Event']['id']?>">download images</a>
+                <a href="/events/download_image/<?=$event['Event']['id']?>">Download all images as ZIP file</a>
             </li>
         </ul>
     </section>
