@@ -232,13 +232,15 @@ class EventsController extends AppController
         } else {
             $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.id' => $event_action_id)));
         }
+
         foreach ($event_actions as $event_action) {
             $rows[] = $event_action['EventAction'];
         }
 
         //todo: very bad memory hungry code... will have to fix it soon ...
+        $this->exportCSV($rows);
 
-        $temp_file_name = '/tmp/' . mt_rand(1, 1000000000) . '.csv';
+        /*$temp_file_name = '/tmp/' . mt_rand(1, 1000000000) . '.csv';
         $fp = fopen($temp_file_name, 'w');
         foreach ($rows as $row) {
             fputcsv($fp, $row);
@@ -250,7 +252,7 @@ class EventsController extends AppController
         header("Content-length: " . filesize($temp_file_name));
         header('Content-Type: application/excel');
         header('Content-Disposition: attachment; filename="' . $FileName . '"');
-        readfile($temp_file_name);
+        readfile($temp_file_name);*/
     }
 
     public function download_image($event_id = null) {
@@ -554,6 +556,36 @@ class EventsController extends AppController
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => $event_actions));
+    }
+
+    /**
+     *
+     * Dynamically generates a .csv file by looping through the results of a sql query.
+     *
+     */
+
+    public function exportCSV($results)
+    {
+    	ini_set('max_execution_time', 600); //increase max_execution_time to 10 min if data set is very large
+
+    	//create a file
+    	$filename = "export_".date("Y.m.d").".csv";
+    	$csv_file = fopen('php://output', 'w');
+
+    	header('Content-type: application/csv');
+    	header('Content-Disposition: attachment; filename="'.$filename.'"');
+
+    	// The column headings of your .csv file
+    	//$header_row = array("ID", "Event ID", "Phone ID", "Blacklist", "Phone Type", "Action Name", "Photo", "Created");
+    	//fputcsv($csv_file,$header_row,',','"');
+
+    	// Each iteration of this while loop will be a row in your .csv file where each field corresponds to the heading of the column
+    	foreach($results as $result)
+    	{
+    		fputcsv($csv_file,$result,',','"');
+    	}
+
+    	fclose($csv_file);
     }
 
 }
