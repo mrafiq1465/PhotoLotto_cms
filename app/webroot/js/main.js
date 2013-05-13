@@ -19,6 +19,28 @@ $(document).ready(function() {
         });
     });
 
+    var $formContainer = $("#form-container");
+
+    $(".blacklistToggle", $formContainer).on('click', function () {
+        // which blacklistToggle radio button is selected
+        var blacklistOption = $("[name=blacklistToggle]:checked", $formContainer).val(),
+            checkAll = !!(blacklistOption == "1"),
+            eventId = $(this).data('event-id');
+
+        //update the option via ajax
+        $.ajax({
+            type     : "POST",
+            url      : '/events/photo_update_all',
+            data     : {'data[event_id]' : eventId, 'data[blacklist]' : blacklistOption},
+            dataType : "json",
+            success  : function (json) {
+                if (json.response == true) {
+                    $('.blacklist').prop('checked', checkAll);
+                }
+            }
+        });
+    });
+
     $('.blacklist_all').change(function(e){
         var id = $(this).attr('id');
         var blacklist = 0;
