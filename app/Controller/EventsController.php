@@ -190,7 +190,6 @@ class EventsController extends AppController
     }
 
     public function report($id = null) {
-
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
@@ -281,7 +280,7 @@ class EventsController extends AppController
             $url = 'http://appevent.s3.amazonaws.com/'. $ea['EventAction']['photo'];
             $data = @file_get_contents($url, false);
             if ($data !== false) {
-                $zip->addFromString($ea['EventAction']['photo'], $data);
+                var_dump($zip->addFromString($ea['EventAction']['photo'], $data));
             }
         }
 
@@ -289,18 +288,17 @@ class EventsController extends AppController
         //echo "status:" . $zip->status . "\n";
         $zip->close();
 
+        //$filename = '../tmp/image-zips/656895736.zip';
+
         $FileName = 'Event-images-' . date("d-m-y") . '.zip';
-        header('Content-Disposition: inline; filename="' . $filename . '"');
-        header("Content-Transfer-Encoding: Binary");
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Transfer-Encoding: binary');
         header("Content-length: " . filesize($filename));
-        header('Content-Type: application/excel');
         header('Content-Disposition: attachment; filename="' . $FileName . '"');
+        ob_clean();
+        flush();
         readfile($filename);
-
-        //print_r($event_actions);
-
-
-
     }
 
     /**
