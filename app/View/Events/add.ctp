@@ -36,6 +36,10 @@ $options = array(
                 <label for="EventName">Event Name <span>(60 characters max.)</span></label>
                 <?= $this->Form->input('name', array('div' => false, 'placeholder' => 'Event Name',)); ?>
             </div>
+            <div class="row-fluid">
+                <label for="password">Event Password</label>
+                <?= $this->Form->input('event_password', array('div' => false, 'placeholder' => 'Password for Event',));?>
+            </div>
 
             <div class="row-fluid">
                 <label for="shortdescription_line_1">Event Description <span>(60 characters max. per line)</span></label>
