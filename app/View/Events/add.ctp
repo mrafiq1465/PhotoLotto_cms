@@ -38,7 +38,10 @@ $options = array(
             </div>
             <div class="row-fluid">
                 <label for="password">Event Password</label>
-                <?= $this->Form->input('event_password', array('div' => false, 'placeholder' => 'Password for Event',));?>
+                <?=$this->Form->input('event_password', array(
+                'div' => false,
+                'class' => 'not_required span12',
+                'placeholder' => 'Password for Event')); ?>
             </div>
 
             <div class="row-fluid">
