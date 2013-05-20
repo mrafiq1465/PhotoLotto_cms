@@ -342,6 +342,10 @@ $options = array(
                 <label for="stage">Event Status</label>
                 <? echo $this->Form->select('stage', array('' => '---Select Stage---', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'), array('div' => false)); ?>
             </div>
+            <div class="row-fluid">
+                <label for="event_status">Event Order</label>
+                <?=$this->Form->input('view_order', array('div' => false, 'placeholder' => 'Event order in number', 'type' => 'text')); ?>
+            </div>
         </div>
         <div class="span5">
             <aside class="help">
