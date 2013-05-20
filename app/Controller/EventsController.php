@@ -31,6 +31,7 @@ class EventsController extends AppController
             // $event_conditions['Event.updated_by'] = 1;
             $events = $this->paginate(null, $event_conditions);
         }
+        $events = Set::sort($events, '{n}.Event.view_order', 'asc');
         $companies = $this->Event->Company->find('list');
         if ($this->isAdmin()) $companies = array('' => 'All') + $companies;
         $this->set(compact('events', 'companies'));
