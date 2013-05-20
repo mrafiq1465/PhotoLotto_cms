@@ -410,10 +410,12 @@ $options = array(
     </div>
 </section>
 </div>
-
+<script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
 <script>
     $(function () {
         window.EventStep = [];
+
+        $("#EventViewOrder").mask("9?99999",{placeholder:" "});
 
         $('.overlay-img-upload').change(function (e, invoked) {
             if (invoked == 'clear') return;
