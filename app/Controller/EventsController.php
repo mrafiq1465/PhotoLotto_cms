@@ -351,6 +351,7 @@ class EventsController extends AppController
                 'Event.date_end >=' => date('Y-m-d'),
                 'Event.status' => 1,
             ),
+            'order' => array('Event.view_order' => 'desc', 'Event.created' => 'desc')
         );
 
         $events = $this->Event->find('all', $options);
