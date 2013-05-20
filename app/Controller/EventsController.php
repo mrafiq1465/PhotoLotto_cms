@@ -64,12 +64,12 @@ class EventsController extends AppController
         if (isset($this->request->data['Event'][$field]['error']) && $this->request->data['Event'][$field]['error'] == 0) {
             $uploaded_file = $this->request->data['Event'][$field]['tmp_name'];
             $uploaded_file_name = $this->request->data['Event'][$field]['name'];
-            $uploaded_file_name = '/img/events/' . $event_id . '-' . $uploaded_file_name;
+            $uploaded_file_name = 'img' . DS . 'events' . DS . $event_id . '-' . $uploaded_file_name;
             if (!move_uploaded_file($uploaded_file, WWW_ROOT . $uploaded_file_name)) {
                 throw new NotFoundException(__('Permission not available in upload directory'));
             }
             ;
-            $this->request->data['Event'][$field] = $uploaded_file_name;
+            $this->request->data['Event'][$field] = 'events/'  . $event_id . '-' . $this->request->data['Event'][$field]['name'];
         } elseif (is_array($this->request->data['Event'][$field]) && $this->request->data['Event'][$field]['error'] <> 0) {
             unset($this->request->data['Event'][$field]);
         } elseif (isset($this->request->data['Event'][$field . "_delete"])) {

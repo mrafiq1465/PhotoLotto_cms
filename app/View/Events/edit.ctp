@@ -57,7 +57,12 @@ $options = array(
                     <div class="row-fluid">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                <img src="<?=(!empty($this->request->data['Event']['public_logo']))?$this->request->data['Event']['public_logo']:'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'?>"/></div>
+                                <?php
+                                $src = (!empty($this->request->data['Event']['public_logo']))
+                                        ? $this->request->data['Event']['public_logo']
+                                        : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image';
+                                echo $this->Html->image($src); ?>
+                            </div>
                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                             <div>
                                 <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
