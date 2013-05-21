@@ -365,13 +365,7 @@ class EventsController extends AppController
             $overlay_img_count = 0;
             $events_array[$i]['id'] = $event['Event']['id'];
             $events_array[$i]['name'] = $event['Event']['name'];
-            if(empty($event['Event']['event_password'])){
-                $events_array[$i]['password'] = 'null';
-            }
-            else {
-                $events_array[$i]['password'] = $event['Event']['event_password'];
-            }
-
+            $events_array[$i]['password'] = $event['Event']['event_password'];
             $events_array[$i]['event_type'] = $event['Event']['eventtype'];
             $events_array[$i]['shortdescription_line_1'] = $event['Event']['shortdescription_line_1'];
             $events_array[$i]['shortdescription_line_2'] = $event['Event']['shortdescription_line_2'];
