@@ -343,8 +343,9 @@ $options = array(
                 <? echo $this->Form->select('stage', array('' => '---Select Stage---', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'), array('div' => false)); ?>
             </div>
             <div class="row-fluid">
-                <label for="event_status">Event Order</label>
-                <?=$this->Form->input('view_order', array('div' => false, 'placeholder' => 'Event order in number', 'type' => 'text')); ?>
+                <label for="view_order">Event Order</label>
+                <?php $view_order = array('0' => '0', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
+                echo $this->Form->input('view_order', array('options' => $view_order, 'default' => '0'), array('div' => false,'class' => 'span8'));?>
             </div>
         </div>
         <div class="span5">
@@ -406,7 +407,7 @@ $options = array(
 
 <script>
     $(function () {
-        $("#EventViewOrder").mask("9?99999",{placeholder:" "});
+        //$("#EventViewOrder").mask("9?99999",{placeholder:" "});
         window.EventStep = [];
         $('.overlay-img-upload').change(function (e, invoked) {
             if (invoked == 'clear') return;

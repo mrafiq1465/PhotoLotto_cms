@@ -351,7 +351,7 @@ class EventsController extends AppController
                 'Event.date_end >=' => date('Y-m-d'),
                 'Event.status' => 1,
             ),
-            'order' => array('Event.view_order' => 'desc', 'Event.created' => 'desc')
+            'order' => array('Event.view_order' => 'asc', 'Event.created' => 'desc')
         );
 
         $events = $this->Event->find('all', $options);
@@ -390,7 +390,7 @@ class EventsController extends AppController
                 $events_array[$i]['t_c'] = '';
             }
 
-            $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['img_thumb'];
+            $events_array[$i]['img_thumb'] = FULL_BASE_URL . $event['Event']['public_logo'];
 
             if (!empty($this->request->query['gpslat']) && !empty($this->request->query['gpslong']) &&
                 !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong']) &&
