@@ -397,7 +397,7 @@ $options = array(
     <div class="row-fluid">
         <div class="span7">
             <div class="row-fluid">
-                <?=$this->Form->end(array('id' => 'submitBtn', 'class' => 'btn btn-large btn-block btn-primary', 'label' => 'Add',))?>
+                <?=$this->Form->end(array('id' => 'submitBtn', 'class' => 'btn btn-large btn-block btn-primary', 'label' => 'Continue',))?>
             </div>
         </div>
     </div>
