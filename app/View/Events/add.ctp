@@ -344,7 +344,7 @@ $options = array(
             </div>
             <div class="row-fluid">
                 <label for="view_order">Event Order</label>
-                <?php $view_order = array('0' => '0', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
+                <?php $view_order = array('100' => 'not set', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
                 echo $this->Form->input('view_order', array('options' => $view_order, 'default' => '0'), array('div' => false,'class' => 'span8'));?>
             </div>
         </div>
