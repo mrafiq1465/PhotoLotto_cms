@@ -366,7 +366,7 @@ class EventsController extends AppController
             $events_array[$i]['id'] = $event['Event']['id'];
             $events_array[$i]['name'] = $event['Event']['name'];
             if(empty($event['Event']['event_password'])){
-                $events_array[$i]['password'] = 'NULL';
+                $events_array[$i]['password'] = 'null';
             }
             else {
                 $events_array[$i]['password'] = $event['Event']['event_password'];
