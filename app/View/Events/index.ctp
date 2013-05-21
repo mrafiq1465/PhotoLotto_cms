@@ -27,7 +27,7 @@
         <? foreach ($events as $k => $event) { ?>
         <tr class="<?=($k % 2 == 0) ? 'odd' : 'even'?>">
             <td class="span3">
-                <img src="<?=$event['Event']['img_thumb']; ?>" alt="Image thumb" width="90px" height="60px" />
+                <img src="<?=$event['Event']['public_logo']; ?>" alt="Image thumb" width="90px" height="60px" />
             </td>
             <td class="span5">
                 <div class="details">
