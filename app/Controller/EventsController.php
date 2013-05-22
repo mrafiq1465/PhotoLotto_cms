@@ -24,6 +24,7 @@ class EventsController extends AppController
         $this->Event->recursive = 0;
         $event_conditions = array();
         //if (isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
+        /*
         if ($this->isAdmin()) {
             $events = $this->paginate(null, array($event_conditions));
         } else {
@@ -31,7 +32,18 @@ class EventsController extends AppController
             // $event_conditions['Event.updated_by'] = 1;
             $events = $this->paginate(null, $event_conditions);
         }
-        $events = Set::sort($events, '{n}.Event.view_order', 'asc');
+     */
+        $options = array(
+            'conditions' => array(
+
+                'Event.status' => 1,
+            ),
+            'order' => array('Event.view_order' => 'asc')
+        );
+
+        $events = $this->Event->find('all', $options);
+
+       // $events = Set::sort($events, '{n}.Event.view_order', 'asc');
         $companies = $this->Event->Company->find('list');
         if ($this->isAdmin()) $companies = array('' => 'All') + $companies;
         $this->set(compact('events', 'companies'));
