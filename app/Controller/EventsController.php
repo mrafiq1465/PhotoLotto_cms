@@ -23,7 +23,7 @@ class EventsController extends AppController
     public function index() {
         $this->Event->recursive = 0;
         $event_conditions = array();
-        if (isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
+        //if (isset($_GET['company'])) $event_conditions['Event.company_id'] = $_GET['company'];
         if ($this->isAdmin()) {
             $events = $this->paginate(null, array($event_conditions));
         } else {
