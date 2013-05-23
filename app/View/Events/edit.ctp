@@ -135,8 +135,8 @@ $options = array(
                                     'class' => 'span12',
                                     'options' => array(
                                         'pixta-play' => 'PIXTA Play',
-                                        'National' => 'National',
-                                        'location-based' => 'Location Based'),
+                                        'National' => 'Personal',
+                                        'location-based' => 'Brands'),
                                     'default' => 'pixta-play'
                                 ));?>
                         </div>
