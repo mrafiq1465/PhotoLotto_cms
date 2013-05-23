@@ -79,7 +79,7 @@
                 <br>images
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-share"></i> ', '/' . $event['Event']['name'], array('class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-share"></i> ', '/' . $event['Event']['event_url'], array('class' => '', 'escape' => FALSE)); ?>
                 <br>event page
             </td>
             <td>

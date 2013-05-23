@@ -192,7 +192,7 @@ class EventsController extends AppController
         $this->layout = 'event2';
 
         $event = $this->Event->find('first', array(
-            'conditions' => array('Event.name' => $id),
+            'conditions' => array('Event.event_url' => $id),
         ));
 
          $this->set(compact('event', 'event'));
