@@ -32,17 +32,19 @@
     <?php
     $top_id = false;
     $photo_id = '';
-    foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
-        if ($ev['blacklist'] != 1) {
+    if(count($event['EventAction']) > 2){
+        foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
+            if ($ev['blacklist'] != 1) {
 
-            if(!$top_id){
-                $photo_id = $ev['id'];
-                $top_id = true;
+                if(!$top_id){
+                    $photo_id = $ev['id'];
+                    $top_id = true;
+                }
+                ?>
+                    <div class="item">
+                        <img src="<?php echo S3_IMG_URL . '/' . $ev['photo']; ?>" alt="" /></div>
+                <?php
             }
-            ?>
-                <div class="item">
-                    <img src="<?php echo S3_IMG_URL . '/' . $ev['photo']; ?>" alt="" /></div>                
-            <?php
         }
     }
     ?>
