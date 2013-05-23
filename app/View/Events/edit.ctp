@@ -375,7 +375,10 @@ $options = array(
                 <? echo $this->Form->input('public_event_name', array('label' => false, 'div' => false,'placeholder' => 'Public Event Name', 'class' => 'span12')); ?>
 
             </div>
-
+            <div class="row-fluid row-event-name">
+                <label for="CustomPageUrl">Custom Event Page URL</span></label>
+                http://www.pixta.com.au/<?= $this->Form->input('event_url', array('div' => false, 'placeholder' => 'Custom Event Page URL','class' => 'span6')); ?>
+            </div>
             <div class="row-fluid">
                 <label for="public_phone_number">Phone Number</label>
                 <?=$this->Form->input('public_phone_number', array(
