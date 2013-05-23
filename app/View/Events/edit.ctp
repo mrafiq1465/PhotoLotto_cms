@@ -376,7 +376,7 @@ $options = array(
 
             </div>
             <div class="row-fluid row-event-name">
-                <label for="CustomPageUrl">Custom Event Page URL</span></label>
+                <label for="CustomPageUrl">Event Page URL</span></label>
                 http://www.pixta.com.au/<?= $this->Form->input('event_url', array('div' => false, 'placeholder' => 'Custom Event Page URL','class' => 'span6')); ?>
             </div>
             <div class="row-fluid">
