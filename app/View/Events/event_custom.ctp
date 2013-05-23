@@ -32,7 +32,7 @@
     <?php
     $top_id = false;
     $photo_id = '';
-    if(count($event['EventAction']) > 2){
+    if(count($event['EventAction']) > 1){
         foreach (Set::sort($event['EventAction'], '{n}.id', 'desc') as $ev) {
             if ($ev['blacklist'] != 1) {
 
