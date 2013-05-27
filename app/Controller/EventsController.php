@@ -525,6 +525,21 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    function rank_update() {
+        $this->autoRender = false;
+
+        $event_id = $this->request->data['id'];
+        $rank = $this->request->data['rank'];
+
+        $this->Event->id = $event_id;
+
+        $success = true;
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => !empty($success)));
+    }
+
     function photo_update_all() {
         $this->autoRender = false;
 

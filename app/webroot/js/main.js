@@ -72,12 +72,9 @@ $(document).ready(function() {
         var blacklist = 0;
 
         if($(this).attr('checked') == 'checked') {
-
             $('.blacklist_all').prop('checked', false);
             $('.blacklist').prop('checked', false);
             blacklist =0;
-
-
              $.ajax({
                  type:"POST",
                  url:'/events/photo_update_all',
@@ -88,11 +85,40 @@ $(document).ready(function() {
                         }
                      }
               });
-
         }
-
     });
 
+    $('.icon-circle-arrow-up').click(function(e){
+        var id = $(this).attr('id');
+
+        $.ajax({
+           type:"POST",
+                url:'/events/rank_update',
+                data:{'data[id]':id, 'data[rank]':'up'},
+                dataType:"json",
+                success:function (json) {
+                    if (json.status == 'success') {
+                        window.location.href= "/events";
+                    }
+                }
+            });
+    });
+
+    $('.icon-circle-arrow-down').click(function(e){
+        var id = $(this).attr('id');
+
+        $.ajax({
+            type:"POST",
+            url:'/events/rank_update',
+            data:{'data[id]':id, 'data[rank]':'down'},
+            dataType:"json",
+            success:function (json) {
+                if (json.status == 'success') {
+                    window.location.href= "/events";
+                }
+            }
+        });
+    });
 
     $('#resetPassword').click(function(e){
         var email = $('#email').val();

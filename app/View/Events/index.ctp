@@ -86,6 +86,10 @@
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/events/duplicate/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
                 <br>duplicate this event
             </td>
+            <td>
+                <a id="<?= $event['Event']['id']?>" class="icon-circle-arrow-up" href="#"></a><br>
+                <a id="<?= $event['Event']['id']?>" class="icon-circle-arrow-down" href="#"></a>
+            </td>
         </tr>
             <? } ?>
         </tbody>
