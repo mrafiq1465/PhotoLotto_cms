@@ -90,7 +90,6 @@ $(document).ready(function() {
 
     $('.icon-circle-arrow-up').click(function(e){
         var id = $(this).attr('id');
-
         $.ajax({
            type:"POST",
                 url:'/events/rank_update',
@@ -104,7 +103,6 @@ $(document).ready(function() {
 
     $('.icon-circle-arrow-down').click(function(e){
         var id = $(this).attr('id');
-
         $.ajax({
             type:"POST",
             url:'/events/rank_update',
