@@ -528,12 +528,34 @@ class EventsController extends AppController
     function rank_update() {
         $this->autoRender = false;
 
-        $event_id = $this->request->data['id'];
+        $id = $this->request->data['id'];
         $rank = $this->request->data['rank'];
 
-        $this->Event->id = $event_id;
+        $this->Event->id = $id;
+        $event = $this->Event->read(null, $id);
 
-        $success = true;
+        $view_order =  $event['Event']['view_order'] ;
+
+        App::uses('ConnectionManager', 'Model');
+        $db = ConnectionManager::getDataSource('default');
+
+
+        if($rank == 'up'){
+
+            $sql_1 = "update events set view_order=view_order+1 where view_order='$view_order' - 1";
+            $db->rawQuery($sql_1);
+            $sql_2 = "update events set view_order=view_order-1 where id='$id'";
+            $db->rawQuery($sql_2);
+        }
+        if($rank == 'down'){
+
+            $sql_3 = "update events set view_order=view_order-1 where view_order='$view_order' + 1";
+            $db->rawQuery($sql_3);
+            $sql_4 = "update events set view_order=view_order+1 where id='$id'";
+            $db->rawQuery($sql_4);
+        }
+
+        $success = 'success';
 
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');

@@ -97,9 +97,7 @@ $(document).ready(function() {
                 data:{'data[id]':id, 'data[rank]':'up'},
                 dataType:"json",
                 success:function (json) {
-                    if (json.status == 'success') {
-                        window.location.href= "/events";
-                    }
+                    window.location.href= "/events";
                 }
             });
     });
@@ -113,9 +111,7 @@ $(document).ready(function() {
             data:{'data[id]':id, 'data[rank]':'down'},
             dataType:"json",
             success:function (json) {
-                if (json.status == 'success') {
-                    window.location.href= "/events";
-                }
+                window.location.href= "/events";
             }
         });
     });

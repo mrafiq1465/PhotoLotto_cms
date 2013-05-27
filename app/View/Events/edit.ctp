@@ -350,12 +350,12 @@ $options = array(
                 <label for="event_status">Event Status</label>
                 <? echo $this->Form->select('stage', array('' => '---Select Stage---', 'Scheduled' => 'Scheduled', 'Draft' => 'Draft'), array('div' => false)); ?>
             </div>
-            <div class="row-fluid">
+            <!--div class="row-fluid">
                 <label for="view_order">Event Order</label>
                 <?php
-                 $view_order = array('100' => 'not set', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
-                echo $this->Form->input('view_order', array('options' => $view_order), array('div' => false,'class' => 'span8'));?>
-            </div>
+                 //$view_order = array('100' => 'not set', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
+                 //echo $this->Form->input('view_order', array('options' => $view_order), array('div' => false,'class' => 'span8'));?>
+            </div-->
         </div>
         <div class="span5">
             <aside class="help">
