@@ -415,7 +415,7 @@ class EventsController extends AppController
                 $events_array[$i]['distance'] = 0;
             }
 
-            $events_array[$i]['event_radius'] = 0;
+            $events_array[$i]['event_radius'] = $event['Event']['event_radius'];;
             $overlay_img_count = 1;
             for ($j = 1; $j <= 5; $j++) {
                 if (!empty($event['Event']["img_overlay_$j"])) {
