@@ -23,6 +23,27 @@
             <td>
                 <? echo $this->Form->input('company_id', array('options' => $companies, 'default' => !empty($_GET['company'])?$_GET['company']:'')); ?>
             </td>
+
+            <td>
+                <?=$this->Form->input('eventtype',
+                array(
+                    'options' => array(
+                        '0' => 'Please select',
+                        'pixta-play' => 'PIXTA Play',
+                        'National' => 'Personal',
+                        'location-based' => 'Brands'),
+                    'default' => !empty($_GET['eventtype'])?$_GET['eventtype']:'0'
+                ));?>
+
+            </td>
+
+            <td>
+                <?=$this->Html->link('All', '/events/', array('class' => '', 'escape' => FALSE)); ?>
+
+            </td>
+            <td colspan="10">
+               &nbsp;
+            </td>
         </tr>
 
         <? foreach ($events as $k => $event) { ?>
@@ -105,6 +126,13 @@ $(function(){
         } else {
             window.location.href= '/events/';
         }
-    })
+    });
+    $('#eventtype').change(function(){
+        if($(this).val() != ''){
+            window.location.href= '/events/?eventtype=' + $(this).val();
+        } else {
+            window.location.href= '/events/';
+        }
+    });
 });
 </script>
