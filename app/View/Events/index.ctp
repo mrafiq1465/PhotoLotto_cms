@@ -121,16 +121,24 @@
 <script type="text/javascript">
 $(function(){
     $('#company_id').change(function(){
-        if($(this).val() != ''){
+        var eventtype = $('#eventtype').val();
+
+        if($(this).val() != '' && eventtype > 0){
+            window.location.href= '/events/?company=' + $(this).val() + '&eventtype=' + eventtype;
+        }else if($(this).val() != ''){
             window.location.href= '/events/?company=' + $(this).val();
         } else {
             window.location.href= '/events/';
         }
     });
     $('#eventtype').change(function(){
-        if($(this).val() != ''){
+        var company_id = $('#company_id').val();
+        if($(this).val() != '' && company_id > 0){
+            window.location.href= '/events/?eventtype=' + $(this).val()+'&company='+company_id;
+        }else if ($(this).val() != ''){
             window.location.href= '/events/?eventtype=' + $(this).val();
-        } else {
+        }
+        else {
             window.location.href= '/events/';
         }
     });
