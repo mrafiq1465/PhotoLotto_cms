@@ -1,0 +1,84 @@
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+/* #Lists
+================================================== */
+	ul, ol { margin-bottom:2px; }
+	ul ul, ul ol,
+	ol ol, ol ul { margin:0px;}
+	ul ul li, ul ol li,
+	ol ol li, ol ul li { margin-bottom:px; }
+	li { line-height: 10px; margin-bottom:0px; }
+
+/* #Site Styles
+================================================== */
+*
+	{
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing:border-box;
+		box-sizing:border-box;
+	}
+
+img {
+	max-width: 100%;
+}
+/*header*/
+.header {
+	margin-bottom:10px;
+	height:100px;
+	background:#288ca6;
+	}
+.header h3{
+	text-align:center;
+	padding:30px;
+	color:#FFF;
+	}
+/*band*/
+.band {
+	background:#d2d2d2;
+	}
+.lert_patan {
+	background:#aaaaaa;
+	margin: 0 5px;
+	height:500px;
+	}
+.right_patan {
+	background:#268fac;
+	margin: 0 5px;
+	height:500px;
+	color:#FFF;
+	padding:10px;
+	}
+/*footer*/
+.footer {
+	margin-top:10px;
+	height:100px;
+	background:#288ca6;
+	}
+.footer h3{
+	text-align:center;
+	padding:30px;
+	color:#FFF;
+	}
+/* #Page Styles
+================================================== */
+
+/* #Media Queries
+================================================== */
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 600px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 300px) and (max-width: 600px) {}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 300px) {}
+
+
+/* #Font-Face
+================================================== */
