@@ -5,6 +5,192 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
 
+ <style>
+ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     font: inherit;
+     vertical-align: baseline; }
+ body {
+     background: #fff;
+     font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     color: #444;
+     -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+     -webkit-text-size-adjust: 100%;
+ }
+
+ ul, ol { margin-bottom: 20px; }
+ ul { list-style: none outside; }
+ ol { list-style: decimal; }
+
+ ul ul, ul ol,
+ ol ol, ol ul { margin: 4px 0 5px 30px; font-size: 90%;  }
+
+ img.scale-with-grid {
+     max-width: 100%;
+     height: auto; }
+
+ .remove-bottom { margin-bottom: 0 !important; }
+ .half-bottom { margin-bottom: 10px !important; }
+ .add-bottom { margin-bottom: 20px !important; }
+
+ .container                                  { position: relative; width: 600px; margin: 0 auto; padding: 0; }
+ .container .column,
+ .container .columns                         { float: left; display: inline; margin-left:0px; margin-right:0px; }
+ .row                                        { margin-bottom: 0px; }
+
+     /* Nested Column Classes */
+ .column.alpha, .columns.alpha               { margin-left: 0; }
+ .column.omega, .columns.omega               { margin-right: 0; }
+
+     /* Base Grid */
+ .container .one.column,
+ .container .one.columns                     { width: 40px;  }
+ .container .two.columns                     { width: 100px; }
+ .container .three.columns                   { width: 160px; }
+ .container .four.columns                    { width: 220px; }
+ .container .five.columns                    { width: 300px; }
+ .container .six.columns                     { width: 340px; }
+ .container .seven.columns                   { width: 400px; }
+ .container .eight.columns                   { width: 460px; }
+ .container .nine.columns                    { width: 520px; }
+ .container .ten.columns                     { width: 580px; }
+ .container .eleven.columns                 { width: 600px; }
+
+     /* Offsets */
+ .container .offset-by-one                   { padding-left: 60px;  }
+ .container .offset-by-two                   { padding-left: 120px; }
+ .container .offset-by-three                 { padding-left: 180px; }
+ .container .offset-by-four                  { padding-left: 240px; }
+ .container .offset-by-five                  { padding-left: 300px; }
+ .container .offset-by-six                   { padding-left: 360px; }
+ .container .offset-by-seven                 { padding-left: 420px; }
+ .container .offset-by-eight                 { padding-left: 480px; }
+ .container .offset-by-nine                  { padding-left: 540px; }
+
+
+
+     /* #Mobile (Landscape)
+     ================================================== */
+
+     /* Note: Design for a width of 480px */
+
+ @media only screen and (min-width: 300px) and (max-width: 600px) {
+     .container { width: 300px; }
+     .container .columns,
+     .container .column { margin: 0; }
+
+     .container .one.column,
+     .container .one.columns,
+     .container .two.columns,
+     .container .three.columns,
+     .container .four.columns,
+     .container .five.columns,
+     .container .six.columns,
+     .container .seven.columns,
+     .container .eight.columns,
+     .container .nine.columns,
+     .container .ten.columns,
+     .container .eleven.columns,
+     .container .twelve.columns,
+     .container .thirteen.columns,
+     .container .fourteen.columns,
+     .container .fifteen.columns,
+     .container .sixteen.columns,
+     .container .one-third.column,
+     .container .two-thirds.column { width: 300px; }
+ }
+
+ .clearfix:before,
+ .clearfix:after,
+ .row:before,
+ .row:after {
+     content: '\0020';
+     display: block;
+     overflow: hidden;
+     visibility: hidden;
+     width: 0;
+     height: 0; }
+ .row:after,
+ .clearfix:after {
+     clear: both; }
+ .row,
+ .clearfix {
+     zoom: 1; }
+
+     /* You can also use a <br class="clear" /> to clear columns */
+ .clear {
+     clear: both;
+     display: block;
+     overflow: hidden;
+     visibility: hidden;
+     width: 0;
+     height: 0;
+ }
+
+ ul, ol { margin-bottom:2px; }
+ ul ul, ul ol,
+ ol ol, ol ul { margin:0px;}
+
+ li { line-height: 10px; margin-bottom:0px; }
+
+     /* #Site Styles
+     ================================================== */
+ *
+ {
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     box-sizing:border-box;
+ }
+
+ img {
+     max-width: 100%;
+ }
+     /*header*/
+ .header {
+     margin-bottom:10px;
+     height:100px;
+     background:#288ca6;
+ }
+ .header h3{
+     text-align:center;
+     padding:30px;
+     color:#FFF;
+ }
+     /*band*/
+ .band {
+     background:#d2d2d2;
+ }
+ .lert_patan {
+     background:#aaaaaa;
+     margin: 0 5px;
+     height:500px;
+ }
+ .right_patan {
+     background:#268fac;
+     margin: 0 5px;
+     height:500px;
+     color:#FFF;
+     padding:10px;
+ }
+     /*footer*/
+ .footer {
+     margin-top:10px;
+     height:100px;
+     background:#288ca6;
+ }
+ .footer h3{
+     text-align:center;
+     padding:30px;
+     color:#FFF;
+ }
+
+ </style>
+
+
+
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8">
@@ -18,9 +204,6 @@
 
     <!-- CSS
   ================================================== -->
-    <link rel="stylesheet" href="stylesheets/base.css">
-    <link rel="stylesheet" href="stylesheets/skeleton.css">
-    <link rel="stylesheet" href="stylesheets/layout.css">
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
