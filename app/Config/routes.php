@@ -66,7 +66,10 @@
     Router::connect('/users/logout', array('controller' => 'users', 'action' => 'logout'));
     Router::connect('/users/send_password', array('controller' => 'users', 'action' => 'send_password'));
 
-    Router::connect('/*', array('controller' => 'events', 'action' => 'event_custom'), array('pass' => array('*')));
+    Router::connect('/testemail', array('controller' => 'pages', 'action' => 'email_test'));
+
+
+Router::connect('/*', array('controller' => 'events', 'action' => 'event_custom'), array('pass' => array('*')));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

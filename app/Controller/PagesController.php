@@ -77,4 +77,24 @@ class PagesController extends AppController {
 
     }
 
+    public function email_test()
+    {
+        $subject = "Test mail from Pixta";
+
+        App::uses('CakeEmail', 'Network/Email');
+
+        $email = new CakeEmail();
+        $email->from('no-reply@flypass.com.au');
+        $email->to('raf@flydigital.com.au');
+        $email->subject($subject);
+        $email->template('pixta', 'pixta');
+        /*$email->viewVars(array('info' => array(
+            "name" => $name,
+            "email" => $user_email,
+            "comment" => $comment
+        )));*/
+        $email->emailFormat('both');
+        $email->send();
+    }
+
 }
