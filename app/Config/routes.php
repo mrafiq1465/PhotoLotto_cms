@@ -36,7 +36,6 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 
-
     Router::connect('/users/login/', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/eventlist/*', array('controller' => 'events', 'action' => 'eventlist'));
@@ -52,6 +51,7 @@
     Router::connect('/events/download_image/:event_id', array('controller' => 'events', 'action' => 'download_image'),array('pass' => array('event_id')));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/eventemail/*', array('controller' => 'events', 'action' => 'event_email'));
+    Router::connect('/event_email_test/*', array('controller' => 'events', 'action' => 'event_email_test'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
     Router::connect('/events/rank_update', array('controller' => 'events', 'action' => 'rank_update'));
     Router::connect('/events/photo_update_all', array('controller' => 'events', 'action' => 'photo_update_all'));
@@ -66,7 +66,7 @@
     Router::connect('/users/logout', array('controller' => 'users', 'action' => 'logout'));
     Router::connect('/users/send_password', array('controller' => 'users', 'action' => 'send_password'));
 
-    Router::connect('/testemail', array('controller' => 'pages', 'action' => 'email_test'));
+
 
 
 Router::connect('/*', array('controller' => 'events', 'action' => 'event_custom'), array('pass' => array('*')));

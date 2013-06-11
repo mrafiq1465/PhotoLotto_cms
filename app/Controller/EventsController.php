@@ -505,6 +505,58 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    public function event_email_test() {
+        $this->autoRender = false;
+        if (!empty($_GET)) {
+          //  $this->request->data = $this->Event->read(null, $_GET['event_id']);
+/*
+            $success = $this->Event->EventEmail->save(array(
+                'EventEmail' => array(
+                    'event_id' => $_GET['event_id'],
+                    'phone_type' => $_GET['phone_type'],
+                    'action_name' => $_GET['action'],
+                    'phone_id' => $_GET['phone_id'],
+                    'photo' => $_GET['photo'],
+                    'email_from' => 'no-reply@pixta.com.au',
+                    'email_to' => $_GET['email_to'],
+                    'subject' => $_GET['subject'],
+                    'message' => $_GET['message'],
+                )
+            ));
+*/
+            if (empty($_GET['email_to'])) {
+                die(json_encode(array('error' => 'email not given')));
+            }
+            else {
+                $to=preg_split("([, ;\n])", $_GET['email_to']);
+
+                /*
+                $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+                $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
+                fwrite($save_file, $image);
+                fclose($save_file);
+                */
+
+                App::uses('CakeEmail', 'Network/Email');
+                $email = new CakeEmail();
+                $email->from('no-reply@pixta.com.au');
+                $email->to($to);
+                $email->subject($_GET['subject']);
+                $email->template('pixta', 'pixta');
+               // $email->viewVars(array('photo' => $_GET['photo']));
+                $email->emailFormat('both');
+
+                $email->send();
+                $success = true;
+            }
+
+        }
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
+        echo json_encode(array('response' => !empty($success)));
+    }
+
+
     function photo_update() {
         $this->autoRender = false;
 
