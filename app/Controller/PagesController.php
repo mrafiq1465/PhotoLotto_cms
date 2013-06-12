@@ -79,6 +79,7 @@ class PagesController extends AppController {
 
     public function email_test()
     {
+        $this->autoRender = false;
         $subject = "Test mail from Pixta";
 
         App::uses('CakeEmail', 'Network/Email');

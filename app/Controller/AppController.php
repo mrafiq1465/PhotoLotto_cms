@@ -96,6 +96,7 @@ class AppController extends Controller {
             array('events','event_custom'),
             array('events','event_action'),
             array('events','event_email'),
+            array('events','event_email_test'),
             array('events','action_image')
         );
 
