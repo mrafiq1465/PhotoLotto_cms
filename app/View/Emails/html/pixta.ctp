@@ -9,10 +9,10 @@
                 <table cellpadding="0" cellspacing="0"
                        style="margin: 0;padding: 0;width: 100%;">
                     <tr style="margin: 0;padding: 0;">
-                        <td height="70px" align="center"
+                        <td height="100px" align="center"
                             style="margin: 0;padding: 0;">
                             <img
-                                src="https://i1.createsend1.com/ti/i/55/C8D/E16/035304/csimport/8998713998_e5d2b50afb_o_1.png"
+                                src="http://farm6.staticflickr.com/5336/9027470860_5a9e19fee8_o.png"
                                 style="display: block;max-width: 100%;margin: 0;padding: 0;"
                                 alt="header">
                         </td>
@@ -93,17 +93,9 @@
                                             align="center" bgcolor="#258faa">
                                             <div
                                                 style="min-height: 415px;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;">
-                                                <h3 style="margin: 0;padding: 0;line-height: 1.1;margin-bottom: 15px;color: #000;font-weight: 500;font-size: 27px;">
-                                                    Column B</h3>
-
-                                                <div
-                                                    style="margin: 0;padding: 0;">
-                                                    (300 x *)
-                                                </div>
-                                                <div
-                                                    style="margin: 0;padding: 0;">
-                                                    5px left and right padding
-                                                </div>
+                                                <img style="display: block;"
+                                                    src="http://farm3.staticflickr.com/2806/9027470898_dc660f4e34_o.png"
+                                                    alt="Pixta"/>
                                             </div>
                                         </td>
                                     </tr>
@@ -141,7 +133,7 @@
                             style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;">
                             <img
                                 style="display: block;max-width: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"
-                                src="https://i6.createsend1.com/ti/i/55/C8D/E16/035304/csimport/8998714024_29b9fa03f3_o_6.png"
+                                src="http://farm3.staticflickr.com/2879/9025243725_d53694f8c7_o.png"
                                 alt="footer">
                         </td>
                     </tr>
