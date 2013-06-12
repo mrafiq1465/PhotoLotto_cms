@@ -344,7 +344,7 @@
 
 					// Email
 					var email = $('#email').val();
-					var emailFilter = /^[a-zA-Z0-9_.-]+@[a-z0-9][a-z0-9\-]{1,64}(\.[a-z]{2,4}|[a-z]{2,3}\.[a-z]{2})$/i;
+					var emailFilter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 					var emailValid = emailFilter.test(email);
 					if (emailValid != true) {
 						$('#email-error').fadeIn();
