@@ -26,7 +26,7 @@
        style="margin: 0;padding: 0;width: 100%;">
     <tr style="margin: 0;padding: 0;">
         <td style="margin: 0;padding: 0;"></td>
-        <td class="container" bgcolor="#fff" height="10"
+        <td class="container"  height="10"
             style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;"></td>
         <td style="margin: 0;padding: 0;"></td>
     </tr>
@@ -109,7 +109,7 @@
     </tr>
     <tr style="margin: 0;padding: 0;">
         <td style="margin: 0;padding: 0;"></td>
-        <td class="container" bgcolor="#fff" height="10"
+        <td class="container"  height="10"
             style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;"></td>
         <td style="margin: 0;padding: 0;"></td>
     </tr>

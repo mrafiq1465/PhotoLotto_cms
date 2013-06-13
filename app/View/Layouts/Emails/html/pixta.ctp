@@ -45,7 +45,6 @@ a { color: #2BA6CB;}
 }
 p.callout {
 	padding:15px;
-	background-color:#ECF8FF;
 	margin-bottom: 15px;
 }
 .callout a {
@@ -54,7 +53,7 @@ p.callout {
 }
 table.social {
 /* 	padding:15px; */
-	background-color: #ebebeb;
+
 
 }
 .social .soc-btn {

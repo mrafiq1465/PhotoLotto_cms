@@ -67,7 +67,6 @@
 
         table.social {
             /* 	padding:15px; */
-            background-color: #ebebeb;
 
         }
 
