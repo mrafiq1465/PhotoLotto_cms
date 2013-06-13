@@ -14,6 +14,7 @@ class EventsController extends AppController
 
     public $components = array('RequestHandler');
     public $helpers = array('Text');
+    public $uses = array('Event', 'EventEmailConfig');
 
     /**
      * index method
@@ -86,6 +87,27 @@ class EventsController extends AppController
             $this->request->data[$field] = '';
         }
     }
+
+
+
+    function process_email_config_upload($event_id, $field) {
+        if (isset($this->request->data['EventEmailConfig'][$field]['error']) && $this->request->data['EventEmailConfig'][$field]['error'] == 0) {
+            $uploaded_file = $this->request->data['EventEmailConfig'][$field]['tmp_name'];
+            $uploaded_file_name = $this->request->data['EventEmailConfig'][$field]['name'];
+            $uploaded_file_name = '/img/email_configs/' . $event_id . '-' . $uploaded_file_name;
+            //$uploaded_file_name = 'img' . DS . 'events' . DS . $event_id . '-' . $uploaded_file_name;
+            if (!move_uploaded_file($uploaded_file, WWW_ROOT . $uploaded_file_name)) {
+                throw new NotFoundException(__('Permission not available in upload directory'));
+            }
+            $this->request->data['EventEmailConfig'][$field] = $uploaded_file_name;
+            //$this->request->data['Event'][$field] = 'events/'  . $event_id . '-' . $this->request->data['Event'][$field]['name'];
+        } elseif (is_array($this->request->data['EventEmailConfig'][$field]) && $this->request->data['EventEmailConfig'][$field]['error'] <> 0) {
+            unset($this->request->data['EventEmailConfig'][$field]);
+        } elseif (isset($this->request->data['EventEmailConfig'][$field . "_delete"])) {
+            $this->request->data[$field] = '';
+        }
+    }
+
 
     /**
      * add method
@@ -183,6 +205,51 @@ class EventsController extends AppController
         $companies = $this->Event->Company->find('list');
         $this->set(compact('companies'));
     }
+
+    public  function email_config($event_id = null){
+        $this->layout = 'event';
+        $image_parts = array('background','header', 'footer', 'left', 'right');
+
+        $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
+
+        //print_r($this->request->data); exit;
+
+        if($this->request->is('post') || $this->request->is('put')){
+
+            if($event_config)
+                $this->EventEmailConfig->id = $event_config['EventEmailConfig']['id'];
+            else
+                $this->EventEmailConfig->create();
+
+            $this->EventEmailConfig->event_id = $event_id;
+
+            $user_data = $this->Session->read('User');
+            $temp_data = $this->request->data['EventEmailConfig'];
+            foreach($image_parts as $part){
+                unset($this->request->data['EventEmailConfig']['image_'.$part]);
+            }
+
+            if ($this->EventEmailConfig->save($this->request->data)) {
+                $this->request->data['EventEmailConfig'] = array_merge($this->request->data['EventEmailConfig'], $temp_data);
+
+                foreach($image_parts as $part){
+                    $this->process_email_config_upload($event_id, "image_$part");
+                }
+                $this->EventEmailConfig->save($this->request->data);
+
+                $this->Session->setFlash(__('The event has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The event Config could not be saved. Please, try again.'));
+            }
+        } else {
+
+            $this->request->data = $event_config;
+        }
+
+
+    }
+
 
     public function event_custom($id = null) {
 
@@ -351,10 +418,6 @@ class EventsController extends AppController
         }
     }
 
-    public  function email_config($id = null){
-
-
-    }
 
     public function eventlist() {
         $this->autoRender = false;

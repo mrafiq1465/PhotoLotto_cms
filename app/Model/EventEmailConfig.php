@@ -15,6 +15,7 @@ class EventEmailConfig extends AppModel {
  *
  * @var array
  */
+    public $useTable = 'event_email_config';
 	public $belongsTo = array(
 		'Event' => array(
 			'className' => 'Event',
