@@ -351,6 +351,11 @@ class EventsController extends AppController
         }
     }
 
+    public  function email_config($id = null){
+
+
+    }
+
     public function eventlist() {
         $this->autoRender = false;
         $params = array_keys($_GET);

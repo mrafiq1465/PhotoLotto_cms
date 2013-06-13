@@ -16,6 +16,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -107,6 +108,10 @@
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/events/duplicate/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
                 <br>duplicate this event
+            </td>
+            <td>
+                <?=$this->Html->link('<i class="icon-share"></i> ', '/events/email_config/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <br>email
             </td>
             <td>
                 <a id="<?= $event['Event']['id']?>" class="icon-circle-arrow-up" href="#"></a><br>
