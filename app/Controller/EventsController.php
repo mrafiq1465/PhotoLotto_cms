@@ -93,6 +93,7 @@ class EventsController extends AppController
     function process_email_config_upload($event_id, $field) {
         if (isset($this->request->data['EventEmailConfig'][$field]['error']) && $this->request->data['EventEmailConfig'][$field]['error'] == 0) {
             $uploaded_file = $this->request->data['EventEmailConfig'][$field]['tmp_name'];
+
             $uploaded_file_name = $this->request->data['EventEmailConfig'][$field]['name'];
             $uploaded_file_name = '/img/email_configs/' . $event_id . '-' . $uploaded_file_name;
             //$uploaded_file_name = 'img' . DS . 'events' . DS . $event_id . '-' . $uploaded_file_name;
@@ -208,7 +209,7 @@ class EventsController extends AppController
 
     public  function email_config($event_id = null){
         $this->layout = 'event';
-        $image_parts = array('background','header', 'footer', 'left', 'right');
+        $image_parts = array('background','header', 'footer', 'right');
 
         $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
 
@@ -221,7 +222,8 @@ class EventsController extends AppController
             else
                 $this->EventEmailConfig->create();
 
-            $this->EventEmailConfig->event_id = $event_id;
+
+            $this->request->data['EventEmailConfig']['event_id']=$event_id;
 
             $user_data = $this->Session->read('User');
             $temp_data = $this->request->data['EventEmailConfig'];
@@ -234,6 +236,7 @@ class EventsController extends AppController
 
                 foreach($image_parts as $part){
                     $this->process_email_config_upload($event_id, "image_$part");
+                    exit;
                 }
                 $this->EventEmailConfig->save($this->request->data);
 
