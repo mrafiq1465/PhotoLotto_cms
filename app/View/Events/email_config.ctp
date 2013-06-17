@@ -89,7 +89,12 @@ $options = array(
                     <div class="row-fluid">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="fileupload-new thumbnail" style="width: 300px; height: 100px;">
-                                <img src="http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image"/></div>
+                                <?php
+                                $src = (!empty($this->request->data['EventEmailConfig']['image_footer']))
+                                    ? $this->request->data['EventEmailConfig']['image_footer']
+                                    : 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image';
+                                echo $this->Html->image($src); ?>
+                            </div>
                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 300px; max-height: 100px; line-height: 20px;"></div>
                             <div>
                                 <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
@@ -129,7 +134,12 @@ $options = array(
                     <div class="row-fluid">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="fileupload-new thumbnail" style="width: 300px; height: 100px;">
-                                <img src="http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image"/></div>
+                                <?php
+                                $src = (!empty($this->request->data['EventEmailConfig']['image_right']))
+                                    ? $this->request->data['EventEmailConfig']['image_right']
+                                    : 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image';
+                                echo $this->Html->image($src); ?>
+                            </div>
                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 300px; max-height: 100px; line-height: 20px;"></div>
                             <div>
                                 <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
