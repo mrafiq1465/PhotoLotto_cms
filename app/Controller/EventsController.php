@@ -209,7 +209,7 @@ class EventsController extends AppController
 
     public  function email_config($event_id = null){
         $this->layout = 'event';
-        $image_parts = array('background','header', 'footer', 'right');
+        $image_parts = array('background', 'header', 'footer', 'right');
 
         $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
 
@@ -233,10 +233,8 @@ class EventsController extends AppController
 
             if ($this->EventEmailConfig->save($this->request->data)) {
                 $this->request->data['EventEmailConfig'] = array_merge($this->request->data['EventEmailConfig'], $temp_data);
-
                 foreach($image_parts as $part){
                     $this->process_email_config_upload($event_id, "image_$part");
-                    exit;
                 }
                 $this->EventEmailConfig->save($this->request->data);
 
