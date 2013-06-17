@@ -10,7 +10,7 @@
                        style="margin: 0;padding: 0;width: 100%;">
                     <tr style="margin: 0;padding: 0;">
                         <td height="100px" align="center" style="margin: 0;padding: 0;">
-                            <img src="http://www.pixta.com.au/img/email_image/def-header.png"
+                            <img src="<?php echo $image_header; ?>"
                                 style="display: block;max-width: 100%;margin: 0;padding: 0;"
                                 alt="header">
                         </td>
@@ -49,7 +49,7 @@
                                             align="center">
                                             <a href="#"
                                                style="margin: 0;padding: 0;"><img
-                                                    src="http://www.pixta.com.au/img/email_image/def-app.png"
+                                                    src="<?php echo $image_columnA; ?>"
                                                     alt="Fun"
                                                     style="display: block;margin: 0;padding: 0;max-width: 100%;"></a>
 
@@ -90,7 +90,7 @@
                                             <div
                                                 style="margin: 0;padding: 0;">
                                                 <img style="display: block;"
-                                                    src="http://www.pixta.com.au/img/email_image/def-columnb.png"
+                                                    src="<?php echo $image_columnB; ?>"
                                                     alt="Pixta"/>
                                             </div>
                                         </td>
@@ -129,7 +129,7 @@
                             style="margin: 0;padding: 0;">
                             <img
                                 style="display: block;max-width: 100%;margin: 0;padding: 0;"
-                                src="http://www.pixta.com.au/img/email_image/def-footer.png"
+                                src="<?php echo $image_footer; ?>"
                                 alt="footer">
                         </td>
                     </tr>

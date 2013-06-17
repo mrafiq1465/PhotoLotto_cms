@@ -141,12 +141,12 @@ $options = array(
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
+            <!--div class="row-fluid">
                 <label for="social_share">Social Share </label>
                 <?=$this->Form->textarea('social_share', array(
                 'div' => false,
                 'placeholder' => 'Social Share')); ?>
-            </div>
+            </div-->
 
 
 

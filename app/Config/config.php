@@ -21,4 +21,13 @@ $config['facebook'] = array(
 
 );
 
+$config['email_config'] = array(
+    'image_header' => 'http://www.pixta.com.au/img/email_image/def-header.png',
+    'image_bg' => 'http://www.pixta.com.au/img/email_image/def-bg.png',
+    'image_footer' => 'http://www.pixta.com.au/img/email_image/def-footer.png',
+    'image_columnA' => 'http://www.pixta.com.au/img/email_image/def-app.png',
+    'image_columnB' => 'http://www.pixta.com.au/img/email_image/def-columnb.png',
+    'email_from' => 'no-reply@pixta.com.au'
+);
+
 

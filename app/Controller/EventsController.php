@@ -576,9 +576,17 @@ class EventsController extends AppController
 
     public function event_email_test() {
         $this->autoRender = false;
+        $email_config = Configure::read('email_config');
+        $image_header = $email_config['image_header'];
+        $image_footer = $email_config['image_footer'];
+        $image_bg = $email_config['image_bg'];
+        $image_columnA = $email_config['image_columnA'];
+        $image_columnB = $email_config['image_columnB'];
+        $email_from = $email_config['email_from'];
+
+
         if (!empty($_GET)) {
-          //  $this->request->data = $this->Event->read(null, $_GET['event_id']);
-/*
+
             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
@@ -586,13 +594,37 @@ class EventsController extends AppController
                     'action_name' => $_GET['action'],
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
-                    'email_from' => 'no-reply@pixta.com.au',
+                    'email_from' => $email_from,
                     'email_to' => $_GET['email_to'],
                     'subject' => $_GET['subject'],
                     'message' => $_GET['message'],
                 )
             ));
-*/
+
+            $host = 'http://www.pixta.com.au';
+            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
+
+            if(!empty($event_config)){
+                if(!empty($event_config['EventEmailConfig']['image_header'])){
+                    $image_header = $host . $event_config['EventEmailConfig']['image_header'];
+                }
+                if(!empty($event_config['EventEmailConfig']['image_footer'])){
+                    $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
+                }
+                if(!empty($event_config['EventEmailConfig']['image_background'])){
+                    $image_bg = $host . $event_config['EventEmailConfig']['image_background'];
+                }
+                if(!empty($event_config['EventEmailConfig']['image_left'])){
+                    $image_columnA = $host . $event_config['EventEmailConfig']['image_left'];
+                }
+                if(!empty($event_config['EventEmailConfig']['image_right'])){
+                    $image_columnB = $host . $event_config['EventEmailConfig']['image_right'];
+                }
+                if(!empty($event_config['EventEmailConfig']['email_from'])){
+                    $email_from =  $event_config['EventEmailConfig']['email_from'];
+                }
+            }
+
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
             }
@@ -608,11 +640,15 @@ class EventsController extends AppController
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
-                $email->from('no-reply@pixta.com.au');
+                $email->from($email_from);
                 $email->to($to);
                 $email->subject($_GET['subject']);
                 $email->template('pixta', 'pixta');
-               // $email->viewVars(array('photo' => $_GET['photo']));
+                $email->viewVars(array('image_header' => $image_header));
+                $email->viewVars(array('image_footer' => $image_footer));
+                $email->viewVars(array('image_bg' => $image_bg));
+                $email->viewVars(array('image_columnA' => $image_columnA));
+                $email->viewVars(array('image_columnB' => $image_columnB));
                 $email->emailFormat('both');
 
                 $email->send();
@@ -621,7 +657,7 @@ class EventsController extends AppController
 
         }
         $this->response->type('json');
-        $this->RequestHandler->respondAs('json'); /* I've tried 'json', 'JSON', 'application/json' but none of them work */
+        $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
     }
 
