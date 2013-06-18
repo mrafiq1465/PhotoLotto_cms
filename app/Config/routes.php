@@ -46,6 +46,7 @@
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
     Router::connect('/events/duplicate/:id', array('controller' => 'events', 'action' => 'duplicate'),array('pass' => array('id')));
     Router::connect('/events/email_config/:id', array('controller' => 'events', 'action' => 'email_config'),array('pass' => array('id')));
+    Router::connect('/events/trace_share/:event_email_id', array('controller' => 'events', 'action' => 'trace_share'),array('pass' => array('event_email_id')));
     Router::connect('/events/delete/:id', array('controller' => 'events', 'action' => 'delete'),array('pass' => array('id')));
     Router::connect('/events/download_submissions/:event_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id')));
     Router::connect('/events/download_submissions/:event_id/:event_action_id', array('controller' => 'events', 'action' => 'download_submissions'),array('pass' => array('event_id','event_action_id')));

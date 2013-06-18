@@ -601,6 +601,8 @@ class EventsController extends AppController
                 )
             ));
 
+            $event_email_id = $this->Event->EventEmail->getLastInsertId();
+
             $host = 'http://www.pixta.com.au';
             $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
 
@@ -632,11 +634,24 @@ class EventsController extends AppController
                 $to=preg_split("([, ;\n])", $_GET['email_to']);
 
                 /*
-                $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+                $image = file_get_contents('http://appevent.s3.amazonaws.chm/'.$_GET['photo']);
                 $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
                 fwrite($save_file, $image);
                 fclose($save_file);
                 */
+
+                //Fb share url
+
+                $fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+
+                //twitter share url
+
+                $tw_share = "https://twitter.com/share?url=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+
+                //instagram share url
+
+                $ig_share = '';
+
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
@@ -649,6 +664,14 @@ class EventsController extends AppController
                 $email->viewVars(array('image_bg' => $image_bg));
                 $email->viewVars(array('image_columnA' => $image_columnA));
                 $email->viewVars(array('image_columnB' => $image_columnB));
+
+                //call back params
+                $email->viewVars(array('host'=>$host));
+                $email->viewVars(array('event_email_id' => $event_email_id));
+                $email->viewVars(array('fb_share' => $fb_share));
+                $email->viewVars(array('tw_share' => $tw_share));
+                $email->viewVars(array('ig_share' => $ig_share));
+
                 $email->emailFormat('both');
 
                 $email->send();
@@ -659,6 +682,20 @@ class EventsController extends AppController
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
+    }
+
+    /*
+     * Trace Count for social sharing.
+     *
+     * */
+    public function trace_share($event_email_id=null)
+    {
+        $media_share = $_GET['media']."_share";
+        $redirect_url = $_GET['share_url'];
+        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
+
+        $this->set('redirect_url', $redirect_url);
+
     }
 
 
@@ -791,5 +828,7 @@ class EventsController extends AppController
 
     	fclose($csv_file);
     }
+
+
 
 }
