@@ -53,18 +53,19 @@
                                                     alt="Fun"
                                                     style="display: block;margin: 0;padding: 0;max-width: 100%;"></a>
 
-                                            <a href="#"
+                                            <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=fb&share_url='.$fb_share; ?>"
                                                style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                     alt="Share on Facebook"
                                                     src="http://www.pixta.com.au/img/email_image/def-fb-share.png"
                                                     style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
-                                            <a href="#"
+
+                                            <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=ig&share_url='.$ig_share; ?>"
                                                style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                     alt="Share on Instagram"
                                                     src="http://www.pixta.com.au/img/email_image/def-ig-share.png"
                                                     style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
 
-                                            <a href="#"
+                                            <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=tw&share_url='.$tw_share; ?>"
                                                style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                     alt="Share on Twitter"
                                                     src="http://www.pixta.com.au/img/email_image/def-tw-share.png"
