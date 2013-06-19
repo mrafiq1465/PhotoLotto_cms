@@ -151,12 +151,20 @@ $options = array(
                     </div>
                 </div>
             </div>
-            <!--div class="row-fluid">
-                <label for="social_share">Social Share </label>
-                <?=$this->Form->textarea('social_share', array(
+            <div class="row-fluid">
+                <label for="href_right">Image Right Hyperlink</span></label>
+                <?= $this->Form->input('href_right', array('div' => false, 'placeholder' => 'Image Right Hyperlink', 'type'=>'text' )); ?>
+
+            </div>
+            <div class="row-fluid row-event-config-desc">
+                <label for="html_right">Image Right HTML</label>
+                <?=$this->Form->textarea('html_right', array(
                 'div' => false,
-                'placeholder' => 'Social Share')); ?>
-            </div-->
+                'rows' => 10,
+                'cols' => 50,
+                'class' => 'span12',
+                'placeholder' => 'Image Right HTML')); ?>
+            </div>
 
 
 
