@@ -90,6 +90,7 @@ class AppController extends Controller {
     function beforeFilter() {
 
         $excluded = array(
+            array('pages','home'),
             array('users','login'),
             array('events','eventlist'),
             array('users','send_password'),

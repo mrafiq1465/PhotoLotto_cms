@@ -29,7 +29,7 @@
     Router::connect('/events/rss/:id', array('controller' => 'events', 'action' => 'view', 'ext' => 'rss' ),
         array('pass' => array('id'), 'id' => '[a-zA-Z-0-9-]*') );
 
-	Router::connect('/', array('controller' => 'events', 'action' => 'index', 'home'));
+	Router::connect('/', array('controller' => 'pages', 'action' =>'home'));
 	Router::connect('/index', array('controller' => 'events', 'action' => 'index', 'home'));
     Router::connect('/events', array('controller' => 'events', 'action' => 'index', 'home'));
 /**

@@ -74,7 +74,7 @@ class PagesController extends AppController {
 	}
 
     public function home() {
-
+        $this->layout = 'no_layout';
     }
 
     public function email_test()
