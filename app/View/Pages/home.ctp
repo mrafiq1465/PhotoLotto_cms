@@ -341,7 +341,7 @@
             var dataString = 'name=' + name + '&email=' + email + '&message=' + message;
             $.ajax({
                 type: 'POST',
-                url: 'contact-form.php',
+                url: 'http://www.pixta.com.au/app/contact-form.php',
                 data: dataString,
                 success: function() {
                     // On Success
