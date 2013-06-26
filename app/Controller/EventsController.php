@@ -640,12 +640,9 @@ class EventsController extends AppController
                 if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
                 }
-<<<<<<< HEAD
-            } 
-=======
+
             }
 
->>>>>>> a4fc328461c3d4fe371b6d7027583a2381749073
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
             }
