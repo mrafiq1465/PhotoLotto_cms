@@ -692,7 +692,7 @@ class EventsController extends AppController
     {
         $media_share = $_GET['media']."_share";
         $redirect_url = $_GET['share_url'];
-        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
+        $this->Event->EventEmail->query("update event_emails set $media_share = if null($media_share, 0) + 1 where id = $event_email_id");
 
         $this->set('redirect_url', $redirect_url);
 
