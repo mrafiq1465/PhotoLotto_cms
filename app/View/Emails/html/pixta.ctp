@@ -1,5 +1,5 @@
 <table cellpadding="0" cellspacing="0"
-       style=" background-image:<?php echo $image_bg; ?> ; margin: 0;padding: 0;width: 100%;">
+       style=" border: 1px solid red; background-image:<?php echo $image_bg; ?> ; margin: 0;padding: 0;width: 100%;">
     <tr>
         <td>
             <table class="head-wrap"  cellpadding="0" cellspacing="0"
