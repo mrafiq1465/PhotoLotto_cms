@@ -94,9 +94,7 @@
                                                         align="center" >
                                                         <div
                                                                 style="margin: 0;padding: 0;">
-                                                            <img style="display: block;"
-                                                                 src="<?php echo $image_columnB; ?>"
-                                                                 alt="Pixta"/>
+                                                                <?php echo $image_columnB; ?>
                                                         </div>
                                                     </td>
                                                 </tr>

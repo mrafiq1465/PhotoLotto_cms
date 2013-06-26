@@ -581,7 +581,9 @@ class EventsController extends AppController
         $image_footer = $email_config['image_footer'];
         $image_bg = $email_config['image_bg'];
         $image_columnA = $email_config['image_columnA'];
-        $image_columnB = $email_config['image_columnB'];
+
+        //image right configurable with html/custom href N.B: Do not remove img tag from here!
+        $image_columnB = '<a href="#"> <img style="display: block; src="'.$email_config['image_columnB'].'alt="Pixta"/></a>';
         $email_from = $email_config['email_from'];
 
 
@@ -606,26 +608,40 @@ class EventsController extends AppController
             $host = 'http://www.pixta.com.au';
             $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
 
+
             if(!empty($event_config)){
-                if(!empty($event_config['EventEmailConfig']['image_header'])){
+
+                if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
                     $image_header = $host . $event_config['EventEmailConfig']['image_header'];
                 }
-                if(!empty($event_config['EventEmailConfig']['image_footer'])){
+                if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
                     $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
                 }
-                if(!empty($event_config['EventEmailConfig']['image_background'])){
+                if(isset($event_config['EventEmailConfig']['image_background']) && trim($event_config['EventEmailConfig']['image_background'])!=='') {
                     $image_bg = $host . $event_config['EventEmailConfig']['image_background'];
                 }
-                if(!empty($event_config['EventEmailConfig']['image_left'])){
+                if(isset($event_config['EventEmailConfig']['image_left']) && trim($event_config['EventEmailConfig']['image_left'])!=='') {
                     $image_columnA = $host . $event_config['EventEmailConfig']['image_left'];
                 }
-                if(!empty($event_config['EventEmailConfig']['image_right'])){
-                    $image_columnB = $host . $event_config['EventEmailConfig']['image_right'];
+                //event email config new logic - if html present then ignore all other options otherwise should add href on image tag.
+
+                if(isset($event_config['EventEmailConfig']['html_right']) && trim($event_config['EventEmailConfig']['html_right'])!=='') {
+
+                    $image_columnB = $event_config['EventEmailConfig']['html_right'];
+
+                } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
+
+                    $href = isset($event_config['EventEmailConfig']['image_right'])? isset($event_config['EventEmailConfig']['image_right']) : '#';
+                    $image_columnB = '<a href="'.$href.'"> <img style="display: block; src="'.$host . $event_config['EventEmailConfig']['image_right'].'alt="Pixta"/></a>';
+
                 }
-                if(!empty($event_config['EventEmailConfig']['email_from'])){
+                //newly added end
+
+                if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
                 }
             }
+            echo $image_columnB; exit;
 
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
@@ -692,7 +708,7 @@ class EventsController extends AppController
     {
         $media_share = $_GET['media']."_share";
         $redirect_url = $_GET['share_url'];
-        $this->Event->EventEmail->query("update event_emails set $media_share = if null($media_share, 0) + 1 where id = $event_email_id");
+        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
         $this->set('redirect_url', $redirect_url);
 
