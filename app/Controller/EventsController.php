@@ -641,8 +641,7 @@ class EventsController extends AppController
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
                 }
             }
-            echo $image_columnB; exit;
-
+            
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
             }
