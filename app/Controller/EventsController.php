@@ -583,7 +583,7 @@ class EventsController extends AppController
         $image_columnA = $email_config['image_columnA'];
 
         //image right configurable with html/custom href N.B: Do not remove img tag from here!
-        $image_columnB = '<a href="#"> <img style="display: block; src="'.$email_config['image_columnB'].'  alt="Pixta"/></a>';
+        $image_columnB = '<a href="#"> <img style="display: block;" src="'.$email_config['image_columnB'].'"  alt="Pixta"/></a>';
         $email_from = $email_config['email_from'];
 
 
@@ -632,7 +632,7 @@ class EventsController extends AppController
                 } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
 
                     $href = isset($event_config['EventEmailConfig']['image_right'])? isset($event_config['EventEmailConfig']['image_right']) : '#';
-                    $image_columnB = '<a href="'.$href.'"> <img style="display: block; src="'.$host . $event_config['EventEmailConfig']['image_right'].' alt="Pixta"/></a>';
+                    $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
 
                 }
                 //newly added end
