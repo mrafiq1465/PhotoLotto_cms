@@ -524,7 +524,11 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    public function event_email() {
+    public function event_email_test() {
+
+        //$temp = 'Event_id:' . $_GET['event_id'] .' ' . 'Phone Id:' .$_GET['phone_id'] . ' Email To:' . $_GET['email_to'] . ' Message: ' .$_GET['message'];
+        //error_log("$temp\n", 3, "/var/www/html/www.pixta.com.au/email.log");
+
         $this->autoRender = false;
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
@@ -574,12 +578,16 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    public function event_email_test() {
+    public function event_email() {
+
+        $temp = 'Event_id:' . $_GET['event_id'] .' ' . 'Phone Id:' .$_GET['phone_id'] . ' Email To:' . $_GET['email_to'] . ' Message: ' .$_GET['message'];
+        error_log("$temp\n", 3, "/var/www/html/www.pixta.com.au/email.log");
+
         $this->autoRender = false;
         $email_config = Configure::read('email_config');
         $image_header = $email_config['image_header'];
         $image_footer = $email_config['image_footer'];
-        $image_bg = $email_config['image_bg'];
+        $image_bg = '';
         $image_columnA = $email_config['image_columnA'];
 
         //image right configurable with html/custom href N.B: Do not remove img tag from here!
