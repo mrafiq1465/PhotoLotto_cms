@@ -1,5 +1,5 @@
 <table cellpadding="0" cellspacing="0"
-       style="background:#000000 url('<?php echo $image_bg; ?>') ; margin: 0;padding: 0;width: 100%;">
+       style=" background:#000000 url('<?php echo $image_bg; ?>') ; margin: 0;padding: 0;width: 100%;">
     <tr>
         <td>
             <table class="head-wrap"  cellpadding="0" cellspacing="0"
@@ -63,11 +63,11 @@
                                                                 src="http://www.pixta.com.au/img/email_image/def-fb-share.png"
                                                                 style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
 
-                                                        <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=ig&share_url='.$ig_share; ?>"
+                                                        <!--a href="<?php //echo $host.'/events/trace_share/'.$event_email_id.'/?media=ig&share_url='.$ig_share; ?>"
                                                            style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                                 alt="Share on Instagram"
                                                                 src="http://www.pixta.com.au/img/email_image/def-ig-share.png"
-                                                                style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
+                                                                style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a-->
 
                                                         <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=tw&share_url='.$tw_share; ?>"
                                                            style="margin: 0;padding: 0;color: #2BA6CB;"><img
@@ -94,9 +94,7 @@
                                                         align="center" >
                                                         <div
                                                                 style="margin: 0;padding: 0;">
-                                                            <img style="display: block;"
-                                                                 src="<?php echo $image_columnB; ?>"
-                                                                 alt="Pixta"/>
+                                                            <?php echo $image_columnB; ?>
                                                         </div>
                                                     </td>
                                                 </tr>
