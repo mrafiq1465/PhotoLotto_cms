@@ -667,8 +667,8 @@ class EventsController extends AppController
                 //instagram share url
 
                 $ig_share = '';
-                echo $image_columnA = 'http://appevent.s3.amazonaws.com/'.$_GET['photo']; //replaceing leftsided image by get params
-                exit;
+                $image_columnA = 'http://appevent.s3.amazonaws.com/'.$_GET['photo']; //replaceing leftsided image by get params
+
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
