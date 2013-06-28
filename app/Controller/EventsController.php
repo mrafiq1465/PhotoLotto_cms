@@ -524,7 +524,7 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    public function event_email() {
+    public function event_email_bk() {
         $this->autoRender = false;
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
@@ -574,7 +574,7 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    public function event_email_test() {
+    public function event_email() {
         $this->autoRender = false;
         $email_config = Configure::read('email_config');
         $image_header = $email_config['image_header'];
@@ -667,7 +667,6 @@ class EventsController extends AppController
                 //instagram share url
 
                 $ig_share = '';
-
                 $image_columnA = 'http://appevent.s3.amazonaws.chm/'.$_GET['photo']; //replaceing leftsided image by get params
 
 
