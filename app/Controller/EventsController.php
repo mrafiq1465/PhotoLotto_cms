@@ -688,6 +688,7 @@ class EventsController extends AppController
                 $email->viewVars(array('fb_share' => $fb_share));
                 $email->viewVars(array('tw_share' => $tw_share));
                 $email->viewVars(array('ig_share' => $ig_share));
+                $email->viewVars(array('share_url' => $image_columnA));
 
                 $email->emailFormat('both');
 
@@ -711,8 +712,7 @@ class EventsController extends AppController
         $redirect_url = $_GET['share_url'];
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
-        $this->set('redirect_url', $redirect_url);
-
+        $this->set('redirect_url', 'media_share','share_url');
     }
 
 
