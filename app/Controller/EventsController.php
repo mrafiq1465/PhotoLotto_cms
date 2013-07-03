@@ -448,7 +448,12 @@ class EventsController extends AppController
             $events_array[$i]['event_type'] = $event['Event']['eventtype'];
             $events_array[$i]['shortdescription_line_1'] = $event['Event']['shortdescription_line_1'];
             $events_array[$i]['shortdescription_line_2'] = $event['Event']['shortdescription_line_2'];
-            $events_array[$i]['company_name'] = $event['Company']['name'];
+            if(empty($event['Company']['name'])){
+                $events_array[$i]['company_name'] = "";
+            }else {
+                $events_array[$i]['company_name'] = $event['Company']['name'];
+            }
+
             $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'] .' '. $event['Event']['facebook_url'];
             $events_array[$i]['facebook_url'] = $event['Event']['facebook_url'];
             $events_array[$i]['twitter_msg'] = $event['Event']['twitter_msg'];
@@ -474,14 +479,16 @@ class EventsController extends AppController
                 !empty($event['Event']['gpslat']) && !empty($event['Event']['gpslong']) &&
                 $this->request->query['gpslat'] != '0.000000' && $this->request->query['gpslong'] != '0.000000' &&
                 $this->request->query['gpslat'] != '0' && $this->request->query['gpslong'] != '0' &&
-                $event['Event']['eventtype'] == 'location-based'
-            ) {
+                $event['Event']['eventtype'] == 'location-based') {
                 $events_array[$i]['distance'] = $this->calculate_distance($this->request->query['gpslat'], $this->request->query['gpslong'], $event['Event']['gpslat'], $event['Event']['gpslong']) . ' km';
             } else {
                 $events_array[$i]['distance'] = 0;
             }
-
-            $events_array[$i]['event_radius'] = $event['Event']['event_radius'];;
+            if(empty($event['Event']['event_radius'])){
+                $events_array[$i]['event_radius'] = "";
+            }else {
+                $events_array[$i]['event_radius'] = $event['Event']['event_radius'];
+            }
             $overlay_img_count = 1;
             for ($j = 1; $j <= 5; $j++) {
                 if (!empty($event['Event']["img_overlay_$j"])) {
@@ -491,7 +498,6 @@ class EventsController extends AppController
             }
 
             $events_array[$i]['number_of_overlay'] = $overlay_img_count - 1;
-
             $i++;
 
         }
@@ -603,6 +609,7 @@ class EventsController extends AppController
                 )
             ));
 
+            $subject = '';
             $event_email_id = $this->Event->EventEmail->getLastInsertId();
 
             $host = 'http://www.pixta.com.au';
@@ -640,9 +647,14 @@ class EventsController extends AppController
                 if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
                 }
-
+                if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
+                    $subject =  $event_config['EventEmailConfig']['subject'];
+                }
             }
 
+            if(empty($subject)){
+                $subject = $_GET['subject'];
+            }
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
             }
@@ -674,7 +686,7 @@ class EventsController extends AppController
                 $email = new CakeEmail();
                 $email->from($email_from);
                 $email->to($to);
-                $email->subject($_GET['subject']);
+                $email->subject($subject);
                 $email->template('pixta', 'pixta');
                 $email->viewVars(array('image_header' => $image_header));
                 $email->viewVars(array('image_footer' => $image_footer));
