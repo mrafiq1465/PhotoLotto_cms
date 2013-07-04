@@ -138,13 +138,22 @@ $options = array(
                                 $src = (!empty($this->request->data['EventEmailConfig']['image_right']))
                                     ? $this->request->data['EventEmailConfig']['image_right']
                                     : 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image';
-                                echo $this->Html->image($src); ?>
+                                echo $this->Html->image($src);
+
+
+
+                                ?>
                             </div>
+
                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 300px; max-height: 100px; line-height: 20px;"></div>
                             <div>
                                 <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
                                     <?= $this->Form->file('image_right'); ?>
                                 </span>
+                                <?php
+                                if (!empty($this->request->data['EventEmailConfig']['image_right']))
+                                    echo '<a href="#" class="btn" id="custom_remove" >Remove</a>';
+                                ?>
                                 <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                             </div>
                         </div>
@@ -284,6 +293,14 @@ $('#image_right_remove').click(function(){
 
         fr.readAsDataURL(this.files[0]);
 
+    });
+
+    //add custom code for remove existing image during edit.
+
+    $('#custom_remove').click(function(){
+        var $imageholder = $('#EventEmailConfigImageRight').parents('.row-fluid').first().find('img');
+        $imageholder.attr('src', 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image');
+        $(this).hide();
     });
 
 });
