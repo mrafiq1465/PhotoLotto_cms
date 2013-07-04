@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property Event $Event
  */
 
-require_once('facebook/facebook.php');
+//require_once('facebook/facebook.php');
 
 class EventsController extends AppController
 {
@@ -861,12 +861,11 @@ class EventsController extends AppController
     	fclose($csv_file);
     }
 
+    /*
     protected $comp_config = array(
         'app_permissions' => 'email,publish_actions,publish_stream'
     );
 
-
-   /*
     function __construct()
     {
         parent::__construct();
@@ -1152,6 +1151,5 @@ HTML;
         die('');
     }
 */
-
 
 }

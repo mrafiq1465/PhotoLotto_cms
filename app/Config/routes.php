@@ -40,7 +40,7 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/eventlist/*', array('controller' => 'events', 'action' => 'eventlist'));
 
-    Router::connect('/events/share', array('controller' => 'events', 'action' => 'share'));
+    //Router::connect('/events/share', array('controller' => 'events', 'action' => 'share'));
     Router::connect('/events', array('controller' => 'events', 'action' => 'index'));
     Router::connect('/events/add', array('controller' => 'events', 'action' => 'add'));
     Router::connect('/events/action_image', array('controller' => 'events', 'action' => 'action_image'));
