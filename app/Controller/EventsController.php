@@ -861,19 +861,11 @@ class EventsController extends AppController
     	fclose($csv_file);
     }
 
-
-
-
     protected $comp_config = array(
         'app_permissions' => 'email,publish_actions,publish_stream'
     );
 
-    /**
-     * In CI, construct() is called when the class is first loaded,
-     * which means you gotta be real careful about what you're loading.
-     * You make the user wait for everything you do here (yes, it's blocking).
-     * Consider autoloading whenever possible.
-     */
+
    /*
     function __construct()
     {
@@ -892,7 +884,7 @@ class EventsController extends AppController
             $this->error_response('facebook library is not loaded');
         }
     }
-*/
+
     // https://graph.facebook.com/oauth/access_token?client_id=160999394058419&client_secret=4d3d580a7d07334878b26942c77d1d7a&grant_type=client_credentials
     protected $app_access_token = '160999394058419|S6I7SP_eWkKii5pNgp9moEcbS9M';
 
@@ -903,9 +895,6 @@ class EventsController extends AppController
         die('---');
     }
 
-    /**
-     * Checks if a user has a Facebook account or not.
-     */
     protected function no_account_callback($get)
     {
 
@@ -1008,9 +997,7 @@ SCRIPT;
 
         die('');
     }
-    /**
-     * Core HTML loader for connect component
-     */
+
 
     function html()
     {
@@ -1053,9 +1040,7 @@ HTML;
         die('');
     }
 
-    /**
-     * Core login function that drives the redirect to Facebook server.
-     */
+
     function login()
     {
         $this->_destroy();
@@ -1067,9 +1052,7 @@ HTML;
 
     }
 
-    /**
-     * Core login function that handles the redirect back from Facebook server.
-     */
+
     function login_return()
     {
         header('Access-Control-Allow-Origin: *');
@@ -1108,9 +1091,7 @@ HTML;
 
 		<script type="text/javascript">
 		    //window.opener._fb_connected = ' . (!empty($user) ? 'true' : 'false') . ';
-			/*
-				user-data: ' . $user_data . '\n\n query-string: ' . $error_data . '
-			*/
+
 			window.close();
 		</script>
 		</html>
@@ -1119,11 +1100,6 @@ HTML;
     }
 
 
-
-    /**
-     * Returns the logged in user retrieved through facebook php api.
-     * @return array|null
-     */
     protected function get_facebook_user()
     {
         try {
@@ -1175,7 +1151,7 @@ HTML;
         var_dump($this->facebook);
         die('');
     }
-
+*/
 
 
 }
