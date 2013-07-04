@@ -16,7 +16,7 @@ class EventsController extends AppController
     public $components = array('RequestHandler');
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmailConfig');
-    public $fbappid = 'c';
+    public $fbappid = '144734069055490';
 
 
     /*
