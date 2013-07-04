@@ -765,6 +765,7 @@ class EventsController extends AppController
         if($rank == 'up'){
 
             $sql_1 = "update events set view_order=view_order+1 where view_order='$view_order' - 1";
+            $sql_1 = "update events set view_order=view_order+1 where view_order='$view_order' - 1";
             $db->rawQuery($sql_1);
             $sql_2 = "update events set view_order=view_order-1 where id='$id'";
             $db->rawQuery($sql_2);
@@ -873,6 +874,7 @@ class EventsController extends AppController
      * You make the user wait for everything you do here (yes, it's blocking).
      * Consider autoloading whenever possible.
      */
+   /*
     function __construct()
     {
         parent::__construct();
@@ -890,7 +892,7 @@ class EventsController extends AppController
             $this->error_response('facebook library is not loaded');
         }
     }
-
+*/
     // https://graph.facebook.com/oauth/access_token?client_id=160999394058419&client_secret=4d3d580a7d07334878b26942c77d1d7a&grant_type=client_credentials
     protected $app_access_token = '160999394058419|S6I7SP_eWkKii5pNgp9moEcbS9M';
 
