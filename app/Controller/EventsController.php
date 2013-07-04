@@ -861,7 +861,7 @@ class EventsController extends AppController
     	fclose($csv_file);
     }
 
-    /*
+
     protected $comp_config = array(
         'app_permissions' => 'email,publish_actions,publish_stream'
     );
@@ -1150,6 +1150,6 @@ HTML;
         var_dump($this->facebook);
         die('');
     }
-*/
+
 
 }

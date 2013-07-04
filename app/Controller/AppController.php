@@ -99,12 +99,10 @@ class AppController extends Controller {
             array('events','event_email'),
             array('events','event_email_test'),
             array('events','action_image'),
-            array('events','trace_share')
-            /*
+            array('events','trace_share'),
             array('events','share'),
             array('events','login'),
             array('events','logged_in')
-            */
         );
 
         $included_admin = array(
