@@ -26,12 +26,12 @@ class Event extends AppModel {
  */
 	public $belongsTo = array(
 		'Company' => array(
-			'className' => 'Company',
-			'foreignKey' => 'company_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
+            'className' => 'Company',
+            'foreignKey' => 'company_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'updated_by',
@@ -72,7 +72,14 @@ class Event extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        )
+        ),
+        'EventEmailConfig' => array(
+            'className' => 'EventEmailConfig',
+            'foreignKey' => 'event_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
 	);
 
 }
