@@ -434,7 +434,6 @@ class EventsController extends AppController
         );
 
         $events = $this->Event->find('all', $options);
-        //var_dump($events);
         $events_array = array();
         $i = 0;
 
@@ -453,6 +452,13 @@ class EventsController extends AppController
                 $events_array[$i]['company_name'] = "";
             }else {
                 $events_array[$i]['company_name'] = $event['Company']['name'];
+            }
+
+            if(!empty($event['EventEmailConfig'][0]['subject'])){
+                $events_array[$i]['email_subject'] = $event['EventEmailConfig'][0]['subject'];
+            }
+            else {
+                $events_array[$i]['email_subject'] = "Hi you've been sent a photo via PIXTA.. ..";
             }
 
             $events_array[$i]['facebook_msg'] = $event['Event']['facebook_msg'] .' '. $event['Event']['facebook_url'];
@@ -687,7 +693,7 @@ class EventsController extends AppController
                 $email = new CakeEmail();
                 $email->from($email_from);
                 $email->to($to);
-                $email->subject($subject);
+                $email->subject($_GET['subject']);
                 $email->template('pixta', 'pixta');
                 $email->viewVars(array('image_header' => $image_header));
                 $email->viewVars(array('image_footer' => $image_footer));
@@ -861,7 +867,7 @@ class EventsController extends AppController
     	fclose($csv_file);
     }
 
-
+    /*
     protected $comp_config = array(
         'app_permissions' => 'email,publish_actions,publish_stream'
     );
@@ -1150,6 +1156,6 @@ HTML;
         var_dump($this->facebook);
         die('');
     }
-
+*/
 
 }

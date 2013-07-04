@@ -257,6 +257,10 @@ $(document).ready(function(){
 
     });
 
+$('#image_right_remove').click(function(){
+
+
+});
 
     $('#EventEmailConfigImageRight').change(function() {
 
