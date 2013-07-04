@@ -1,4 +1,3 @@
-
 <!-- HELPER CLASS -->
 <div class="helper">
     DESKTOP: RED / LAPTOP: ORANGE / TABLET: GREEN / PHONE: BLUE
@@ -9,10 +8,10 @@
     <div class="container">
         <div class="row">
             <div class="span3">
-                <img src="http://www.pixta.com.au/app/img/pixta-logo.jpg" width="149" height="37" class="logo" alt="Pixta - Instagram for Brands" title="Pixta - Instagram for Brands" />
+                <img src="img/pixta-logo.jpg" width="149" height="37" class="logo" alt="Pixta - Instagram for Brands" title="Pixta - Instagram for Brands" />
             </div>
             <div class="span4 offset5 text-right">
-                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
+                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
                 <!--<a href="#" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'Google Play Button']);"><img src="img/google-play.png" width="100" height="30" alt="Available on Google Play" title="Get Pixta on Google Play" /></a>-->
             </div>
         </div>
@@ -29,40 +28,37 @@
                         <div class="slider-edge"></div>
                         <div class="slide-deck">
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app//img/slider/artistic.jpg" width="200" height="200" alt="Artistic" />
+                                <img src="img/slider/westfield.jpg" width="200" height="200" alt="Westfield" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/funny.jpg" width="200" height="200" alt="Funny" />
+                                <img src="img/slider/aami.jpg" width="200" height="200" alt="AAMI" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/food.jpg" width="200" height="200" alt="Food" />
+                                <img src="img/slider/brazilian-beauty.jpg" width="200" height="200" alt="Brazilian Beauty" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/westfield.jpg" width="200" height="200" alt="Inspirational" />
+                                <img src="img/slider/levis.jpg" width="200" height="200" alt="Levis" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/inspirational.jpg" width="200" height="200" alt="Inspirational" />
+                                <img src="img/slider/brazilian-beauty02.jpg" width="200" height="200" alt="Brazilian Beauty" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/aami.jpg" width="200" height="200" alt="Inspirational" />
+                                <img src="img/slider/brazilian-beauty03.jpg" width="200" height="200" alt="Brazilian Beauty" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/hipster.jpg" width="200" height="200" alt="Hipster" />
+                                <img src="img/slider/hyundai.jpg" width="200" height="200" alt="Hyundai" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/brazilian-beauty.jpg" width="200" height="200" alt="Inspirational" />
+                                <img src="img/slider/menshealth.jpg" width="200" height="200" alt="Men's Health" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/coffee.jpg" width="200" height="200" alt="Coffee" />
+                                <img src="img/slider/menshealth02.jpg" width="200" height="200" alt="Men's Health" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/levis.jpg" width="200" height="200" alt="Inspirational" />
+                                <img src="img/slider/nintendo.jpg" width="200" height="200" alt="Nintendo" />
                             </div>
                             <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/girls.jpg" width="200" height="200" alt="Girls" />
-                            </div>
-                            <div class="photo">
-                                <img src="http://www.pixta.com.au/app/img/slider/beer.jpg" width="200" height="200" alt="Beer" />
+                                <img src="img/slider/urbanathlon.jpg" width="200" height="200" alt="Urbanathlon" />
                             </div>
                         </div>
                     </div>
@@ -109,7 +105,7 @@
             <div class="row">
                 <div class="span4 description">
                     <div class="text-center">
-                        <img src="http://www.pixta.com.au/app/img/branded-photos.png" width="300" height="300" alt="Branded photos" />
+                        <img src="img/branded-photos.png" width="300" height="300" alt="Branded photos" />
                     </div>
                     <h3>Branded Photos</h3>
                     <div class="lead">
@@ -127,7 +123,7 @@
                 </div>
                 <div class="span4 description">
                     <div class="text-center">
-                        <img src="http://www.pixta.com.au/app/img/smintegration.png" width="300" height="300" alt="Social media integration" />
+                        <img src="img/smintegration.png" width="300" height="300" alt="Social media integration" />
                     </div>
                     <h3>Facebook, Twitter &amp; Instagram Integration</h3>
                     <div class="lead">
@@ -146,7 +142,7 @@
                 </div>
                 <div class="span4 description">
                     <div class="text-center">
-                        <img src="http://www.pixta.com.au/app/img/photo-filters.png" width="300" height="300" alt="Photo filters" />
+                        <img src="img/photo-filters.png" width="300" height="300" alt="Photo filters" />
                     </div>
                     <h3>Photo Filters</h3>
                     <div class="lead">
@@ -154,12 +150,12 @@
                     </div>
                     <div class="more">
                         <div class="img-fader">
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters01.jpg" width="300" height="300" alt="Pixta photo filters" />
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters02.jpg" width="300" height="300" alt="Pixta photo filters" />
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters03.jpg" width="300" height="300" alt="Pixta photo filters" />
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters04.jpg" width="300" height="300" alt="Pixta photo filters" />
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters05.jpg" width="300" height="300" alt="Pixta photo filters" />
-                            <img src="http://www.pixta.com.au/app/img/more-info/filters06.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters01.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters02.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters03.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters04.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters05.jpg" width="300" height="300" alt="Pixta photo filters" />
+                            <img src="img/more-info/filters06.jpg" width="300" height="300" alt="Pixta photo filters" />
                         </div>
                     </div>
                     <a class="btn btn-large btn-primary" data-name="See Example" onClick="_gaq.push(['_trackEvent', 'Main Content', 'See Example', 'Photo Filters']);">See Example</a>
@@ -172,7 +168,7 @@
             <div class="row">
                 <div class="span4 description">
                     <div class="text-center">
-                        <img src="http://www.pixta.com.au/app/img/data-capture.png" width="300" height="300" alt="Redemption and Data Capture" />
+                        <img src="img/data-capture.png" width="300" height="300" alt="Redemption and Data Capture" />
                     </div>
                     <h3>Consumer Redemption &amp; Data Capture</h3>
                     <div class="lead">
@@ -191,7 +187,7 @@
                 </div>
                 <div class="span4 description">
                     <div class="text-center">
-                        <img src="http://www.pixta.com.au/app/img/events.png" width="300" height="300" alt="Worldwide Events" />
+                        <img src="img/events.png" width="300" height="300" alt="Worldwide Events" />
                     </div>
                     <h3>Location Based &amp; National Events</h3>
                     <div class="lead">
@@ -216,7 +212,7 @@
                     </div>
                     <div class="more">
                         <div class="img-container">
-                            <img src="http://www.pixta.com.au/app/img/more-info/aggregator01.jpg" width="300" height="192" alt="Photo aggregator" />
+                            <img src="img/more-info/aggregator01.jpg" width="300" height="192" alt="Photo aggregator" />
                         </div>
                     </div>
                     <a class="btn btn-large btn-primary" data-name="See Example" onClick="_gaq.push(['_trackEvent', 'Main Content', 'See Example', 'Photo Aggregators']);">See Example</a>
@@ -231,7 +227,7 @@
         <div class="row">
             <div class="span6">
                 <p class="mediakit-wrapper clearfix">
-                    <a href="http://www.pixta.com.au/app/PIXTA_070613.pdf" target="_blank" onClick="_gaq.push(['_trackEvent', 'Media Kit', 'Click', 'Media Kit Download Button']);"><img src="http://www.pixta.com.au/app/img/mediakit.png" alt="Pixta Media Kit" title="Download the Pixta Media Kit" /></a>
+                    <a href="PIXTA_070613.pdf" target="_blank" onClick="_gaq.push(['_trackEvent', 'Media Kit', 'Click', 'Media Kit Download Button']);"><img src="img/mediakit.png" alt="Pixta Media Kit" title="Download the Pixta Media Kit" /></a>
                 </p>
             </div>
             <div class="span6">
@@ -288,7 +284,7 @@
                 <small>&copy; 2013 Pixta. All rights reserved. <!--ABN 000 000 000.--></small>
             </div>
             <div class="span4 offset2 text-right">
-                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
+                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'App Store Button']);"><img src="img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
                 <!--<a href="#" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'Google Play Button']);"><img src="img/google-play.png" width="100" height="30" alt="Available on Google Play" title="Get Pixta on Google Play" /></a>-->
             </div>
         </div>
@@ -296,9 +292,9 @@
 </div>
 
 <!-- SCRIPTS -->
-<script src="http://www.pixta.com.au/app/js/jquery1.9.1.min.js"></script>
-<script src="http://www.pixta.com.au/app/js/bootstrap.min.js"></script>
-<script src="http://www.pixta.com.au/app/js/jquery.fitvids.js"></script>
+<script src="js/jquery1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fitvids.js"></script>
 <script>
     $(document).ready(function(){
         $("#fitVimeo").fitVids();
@@ -322,7 +318,7 @@
 
             // Email
             var email = $('#email').val();
-            var emailFilter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            var emailFilter = /^[a-zA-Z0-9_.-]+@[a-z0-9][a-z0-9\-]{1,64}(\.[a-z]{2,4}|[a-z]{2,3}\.[a-z]{2})$/i;
             var emailValid = emailFilter.test(email);
             if (emailValid != true) {
                 $('#email-error').fadeIn();
@@ -341,7 +337,7 @@
             var dataString = 'name=' + name + '&email=' + email + '&message=' + message;
             $.ajax({
                 type: 'POST',
-                url: 'http://www.pixta.com.au/app/contact-form.php',
+                url: 'contact-form.php',
                 data: dataString,
                 success: function() {
                     // On Success
