@@ -16,10 +16,10 @@ class EventsController extends AppController
     public $components = array('RequestHandler');
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
-    public $fbappid = '144734069055490';
+    public $fbappid = '469543539748993';
 
-    var $__fbApiKey = '549616571765083';
-    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
+    var $__fbApiKey = '469543539748993';
+    var $__fbSecret = '3bb6608b55f2163d1348b32d3d3253fd';
     /**
      * index method
      *
