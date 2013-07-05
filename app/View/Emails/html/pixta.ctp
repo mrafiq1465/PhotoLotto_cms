@@ -57,7 +57,7 @@
                                                                 alt="Fun"
                                                                 style="display: block;margin: 0;padding: 0;max-width: 100%;"></a>
 
-                                                        <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=fb&share_url='.$fb_share. '&image_url='.$share_url ; ?>"
+                                                        <a href="<?php echo $fb_share; ?>"
                                                            style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                                 alt="Share on Facebook"
                                                                 src="http://www.pixta.com.au/img/email_image/def-fb-share.png"

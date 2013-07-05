@@ -15,8 +15,11 @@ class EventsController extends AppController
 
     public $components = array('RequestHandler');
     public $helpers = array('Text');
-    public $uses = array('Event', 'EventEmailConfig');
+    public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
+    public $fbappid = '144734069055490';
 
+    var $__fbApiKey = '549616571765083';
+    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
     /**
      * index method
      *
@@ -64,7 +67,7 @@ class EventsController extends AppController
         if ($this->RequestHandler->isRss()) {
             $event = $this->Event->read(null, $id);
             // You should import Sanitize
-           var_dump($event);
+           //var_dump($event);
 
             return $this->set(compact('event'));
         }
@@ -109,7 +112,6 @@ class EventsController extends AppController
             $this->request->data[$field] = '';
         }
     }
-
 
     /**
      * add method
@@ -668,16 +670,18 @@ class EventsController extends AppController
             else {
                 $to=preg_split("([, ;\n])", $_GET['email_to']);
 
-                /*
-                $image = file_get_contents('http://appevent.s3.amazonaws.chm/'.$_GET['photo']);
-                $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
-                fwrite($save_file, $image);
-                fclose($save_file);
-                */
-
                 //Fb share url
 
-                $fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+
+                //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+                //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
+                //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
+
+                $email_config_id = 0;
+                if(!empty($event_config['EventEmailConfig']['id']))
+                    $email_config_id = $event_config['EventEmailConfig']['id'];
+
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&email_config_id=" .$email_config_id;
 
                 //twitter share url
 
@@ -728,11 +732,14 @@ class EventsController extends AppController
     public function trace_share($event_email_id=null)
     {
         $media_share = $_GET['media']."_share";
-        $redirect_url = $_GET['share_url'];
+
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
-        $this->set('redirect_url',$redirect_url);
-        //$this->set('redirect_url', 'media_share','share_url');
+        if(isset($_GET['share_url']))
+            $this->set('redirect_url',$_GET['share_url']);
+        else
+            $this->redirect('/');
+
     }
 
 
@@ -867,60 +874,96 @@ class EventsController extends AppController
     	fclose($csv_file);
     }
 
+
+    public function share() {
+
+        $this->autoRender = false;
+
+        $this->facebook = new Facebook(array(
+            'appId'  => $this->__fbApiKey,
+            'secret' => $this->__fbSecret,
+            'fileUpload' => true
+        ));
+
+        if ($this->facebook->getUser()) {
+
+            //get image in local from bucket
+            $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+            $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
+            fwrite($save_file, $image);
+            fclose($save_file);
+            $file = IMAGES . 'email_image' . DS . $_GET['photo'];
+
+            //add to wall
+            $attachment = array('message' => 'PIXTA is now on the App Store',
+                'name' => 'PIXTA is now on the App Store',
+                'caption' => 'PIXTA is now on the App Store',
+                'link' => 'http://www.pixta.com.au',
+                'description' => 'Pixta Image Share',
+                'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
+                'image'=> '@' . realpath($file)
+            );
+
+            $this->facebook->api("/me/photos", "post", $attachment);
+
+            // $this->facebook->api("/me/feed" , 'post', json_encode($attachment));
+            // $result = $this->facebook->api('/me/feed/','post',);
+
+            $email_config_id = $_GET['email_config_id'];
+            if($email_config_id > 0)
+                $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
+
+        } else {
+
+            $loginUrl = $this->facebook->getLoginUrl(
+                array('scope' => 'publish_stream')
+            );
+            echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
+            exit();
+            //$this->redirect($loginUrl);
+        }
+
+    }
+
+
     /*
-    protected $comp_config = array(
-        'app_permissions' => 'email,publish_actions,publish_stream'
-    );
+        protected $comp_config = array(
+            'app_permissions' => 'email,publish_actions,publish_stream'
+        );
 
-    function __construct()
-    {
-        parent::__construct();
 
-        // Load facebook app configuration
-        $config = array();
-        $config['appId'] = '160999394058419';
-        $config['secret'] = '4d3d580a7d07334878b26942c77d1d7a';
-        $config['cookie'] = true;
 
-        $this->facebook = new Facebook($config);
+        // https://graph.facebook.com/oauth/access_token?client_id=160999394058419&client_secret=4d3d580a7d07334878b26942c77d1d7a&grant_type=client_credentials
+        //protected $app_access_token = '160999394058419|S6I7SP_eWkKii5pNgp9moEcbS9M';
 
-        if (!is_object($this->facebook)) {
-            // facebook library is not loaded
-            $this->error_response('facebook library is not loaded');
+        //protected $user_access_token = 'CAACSbZAexILMBAOIubRXjdwLdWBlk5zSRwHZAfRg0YWZAqZC0Fb7lrOzGteGJG97hXLpQmiN74dvYz5nchtp5hIIzHNMgpqEhAvQkGwLm9KF7nleJFHOVKXIfvZAhCQKI6k9eYwDyQSBEsN9d7Bvj';
+
+        protected function error_response($msg) {
+            var_dump($msg);
+            die('---');
         }
-    }
 
-    // https://graph.facebook.com/oauth/access_token?client_id=160999394058419&client_secret=4d3d580a7d07334878b26942c77d1d7a&grant_type=client_credentials
-    protected $app_access_token = '160999394058419|S6I7SP_eWkKii5pNgp9moEcbS9M';
+        protected function no_account_callback($get)
+        {
 
-    protected $user_access_token = 'CAACSbZAexILMBAOIubRXjdwLdWBlk5zSRwHZAfRg0YWZAqZC0Fb7lrOzGteGJG97hXLpQmiN74dvYz5nchtp5hIIzHNMgpqEhAvQkGwLm9KF7nleJFHOVKXIfvZAhCQKI6k9eYwDyQSBEsN9d7Bvj';
-
-    protected function error_response($msg) {
-        var_dump($msg);
-        die('---');
-    }
-
-    protected function no_account_callback($get)
-    {
-
-    }
-
-    protected function account_callback($user)
-    {
-
-    }
-
-    function logged_in()
-    {
-        header('Access-Control-Allow-Origin: *');
-        if (isset($_SESSION['fb_connected'])) {
-            echo '{"connected": true}';
         }
-        else {
-            echo '{"connected": false}';
+
+        protected function account_callback($user)
+        {
+
         }
-        die('');
-    }
+
+        function logged_in()
+        {
+            header('Access-Control-Allow-Origin: *');
+            if (isset($_SESSION['fb_connected'])) {
+                echo '{"connected": true}';
+            }
+            else {
+                echo '{"connected": false}';
+            }
+            die('');
+        }
 
 
     function script() {
@@ -998,7 +1041,7 @@ class EventsController extends AppController
                         return false;
                     });
                 };
-SCRIPT;
+    SCRIPT;
 
         die('');
     }
@@ -1011,7 +1054,7 @@ SCRIPT;
         echo <<<HTML
             <a class="share" href="#" style="display:block;float:left;">Share</a>
 
-HTML;
+        HTML;
         die('');
     }
 
@@ -1026,136 +1069,142 @@ HTML;
         }
     }
 
-    protected function _login() {
-        $session = session_id();
-        $redirect_uri = (isset($_SERVER['HTTPS']) ? "https://" : "http://")
-            . $_SERVER['HTTP_HOST'] . ''//$_SERVER['SCRIPT_NAME']
-            . '/facebook/login_return/?'
-            . (!empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] . '&' : '')
-            . "psession={$session}";
+        protected function _login() {
+            $session = session_id();
+            $redirect_uri = (isset($_SERVER['HTTPS']) ? "https://" : "http://")
+                . $_SERVER['HTTP_HOST'] . ''//$_SERVER['SCRIPT_NAME']
+                . '/facebook/login_return/?'
+                . (!empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] . '&' : '')
+                . "psession={$session}";
 
-        $auth_config = array(
-            'scope' => $this->comp_config['app_permissions'], //Extended Permissions requested from the API at time of login
-            'display' => 'popup', //Dialog Form Factors used to display login page
-            'redirect_uri' => $redirect_uri //Callback URL once user is authenticated
-        );
-        echo "Connecting with facebook. Please wait...";
-        $login_url = $this->facebook->getLoginUrl($auth_config);
-        header('Location: ' . $login_url);
-        die('');
-    }
-
-
-    function login()
-    {
-        $this->_destroy();
-
-        // Now drive the user to Facebook redirect for login/permission/etc.
-        //$user = $this->get_facebook_user();
-
-        $this->_login();
-
-    }
-
-
-    function login_return()
-    {
-        header('Access-Control-Allow-Origin: *');
-        $user = $this->get_facebook_user();
-        $user_data = var_export($user, true);
-        $error_data = var_export($_GET, true);
-
-        // if returned without error but still we don't have user info
-        // then how come we reached this page ?
-        // so retry login in facebook !
-        if (!empty($user)) {
-            $this->account_callback($user);
-            $_SESSION['fb_connected'] = 1;
+            $auth_config = array(
+                'scope' => $this->comp_config['app_permissions'], //Extended Permissions requested from the API at time of login
+                //'display' => 'popup', //Dialog Form Factors used to display login page
+                'redirect_uri' => $redirect_uri //Callback URL once user is authenticated
+            );
+            echo "Connecting with facebook. Please wait...";
+            $login_url = $this->facebook->getLoginUrl($auth_config);
+            header('Location: ' . $login_url);
+            die('');
         }
-        else if (isset($_GET['error_reason'])) {
-            $this->no_account_callback($_GET);
+
+
+        function login()
+        {
+            $this->_destroy();
+
+            // Now drive the user to Facebook redirect for login/permission/etc.
+            //$user = $this->get_facebook_user();
+
+            $this->_login();
+
         }
-        else {
 
-            // keep a session information to track number of tries.
-            // if this is the first try then
-            if (!isset($_SESSION['connect_return_nouser'])) {
-                $_SESSION['connect_return_nouser'] = 1;
 
-                // sleep 1 sec to ensure a delay between successive requests
-                // to sync using delays/timers. We should revisit this.
-                sleep(1);
-                $this->_login();
+        function login_return()
+        {
+            header('Access-Control-Allow-Origin: *');
+            $user = $this->get_facebook_user();
+            $user_data = var_export($user, true);
+            $error_data = var_export($_GET, true);
+
+            // if returned without error but still we don't have user info
+            // then how come we reached this page ?
+            // so retry login in facebook !
+            if (!empty($user)) {
+                $this->account_callback($user);
+                $_SESSION['fb_connected'] = 1;
             }
-        }
-        unset($_SESSION['connect_return_nouser']);
-
-        //setcookie('fb_connected', true, time() + 1000000, '/', $_SERVER['HTTP_HOST']);
-        echo '
-		<html>
-
-		<script type="text/javascript">
-		    //window.opener._fb_connected = ' . (!empty($user) ? 'true' : 'false') . ';
-
-			window.close();
-		</script>
-		</html>
-		';
-        die('');
-    }
-
-
-    protected function get_facebook_user()
-    {
-        try {
-            $user_id = $this->facebook->getUser();
-            if ($user_id) {
-                return array('fb_user_id' => $user_id, 'access_token' => $this->facebook->getAccessToken());
+            else if (isset($_GET['error_reason'])) {
+                $this->no_account_callback($_GET);
             }
-        } catch (Exception $e) {
-            var_dump($e);
+            else {
+
+                // keep a session information to track number of tries.
+                // if this is the first try then
+                if (!isset($_SESSION['connect_return_nouser'])) {
+                    $_SESSION['connect_return_nouser'] = 1;
+
+                    // sleep 1 sec to ensure a delay between successive requests
+                    // to sync using delays/timers. We should revisit this.
+                    sleep(1);
+                    $this->_login();
+                }
+            }
+            unset($_SESSION['connect_return_nouser']);
+
+            //setcookie('fb_connected', true, time() + 1000000, '/', $_SERVER['HTTP_HOST']);
+            echo '
+            <html>
+
+            <script type="text/javascript">
+                //window.opener._fb_connected = ' . (!empty($user) ? 'true' : 'false') . ';
+
+                window.close();
+            </script>
+            </html>
+            ';
+            die('');
         }
 
-        return null;
-    }
 
-    public function share() {
-        header('Access-Control-Allow-Origin: *');
+        protected function get_facebook_user()
+        {
+            try {
+                $user_id = $this->facebook->getUser();
+                if ($user_id) {
+                    return array('fb_user_id' => $user_id, 'access_token' => $this->facebook->getAccessToken());
+                }
+            } catch (Exception $e) {
+                var_dump($e);
+            }
 
-        $attachment = $_POST;
+            return null;
+        }
 
-//        array(
-//            'message' => $msg,
-//            'name'    => $title,
-//            'link'    => $uri,
-//            'description' => $desc,
-//            'picture' => $pic,
-//            'actions' => json_encode(array('name' => $action_name,'link' => $action_link))
-//        );
-//    )
+        public function share() {
+            header('Access-Control-Allow-Origin: *');
 
-        $user = $this->get_facebook_user();
-        $attachment['access_token'] = $user['access_token'];
+            //$attachment = $_POST;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,'https://graph.facebook.com/' . $user['fb_user_id'].'/feed');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $attachment);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  //to suppress the curl output
-        $result = curl_exec($ch);
-        echo $result;
-        curl_close ($ch);
-        die('');
-    }
+            array(
+                 'message' => "test",
+                 'name'    => "Test Title",
+                 'link'    => $uri,
+                 'description' => $desc,
+                 'picture' => $pic,
+                 'actions' => json_encode(array('name' => $action_name,'link' => $action_link))
+            );
 
-    public function view_user_access_token() {
-        $this->facebook->setAccessToken(null);
-        echo $this->facebook->getAccessToken();
-        var_dump($this->facebook);
-        die('');
-    }
-*/
 
+
+
+            $user = $this->get_facebook_user();
+
+            if(!$user)
+                $this->login();
+
+            $attachment['access_token'] = $user['access_token'];
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,'https://graph.facebook.com/' . $user['fb_user_id'].'/feed');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $attachment);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  //to suppress the curl output
+            $result = curl_exec($ch);
+            echo $result;
+            curl_close ($ch);
+            die('');
+        }
+
+        public function view_user_access_token() {
+            $this->facebook->setAccessToken(null);
+            echo $this->facebook->getAccessToken();
+            var_dump($this->facebook);
+            die('');
+        }
+
+        */
 }

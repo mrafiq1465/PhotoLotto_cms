@@ -3,3 +3,4 @@ app/tmp/*
 app/Config/database.php
 app/Test/*
 app/webroot/img/events/*
+app/webroot/img/email_configs/*

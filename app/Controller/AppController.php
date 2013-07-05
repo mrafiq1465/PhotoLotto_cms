@@ -21,6 +21,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::import('Vendor', 'facebook/facebook');
 
 /**
  * Application Controller
@@ -33,6 +34,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
+
     public $helpers = array(
         'Html'      => array('className' => 'TwitterBootstrap.BootstrapHtml'),
         'Form'      => array('className' => 'TwitterBootstrap.BootstrapForm'),
@@ -44,8 +46,19 @@ class AppController extends Controller {
         'Cookie',
         'RequestHandler',
     );
+/*
+    function __construct() {
+        // parent::__construct();
+        // $GLOBALS['facebook_config']['debug'] = NULL;
 
+                $this->facebook = new Facebook(array(
+                    'appId'  => $this->__fbApiKey,
+                    'secret' => $this->__fbSecret,
+                    'fileUpload' => true
+                ));
 
+    }
+*/
     // If current user is not logged in, prompt for login
     function requireLogin() {
         if (!$this->Session->check('User')) {
@@ -102,6 +115,7 @@ class AppController extends Controller {
             array('events','trace_share'),
             array('events','share'),
             array('events','login'),
+            array('events','view'),
             array('events','logged_in')
         );
 

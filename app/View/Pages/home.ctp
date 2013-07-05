@@ -292,9 +292,9 @@
 </div>
 
 <!-- SCRIPTS -->
-<script src="js/jquery1.9.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
+<script src="http://www.pixta.com.au/app/js/jquery1.9.1.min.js"></script>
+<script src="http://www.pixta.com.au/app/js/bootstrap.min.js"></script>
+<script src="http://www.pixta.com.au/app/js/jquery.fitvids.js"></script>
 <script>
     $(document).ready(function(){
         $("#fitVimeo").fitVids();

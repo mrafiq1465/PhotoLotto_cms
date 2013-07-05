@@ -33,7 +33,7 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
     <!-- scripts -->
     <?php
 
-        echo $this->Html->meta('favicon.ico','/favicon.ico', array('type' => 'icon'));
+        echo $this->Html->meta('favicon.ico','/img/favicon.ico', array('type' => 'icon'));
 
         echo $this->Html->script(
             array(
