@@ -15,29 +15,11 @@ class EventsController extends AppController
 
     public $components = array('RequestHandler');
     public $helpers = array('Text');
-    public $uses = array('Event', 'EventEmailConfig');
+    public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
     public $fbappid = '144734069055490';
 
-
-    /*
-    function beforeFilter()
-    {
-        parent::beforeFilter();
-
-        // Load facebook app configuration
-        $config = array();
-        $config['appId'] = '144734069055490';
-        $config['secret'] = '783af0d0c0aeee9c4cb51b4536901be5';
-        $config['cookie'] = true;
-
-        $this->facebook = new Facebook($config);
-
-        if (!is_object($this->facebook)) {
-            // facebook library is not loaded
-            $this->error_response('facebook library is not loaded');
-        }
-    }
-    */
+    var $__fbApiKey = '549616571765083';
+    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
     /**
      * index method
      *
@@ -85,7 +67,7 @@ class EventsController extends AppController
         if ($this->RequestHandler->isRss()) {
             $event = $this->Event->read(null, $id);
             // You should import Sanitize
-           var_dump($event);
+           //var_dump($event);
 
             return $this->set(compact('event'));
         }
@@ -130,7 +112,6 @@ class EventsController extends AppController
             $this->request->data[$field] = '';
         }
     }
-
 
     /**
      * add method
@@ -689,19 +670,18 @@ class EventsController extends AppController
             else {
                 $to=preg_split("([, ;\n])", $_GET['email_to']);
 
-                /*
-                $image = file_get_contents('http://appevent.s3.amazonaws.chm/'.$_GET['photo']);
-                $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
-                fwrite($save_file, $image);
-                fclose($save_file);
-                */
-
                 //Fb share url
 
 
                 //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
                 //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
-                $fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
+                //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
+
+                $email_config_id = 0;
+                if(!empty($event_config['EventEmailConfig']['id']))
+                    $email_config_id = $event_config['EventEmailConfig']['id'];
+
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&email_config_id=" .$email_config_id;
 
                 //twitter share url
 
@@ -893,6 +873,58 @@ class EventsController extends AppController
 
     	fclose($csv_file);
     }
+
+
+    public function share() {
+
+        $this->autoRender = false;
+
+        $this->facebook = new Facebook(array(
+            'appId'  => $this->__fbApiKey,
+            'secret' => $this->__fbSecret,
+            'fileUpload' => true
+        ));
+
+        if ($this->facebook->getUser()) {
+
+            //get image in local from bucket
+            $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+            $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
+            fwrite($save_file, $image);
+            fclose($save_file);
+            $file = IMAGES . 'email_image' . DS . $_GET['photo'];
+
+            //add to wall
+            $attachment = array('message' => 'Image Share from Pixta',
+                'name' => 'Image Share from Pixta',
+                'caption' => 'Image Share from Pixta',
+                'link' => 'http://www.pixta.com.au',
+                'description' => 'Pixta Image Share',
+                'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
+                'image'=> '@' . realpath($file)
+            );
+
+            $this->facebook->api("/me/photos", "post", $attachment);
+
+            // $this->facebook->api("/me/feed" , 'post', json_encode($attachment));
+            // $result = $this->facebook->api('/me/feed/','post',);
+
+            $email_config_id = $_GET['email_config_id'];
+            if($email_config_id > 0)
+                $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
+
+        } else {
+
+            $loginUrl = $this->facebook->getLoginUrl(
+                array('scope' => 'publish_stream')
+            );
+            echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
+            exit();
+            //$this->redirect($loginUrl);
+        }
+
+    }
+
 
     /*
         protected $comp_config = array(
