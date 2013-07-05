@@ -895,9 +895,9 @@ class EventsController extends AppController
             $file = IMAGES . 'email_image' . DS . $_GET['photo'];
 
             //add to wall
-            $attachment = array('message' => 'Image Share from Pixta',
-                'name' => 'Image Share from Pixta',
-                'caption' => 'Image Share from Pixta',
+            $attachment = array('message' => 'PIXTA is now on the App Store',
+                'name' => 'PIXTA is now on the App Store',
+                'caption' => 'PIXTA is now on the App Store',
                 'link' => 'http://www.pixta.com.au',
                 'description' => 'Pixta Image Share',
                 'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
