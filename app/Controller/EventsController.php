@@ -894,14 +894,13 @@ class EventsController extends AppController
             fclose($save_file);
             $file = IMAGES . 'email_image' . DS . $_GET['photo'];
 
-            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('id'=>$_GET['email_config_id']), 'recursive'=>-1));
+            //$event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('id'=>$_GET['email_config_id']), 'recursive'=>-1));
 
+            $subject = 'PIXTA is now on the App Store';
+            /*
             if(!empty($event_config['EventEmailConfig']['subject'])){
                 $subject = $event_config['EventEmailConfig']['subject'];
-            }
-            else {
-                $subject = 'PIXTA is now on the App Store';
-            }
+            }*/
 
             //add to wall
             $attachment = array('message' => $subject,
