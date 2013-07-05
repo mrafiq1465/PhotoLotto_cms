@@ -894,13 +894,13 @@ class EventsController extends AppController
             fclose($save_file);
             $file = IMAGES . 'email_image' . DS . $_GET['photo'];
 
-            //$event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('id'=>$_GET['email_config_id']), 'recursive'=>-1));
+            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('id'=>$_GET['email_config_id']), 'recursive'=>-1));
 
             $subject = 'PIXTA is now on the App Store';
-            /*
+
             if(!empty($event_config['EventEmailConfig']['subject'])){
                 $subject = $event_config['EventEmailConfig']['subject'];
-            }*/
+            }
 
             //add to wall
             $attachment = array('message' => $subject,
@@ -920,6 +920,8 @@ class EventsController extends AppController
             $email_config_id = $_GET['email_config_id'];
             if($email_config_id > 0)
                 $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
+            else
+                $this->redirect('/');
 
         } else {
 
