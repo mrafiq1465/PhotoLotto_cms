@@ -735,7 +735,10 @@ class EventsController extends AppController
 
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
-        if(isset($_GET['share_url']))
+        if($media_share == 'fb_share'){
+            $this->redirect('http://www.facebook.com');
+        }
+        else if(isset($_GET['share_url']))
             $this->set('redirect_url',$_GET['share_url']);
         else
             $this->redirect('/');
@@ -920,7 +923,7 @@ class EventsController extends AppController
             if($email_config_id > 0)
                 $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
             else
-                $this->redirect('/');
+                $this->redirect('http://www.facebook.com');
 
         } else {
 

@@ -6,7 +6,6 @@ $this->set('channelData', array(
     'language' => 'en-us'
 ));
 
-
 App::uses('Sanitize', 'Utility');
 
 $postTime = strtotime($event['Event']['created']);
@@ -17,9 +16,10 @@ $postLink = array(
     $event['Event']['id']
 );
 
+
 // This is the part where we clean the body text for output as the description
 // of the rss item, this needs to have only text to make sure the feed validates
-$bodyText = preg_replace('=\(.*?\)=is', '', $event['Event']['shortdescription']);
+$bodyText = preg_replace('=\(.*?\)=is', '', $event['Event']['shortdescription_line_1']." ".$event['Event']['shortdescription_line_2']);
 $bodyText = $this->Text->stripLinks($bodyText);
 $bodyText = Sanitize::stripAll($bodyText);
 $bodyText = $this->Text->truncate($bodyText, 400, array(
@@ -49,5 +49,6 @@ for ($i = 1; $i <= count($event['EventAction']); $i++) {
         'date' => date('m-d-Y', strtotime($event['EventAction'][$i - 1]['created'])),
     );
 }
+
 echo  $this->Rss->item(array(), $item);
 
