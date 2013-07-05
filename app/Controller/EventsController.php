@@ -894,18 +894,17 @@ class EventsController extends AppController
             fclose($save_file);
             $file = IMAGES . 'email_image' . DS . $_GET['photo'];
 
-            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('id'=>$_GET['email_config_id']), 'recursive'=>-1));
+            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('EventEmailConfig.id'=>$_GET['email_config_id']), 'recursive'=>1));
 
-            $subject = 'PIXTA is now on the App Store';
+            $facebook_msg = 'PIXTA is now on the App Store';
 
-            if(!empty($event_config['EventEmailConfig']['subject'])){
-                $subject = $event_config['EventEmailConfig']['subject'];
+            if(!empty($event_config['Event']['facebook_msg'])){
+                $facebook_msg = $event_config['Event']['facebook_msg'];
             }
-
             //add to wall
-            $attachment = array('message' => $subject,
-                'name' => $subject,
-                'caption' => $subject,
+            $attachment = array('message' => $facebook_msg,
+                'name' => $facebook_msg,
+                'caption' => $facebook_msg,
                 'link' => 'http://www.pixta.com.au',
                 'description' => 'Pixta Image Share',
                 'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
