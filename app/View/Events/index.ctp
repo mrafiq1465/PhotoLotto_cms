@@ -17,6 +17,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -111,7 +112,11 @@
             </td>
             <td>
                 <?=$this->Html->link('<i class="icon-share"></i> ', '/events/email_config/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
-                <br>email
+                <br>email config
+            </td>
+            <td>
+                <?=$this->Html->link('<i class="icon-share"></i> ', '/events/email_stat/' . $event['Event']['id'], array('class' => '', 'escape' => FALSE)); ?>
+                <br>email stat
             </td>
             <td>
                 <a id="<?= $event['Event']['id']?>" class="icon-circle-arrow-up" href="#"></a><br>
