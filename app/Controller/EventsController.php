@@ -270,6 +270,31 @@ class EventsController extends AppController
 
     }
 
+    public function email_stat($id = null) {
+        $this->Event->id = $id;
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+
+        $event = $this->Event->read(null, $id);
+        $event_emails = $this->Event->EventEmail->find('all', array('recursive' => -1, 'conditions' => array('EventEmail.event_id' => $id)));
+
+        $fb_share = 0;
+        $tw_share = 0;
+
+        foreach($event_emails as $e){
+
+            if(!empty($e['EventEmail']['fb_share'])){
+                $fb_share = $fb_share + $e['EventEmail']['fb_share'];
+            }
+            if(!empty($e['EventEmail']['tw_share'])){
+                $tw_share = $tw_share + $e['EventEmail']['tw_share'];
+            }
+        }
+
+        $this->set(compact('event', 'event_emails','fb_share','tw_share'));
+    }
+
     public function report($id = null) {
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
@@ -384,14 +409,24 @@ class EventsController extends AppController
         readfile($filename);
     }
 
-    /**
-     * delete method
-     *
-     * @throws MethodNotAllowedException
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
+    public function download_email_post($event_id = null) {
+        $this->autoRender = false;
+
+        $this->Event->id = $event_id;
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+        $event_emails = $this->Event->EventEmail->find('all', array('recursive' => -1, 'conditions' => array('EventEmail.event_id' => $event_id)));
+
+        $rows[] = array_keys($this->Event->EventEmail->getColumnTypes());
+
+        foreach ($event_emails as $event_email) {
+            $rows[] = $event_email['EventEmail'];
+        }
+
+        $this->exportCSV($rows);
+    }
+
     public function delete($id = null) {
         if (!$this->request->is('post')) {
             //throw new MethodNotAllowedException();
@@ -422,19 +457,29 @@ class EventsController extends AppController
         }
     }
 
-
     public function eventlist() {
         $this->autoRender = false;
         $params = array_keys($_GET);
         if (!empty($params)) $params_formatted = array('fields' => $params);
-        $options = array(
-            'conditions' => array(
-                'Event.date_end >=' => date('Y-m-d'),
-                'Event.status' => 1,
-            ),
-            'order' => array('Event.view_order' => 'asc', 'Event.created' => 'desc')
-        );
 
+        if(isset($_GET['event_id'])){
+            $options = array(
+                'conditions' => array(
+                    'Event.id' => $_GET['event_id'],
+                ),
+                'order' => array('Event.view_order' => 'asc', 'Event.created' => 'desc')
+            );
+
+        }
+        else {
+            $options = array(
+                'conditions' => array(
+                    'Event.date_end >=' => date('Y-m-d'),
+                    'Event.status' => 1,
+                ),
+                'order' => array('Event.view_order' => 'asc', 'Event.created' => 'desc')
+            );
+        }
         $events = $this->Event->find('all', $options);
         $events_array = array();
         $i = 0;
@@ -733,6 +778,7 @@ class EventsController extends AppController
     {
         $media_share = $_GET['media']."_share";
 
+        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
         if($media_share == 'fb_share'){
