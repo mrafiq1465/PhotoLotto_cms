@@ -10,7 +10,7 @@
             <div class="span3">
                 <img src="http://www.pixta.com.au/app/img/pixta-logo.jpg" width="149" height="37" class="logo" alt="Pixta - Instagram for Brands" title="Pixta - Instagram for Brands" />
                 <video width="320" height="240" controls>
-                    <source src="http://pixta.local/app/Foxtel_H_video.mp4" type="video/mp4">
+                    <source src="http://www.pixta.com.au/app/Foxtel_H_video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
