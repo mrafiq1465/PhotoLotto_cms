@@ -9,6 +9,10 @@
         <div class="row">
             <div class="span3">
                 <img src="http://www.pixta.com.au/app/img/pixta-logo.jpg" width="149" height="37" class="logo" alt="Pixta - Instagram for Brands" title="Pixta - Instagram for Brands" />
+                <video width="320" height="240" controls>
+                    <source src="http://pixta.local/app/Foxtel_H_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="span4 offset5 text-right">
                 <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
