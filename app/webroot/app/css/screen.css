@@ -75,7 +75,7 @@ header .span4 a:last-child {
 
 #main {
 	padding-top: 90px;
-	background: url(../img/feature-phones.png) right 33px no-repeat;
+	bbackground: url(../img/feature-phonesssss.png) right 33px no-repeat;
 }
 
 .banner {
@@ -527,7 +527,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 	}
 
 	#main {
-		background: url(../img/feature-phones.png) center 33px no-repeat;
+		bbackground: url(../img/feature-phones.png) center 33px no-repeat;
 	}
 
 	#main .slider {

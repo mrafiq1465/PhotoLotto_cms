@@ -9,10 +9,7 @@
         <div class="row">
             <div class="span3">
                 <img src="http://www.pixta.com.au/app/img/pixta-logo.jpg" width="149" height="37" class="logo" alt="Pixta - Instagram for Brands" title="Pixta - Instagram for Brands" />
-                <video width="320" height="240" controls>
-                    <source src="http://www.pixta.com.au/app/Foxtel_H_video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+
             </div>
             <div class="span4 offset5 text-right">
                 <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
@@ -26,7 +23,7 @@
 <div id="main-wrapper">
     <div class="container" id="main">
         <div class="row">
-            <div class="span12">
+            <div class="span8">
                 <div class="row">
                     <div class="span6 slider">
                         <div class="slider-edge"></div>
@@ -69,6 +66,16 @@
                 </div>
                 <h1 class="banner">Welcome to PIXTA, the world's most exciting photo app.</h1>
                 <div class="lead">It's free and it's for everyone. See how it can work for you.</div>
+            </div>
+            <div class="span4">
+                <video width="456" height="240" controls="controls">
+                    <source src="http://www.pixta.com.au/app/Foxtel_H_video.mp4" type="video/mp4" />
+                    <object data="movie.mp4" width="456" height="240">
+                        <embed src="movie.swf" width="456" height="240">
+                            Your browser does not support video
+                        </embed>
+                    </object>
+                </video>
             </div>
         </div>
         <div class="row">
