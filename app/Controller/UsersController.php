@@ -188,7 +188,7 @@ class UsersController extends AppController {
         $this->Session->destroy();
         // redirect to posts index page
         $this->Session->setFlash('You have successfully logged out.');
-        $this->redirect('/');
+        $this->redirect('/users/login/');
     }
 
     function send_password() {
