@@ -302,6 +302,7 @@ $options = array(
             $imageholder.attr('src', 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image');
             $('input[id=EventEmailConfigImageRight]').val('');
             $(this).hide();
+            return false;
         });
 
     });
