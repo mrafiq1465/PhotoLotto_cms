@@ -726,7 +726,7 @@ class EventsController extends AppController
 
                 } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
 
-                    $href = isset($event_config['EventEmailConfig']['image_right'])? isset($event_config['EventEmailConfig']['image_right']) : '#';
+                    $href = isset($event_config['EventEmailConfig']['href_right'])? isset($event_config['EventEmailConfig']['href_right']) : '#';
                     $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
 
                 }
