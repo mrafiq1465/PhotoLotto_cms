@@ -11,6 +11,7 @@ $options = array(
     )
 );
 ?>
+<input id="email_config_id" type="hidden" value="<? echo $this->request->data['EventEmailConfig']['id'];?>" />
 
 <div id="secondary" class="pull-left">
     <h2>Event Email Config</h2>
@@ -302,6 +303,16 @@ $options = array(
             $imageholder.attr('src', 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image');
             $('input[id=EventEmailConfigImageRight]').val('');
             $(this).hide();
+
+            $.ajax({
+                type: "POST",
+                url: "/events/delete_email_image",
+                data: { 'data[id]' : $('#email_config_id').val()},
+                success: function (response) {
+
+                }
+            });
+
             return false;
         });
 

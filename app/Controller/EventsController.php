@@ -602,6 +602,22 @@ class EventsController extends AppController
         echo json_encode(array('response' => 'success'));
     }
 
+    public function delete_email_image() {
+        $this->autoRender = false;
+
+        $id = $this->request->data['id'];
+
+        App::uses('ConnectionManager', 'Model');
+        $db = ConnectionManager::getDataSource('default');
+
+        $sql = "update event_email_config set image_right=null where id='$id' ";
+        $db->rawQuery($sql);
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => 'success'));
+    }
+
     public function event_email_bk() {
         $this->autoRender = false;
         if (!empty($_GET)) {
