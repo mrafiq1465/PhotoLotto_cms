@@ -11,6 +11,7 @@ $options = array(
     )
 );
 ?>
+<input id="event_id" type="hidden" value="<? echo $this->request->data['Event']['id'] ?>">
 <div id="secondary" class="pull-left">
     <h2>Campaign Creator</h2>
     <nav id="event-menu">
@@ -451,10 +452,23 @@ $options = array(
 
         $('.overlay-delete').click(function (e) {
             var index = $('.overlay-delete').index($(this));
+            var event_id = $('#event_id').val();
             $('.overlay-img-upload').eq(index).val('');
             $('.overlay-img-container').eq(index).attr('src', '/images/dummy.jpg');
             var dataName = $(this).attr('data-name');
             $(this).before('<input type="hidden" name=data[Event]['+ dataName+ '_delete]" value="delete" />');
+
+            $.ajax({
+                type: "POST",
+                url: "/events/delete_overlay",
+                data: { 'data[event_id]' : event_id, 'data[overlay]' : index+1},
+                success: function (response) {
+
+
+                }
+            });
+
+
             e.preventDefault();
         });
 

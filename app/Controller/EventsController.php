@@ -584,6 +584,24 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
+    public function delete_overlay() {
+        $this->autoRender = false;
+
+        $event_id = $this->request->data['event_id'];
+        $overlay = 'img_overlay_'.$this->request->data['overlay'];
+
+
+        App::uses('ConnectionManager', 'Model');
+        $db = ConnectionManager::getDataSource('default');
+
+        $sql = "update events set $overlay=null where id='$event_id' ";
+        $db->rawQuery($sql);
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => 'success'));
+    }
+
     public function event_email_bk() {
         $this->autoRender = false;
         if (!empty($_GET)) {
@@ -770,10 +788,6 @@ class EventsController extends AppController
         echo json_encode(array('response' => !empty($success)));
     }
 
-    /*
-     * Trace Count for social sharing.
-     *
-     * */
     public function trace_share($event_email_id=null)
     {
         $media_share = $_GET['media']."_share";
