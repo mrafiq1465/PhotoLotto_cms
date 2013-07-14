@@ -44,6 +44,7 @@
     Router::connect('/events', array('controller' => 'events', 'action' => 'index'));
     Router::connect('/events/add', array('controller' => 'events', 'action' => 'add'));
     Router::connect('/events/action_image', array('controller' => 'events', 'action' => 'action_image'));
+    Router::connect('/events/delete_overlay', array('controller' => 'events', 'action' => 'delete_overlay'));
     Router::connect('/events/edit/:id', array('controller' => 'events', 'action' => 'edit'),array('pass' => array('id')));
     Router::connect('/events/report/:id', array('controller' => 'events', 'action' => 'report'),array('pass' => array('id')));
     Router::connect('/events/email_stat/:id', array('controller' => 'events', 'action' => 'email_stat'),array('pass' => array('id')));
