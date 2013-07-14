@@ -703,7 +703,6 @@ class EventsController extends AppController
             $host = 'http://www.pixta.com.au';
             $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
 
-
             if(!empty($event_config)){
 
                 if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
@@ -726,9 +725,8 @@ class EventsController extends AppController
 
                 } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
 
-                    $href = isset($event_config['EventEmailConfig']['href_right'])? isset($event_config['EventEmailConfig']['href_right']) : '#';
+                    $href = isset($event_config['EventEmailConfig']['href_right'])? ($event_config['EventEmailConfig']['href_right']) : '#';
                     $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
-
                 }
                 //newly added end
 
