@@ -17,12 +17,12 @@ class EventsController extends AppController
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
 
-    //var $__fbApiKey = '549616571765083';
-    //var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
+    var $__fbApiKey = '549616571765083';
+    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
 
     //for local test
-    var $__fbApiKey = '144734069055490';
-    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
+    //var $__fbApiKey = '144734069055490';
+    //var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
     /**
      * index method
      *
