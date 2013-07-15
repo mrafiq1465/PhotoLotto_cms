@@ -985,6 +985,10 @@ class EventsController extends AppController
             if(!empty($event_config['Event']['facebook_msg'])){
                 $facebook_msg = $event_config['Event']['facebook_msg'];
             }
+            if(!empty($event_config['Event']['facebook_url'])){
+                $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
+            }
+
             //add to wall
             $attachment = array('message' => $facebook_msg,
                 'name' => $facebook_msg,
