@@ -21,8 +21,8 @@ class EventsController extends AppController
     var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
 
     //for local test
-    /*var $__fbApiKey = '144734069055490';
-    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';*/
+    //var $__fbApiKey = '144734069055490';
+    //var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
     /**
      * index method
      *
@@ -961,7 +961,8 @@ class EventsController extends AppController
         $this->facebook = new Facebook(array(
             'appId'  => $this->__fbApiKey,
             'secret' => $this->__fbSecret,
-            'fileUpload' => true
+            'fileUpload' => true,
+            'cookie' => false
         ));
 
 
@@ -1001,6 +1002,8 @@ class EventsController extends AppController
 
             $email_config_id = $_GET['email_config_id'];
 
+            //destroy session
+            //$this->facebook->destroySession();
 
             if($email_config_id > 0)
                 $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
@@ -1010,7 +1013,7 @@ class EventsController extends AppController
         } else {
 
             $loginUrl = $this->facebook->getLoginUrl(
-                array('scope' => 'email,publish_actions,publish_stream')
+                array('scope' => 'publish_stream')
 
             );
 
