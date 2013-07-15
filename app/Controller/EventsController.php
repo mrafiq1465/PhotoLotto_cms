@@ -812,7 +812,6 @@ class EventsController extends AppController
         $media_share = $_GET['media']."_share";
 
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
-        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
         if($media_share == 'fb_share'){
             $this->redirect('http://www.facebook.com');
@@ -990,7 +989,6 @@ class EventsController extends AppController
             //add to wall
             $attachment = array('message' => $facebook_msg,
                 'name' => $facebook_msg,
-                'access_token'=> $accessToken,
                 'caption' => $facebook_msg,
                 'link' => 'http://www.pixta.com.au',
                 'description' => 'Pixta Image Share',
