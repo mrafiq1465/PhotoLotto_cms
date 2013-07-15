@@ -16,10 +16,15 @@ class EventsController extends AppController
     public $components = array('RequestHandler');
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
-    public $fbappid = '144734069055490';
+    /*public $fbappid = '144734069055490';
 
     var $__fbApiKey = '549616571765083';
-    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
+    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';*/
+
+    public $fbappid = '144734069055490';
+
+    var $__fbApiKey = '144734069055490';
+    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
     /**
      * index method
      *
@@ -758,7 +763,7 @@ class EventsController extends AppController
                 if(!empty($event_config['EventEmailConfig']['id']))
                     $email_config_id = $event_config['EventEmailConfig']['id'];
 
-                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&email_config_id=" .$email_config_id;
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&email_config_id=" .$event_email_id;
 
                 //twitter share url
 
@@ -962,7 +967,11 @@ class EventsController extends AppController
             'fileUpload' => true
         ));
 
+
+
         if ($this->facebook->getUser()) {
+
+            $accessToken = $this->facebook->getAccessToken();
 
             //get image in local from bucket
             $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
@@ -981,6 +990,7 @@ class EventsController extends AppController
             //add to wall
             $attachment = array('message' => $facebook_msg,
                 'name' => $facebook_msg,
+                'access_token'=> $accessToken,
                 'caption' => $facebook_msg,
                 'link' => 'http://www.pixta.com.au',
                 'description' => 'Pixta Image Share',
@@ -988,12 +998,14 @@ class EventsController extends AppController
                 'image'=> '@' . realpath($file)
             );
 
+
+
             $this->facebook->api("/me/photos", "post", $attachment);
 
-            // $this->facebook->api("/me/feed" , 'post', json_encode($attachment));
-            // $result = $this->facebook->api('/me/feed/','post',);
 
             $email_config_id = $_GET['email_config_id'];
+
+
             if($email_config_id > 0)
                 $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
             else
@@ -1002,8 +1014,10 @@ class EventsController extends AppController
         } else {
 
             $loginUrl = $this->facebook->getLoginUrl(
-                array('scope' => 'publish_stream')
+                array('scope' => 'email,publish_actions,publish_stream')
+
             );
+
             echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
             exit();
             //$this->redirect($loginUrl);
