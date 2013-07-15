@@ -16,15 +16,13 @@ class EventsController extends AppController
     public $components = array('RequestHandler');
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
-    /*public $fbappid = '144734069055490';
 
     var $__fbApiKey = '549616571765083';
-    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';*/
+    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
 
-    public $fbappid = '144734069055490';
-
-    var $__fbApiKey = '144734069055490';
-    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
+    //for local test
+    /*var $__fbApiKey = '144734069055490';
+    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';*/
     /**
      * index method
      *
@@ -812,7 +810,6 @@ class EventsController extends AppController
         $media_share = $_GET['media']."_share";
 
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
-        $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
         if($media_share == 'fb_share'){
             $this->redirect('http://www.facebook.com');
@@ -990,7 +987,6 @@ class EventsController extends AppController
             //add to wall
             $attachment = array('message' => $facebook_msg,
                 'name' => $facebook_msg,
-                'access_token'=> $accessToken,
                 'caption' => $facebook_msg,
                 'link' => 'http://www.pixta.com.au',
                 'description' => 'Pixta Image Share',
