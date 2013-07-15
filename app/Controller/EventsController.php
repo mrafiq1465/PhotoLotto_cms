@@ -17,12 +17,12 @@ class EventsController extends AppController
     public $helpers = array('Text');
     public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
 
-    var $__fbApiKey = '549616571765083';
-    var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
+    //var $__fbApiKey = '549616571765083';
+    //var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
 
     //for local test
-    //var $__fbApiKey = '144734069055490';
-    //var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
+    var $__fbApiKey = '144734069055490';
+    var $__fbSecret = '783af0d0c0aeee9c4cb51b4536901be5';
     /**
      * index method
      *
@@ -812,7 +812,9 @@ class EventsController extends AppController
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
 
         if($media_share == 'fb_share'){
-            $this->redirect('http://www.facebook.com');
+
+            echo "<script type='text/javascript'>top.location.href = 'http://facebook.com';</script>";
+            exit();
         }
         else if(isset($_GET['share_url']))
             $this->set('redirect_url',$_GET['share_url']);
@@ -964,6 +966,7 @@ class EventsController extends AppController
             'fileUpload' => true,
             'cookie' => false
         ));
+
 
 
 
