@@ -59,6 +59,7 @@
     Router::connect('/events/download_image/:event_id', array('controller' => 'events', 'action' => 'download_image'),array('pass' => array('event_id')));
     Router::connect('/eventaction/*', array('controller' => 'events', 'action' => 'event_action'));
     Router::connect('/eventemail/*', array('controller' => 'events', 'action' => 'event_email'));
+    Router::connect('/resend_email/*', array('controller' => 'events', 'action' => 'resend_email'));
     Router::connect('/event_email_test/*', array('controller' => 'events', 'action' => 'event_email_test'));
     Router::connect('/events/photo_update', array('controller' => 'events', 'action' => 'photo_update'));
     Router::connect('/events/rank_update', array('controller' => 'events', 'action' => 'rank_update'));

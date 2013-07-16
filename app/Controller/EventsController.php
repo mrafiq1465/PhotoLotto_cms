@@ -1029,4 +1029,131 @@ class EventsController extends AppController
             //$this->redirect($loginUrl);
         }
     }
+
+    public function resend_email() {
+        $this->autoRender = false;
+        $email_config = Configure::read('email_config');
+        $image_header = $email_config['image_header'];
+        $image_footer = $email_config['image_footer'];
+        $image_bg = $email_config['image_bg'];
+        $image_columnA = $email_config['image_columnA'];
+
+        //image right configurable with html/custom href N.B: Do not remove img tag from here!
+        $image_columnB = '<a href="#"> <img style="display: block;" src="'.$email_config['image_columnB'].'"  alt="Pixta"/></a>';
+        $email_from = $email_config['email_from'];
+
+        $event_email =  $this->EventEmail->find('first', array('conditions'=>array('id'=>$_GET['email_id']), 'recursive'=>-1));
+
+        $event_id = $event_email['EventEmail']['event_id'];
+        $email_from = $event_email['EventEmail']['email_from'];
+        $email_to = $event_email['EventEmail']['email_to'];
+        $subject = $event_email['EventEmail']['subject'];
+        $photo = $event_email['EventEmail']['photo'];
+
+        $event_email_id = $this->Event->EventEmail->getLastInsertId();
+
+            $host = 'http://www.pixta.com.au';
+            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
+
+            if(!empty($event_config)){
+
+                if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
+                    $image_header = $host . $event_config['EventEmailConfig']['image_header'];
+                }
+                if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
+                    $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
+                }
+                if(isset($event_config['EventEmailConfig']['image_background']) && trim($event_config['EventEmailConfig']['image_background'])!=='') {
+                    $image_bg = $host . $event_config['EventEmailConfig']['image_background'];
+                }
+                if(isset($event_config['EventEmailConfig']['image_left']) && trim($event_config['EventEmailConfig']['image_left'])!=='') {
+                    $image_columnA = $host . $event_config['EventEmailConfig']['image_left'];
+                }
+                //event email config new logic - if html present then ignore all other options otherwise should add href on image tag.
+
+                if(isset($event_config['EventEmailConfig']['html_right']) && trim($event_config['EventEmailConfig']['html_right'])!=='') {
+
+                    $image_columnB = $event_config['EventEmailConfig']['html_right'];
+
+                } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
+
+                    $href = isset($event_config['EventEmailConfig']['href_right'])? ($event_config['EventEmailConfig']['href_right']) : '#';
+                    $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
+                }
+                //newly added end
+
+                if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
+                    $email_from =  $event_config['EventEmailConfig']['email_from'];
+                }
+                if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
+                    $subject =  $event_config['EventEmailConfig']['subject'];
+                }
+            }
+
+            if(empty($subject)){
+                $subject = $subject;
+            }
+            if (empty($email_to)) {
+                die(json_encode(array('error' => 'email not given')));
+            }
+            else {
+                $to=preg_split("([, ;\n])", $email_to);
+
+                //Fb share url
+
+                //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+                //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
+                //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
+
+                $email_config_id = 0;
+                if(!empty($event_config['EventEmailConfig']['id']))
+                    $email_config_id = $event_config['EventEmailConfig']['id'];
+
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$photo."&email_config_id=" .$event_email_id;
+
+                //twitter share url
+
+                $tw_share = "https://twitter.com/share?url=http://appevent.s3.amazonaws.com/".$photo;
+
+                //instagram share url
+
+                $ig_share = '';
+                $image_columnA = 'http://appevent.s3.amazonaws.com/'.$photo; //replaceing leftsided image by get params
+
+
+                App::uses('CakeEmail', 'Network/Email');
+                $email = new CakeEmail();
+                $email->from($email_from);
+                $email->to($to);
+                $email->subject($subject);
+                $email->template('pixta', 'pixta');
+                $email->viewVars(array('image_header' => $image_header));
+                $email->viewVars(array('image_footer' => $image_footer));
+                $email->viewVars(array('image_bg' => $image_bg));
+                $email->viewVars(array('image_columnA' => $image_columnA));
+                $email->viewVars(array('image_columnB' => $image_columnB));
+
+                //call back params
+                $email->viewVars(array('host'=>$host));
+                $email->viewVars(array('event_email_id' => $event_email_id));
+                $email->viewVars(array('fb_share' => $fb_share));
+                $email->viewVars(array('tw_share' => $tw_share));
+                $email->viewVars(array('ig_share' => $ig_share));
+                $email->viewVars(array('share_url' => $image_columnA));
+
+                $email->emailFormat('both');
+
+                $success = $email->send();
+            }
+        if($success)
+            $res = 'Email has been sent successfully';
+        else
+            $res = 'Email is not sent. please try again.';
+
+
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => $res));
+    }
+
 }
