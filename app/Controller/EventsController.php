@@ -685,7 +685,7 @@ class EventsController extends AppController
 
 
         if (!empty($_GET)) {
-
+           /*
             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
@@ -699,6 +699,7 @@ class EventsController extends AppController
                     'message' => $_GET['message'],
                 )
             ));
+           */
 
             $subject = '';
             $event_email_id = $this->Event->EventEmail->getLastInsertId();
@@ -734,7 +735,16 @@ class EventsController extends AppController
                 //newly added end
 
                 if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
+
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
+                    $temp = explode("<",$email_from);
+
+                    if(!empty($temp[1])){
+                        $email_from = array(preg_replace('/[";<>&*~|#]/', '', $temp[1]) => preg_replace('/[";<>&*~|#]/', '', $temp[0]));
+                    }
+                    else {
+                        $email_from = preg_replace('/[";<>&*~|#]/', '', $temp[0]);
+                    }
                 }
                 if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
                     $subject =  $event_config['EventEmailConfig']['subject'];
@@ -1119,7 +1129,6 @@ class EventsController extends AppController
 
                 $ig_share = '';
                 $image_columnA = 'http://appevent.s3.amazonaws.com/'.$photo; //replaceing leftsided image by get params
-
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
