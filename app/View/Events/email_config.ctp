@@ -25,11 +25,11 @@ $options = array(
             <h3>Config Details</h3>
 
             <div class="row-fluid row-event-config-email_from">
-                <label for="email_from">Email</span></label>
+                <label for="email_from">Email<span>&nbsp;(Format:  "Pixta" &#60do-not-reply@norton.com.au&#62)</span></label>
                 <?= $this->Form->input('email_from', array('div' => false, 'placeholder' => 'Email Address', 'type'=>'email', 'required'=>'required' )); ?>
             </div>
             <div class="row-fluid row-event-config-desc">
-                <label for="subject">Subject</span></label>
+                <label for="subject">Subject</label>
                 <?= $this->Form->input('subject', array('div' => false, 'placeholder' => 'Subject',)); ?>
             </div>
             <div class="row-fluid">
@@ -303,6 +303,7 @@ $options = array(
             $imageholder.attr('src', 'http://www.placehold.it/300x100/EFEFEF/AAAAAA&text=no+image');
             $('input[id=EventEmailConfigImageRight]').val('');
             $(this).hide();
+
 
             $.ajax({
                 type: "POST",
