@@ -26,7 +26,7 @@ $options = array(
 
             <div class="row-fluid row-event-config-email_from">
                 <label for="email_from">Email<span>&nbsp;(Format:  "Pixta" &#60do-not-reply@norton.com.au&#62)</span></label>
-                <?= $this->Form->input('email_from', array('div' => false, 'placeholder' => 'Email Address', 'type'=>'email', 'required'=>'required' )); ?>
+                <?= $this->Form->input('email_from', array('div' => false, 'placeholder' => 'Email Address', 'type'=>'text', 'required'=>'required' )); ?>
             </div>
             <div class="row-fluid row-event-config-desc">
                 <label for="subject">Subject</label>
