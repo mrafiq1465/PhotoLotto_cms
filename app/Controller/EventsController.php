@@ -817,6 +817,8 @@ class EventsController extends AppController
 
     public function trace_share($event_email_id=null)
     {
+        $this->autoRender = false;
+
         $media_share = $_GET['media']."_share";
 
         $this->Event->EventEmail->query("update event_emails set $media_share = ifnull($media_share, 0) + 1 where id = $event_email_id");
@@ -826,8 +828,10 @@ class EventsController extends AppController
             echo "<script type='text/javascript'>top.location.href = 'http://facebook.com';</script>";
             exit();
         }
-        else if(isset($_GET['share_url']))
-            $this->set('redirect_url',$_GET['share_url']);
+        else if(isset($_GET['share_url'])){
+            echo "<script type='text/javascript'>top.location.href = '".$_GET['share_url']."';</script>";
+            exit();
+        }
         else
             $this->redirect('/');
 
