@@ -1019,7 +1019,7 @@ class EventsController extends AppController
             //destroy session
             //$this->facebook->destroySession();
 
-            if($email_config_id > 0)
+            if($event_email_id > 0)
                 $this->redirect('/events/trace_share/'.$event_email_id.'/?media=fb');
             else
                 $this->redirect('http://www.facebook.com');
