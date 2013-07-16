@@ -1093,7 +1093,16 @@ class EventsController extends AppController
                 //newly added end
 
                 if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
+
                     $email_from =  $event_config['EventEmailConfig']['email_from'];
+                    $temp = explode("<",$email_from);
+
+                    if(!empty($temp[1])){
+                        $email_from = array(preg_replace('/[";<>&*~|#]/', '', $temp[1]) => preg_replace('/[";<>&*~|#]/', '', $temp[0]));
+                    }
+                    else {
+                        $email_from = preg_replace('/[";<>&*~|#]/', '', $temp[0]);
+                    }
                 }
                 if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
                     $subject =  $event_config['EventEmailConfig']['subject'];
