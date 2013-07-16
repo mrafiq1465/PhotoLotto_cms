@@ -48,7 +48,7 @@ class EventsController extends AppController
 
         $events = $this->Event->find('all', $options);
 
-       // $events = Set::sort($events, '{n}.Event.view_order', 'asc');
+        // $events = Set::sort($events, '{n}.Event.view_order', 'asc');
         $companies = $this->Event->Company->find('list');
         if ($this->isAdmin()) $companies = array('' => 'All') + $companies;
         $this->set(compact('events', 'companies'));
@@ -70,7 +70,7 @@ class EventsController extends AppController
         if ($this->RequestHandler->isRss()) {
             $event = $this->Event->read(null, $id);
             // You should import Sanitize
-           //var_dump($event);
+            //var_dump($event);
 
             return $this->set(compact('event'));
         }
@@ -266,7 +266,7 @@ class EventsController extends AppController
             'conditions' => array('Event.event_url' => $id),
         ));
 
-         $this->set(compact('event', 'event'));
+        $this->set(compact('event', 'event'));
 
         //$event = $this->Event->read(null, $id);
         //$event_actions = $this->Event->EventAction->find('all',array('recursive'=> -1, 'conditions' => array('EventAction.event_id' => $id)));
@@ -685,7 +685,7 @@ class EventsController extends AppController
 
 
         if (!empty($_GET)) {
-           /*
+
             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
@@ -699,7 +699,7 @@ class EventsController extends AppController
                     'message' => $_GET['message'],
                 )
             ));
-           */
+
 
             $subject = '';
             $event_email_id = $this->Event->EventEmail->getLastInsertId();
@@ -771,7 +771,7 @@ class EventsController extends AppController
                 if(!empty($event_config['EventEmailConfig']['id']))
                     $email_config_id = $event_config['EventEmailConfig']['id'];
 
-                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&email_config_id=" .$event_email_id;
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&event_email_id=" .$event_email_id."&email_config_id=".$email_config_id;
 
                 //twitter share url
 
@@ -943,26 +943,26 @@ class EventsController extends AppController
 
     public function exportCSV($results)
     {
-    	ini_set('max_execution_time', 600); //increase max_execution_time to 10 min if data set is very large
+        ini_set('max_execution_time', 600); //increase max_execution_time to 10 min if data set is very large
 
-    	//create a file
-    	$filename = "export_".date("Y.m.d").".csv";
-    	$csv_file = fopen('php://output', 'w');
+        //create a file
+        $filename = "export_".date("Y.m.d").".csv";
+        $csv_file = fopen('php://output', 'w');
 
-    	header('Content-type: application/csv');
-    	header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
 
-    	// The column headings of your .csv file
-    	//$header_row = array("ID", "Event ID", "Phone ID", "Blacklist", "Phone Type", "Action Name", "Photo", "Created");
-    	//fputcsv($csv_file,$header_row,',','"');
+        // The column headings of your .csv file
+        //$header_row = array("ID", "Event ID", "Phone ID", "Blacklist", "Phone Type", "Action Name", "Photo", "Created");
+        //fputcsv($csv_file,$header_row,',','"');
 
-    	// Each iteration of this while loop will be a row in your .csv file where each field corresponds to the heading of the column
-    	foreach($results as $result)
-    	{
-    		fputcsv($csv_file,$result,',','"');
-    	}
+        // Each iteration of this while loop will be a row in your .csv file where each field corresponds to the heading of the column
+        foreach($results as $result)
+        {
+            fputcsv($csv_file,$result,',','"');
+        }
 
-    	fclose($csv_file);
+        fclose($csv_file);
     }
 
 
@@ -976,9 +976,6 @@ class EventsController extends AppController
             'fileUpload' => true,
             'cookie' => false
         ));
-
-
-
 
         if ($this->facebook->getUser()) {
 
@@ -1017,13 +1014,13 @@ class EventsController extends AppController
             $this->facebook->api("/me/photos", "post", $attachment);
 
 
-            $email_config_id = $_GET['email_config_id'];
+            $event_email_id = $_GET['event_email_id'];
 
             //destroy session
             //$this->facebook->destroySession();
 
             if($email_config_id > 0)
-                $this->redirect('/events/trace_share/'.$email_config_id.'/?media=fb');
+                $this->redirect('/events/trace_share/'.$event_email_id.'/?media=fb');
             else
                 $this->redirect('http://www.facebook.com');
 
@@ -1062,107 +1059,107 @@ class EventsController extends AppController
 
         $event_email_id = $this->Event->EventEmail->getLastInsertId();
 
-            $host = 'http://www.pixta.com.au';
-            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
+        $host = 'http://www.pixta.com.au';
+        $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
 
-            if(!empty($event_config)){
+        if(!empty($event_config)){
 
-                if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
-                    $image_header = $host . $event_config['EventEmailConfig']['image_header'];
+            if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
+                $image_header = $host . $event_config['EventEmailConfig']['image_header'];
+            }
+            if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
+                $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
+            }
+            if(isset($event_config['EventEmailConfig']['image_background']) && trim($event_config['EventEmailConfig']['image_background'])!=='') {
+                $image_bg = $host . $event_config['EventEmailConfig']['image_background'];
+            }
+            if(isset($event_config['EventEmailConfig']['image_left']) && trim($event_config['EventEmailConfig']['image_left'])!=='') {
+                $image_columnA = $host . $event_config['EventEmailConfig']['image_left'];
+            }
+            //event email config new logic - if html present then ignore all other options otherwise should add href on image tag.
+
+            if(isset($event_config['EventEmailConfig']['html_right']) && trim($event_config['EventEmailConfig']['html_right'])!=='') {
+
+                $image_columnB = $event_config['EventEmailConfig']['html_right'];
+
+            } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
+
+                $href = isset($event_config['EventEmailConfig']['href_right'])? ($event_config['EventEmailConfig']['href_right']) : '#';
+                $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
+            }
+            //newly added end
+
+            if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
+
+                $email_from =  $event_config['EventEmailConfig']['email_from'];
+                $temp = explode("<",$email_from);
+
+                if(!empty($temp[1])){
+                    $email_from = array(preg_replace('/[";<>&*~|#]/', '', $temp[1]) => preg_replace('/[";<>&*~|#]/', '', $temp[0]));
                 }
-                if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
-                    $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
-                }
-                if(isset($event_config['EventEmailConfig']['image_background']) && trim($event_config['EventEmailConfig']['image_background'])!=='') {
-                    $image_bg = $host . $event_config['EventEmailConfig']['image_background'];
-                }
-                if(isset($event_config['EventEmailConfig']['image_left']) && trim($event_config['EventEmailConfig']['image_left'])!=='') {
-                    $image_columnA = $host . $event_config['EventEmailConfig']['image_left'];
-                }
-                //event email config new logic - if html present then ignore all other options otherwise should add href on image tag.
-
-                if(isset($event_config['EventEmailConfig']['html_right']) && trim($event_config['EventEmailConfig']['html_right'])!=='') {
-
-                    $image_columnB = $event_config['EventEmailConfig']['html_right'];
-
-                } else if(isset($event_config['EventEmailConfig']['image_right']) && trim($event_config['EventEmailConfig']['image_right'])!=='') {
-
-                    $href = isset($event_config['EventEmailConfig']['href_right'])? ($event_config['EventEmailConfig']['href_right']) : '#';
-                    $image_columnB = '<a href="'.$href.'"> <img style="display: block;" src="'.$host . $event_config['EventEmailConfig']['image_right'].'" alt="Pixta"/></a>';
-                }
-                //newly added end
-
-                if(isset($event_config['EventEmailConfig']['email_from']) && trim($event_config['EventEmailConfig']['email_from'])!=='') {
-
-                    $email_from =  $event_config['EventEmailConfig']['email_from'];
-                    $temp = explode("<",$email_from);
-
-                    if(!empty($temp[1])){
-                        $email_from = array(preg_replace('/[";<>&*~|#]/', '', $temp[1]) => preg_replace('/[";<>&*~|#]/', '', $temp[0]));
-                    }
-                    else {
-                        $email_from = preg_replace('/[";<>&*~|#]/', '', $temp[0]);
-                    }
-                }
-                if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
-                    $subject =  $event_config['EventEmailConfig']['subject'];
+                else {
+                    $email_from = preg_replace('/[";<>&*~|#]/', '', $temp[0]);
                 }
             }
-
-            if(empty($subject)){
-                $subject = $subject;
+            if(isset($event_config['EventEmailConfig']['subject']) && trim($event_config['EventEmailConfig']['subject'])!=='') {
+                $subject =  $event_config['EventEmailConfig']['subject'];
             }
-            if (empty($email_to)) {
-                die(json_encode(array('error' => 'email not given')));
-            }
-            else {
-                $to=preg_split("([, ;\n])", $email_to);
+        }
 
-                //Fb share url
+        if(empty($subject)){
+            $subject = $subject;
+        }
+        if (empty($email_to)) {
+            die(json_encode(array('error' => 'email not given')));
+        }
+        else {
+            $to=preg_split("([, ;\n])", $email_to);
 
-                //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
-                //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
-                //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
+            //Fb share url
 
-                $email_config_id = 0;
-                if(!empty($event_config['EventEmailConfig']['id']))
-                    $email_config_id = $event_config['EventEmailConfig']['id'];
+            //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
+            //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
+            //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
 
-                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$photo."&email_config_id=" .$event_email_id;
+            $email_config_id = 0;
+            if(!empty($event_config['EventEmailConfig']['id']))
+                $email_config_id = $event_config['EventEmailConfig']['id'];
 
-                //twitter share url
+            $fb_share = "http://www.pixta.com.au/events/share/?photo=".$photo."&email_config_id=" .$event_email_id;
 
-                $tw_share = "https://twitter.com/share?url=http://appevent.s3.amazonaws.com/".$photo;
+            //twitter share url
 
-                //instagram share url
+            $tw_share = "https://twitter.com/share?url=http://appevent.s3.amazonaws.com/".$photo;
 
-                $ig_share = '';
-                $image_columnA = 'http://appevent.s3.amazonaws.com/'.$photo; //replaceing leftsided image by get params
+            //instagram share url
 
-                App::uses('CakeEmail', 'Network/Email');
-                $email = new CakeEmail();
-                $email->from($email_from);
-                $email->to($to);
-                $email->subject($subject);
-                $email->template('pixta', 'pixta');
-                $email->viewVars(array('image_header' => $image_header));
-                $email->viewVars(array('image_footer' => $image_footer));
-                $email->viewVars(array('image_bg' => $image_bg));
-                $email->viewVars(array('image_columnA' => $image_columnA));
-                $email->viewVars(array('image_columnB' => $image_columnB));
+            $ig_share = '';
+            $image_columnA = 'http://appevent.s3.amazonaws.com/'.$photo; //replaceing leftsided image by get params
 
-                //call back params
-                $email->viewVars(array('host'=>$host));
-                $email->viewVars(array('event_email_id' => $event_email_id));
-                $email->viewVars(array('fb_share' => $fb_share));
-                $email->viewVars(array('tw_share' => $tw_share));
-                $email->viewVars(array('ig_share' => $ig_share));
-                $email->viewVars(array('share_url' => $image_columnA));
+            App::uses('CakeEmail', 'Network/Email');
+            $email = new CakeEmail();
+            $email->from($email_from);
+            $email->to($to);
+            $email->subject($subject);
+            $email->template('pixta', 'pixta');
+            $email->viewVars(array('image_header' => $image_header));
+            $email->viewVars(array('image_footer' => $image_footer));
+            $email->viewVars(array('image_bg' => $image_bg));
+            $email->viewVars(array('image_columnA' => $image_columnA));
+            $email->viewVars(array('image_columnB' => $image_columnB));
 
-                $email->emailFormat('both');
+            //call back params
+            $email->viewVars(array('host'=>$host));
+            $email->viewVars(array('event_email_id' => $event_email_id));
+            $email->viewVars(array('fb_share' => $fb_share));
+            $email->viewVars(array('tw_share' => $tw_share));
+            $email->viewVars(array('ig_share' => $ig_share));
+            $email->viewVars(array('share_url' => $image_columnA));
 
-                $success = $email->send();
-            }
+            $email->emailFormat('both');
+
+            $success = $email->send();
+        }
         if($success)
             $res = 'Email has been sent successfully';
         else
