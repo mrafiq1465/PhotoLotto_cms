@@ -68,14 +68,8 @@
                 <div class="lead">It's free and it's for everyone. See how it can work for you.</div>
             </div>
             <div class="span4">
-                <video width="456" height="240" controls="controls">
-                    <source src="http://www.pixta.com.au/app/Foxtel_H_video.mp4" type="video/mp4" />
-                    <object data="movie.mp4" width="456" height="240">
-                        <embed src="movie.swf" width="456" height="240">
-                            Your browser does not support video
-                        </embed>
-                    </object>
-                </video>
+                <iframe src="http://player.vimeo.com/video/70095185" width="456" height="256" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                <p><a href="http://vimeo.com/70095185">Introducing PIXTA. A fun new way to engage with fans on-the-go.</a> from <a href="http://vimeo.com/politeinpublicaustralia">Polite in Public Australia</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
             </div>
         </div>
         <div class="row">
