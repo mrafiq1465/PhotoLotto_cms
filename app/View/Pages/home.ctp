@@ -68,8 +68,8 @@
                 <div class="lead">It's free and it's for everyone. See how it can work for you.</div>
             </div>
             <div class="span4">
-                <iframe src="http://player.vimeo.com/video/70095185" width="456" height="257" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>            </div>
-        </div>
+                <iframe src="http://player.vimeo.com/video/70095185?title=0&amp;byline=0&amp;portrait=0" width="456" height="257" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                       </div>
         <div class="row">
             <div class="span4 growbox-container" id="play">
                 <div class="growbox">
