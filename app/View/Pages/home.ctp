@@ -68,9 +68,7 @@
                 <div class="lead">It's free and it's for everyone. See how it can work for you.</div>
             </div>
             <div class="span4">
-                <iframe src="http://player.vimeo.com/video/70095185" width="456" height="256" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                <p><a href="http://vimeo.com/70095185">Introducing PIXTA. A fun new way to engage with fans on-the-go.</a> from <a href="http://vimeo.com/politeinpublicaustralia">Polite in Public Australia</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-            </div>
+                <iframe src="http://player.vimeo.com/video/70095185" width="456" height="257" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>            </div>
         </div>
         <div class="row">
             <div class="span4 growbox-container" id="play">
