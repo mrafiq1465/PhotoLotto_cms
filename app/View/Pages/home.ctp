@@ -231,7 +231,7 @@
         <div class="row">
             <div class="span6">
                 <p class="mediakit-wrapper clearfix">
-                    <a href="PIXTA_070613.pdf" target="_blank" onClick="_gaq.push(['_trackEvent', 'Media Kit', 'Click', 'Media Kit Download Button']);"><img src="http://www.pixta.com.au/app/img/mediakit.png" alt="Pixta Media Kit" title="Download the Pixta Media Kit" /></a>
+                    <a href="app/PIXTA_070613.pdf" target="_blank" onClick="_gaq.push(['_trackEvent', 'Media Kit', 'Click', 'Media Kit Download Button']);"><img src="http://www.pixta.com.au/app/img/mediakit.png" alt="Pixta Media Kit" title="Download the Pixta Media Kit" /></a>
                 </p>
             </div>
             <div class="span6">
