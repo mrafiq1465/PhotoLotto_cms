@@ -63,15 +63,14 @@ class EventsController extends AppController
      * @return void
      */
     public function view($id = null) {
+        $this->response->type('xml'); 
+        
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
         if ($this->RequestHandler->isRss()) {
             $event = $this->Event->read(null, $id);
-            // You should import Sanitize
-            //var_dump($event);
-
             return $this->set(compact('event'));
         }
         $this->set('event', $this->Event->read(null, $id));
