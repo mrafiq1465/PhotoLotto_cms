@@ -43,12 +43,7 @@ for ($i = 1; $i <= 5; $i++) {
 }
 
 for ($i = 1; $i <= count($event['EventAction']); $i++) {
-    $item["app_photo_$i"] = array(
-        'device' => $event['EventAction'][$i - 1]['phone_type'],
-        'url' => S3_IMG_URL . $event['EventAction'][$i - 1]['photo'],
-        'date' => date('m-d-Y', strtotime($event['EventAction'][$i - 1]['created'])),
-    );
+    $item["app_photo_$i"] =  S3_IMG_URL . $event['EventAction'][$i - 1]['photo'];
 }
-
 echo  $this->Rss->item(array(), $item);
 
