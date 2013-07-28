@@ -1174,4 +1174,31 @@ class EventsController extends AppController
         echo json_encode(array('response' => $res));
     }
 
+    public function xml($id = null){
+
+        $this->autoRender = false;
+
+/*
+        App::uses('Sanitize', 'Utility');
+        $xmlArray = array(
+            'root' => array(
+                'xmlns:' => 'http://cakephp.org',
+                'child' => 'value'
+            )
+        );
+        $xml1 = Xml::fromArray($xmlArray);
+
+
+$xml2 = Xml::fromArray($xmlArray);
+
+*/
+        //$xml = Xml::build($data);
+
+        $event = $this->Event->read(null, $id);
+        $xmlObject = Xml::fromArray($event);
+        $xmlString = $xmlObject->asXML();
+
+
+    }
+
 }
