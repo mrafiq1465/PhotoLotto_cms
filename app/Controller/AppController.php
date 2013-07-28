@@ -117,6 +117,7 @@ class AppController extends Controller {
             array('events','share'),
             array('events','login'),
             array('events','view'),
+            array('events','xml'),
             array('events','logged_in')
         );
 
