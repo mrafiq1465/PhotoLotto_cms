@@ -1,4 +1,3 @@
-
 <?php
 
 define('S3_IMG_URL', 'http://appevent.s3.amazonaws.com');
