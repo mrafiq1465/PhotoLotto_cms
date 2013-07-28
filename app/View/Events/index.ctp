@@ -95,7 +95,7 @@
                 <br>delete
             </td>
             <td>
-                <?=$this->Html->link('<i class="icon-rss"></i> ', '/events/rss/' . $event['Event']['id'], array('target' => '_blank', 'class' => '', 'escape' => FALSE)); ?>
+                <?=$this->Html->link('<i class="icon-rss"></i> ', '/events/xml/' . $event['Event']['id'], array('target' => '_blank', 'class' => '', 'escape' => FALSE)); ?>
                 <br>RSS
             </td>
             <td>
