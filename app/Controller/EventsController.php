@@ -1219,7 +1219,7 @@ class EventsController extends AppController
         for ($i = 1; $i <= count($event['EventAction']); $i++) {
             $item["photos"][] = array('photo' => array(
 //                'device' => $event['EventAction'][$i - 1]['phone_type'],
-                'url' => S3_IMG_URL . $event['EventAction'][$i - 1]['photo'],
+                'url' => S3_IMG_URL .'/'. $event['EventAction'][$i - 1]['photo'],
                 'date' => date('m-d-Y H:i', strtotime($event['EventAction'][$i - 1]['created'])),
             ));
         }
