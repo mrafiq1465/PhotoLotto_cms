@@ -8,6 +8,25 @@ App::uses('AppController', 'Controller');
 
 //require_once('facebook/facebook.php');
 
+// function defination to convert array to xml
+function array_to_xml($student_info, &$xml_student_info) {
+    foreach($student_info as $key => $value) {
+        if(is_array($value)) {
+            if(!is_numeric($key)){
+                $subnode = $xml_student_info->addChild("$key");
+                array_to_xml($value, $subnode);
+            }
+            else{
+                //$subnode = $xml_student_info->addChild("");
+                array_to_xml($value, $xml_student_info);
+            }
+        }
+        else {
+            $xml_student_info->addChild("$key","$value");
+        }
+    }
+}
+
 class EventsController extends AppController
 {
 
@@ -1178,27 +1197,40 @@ class EventsController extends AppController
 
         $this->autoRender = false;
 
-/*
-        App::uses('Sanitize', 'Utility');
-        $xmlArray = array(
-            'root' => array(
-                'xmlns:' => 'http://cakephp.org',
-                'child' => 'value'
-            )
-        );
-        $xml1 = Xml::fromArray($xmlArray);
-
-
-$xml2 = Xml::fromArray($xmlArray);
-
-*/
-        //$xml = Xml::build($data);
-
         $event = $this->Event->read(null, $id);
-        $xmlObject = Xml::fromArray($event);
-        $xmlString = $xmlObject->asXML();
+        //$xmlObject = Xml::fromArray($event);
+        //$xmlString = $xmlObject->asXML();
+
+        $item = array();
+
+        $item['name'] = $event['Event']['name'];
+        $item['description'] = $bodyText = preg_replace('=\(.*?\)=is', '', $event['Event']['shortdescription_line_1']." ".$event['Event']['shortdescription_line_2']);
+        $item['created'] = $event['Event']['created'];
 
 
+        $item['overlay'] = array();
+
+        for ($i = 1; $i <= 5; $i++) {
+            if (!empty($event['Event']["img_overlay_$i"])) $item["overlay"][] = array('url'=>FULL_BASE_URL . $event['Event']["img_overlay_$i"]);
+        }
+
+        $item["photos"] = array();
+
+        for ($i = 1; $i <= count($event['EventAction']); $i++) {
+            $item["photos"][] = array('photo' => array(
+//                'device' => $event['EventAction'][$i - 1]['phone_type'],
+                'url' => S3_IMG_URL . $event['EventAction'][$i - 1]['photo'],
+                'date' => date('m-d-Y H:i', strtotime($event['EventAction'][$i - 1]['created'])),
+            ));
+        }
+
+        $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><event></event>");
+        array_to_xml($item, $xml);
+
+        header('Content-Type: text/xml');
+        echo $xml->asXML();
+
+        die('');
     }
 
 }
