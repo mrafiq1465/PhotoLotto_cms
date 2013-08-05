@@ -403,13 +403,13 @@ class EventsController extends AppController
         }
 
         set_time_limit(count($event_actions) * 10);
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '5012M');
 
         foreach ($event_actions as $ea) {
             $url = 'http://appevent.s3.amazonaws.com/'. $ea['EventAction']['photo'];
             $data = @file_get_contents($url, false);
             if ($data !== false) {
-                var_dump($zip->addFromString($ea['EventAction']['photo'], $data));
+                $zip->addFromString($ea['EventAction']['photo'], $data);
             }
         }
 
