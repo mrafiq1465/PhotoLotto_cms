@@ -1233,4 +1233,49 @@ class EventsController extends AppController
         die('');
     }
 
+
+    public function fb_post_public_page() {
+        $this->autoRender = false;
+
+        $this->facebook = new Facebook(array(
+            'appId'  => $this->__fbApiKey,
+            'secret' => $this->__fbSecret,
+            'fileUpload' => true,
+            'cookie' => false
+        ));
+
+        if ($this->facebook->getUser()) {
+
+            $event_actions = $this->Event->EventAction->find('all', array('recursive' => 1,
+                //'conditions' => array('EventAction.event_id' => $event_id),
+                'limit' => '5'
+            ));
+            //echo "<pre>";
+            //print_r($event_actions);
+            //echo "</pre>";
+
+            foreach ($event_actions as $ea) {
+                $public_page = "http://www.facebook.com/Syntaxperfect";
+                $page_id = '520410234667909';
+                $http_post = '/'.$page_id.'/photos';
+
+                $url = 'http://appevent.s3.amazonaws.com/'. $ea['EventAction']['photo'];
+                $image = @file_get_contents($url, false);
+                if ($image !== false) {
+                    $save_file = fopen('img/email_image/'.$ea['EventAction']['photo'], 'w');
+                    fwrite($save_file, $image);
+                    fclose($save_file);
+                    $file = IMAGES . 'email_image' . DS . $ea['EventAction']['photo'];
+
+
+                    $attachment = array(
+                        'source' => '',
+                        'picture' => 'http://appevent.s3.amazonaws.com/'.$ea['EventAction']['photo'],
+                        'image'=> '@' . realpath($file)
+                    );
+                    $this->facebook->api($http_post, "post", $attachment);
+                }
+            }
+        }
+    }
 }

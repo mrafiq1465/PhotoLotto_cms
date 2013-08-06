@@ -75,7 +75,9 @@
     Router::connect('/users/logout', array('controller' => 'users', 'action' => 'logout'));
     Router::connect('/users/send_password', array('controller' => 'users', 'action' => 'send_password'));
 
-     Router::connect('/events/xml/:id', array('controller' => 'events', 'action' => 'xml'),array('pass' => array('id')));
+    Router::connect('/events/xml/:id', array('controller' => 'events', 'action' => 'xml'),array('pass' => array('id')));
+    Router::connect('/fb_post_public_page', array('controller' => 'events', 'action' => 'fb_post_public_page'));
+
 
 
 Router::connect('/*', array('controller' => 'events', 'action' => 'event_custom'), array('pass' => array('*')));
