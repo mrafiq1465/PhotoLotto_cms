@@ -148,6 +148,7 @@ class EventsController extends AppController
             $user_data = $this->Session->read('User');
 
             $this->request->data['Event']['updated_by'] = $user_data['id'];
+            $this->request->data['Event']['view_order'] = 100;
 
             if (!empty($this->request->data['Event']['date_start']) ||
                 count(array_filter($this->request->data['Event']['date_start'])) < count($this->request->data['Event']['date_start'])
