@@ -49,6 +49,7 @@ class EventsController extends AppController
      */
     public function index() {
         $this->Event->recursive = 0;
+
         $event_conditions = array();
         $event_conditions['Event.status'] = 1;
         if (isset($_GET['company'])) {
@@ -148,7 +149,13 @@ class EventsController extends AppController
             $user_data = $this->Session->read('User');
 
             $this->request->data['Event']['updated_by'] = $user_data['id'];
-            $this->request->data['Event']['view_order'] = 100;
+
+            $options = array(
+                'order' => array('Event.view_order' => 'asc')
+            );
+            $events_order = $this->Event->find('first', $options);
+
+            $this->request->data['Event']['view_order'] = $events_order['Event']['view_order'] + 1;
 
             if (!empty($this->request->data['Event']['date_start']) ||
                 count(array_filter($this->request->data['Event']['date_start'])) < count($this->request->data['Event']['date_start'])

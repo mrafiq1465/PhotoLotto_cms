@@ -42,6 +42,7 @@
             </li>
             <li>
                 <a href="/events/download_image/<?=$event['Event']['id']?>">Download all images as ZIP file</a>
+                <a id="export" href="#">ex</a>
             </li>
             <li>
                 <a href="/events/download_submissions/<?=$event['Event']['id']?>">Export as CSV file</a>
@@ -60,7 +61,8 @@
                 <img src="<?php echo S3_IMG_URL.'/'.$event_action['EventAction']['photo']; ?>" width="300px" height="300px"  alt="" />
                 <input class="blacklist" id="<?php echo $event_action['EventAction']['id']; ?>" type="checkbox" <?php echo $blacklist; ?>  /> BlackList
                 <br /><br />
-                <a href="/events/download_submissions/<?=$event['Event']['id']?>/<?=$event_action['EventAction']['id']?>">Export</a>
+                <a  href="/events/download_submissions/<?=$event['Event']['id']?>/<?=$event_action['EventAction']['id']?>">Export</a>
+
             </li>
             <? } ?>
         </ul>
@@ -85,4 +87,18 @@
     </style>
 
 
+<script type="text/javascript">
 
+    $(function(){
+        $('#export').click(function(e){
+            var start_date = $('#EventDateStartYear').val() + '-' + $('#EventDateStartMonth').val() + '-' + $('#EventDateStartDay').val() ;
+            var end_date = $('#EventDateEndYear').val() + '-' + $('#EventDateEndMonth').val() + '-' + $('#EventDateEndDay').val() ;
+
+            window.location.href= '/events/download_image/<?=$event['Event']['id']?>/?start_date='+start_date + "&end_date=" + end_date;
+
+            e.preventDefault();
+
+        });
+
+    });
+</script>
