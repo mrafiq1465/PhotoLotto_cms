@@ -342,7 +342,7 @@ class EventsController extends AppController
             $date_day = $this->request->data['Event']['date_end']['day'];
             $date_year = $this->request->data['Event']['date_end']['year'];
             $temp = $date_year .'-'.$date_month .'-'.$date_day;
-            $end_date = date($temp.' 00:00:00');
+            $end_date = date($temp.' 23:59:59');
         }
 
         //var_dump($start_date);
