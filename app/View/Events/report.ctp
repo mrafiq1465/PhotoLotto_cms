@@ -42,7 +42,7 @@
             </li>
             <li>
                 <a href="/events/download_image/<?=$event['Event']['id']?>">Download all images as ZIP file</a>
-                <a id="export" href="#">ex</a>
+                <!--a id="export" href="#">ex</a-->
             </li>
             <li>
                 <a href="/events/download_submissions/<?=$event['Event']['id']?>">Export as CSV file</a>
