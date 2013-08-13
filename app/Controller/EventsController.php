@@ -317,13 +317,49 @@ class EventsController extends AppController
     }
 
     public function report($id = null) {
+
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
 
+        $start_date = date('Y-m-d 00:00:00');
+        $end_date = date('Y-m-d 23:59:59');
+
+        $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
+        $start_date = date("Y-m-d",$date);
+
+        if(isset($this->request->data['Event']['date_start'])) {
+            $date_month = $this->request->data['Event']['date_start']['month'];
+            $date_day = $this->request->data['Event']['date_start']['day'];
+            $date_year = $this->request->data['Event']['date_start']['year'];
+            $temp = $date_year .'-'.$date_month .'-'.$date_day;
+            $start_date = date($temp.' 00:00:00');
+        }
+
+        if(isset($this->request->data['Event']['date_end'])) {
+            $date_month = $this->request->data['Event']['date_end']['month'];
+            $date_day = $this->request->data['Event']['date_end']['day'];
+            $date_year = $this->request->data['Event']['date_end']['year'];
+            $temp = $date_year .'-'.$date_month .'-'.$date_day;
+            $end_date = date($temp.' 00:00:00');
+        }
+
+        //var_dump($start_date);
+       // var_dump($end_date);
+
         $event = $this->Event->read(null, $id);
-        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $id)));
+
+        if(isset($_GET['date']) && $_GET['date'] =='all'){
+            $date = strtotime ( '-365 day' , strtotime ( date('Y-m-j') ) ) ;
+            $start_date = date("Y-m-d",$date);
+        }
+
+        $cond = array('EventAction.event_id' => $id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+
+        //print_r($cond);
+        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
+
         $now = time();
         if (strtoupper($event['Event']['stage']) == 'SCHEDULED') {
             if ($now > strtotime($event['Event']['date_start']) && $now < strtotime($event['Event']['date_end'])) {
@@ -887,10 +923,7 @@ class EventsController extends AppController
         App::uses('ConnectionManager', 'Model');
         $db = ConnectionManager::getDataSource('default');
 
-
         if($rank == 'up'){
-
-            $sql_1 = "update events set view_order=view_order+1 where view_order='$view_order' - 1";
             $sql_1 = "update events set view_order=view_order+1 where view_order='$view_order' - 1";
             $db->rawQuery($sql_1);
             $sql_2 = "update events set view_order=view_order-1 where id='$id'";

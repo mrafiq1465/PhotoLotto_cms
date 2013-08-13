@@ -1,6 +1,27 @@
+
+
 <section class="list">
     <?=$this->element('menu', array("heading" => "Event Report"));?>
     <section id="form-container">
+        <ul>
+            <li><a href="/events/report/<?=$event['Event']['id']?>">Today</a> &nbsp;&nbsp;&nbsp;<a href="/events/report/<?=$event['Event']['id']?>/?date=all">All</a></li>
+        </ul>
+        <? echo $this->Form->create('Event'); ?>
+        <div class="row-fluid" >
+            <div class="span7">
+                <div class="row-fluid">
+                    <?=$this->Form->input('date_start', array('empty' => false, 'div' => false, 'minYear'=>date('Y'), 'maxYear'=>date('Y')+10, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                </div>
+                <div class="row-fluid">
+                    <?=$this->Form->input('date_end', array('empty' => false, 'minYear'=>date('Y'), 'maxYear'=>date('Y')+10, 'div' => false, 'placeholder' => 'Please choose a start date', 'type' => "date"));?>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <?=$this->Form->end(array('id' => 'submitBtn', 'class' => 'btn btn-large btn-block btn-primary', 'label' => 'Search',))?>
+        </div>
+
+
         <ul>
             <li>Event name:<?=$event['Event']['name']?></li>
             <li>Status: <?=$event['Event']['status']?></li>
@@ -45,5 +66,23 @@
         </ul>
     </div>
 </section>
+
+
+    <style>
+        .row-fluid {
+            padding-left: 15px;
+        }
+        select {
+            width: 100px;;
+        }
+        #submitBtn {
+            width:150px;
+            margin-left: 15px;
+            height: 30px;
+            padding: 0;
+        }
+
+    </style>
+
 
 
