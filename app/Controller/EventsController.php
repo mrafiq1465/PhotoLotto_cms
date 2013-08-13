@@ -151,7 +151,7 @@ class EventsController extends AppController
             $this->request->data['Event']['updated_by'] = $user_data['id'];
 
             $options = array(
-                'order' => array('Event.view_order' => 'asc')
+                'order' => array('Event.view_order' => 'desc')
             );
             $events_order = $this->Event->find('first', $options);
 
