@@ -154,7 +154,6 @@ class EventsController extends AppController
                 'order' => array('Event.view_order' => 'desc')
             );
             $events_order = $this->Event->find('first', $options);
-
             $this->request->data['Event']['view_order'] = $events_order['Event']['view_order'] + 1;
 
             if (!empty($this->request->data['Event']['date_start']) ||
@@ -685,6 +684,7 @@ class EventsController extends AppController
 
     public function event_email_bk() {
         $this->autoRender = false;
+
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
 
@@ -735,6 +735,7 @@ class EventsController extends AppController
 
     public function event_email() {
         $this->autoRender = false;
+        $success = false;
         $email_config = Configure::read('email_config');
         $image_header = $email_config['image_header'];
         $image_footer = $email_config['image_footer'];
@@ -872,6 +873,7 @@ class EventsController extends AppController
             }
 
         }
+        
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
