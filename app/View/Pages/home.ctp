@@ -12,7 +12,7 @@
 
             </div>
             <div class="span4 offset5 text-right">
-                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
+                <!--a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a-->
                 <!--<a href="#" onClick="_gaq.push(['_trackEvent', 'Header', 'Click', 'Google Play Button']);"><img src="http://www.pixta.com.au/app/img/google-play.png" width="100" height="30" alt="Available on Google Play" title="Get Pixta on Google Play" /></a>-->
             </div>
         </div>
@@ -288,7 +288,7 @@
                 <small>&copy; 2013 Pixta. All rights reserved. <!--ABN 000 000 000.--></small>
             </div>
             <div class="span4 offset2 text-right">
-                <a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a>
+                <!--a href="https://itunes.apple.com/us/app/pixta/id642258988?mt=8" target="_blank" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'App Store Button']);"><img src="http://www.pixta.com.au/app/img/app-store.png" width="100" height="30" alt="Available on the App Store" title="Get Pixta on the App Store" /></a-->
                 <!--<a href="#" onClick="_gaq.push(['_trackEvent', 'Footer', 'Click', 'Google Play Button']);"><img src="http://www.pixta.com.au/app/img/google-play.png" width="100" height="30" alt="Available on Google Play" title="Get Pixta on Google Play" /></a>-->
             </div>
         </div>
