@@ -395,11 +395,40 @@ class EventsController extends AppController
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
+
+        $start_date = date('Y-m-d 00:00:00');
+        $end_date = date('Y-m-d 23:59:59');
+
+        $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
+        $start_date = date("Y-m-d",$date);
+
+        if(isset($_GET['date_start'])) {
+            $start_date = date($_GET['date_start'].' 00:00:00');
+        }
+
+        if(isset($_GET['date_start'])) {
+            $end_date = date($_GET['date_end'].' 00:00:00');
+        }
+
+        //var_dump($start_date);
+        //var_dump($end_date);
+
+        if(isset($_GET['date']) && $_GET['date'] =='all'){
+            $date = strtotime ( '-365 day' , strtotime ( date('Y-m-j') ) ) ;
+            $start_date = date("Y-m-d",$date);
+        }
+
+        $event = $this->Event->read(null, $event_id);
+        //print_r($cond);
+        //$event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
+
         $rows[] = array_keys($this->Event->EventAction->getColumnTypes());
         if (empty($event_action_id)) {
-            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
+            $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
         } else {
-            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.id' => $event_action_id)));
+            $cond = array('EventAction.id' => $event_action_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
         }
 
         foreach ($event_actions as $event_action) {
@@ -433,8 +462,34 @@ class EventsController extends AppController
             throw new NotFoundException(__('Invalid event'));
         }
 
+        $start_date = date('Y-m-d 00:00:00');
+        $end_date = date('Y-m-d 23:59:59');
+
+        $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
+        $start_date = date("Y-m-d",$date);
+
+        if(isset($_GET['date_start'])) {
+            $start_date = date($_GET['date_start'].' 00:00:00');
+        }
+
+        if(isset($_GET['date_start'])) {
+            $end_date = date($_GET['date_end'].' 00:00:00');
+        }
+
+        //var_dump($start_date);
+        //var_dump($end_date);
+
+        if(isset($_GET['date']) && $_GET['date'] =='all'){
+            $date = strtotime ( '-365 day' , strtotime ( date('Y-m-j') ) ) ;
+            $start_date = date("Y-m-d",$date);
+        }
+
         $event = $this->Event->read(null, $event_id);
-        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
+        $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+        //print_r($cond);
+        $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
+
+       // $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
 
         $zip = new ZipArchive();
         $filename = '../tmp/image-zips/' . mt_rand(1, 1000000000) . '.zip';
@@ -873,7 +928,7 @@ class EventsController extends AppController
             }
 
         }
-        
+
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
         echo json_encode(array('response' => !empty($success)));
