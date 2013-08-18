@@ -340,20 +340,18 @@ class EventsController extends AppController
             $date_month = $this->request->data['Event']['date_start']['month'];
             $date_day = $this->request->data['Event']['date_start']['day'];
             $date_year = $this->request->data['Event']['date_start']['year'];
-            $temp = $date_year .'-'.$date_month .'-'.$date_day;
-            $start_date = date($temp.' 00:00:00');
+            $start_date = $date_year .'-'.$date_month .'-'.$date_day;
         }
 
         if(isset($this->request->data['Event']['date_end'])) {
             $date_month = $this->request->data['Event']['date_end']['month'];
             $date_day = $this->request->data['Event']['date_end']['day'];
             $date_year = $this->request->data['Event']['date_end']['year'];
-            $temp = $date_year .'-'.$date_month .'-'.$date_day;
-            $end_date = date($temp.' 23:59:59');
+            $end_date = $date_year .'-'.$date_month .'-'.$date_day;
         }
 
         //var_dump($start_date);
-       // var_dump($end_date);
+        //var_dump($end_date);
 
         $event = $this->Event->read(null, $id);
 
@@ -362,7 +360,8 @@ class EventsController extends AppController
             $start_date = date("Y-m-d",$date);
         }
 
-        $cond = array('EventAction.event_id' => $id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+        //$cond = array('EventAction.event_id' => $id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+        $cond = array('EventAction.event_id' => $id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
 
         //print_r($cond);
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
@@ -396,18 +395,18 @@ class EventsController extends AppController
             throw new NotFoundException(__('Invalid event'));
         }
 
-        $start_date = date('Y-m-d 00:00:00');
-        $end_date = date('Y-m-d 23:59:59');
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
 
         $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
         $start_date = date("Y-m-d",$date);
 
         if(isset($_GET['date_start'])) {
-            $start_date = date($_GET['date_start'].' 00:00:00');
+            $start_date = $_GET['date_start'];
         }
 
         if(isset($_GET['date_start'])) {
-            $end_date = date($_GET['date_end'].' 00:00:00');
+            $end_date = $_GET['date_end'];
         }
 
         //var_dump($start_date);
@@ -424,10 +423,11 @@ class EventsController extends AppController
 
         $rows[] = array_keys($this->Event->EventAction->getColumnTypes());
         if (empty($event_action_id)) {
-            $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
-            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
+            $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
+
+          $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
         } else {
-            $cond = array('EventAction.id' => $event_action_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+            $cond = array('EventAction.id' => $event_action_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
             $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
         }
 
@@ -462,18 +462,18 @@ class EventsController extends AppController
             throw new NotFoundException(__('Invalid event'));
         }
 
-        $start_date = date('Y-m-d 00:00:00');
-        $end_date = date('Y-m-d 23:59:59');
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
 
         $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
         $start_date = date("Y-m-d",$date);
 
         if(isset($_GET['date_start'])) {
-            $start_date = date($_GET['date_start'].' 00:00:00');
+            $start_date = $_GET['date_start'];
         }
 
         if(isset($_GET['date_start'])) {
-            $end_date = date($_GET['date_end'].' 00:00:00');
+            $end_date = $_GET['date_end'];
         }
 
         //var_dump($start_date);
@@ -485,8 +485,10 @@ class EventsController extends AppController
         }
 
         $event = $this->Event->read(null, $event_id);
-        $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
+       // $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
         //print_r($cond);
+        $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
+
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
 
        // $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => array('EventAction.event_id' => $event_id)));
