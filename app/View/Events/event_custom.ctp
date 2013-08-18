@@ -13,7 +13,7 @@
             <?php echo $event['Event']['public_description']; ?>
         </div>
     </div>
-    <div id="app_store">
+    <!--div id="app_store">
         <ul class="clearfix">
             <li>
                 <a href="#"><img src="/img/app_store.png" alt="Apple store"></a>
@@ -22,7 +22,7 @@
                 <a href="#"><img src="/img/google_play.png" alt="google play"></a>
             </li>
         </ul>
-    </div>
+    </div-->
 </div>
 
 <div id="gallery" class="bs">
