@@ -88,9 +88,17 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+        $('#submitBtn').click(function(e){
+            var start_date = $('#EventDateStartYear').val() + '-' + $('#EventDateStartMonth').val() + '-' + $('#EventDateStartDay').val() ;
+            var end_date = $('#EventDateEndYear').val() + '-' + $('#EventDateEndMonth').val() + '-' + $('#EventDateEndDay').val() ;
+            window.location.search = 'start_date='+start_date+'&end_date='+end_date;
+            return false;
+        });
+
         $('#export_image').click(function(e){
             var start_date = $('#EventDateStartYear').val() + '-' + $('#EventDateStartMonth').val() + '-' + $('#EventDateStartDay').val() ;
             var end_date = $('#EventDateEndYear').val() + '-' + $('#EventDateEndMonth').val() + '-' + $('#EventDateEndDay').val() ;
+            //console.log(start_date);
             window.location.href= '/events/download_image/<?=$event['Event']['id']?>/?start_date='+start_date + "&end_date=" + end_date;
             e.preventDefault();
         });

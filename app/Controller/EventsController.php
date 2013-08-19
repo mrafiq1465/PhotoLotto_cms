@@ -34,7 +34,7 @@ class EventsController extends AppController
 
     public $components = array('RequestHandler');
     public $helpers = array('Text');
-    public $uses = array('Event', 'EventEmail', 'EventEmailConfig');
+    public $uses = array('Event', 'EventEmail', 'EventEmailConfig', 'EventAction');
 
     var $__fbApiKey = '549616571765083';
     var $__fbSecret = '1a13e632d224c8310ef6914c766df371';
@@ -336,18 +336,12 @@ class EventsController extends AppController
         $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
         $start_date = date("Y-m-d",$date);
 
-        if(isset($this->request->data['Event']['date_start'])) {
-            $date_month = $this->request->data['Event']['date_start']['month'];
-            $date_day = $this->request->data['Event']['date_start']['day'];
-            $date_year = $this->request->data['Event']['date_start']['year'];
-            $start_date = $date_year .'-'.$date_month .'-'.$date_day;
+        if(isset($_GET['start_date'])) {
+            $start_date = $_GET['start_date'];
         }
 
-        if(isset($this->request->data['Event']['date_end'])) {
-            $date_month = $this->request->data['Event']['date_end']['month'];
-            $date_day = $this->request->data['Event']['date_end']['day'];
-            $date_year = $this->request->data['Event']['date_end']['year'];
-            $end_date = $date_year .'-'.$date_month .'-'.$date_day;
+        if(isset($_GET['end_date'])) {
+            $end_date = $_GET['end_date'];
         }
 
         //var_dump($start_date);
@@ -401,12 +395,12 @@ class EventsController extends AppController
         $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
         $start_date = date("Y-m-d",$date);
 
-        if(isset($_GET['date_start'])) {
-            $start_date = $_GET['date_start'];
+        if(isset($_GET['start_date'])) {
+            $start_date = $_GET['start_date'];
         }
 
-        if(isset($_GET['date_start'])) {
-            $end_date = $_GET['date_end'];
+        if(isset($_GET['end_date'])) {
+            $end_date = $_GET['end_date'];
         }
 
         //var_dump($start_date);
@@ -421,20 +415,19 @@ class EventsController extends AppController
         //print_r($cond);
         //$event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
 
-        $rows[] = array_keys($this->Event->EventAction->getColumnTypes());
+        $rows[] = array_keys($this->EventAction->getColumnTypes());
         if (empty($event_action_id)) {
             $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
-
-          $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
+          $event_actions = $this->EventAction->find('all', array('conditions' => $cond, 'recursive'=>-1));
         } else {
             $cond = array('EventAction.id' => $event_action_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
-            $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, $cond));
+            $event_actions = $this->EventAction->find('all', array('recursive' => -1, 'conditions'=>$cond));
         }
 
         foreach ($event_actions as $event_action) {
             $rows[] = $event_action['EventAction'];
         }
-
+        
         //todo: very bad memory hungry code... will have to fix it soon ...
         $this->exportCSV($rows);
 
@@ -468,12 +461,12 @@ class EventsController extends AppController
         $date = strtotime ( '0 day' , strtotime ( date('Y-m-j') ) ) ;
         $start_date = date("Y-m-d",$date);
 
-        if(isset($_GET['date_start'])) {
-            $start_date = $_GET['date_start'];
+        if(isset($_GET['start_date'])) {
+            $start_date = $_GET['start_date'];
         }
 
-        if(isset($_GET['date_start'])) {
-            $end_date = $_GET['date_end'];
+        if(isset($_GET['end_date'])) {
+            $end_date = $_GET['end_date'];
         }
 
         //var_dump($start_date);
