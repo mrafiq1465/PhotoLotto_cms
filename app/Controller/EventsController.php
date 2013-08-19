@@ -319,7 +319,7 @@ class EventsController extends AppController
                 $tw_share = $tw_share + $e['EventEmail']['tw_share'];
             }
         }
-
+        
         $this->set(compact('event', 'event_emails','fb_share','tw_share'));
     }
 
@@ -372,7 +372,9 @@ class EventsController extends AppController
         } else {
             $event['Event']['status'] = 'DRAFT';
         }
-
+        
+        
+        $this->request->data = array('Event'=>array('date_start'=>$start_date, 'date_end'=>$end_date));
         $this->set(compact('event', 'event_actions'));
     }
 
