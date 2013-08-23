@@ -694,7 +694,7 @@ class EventsController extends AppController
         date_default_timezone_set('Australia/Sydney');
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
-           var_dump(date ('Y-m-d H:i:s'));
+          // var_dump(date ('Y-m-d H:i:s'));
             $success = $this->Event->EventAction->save(array(
                 'EventAction' => array(
                     'event_id' => $_GET['event_id'],
@@ -702,8 +702,7 @@ class EventsController extends AppController
                     'action_name' => $_GET['action'],
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
-                    'blacklist' => $this->request->data['Event']['auto_moderate'],
-                    'created' =>  date ('Y-m-d H:i:s')
+                    'blacklist' => $this->request->data['Event']['auto_moderate']
                 )
             ));
         }
