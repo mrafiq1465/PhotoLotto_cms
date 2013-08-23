@@ -142,7 +142,7 @@ class EventsController extends AppController
      */
     public function add() {
         $this->layout = 'event';
-
+        date_default_timezone_set('Australia/Sydney');
         if ($this->request->is('post')) {
             $this->Event->create();
 
@@ -182,7 +182,7 @@ class EventsController extends AppController
             for ($i = 1; $i <= 5; $i++) {
                 unset($this->request->data['Event']["img_overlay_$i"]);
             }
-
+            date_default_timezone_set('Australia/Sydney');
             if ($this->Event->save($this->request->data)) {
                 $this->request->data['Event'] = array_merge($this->request->data['Event'], $temp_data);
                 $this->process_upload($this->Event->id, 'public_logo');
@@ -210,6 +210,7 @@ class EventsController extends AppController
      */
     public function edit($id = null) {
         $this->Event->id = $id;
+        date_default_timezone_set('Australia/Sydney');
         $this->layout = 'event';
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
@@ -240,6 +241,7 @@ class EventsController extends AppController
 
     public  function email_config($event_id = null){
         $this->layout = 'event';
+        date_default_timezone_set('Australia/Sydney');
         $image_parts = array('background', 'header', 'footer', 'right');
 
         $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$event_id), 'recursive'=>-1));
@@ -300,6 +302,7 @@ class EventsController extends AppController
 
     public function email_stat($id = null) {
         $this->Event->id = $id;
+        date_default_timezone_set('Australia/Sydney');
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
@@ -324,8 +327,8 @@ class EventsController extends AppController
     }
 
     public function report($id = null) {
-        
-        date_default_timezone_set('Australia/Melbourne');
+
+        date_default_timezone_set('Australia/Sydney');
 
         $this->Event->id = $id;
         if (!$this->Event->exists()) {
@@ -381,8 +384,8 @@ class EventsController extends AppController
     }
 
     public function download_submissions($event_id = null, $event_action_id = null) {
-        
-        date_default_timezone_set('Australia/Melbourne');
+
+        date_default_timezone_set('Australia/Sydney');
         $this->autoRender = false;
         if (!empty($event_action_id)) {
             $this->Event->EventAction->id = $event_action_id;
@@ -453,7 +456,7 @@ class EventsController extends AppController
     }
 
     public function download_image($event_id = null) {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Australia/Sydney');
         $this->autoRender = false;
 
         $this->Event->id = $event_id;
@@ -532,7 +535,7 @@ class EventsController extends AppController
 
     public function download_email_post($event_id = null) {
         $this->autoRender = false;
-
+        date_default_timezone_set('Australia/Sydney');
         $this->Event->id = $event_id;
         if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
@@ -566,6 +569,7 @@ class EventsController extends AppController
 
     public function duplicate($id = null) {
         $this->Event->id = $id;
+        date_default_timezone_set('Australia/Sydney');
         $new_record = $this->Event->findById($this->Event->id);
         unset($new_record['Event']['id']);
 
@@ -686,6 +690,8 @@ class EventsController extends AppController
 
     public function event_action() {
         $this->autoRender = false;
+
+        date_default_timezone_set('Australia/Sydney');
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
 
@@ -697,6 +703,7 @@ class EventsController extends AppController
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
                     'blacklist' => $this->request->data['Event']['auto_moderate'],
+                    //'created' =>  date ('Y-m-d H:i:s')
                 )
             ));
         }
@@ -745,6 +752,7 @@ class EventsController extends AppController
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
 
+            date_default_timezone_set('Australia/Sydney');
             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
@@ -805,7 +813,7 @@ class EventsController extends AppController
 
 
         if (!empty($_GET)) {
-
+            date_default_timezone_set('Australia/Sydney');
             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
@@ -961,7 +969,7 @@ class EventsController extends AppController
 
     function photo_update() {
         $this->autoRender = false;
-
+        date_default_timezone_set('Australia/Sydney');
         $event_action_id = $this->request->data['id'];
         $blacklist = $this->request->data['blacklist'];
 
