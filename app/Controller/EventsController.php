@@ -360,7 +360,7 @@ class EventsController extends AppController
         }
 
         //$cond = array('EventAction.event_id' => $id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
-        $cond = array('EventAction.event_id' => $id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <' =>$end_date);
+        $cond = array('EventAction.event_id' => $id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
 
         //print_r($cond);
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
@@ -426,10 +426,10 @@ class EventsController extends AppController
 
         $rows[] = array_keys($this->EventAction->getColumnTypes());
         if (empty($event_action_id)) {
-            $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <' =>$end_date);
+            $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
           $event_actions = $this->EventAction->find('all', array('conditions' => $cond, 'recursive'=>-1));
         } else {
-            $cond = array('EventAction.id' => $event_action_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <' =>$end_date);
+            $cond = array('EventAction.id' => $event_action_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
             $event_actions = $this->EventAction->find('all', array('recursive' => -1, 'conditions'=>$cond));
         }
 
@@ -490,7 +490,7 @@ class EventsController extends AppController
         $event = $this->Event->read(null, $event_id);
        // $cond = array('EventAction.event_id' => $event_id,'EventAction.created >=' =>$start_date,'EventAction.created <' =>$end_date);
         //print_r($cond);
-        $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <' =>$end_date);
+        $cond = array('EventAction.event_id' => $event_id,'DATE(EventAction.created) >=' =>$start_date,'DATE(EventAction.created) <=' =>$end_date);
 
         $event_actions = $this->Event->EventAction->find('all', array('recursive' => -1, 'conditions' => $cond));
 
