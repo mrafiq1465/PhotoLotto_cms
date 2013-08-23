@@ -694,7 +694,6 @@ class EventsController extends AppController
         date_default_timezone_set('Australia/Sydney');
         if (!empty($_GET)) {
             $this->request->data = $this->Event->read(null, $_GET['event_id']);
-          // var_dump(date ('Y-m-d H:i:s'));
             $success = $this->Event->EventAction->save(array(
                 'EventAction' => array(
                     'event_id' => $_GET['event_id'],
