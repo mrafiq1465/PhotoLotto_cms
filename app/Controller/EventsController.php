@@ -835,24 +835,20 @@ class EventsController extends AppController
 
             if(!empty($event_config)){
 
+                $image_header_href = "#";
                 if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
                     $image_header = $host . $event_config['EventEmailConfig']['image_header'];
 
                     if(isset($event_config['EventEmailConfig']['image_header_href'])){
                         $image_header_href = $event_config['EventEmailConfig']['image_header_href'];
                     }
-                    else {
-                        $image_header_href = "#";
-                    }
                 }
+                $image_footer_href = "#";
                 if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
                     $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
 
                     if(isset($event_config['EventEmailConfig']['image_footer_href'])){
                         $image_footer_href = $event_config['EventEmailConfig']['image_footer_href'];
-                    }
-                    else {
-                        $image_footer_href = "#";
                     }
                 }
                 if(isset($event_config['EventEmailConfig']['image_background']) && trim($event_config['EventEmailConfig']['image_background'])!=='') {
@@ -930,7 +926,9 @@ class EventsController extends AppController
                 $email->subject($_GET['subject']);
                 $email->template('pixta', 'pixta');
                 $email->viewVars(array('image_header' => $image_header));
+                $email->viewVars(array('image_header_href' => $image_header_href));
                 $email->viewVars(array('image_footer' => $image_footer));
+                $email->viewVars(array('image_footer_href' => $image_footer_href));
                 $email->viewVars(array('image_bg' => $image_bg));
                 $email->viewVars(array('image_columnA' => $image_columnA));
                 $email->viewVars(array('image_columnB' => $image_columnB));
