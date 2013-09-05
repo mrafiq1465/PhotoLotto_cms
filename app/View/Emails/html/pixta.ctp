@@ -14,9 +14,9 @@
                                    style="margin: 0;padding: 0;width: 100%;">
                                 <tr style="margin: 0;padding: 0;">
                                     <td height="100px" align="center" style="margin: 0;padding: 0;">
-                                        <img src="<?php echo $image_header; ?>"
+                                        <a href="<?php echo $image_header_href; ?>"><img src="<?php echo $image_header; ?>"
                                              style="display: block;max-width: 100%;margin: 0;padding: 0;"
-                                             alt="header">
+                                             alt="header"></a>
                                     </td>
                                 </tr>
                             </table>
@@ -130,7 +130,7 @@
                                 <tr style="margin: 0;padding: 0;">
                                     <td height="100px" align="center"
                                         style="margin: 0;padding: 0;">
-                                        <img
+                                        <a href="<?php echo $image_footer_href; ?>"><img
                                                 style="display: block;max-width: 100%;margin: 0;padding: 0;"
                                                 src="<?php echo $image_footer; ?>"
                                                 alt="footer">

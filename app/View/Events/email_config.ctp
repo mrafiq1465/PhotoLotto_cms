@@ -82,7 +82,12 @@ $options = array(
                     </div>
                 </div>
             </div>
-
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="image_header_href">Image Header Hyperlink</label>
+                    <?= $this->Form->input('image_header_href', array('div' => false, 'placeholder' => 'Image Header Hyperlink', 'type'=>'text' )); ?>
+                </div>
+            </div>
             <div class="row-fluid">
                 <div class="span12">
                     <label for="image_footer">Image Footer <span>(Dimension should be (300X100))</span></label>
@@ -108,6 +113,12 @@ $options = array(
                 </div>
             </div>
 
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="image_footer_href">Image Footer Hyperlink</label>
+                    <?= $this->Form->input('image_footer_href', array('div' => false, 'placeholder' => 'Image Footer Hyperlink', 'type'=>'text' )); ?>
+                </div>
+            </div>
             <!--            <div class="row-fluid">
                 <div class="span12">
                     <label for="image_left">Image Left <span>(100kb max.)</span></label>
