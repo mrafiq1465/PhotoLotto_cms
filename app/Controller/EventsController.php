@@ -832,10 +832,9 @@ class EventsController extends AppController
 
             $host = 'http://www.pixta.com.au';
             $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
-
+			$image_footer_href = "#";
+            $image_header_href = "#";
             if(!empty($event_config)){
-
-                $image_header_href = "#";
                 if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
                     $image_header = $host . $event_config['EventEmailConfig']['image_header'];
 
@@ -843,7 +842,6 @@ class EventsController extends AppController
                         $image_header_href = $event_config['EventEmailConfig']['image_header_href'];
                     }
                 }
-                $image_footer_href = "#";
                 if(isset($event_config['EventEmailConfig']['image_footer']) && trim($event_config['EventEmailConfig']['image_footer'])!=='') {
                     $image_footer = $host . $event_config['EventEmailConfig']['image_footer'];
 
