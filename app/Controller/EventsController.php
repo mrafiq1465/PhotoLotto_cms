@@ -919,7 +919,7 @@ class EventsController extends AppController
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
-               $email->config('default');
+//               $email->config('default');
                 $email->from($email_from);
                 
                 $email->to($to);

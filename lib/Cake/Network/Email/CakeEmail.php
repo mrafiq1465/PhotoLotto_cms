@@ -607,6 +607,7 @@ class CakeEmail {
 	}
 
 
+/*
 class EmailConfig {
 //It also does not work with a constructor
 
@@ -618,6 +619,7 @@ public $amazon = array(
     'transport' => 'Smtp'
 );
 }
+*/
 /**
  * Get/Set Subject.
  *
