@@ -217,7 +217,10 @@ class EmailComponent extends Component {
  *
  * @var array
  */
-	public $smtpOptions = array();
+	public $smtpOptions = array(
+	
+	
+	);
 
 /**
  * Contains the rendered plain text message if one was sent.

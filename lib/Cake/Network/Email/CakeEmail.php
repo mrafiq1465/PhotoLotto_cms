@@ -606,6 +606,18 @@ class CakeEmail {
 		return $this;
 	}
 
+
+class EmailConfig {
+
+//It also does not work with a constructor
+
+public $amazon = array(
+    'host' => 'ses-smtp-user.20130911-145715',
+    'port' => 465,
+    'username' => 'AKIAIZFL57OPDKAOSSWA',
+    'password' => 'ArfpwUg9fD2pT++3oii1e/Li9PBSk4y+Xu79uYtIK1+s',
+    'transport' => 'Smtp'
+);
 /**
  * Get/Set Subject.
  *
