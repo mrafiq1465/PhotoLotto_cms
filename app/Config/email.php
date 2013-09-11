@@ -51,12 +51,12 @@ class EmailConfig {
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
+		'from' => array('info@pixta.copm.au' => 'www.pixta.com.au'),
+		'host' => 'ses-smtp-user.20130911-145715',
 		'port' => 25,
 		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
+		'username' => 'AKIAIZFL57OPDKAOSSWA',
+		'password' => 'ArfpwUg9fD2pT++3oii1e/Li9PBSk4y+Xu79uYtIK1+s',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',
