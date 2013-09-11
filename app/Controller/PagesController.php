@@ -85,7 +85,7 @@ class PagesController extends AppController {
         App::uses('CakeEmail', 'Network/Email');
 
         $email = new CakeEmail();
-        $email->from('no-reply@flypass.com.au');
+        $email->from('info@flypass.com.au');
         $email->to('raf@flydigital.com.au');
         $email->subject($subject);
         $email->template('pixta', 'pixta');

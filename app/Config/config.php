@@ -26,7 +26,7 @@ $config['email_config'] = array(
     'image_footer' => 'http://www.pixta.com.au/img/email_image/def-footer.png',
     'image_columnA' => 'http://www.pixta.com.au/img/email_image/def-app.png',
     'image_columnB' => 'http://www.pixta.com.au/img/email_image/def-columnb.png',
-    'email_from' => 'no-reply@pixta.com.au'
+    'email_from' => 'info@pixta.com.au'
 );
 
 

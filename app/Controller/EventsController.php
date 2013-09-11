@@ -758,7 +758,7 @@ class EventsController extends AppController
                     'action_name' => $_GET['action'],
                     'phone_id' => $_GET['phone_id'],
                     'photo' => $_GET['photo'],
-                    'email_from' => 'no-reply@pixta.com.au',
+                    'email_from' => 'info@pixta.com.au',
                     'email_to' => $_GET['email_to'],
                     'subject' => $_GET['subject'],
                     'message' => $_GET['message'],
@@ -778,7 +778,7 @@ class EventsController extends AppController
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
-                $email->from('no-reply@pixta.com.au');
+                $email->from('info@pixta.com.au');
                 $email->to($to);
                 $email->subject($_GET['subject']);
                 $email->template('event_email', 'event_email');
