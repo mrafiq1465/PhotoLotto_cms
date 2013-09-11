@@ -919,7 +919,7 @@ class EventsController extends AppController
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
-                $email->config(array('from' => 'info@pixta.copm.au', 'transport' => 'Smtp',	'host' => 'ses-smtp-user.20130911-145715',	'port' => 25,'timeout' => 30,	'username' => 'AKIAIZFL57OPDKAOSSWA','password' => 'ArfpwUg9fD2pT++3oii1e/Li9PBSk4y+Xu79uYtIK1+s'));
+                $email->config(array('from' => 'info@pixta.copm.au', 'transport' => 'Smtp',	'host' => 'email-smtp.us-east-1.amazonaws.com',	'port' => 25,'timeout' => 30,	'username' => 'ses-smtp-user.20130910-093443','password' => 'flydigital2013',  'tls' => true));
                // $email->from($email_from);
                 $email->to($to);
                 $email->subject($_GET['subject']);
