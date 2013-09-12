@@ -48,20 +48,19 @@ class EmailConfig {
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
-
+	
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('info@pixta.copm.au' => 'www.pixta.com.au'),
-		'host' => 'ses-smtp-user.20130911-145715',
-		'port' => 25,
-		'timeout' => 30,
-		'username' => 'AKIAIZFL57OPDKAOSSWA',
-		'password' => 'ArfpwUg9fD2pT++3oii1e/Li9PBSk4y+Xu79uYtIK1+s',
+		'from' => array('info@pixta.com.au' => 'Pixta'), //this needs to validated with SES. More details here: http://viorel.sfetea.ro/blog/en/2011/10/31/sending-e-mails-the-efficient-way-using-amazon-ses-and-cakephp/
+		'host' => 'ssl://email-smtp.us-east-1.amazonaws.com',
+		'port' => 465,
+		'timeout' => 10,
+		'username' => 'ses-smtp-user.20130910-093443',
+		'password' => 'flydigital2013',
 		'client' => null,
-		'log' => false,
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		'log' => false
 	);
+
 
 	public $fast = array(
 		'from' => 'you@localhost',
