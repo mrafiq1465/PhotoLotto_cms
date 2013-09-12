@@ -52,7 +52,7 @@ class EmailConfig {
 	public $smtp = array(
 		'transport' => 'Smtp',
 		'from' => array('info@pixta.com.au' => 'Pixta'), 
-		'host' => ' ssl://email-smtp.us-east-1.amazonaws.com',
+		'host' => 'ssl://email-smtp.us-east-1.amazonaws.com',
 		'port' => 465,
 		'timeout' => 10,
 		'username' => 'ses-smtp-user.20130910-093443',
