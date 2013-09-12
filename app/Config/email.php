@@ -51,7 +51,7 @@ class EmailConfig {
 	
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('info@pixta.com.au' => 'Pixta'), //this needs to validated with SES. More details here: http://viorel.sfetea.ro/blog/en/2011/10/31/sending-e-mails-the-efficient-way-using-amazon-ses-and-cakephp/
+		'from' => array('info@pixta.com.au' => 'Pixta'), 
 		'host' => 'tls://email-smtp.us-east-1.amazonaws.com',
 		'port' => 25,
 		'timeout' => 10,
