@@ -797,12 +797,14 @@ class EventsController extends AppController
     }
 
     public function event_email() {
+/*
 if(!in_array('openssl',get_loaded_extensions())){
     die('you have to enable php_openssl in php.ini to use this service');       
 } else {
     echo "php_openssl in php.ini is enabled <br />";
     die();
 }
+*/
         $this->autoRender = false;
         $success = false;
         $email_config = Configure::read('email_config');
