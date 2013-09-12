@@ -58,7 +58,8 @@ class EmailConfig {
 		'username' => 'ses-smtp-user.20130910-093443',
 		'password' => 'DPAyln[K!Q3Z',
 		'client' => null,
-		'log' => false
+		'log' => false,
+		'tls' => true
 	);
 
 
