@@ -52,14 +52,13 @@ class EmailConfig {
 	public $smtp = array(
 		'transport' => 'Smtp',
 		'from' => array('info@pixta.com.au' => 'Pixta'), 
-		'host' => 'tls://email-smtp.us-east-1.amazonaws.com',
-		'port' => 25,
+		'host' => ' ssl://email-smtp.us-east-1.amazonaws.com',
+		'port' => 465,
 		'timeout' => 10,
 		'username' => 'ses-smtp-user.20130910-093443',
 		'password' => 'DPAyln[K!Q3Z',
 		'client' => null,
-		'log' => false,
-		'tls' =>true
+		'log' => false
 	);
 
 
