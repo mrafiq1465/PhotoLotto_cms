@@ -927,7 +927,7 @@ if(!in_array('openssl',get_loaded_extensions())){
 
                 App::uses('CakeEmail', 'Network/Email');
                 $email = new CakeEmail();
-            //    $email->config(array('from' => 'info@pixta.copm.au', 'transport' => 'Smtp',	'host' => 'email-smtp.us-east-1.amazonaws.com',	'port' => 25,'timeout' => 30,	'username' => 'ses-smtp-user.20130910-093443','password' => 'flydigital2013',  'tls' => true));
+           
                $email->config('smtp');
                 $email->from($email_from);
                 $email->to($to);
@@ -1286,6 +1286,7 @@ if(!in_array('openssl',get_loaded_extensions())){
 
             App::uses('CakeEmail', 'Network/Email');
             $email = new CakeEmail();
+            $email->config('smtp');
             $email->from($email_from);
             $email->to($to);
             $email->subject($subject);
