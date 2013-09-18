@@ -25,7 +25,8 @@ $options = array(
             <h3>Config Details</h3>
 
             <div class="row-fluid row-event-config-email_from">
-                <label for="email_from">Email<span>&nbsp;(Format:  "Pixta" &#60do-not-reply@norton.com.au&#62)</span></label>
+                <label for="email_from">Email<span>&nbsp;(Format:  "From name" &#60info@pixta.com.au&#62)</span></label>
+                <div><i><b>important:</b> please always set the from email address as info@pixta.com.au for best deliverability performance</i></div>
                 <?= $this->Form->input('email_from', array('div' => false, 'placeholder' => 'Email Address', 'type'=>'text', 'required'=>'required' )); ?>
             </div>
             <div class="row-fluid row-event-config-desc">
