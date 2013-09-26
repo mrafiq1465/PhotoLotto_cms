@@ -36,7 +36,9 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
     
-    Router::connect('/events/user_share/', array('controller' => 'events', 'action' => 'user_share'));    
+    Router::connect('/events/user_share/', array('controller' => 'events', 'action' => 'user_share'));  
+    Router::connect('/events/share_from_form/', array('controller' => 'events', 'action' => 'share_from_form'));  
+    
 
     Router::connect('/users/login/', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));

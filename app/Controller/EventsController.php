@@ -1131,6 +1131,68 @@ if(!in_array('openssl',get_loaded_extensions())){
         
     }
 
+    public function share_from_form() 
+    {
+        $this->autoRender = false;
+
+        $this->facebook = new Facebook(array(
+            'appId'  => $this->__fbApiKey,
+            'secret' => $this->__fbSecret,
+            'fileUpload' => true,
+            'cookie' => false
+        ));
+
+        if ($this->facebook->getUser()) {
+
+            $accessToken = $this->facebook->getAccessToken();
+
+            //get image in local from bucket
+            $image = file_get_contents('http://appevent.s3.amazonaws.com/'.$_GET['photo']);
+            $save_file = fopen('img/email_image/'.$_GET['photo'], 'w');
+            fwrite($save_file, $image);
+            fclose($save_file);
+            $file = IMAGES . 'email_image' . DS . $_GET['photo'];
+
+            $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('EventEmailConfig.id'=>$_GET['email_config_id']), 'recursive'=>1));
+
+            $facebook_msg = $_GET['message_to_fb'];
+            
+            //add to wall
+            $attachment = array('message' => $facebook_msg,
+                'name' => $facebook_msg,
+                'caption' => $facebook_msg,
+                'link' => 'http://www.pixta.com.au',
+                'description' => 'Pixta Image Share',
+                'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
+                'image'=> '@' . realpath($file)
+            );
+
+            $this->facebook->api("/me/photos", "post", $attachment);
+
+
+            $event_email_id = $_GET['event_email_id'];
+
+            //destroy session
+            //$this->facebook->destroySession();
+
+            if($event_email_id > 0)
+                $this->redirect('/events/trace_share/'.$event_email_id.'/?media=fb');
+            else
+                $this->redirect('http://www.facebook.com');
+
+        } else {
+
+            $loginUrl = $this->facebook->getLoginUrl(
+                array('scope' => 'publish_stream')
+            );
+
+            echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
+            exit();
+            //$this->redirect($loginUrl);
+        }
+    }
+    
+    
     public function share() {
 
         $this->autoRender = false;
@@ -1164,8 +1226,7 @@ if(!in_array('openssl',get_loaded_extensions())){
                 $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
             }
 
-            if (!isset($_GET['message_to_fb']))
-                $facebook_msg = $_GET['message_to_fb'];
+            $facebook_msg = $_GET['message_to_fb'];
             
             //add to wall
             $attachment = array('message' => $facebook_msg,
