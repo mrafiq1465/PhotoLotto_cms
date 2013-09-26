@@ -1113,6 +1113,23 @@ if(!in_array('openssl',get_loaded_extensions())){
         fclose($csv_file);
     }
 
+    public function user_share()
+    {
+        $Photo          = isset($_GET['photo']) ? trim($_GET['photo']) : "";
+        $EmailID        = isset($_GET['email_config_id']) ? trim($_GET['email_config_id']) : "";
+        $EventEmailId   = isset($_GET['event_email_id']) ? trim($_GET['event_email_id']) : "";
+                
+        
+        if ($Photo == "" || $EmailID == "" || $EventEmailId == ""){
+            $this->redirect('http://www.pixta.com.au/');
+            return;
+        }
+
+        $this->set('Photo', $Photo);
+        $this->set('EmailID',$EmailID);
+        $this->set('EventEmailId',$EventEmailId);
+        
+    }
 
     public function share() {
 
@@ -1147,6 +1164,9 @@ if(!in_array('openssl',get_loaded_extensions())){
                 $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
             }
 
+            if (!isset($_GET['message_to_fb']))
+                $facebook_msg = $_GET['message_to_fb'];
+            
             //add to wall
             $attachment = array('message' => $facebook_msg,
                 'name' => $facebook_msg,
@@ -1156,8 +1176,6 @@ if(!in_array('openssl',get_loaded_extensions())){
                 'picture' => 'http://appevent.s3.amazonaws.com/'.$_GET['photo'],
                 'image'=> '@' . realpath($file)
             );
-
-
 
             $this->facebook->api("/me/photos", "post", $attachment);
 
@@ -1176,7 +1194,6 @@ if(!in_array('openssl',get_loaded_extensions())){
 
             $loginUrl = $this->facebook->getLoginUrl(
                 array('scope' => 'publish_stream')
-
             );
 
             echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
