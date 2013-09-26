@@ -120,7 +120,8 @@ class AppController extends Controller {
             array('events','xml'),
             array('events','logged_in'),
             array('events','fb_post_public_page'),
-            array('events','user_share')
+            array('events','user_share'),
+            array('events','share_from_form'),
         );
 
         $included_admin = array(
