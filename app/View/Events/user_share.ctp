@@ -2,7 +2,7 @@
     
         <div class="pop-close">&nbsp;</div>
 
-    <form name="post_to_face" method="GET" action="/events/share" id="fbpost" >
+    <form name="post_to_face" method="GET" action="/events/share_from_form" id="fbpost" >
         <h3>Post to Facebook</h3>
         <img src='<?php echo "http://appevent.s3.amazonaws.com/" . $Photo ?>' style="width: 200px; float: left;">
 
