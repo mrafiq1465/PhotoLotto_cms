@@ -913,7 +913,7 @@ if(!in_array('openssl',get_loaded_extensions())){
                 if(!empty($event_config['EventEmailConfig']['id']))
                     $email_config_id = $event_config['EventEmailConfig']['id'];
 
-                $fb_share = "http://www.pixta.com.au/events/user_share/?photo=".$_GET['photo']."&event_email_id=" .$event_email_id."&email_config_id=".$email_config_id;
+                $fb_share = "http://www.pixta.com.au/events/share/?photo=".$_GET['photo']."&event_email_id=" .$event_email_id."&email_config_id=".$email_config_id;
 
                 //twitter share url
 
