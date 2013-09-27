@@ -1124,10 +1124,25 @@ if(!in_array('openssl',get_loaded_extensions())){
             $this->redirect('http://www.pixta.com.au/');
             return;
         }
+        
+        $event_config =  "";
+        
+        if (strlen($EmailID) > 0 )
+            $event_config = $this->EventEmailConfig->find('first', array('conditions'=>array('EventEmailConfig.id' => $EmailID), 'recursive' => 1));
+
+        $facebook_msg = 'PIXTA is now on the App Store';
+
+        if(!empty($event_config['Event']['facebook_msg']))
+            $facebook_msg = $event_config['Event']['facebook_msg'];
+        
+        if(!empty($event_config['Event']['facebook_url']))
+            $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
+        
 
         $this->set('Photo', $Photo);
         $this->set('EmailID',$EmailID);
         $this->set('EventEmailId',$EventEmailId);
+        $this->set('FbMsg',$facebook_msg);
         
     }
 
