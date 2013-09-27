@@ -367,3 +367,84 @@ textarea + .switch {
 .icon-rss {
     background-position: -263px -23px;
 }
+
+
+#fb_area_boarder{
+    border: 20px outset rgb(81, 140, 228);
+    width: 545px;    
+}
+
+#fbpost{
+    margin-left: 15px;
+    margin-bottom: 40px;  
+    margin-top: 15px;
+}
+
+#img_for_post{
+    width: 200px; 
+    float: left;    
+}
+
+#info_text{
+    float:left;
+    margin-left:10px;    
+}
+
+#heading_text_fb{
+    margin-top: -10px;
+    font-size: 40px;
+    width: 300px;
+    line-height: 130%;    
+}
+
+#body_text_fb{
+    margin-top:45px;
+    font-size: 16px;
+    width:280px;
+    text-align:justify;    
+}
+
+.message_to_fb{
+    width: 500px;
+    margin-bottom: 0px;
+    height: 115px;    
+}
+
+.share_fb{
+    background:url('/app/img/share-photo-btn.png');
+    float:left;
+    min-height: 22px;
+    width: 69px;
+    margin-left: 445px;    
+}
+
+@media screen and (max-width: 400px){
+    #fb_area_boarder{
+        width:390px;
+    }
+    
+    #fbpost{
+        width:370px;
+    }
+    
+    #img_for_post{
+        width: 90%;
+        margin-bottom:10px;
+    }
+    
+    #fb_area_boarder{
+        width: 360px;
+    }
+    
+    .message_to_fb{
+        width: 320px;
+    }
+    
+    .share_fb{
+        margin-left: 265px;    
+    }
+    
+    #body_text_fb{
+        margin-top:15px;
+    }
+}

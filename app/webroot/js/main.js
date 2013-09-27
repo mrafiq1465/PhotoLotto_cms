@@ -1,6 +1,11 @@
 
 $(document).ready(function() {
 
+    $(".share_fb").click(function(e){
+        $('#fbpost').submit();
+    });
+
+
     $('.blacklist').change(function(e){
         var id = $(this).attr('id');
         var blacklist = 0;
