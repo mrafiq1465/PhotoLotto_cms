@@ -1125,10 +1125,10 @@ if(!in_array('openssl',get_loaded_extensions())){
             return;
         }
         
-        $event_config =  "";
+        $event_config =  array();
         
         if (strlen($EmailID) > 0 )
-            $event_config = $this->EventEmailConfig->find('first', array('conditions'=>array('EventEmailConfig.id' => $EmailID), 'recursive' => 1));
+            $event_config = $this->Event->find('first', array('conditions'=>array('Event.id' => $EmailID), 'recursive' => 1));
 
         $facebook_msg = 'PIXTA is now on the App Store';
 
@@ -1138,7 +1138,6 @@ if(!in_array('openssl',get_loaded_extensions())){
         if(!empty($event_config['Event']['facebook_url']))
             $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
         
-
         $this->set('Photo', $Photo);
         $this->set('EmailID',$EmailID);
         $this->set('EventEmailId',$EventEmailId);
