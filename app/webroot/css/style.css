@@ -451,4 +451,17 @@ textarea + .switch {
         width:100%;
     }
     
+    #info_text{
+        width: 90%;
+    }
+    
+    #heading_text_fb{
+        width: 100%;
+        font-size:30px;
+    }
+    
+    #body_text_fb{
+        width: 98%
+    }    
+    
 }
