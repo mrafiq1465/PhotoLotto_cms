@@ -419,12 +419,8 @@ textarea + .switch {
 }
 
 @media screen and (max-width: 400px){
-    #fb_area_boarder{
-        width:390px;
-    }
-    
     #fbpost{
-        width:370px;
+        width:100%;
     }
     
     #img_for_post{
@@ -433,15 +429,18 @@ textarea + .switch {
     }
     
     #fb_area_boarder{
-        width: 360px;
+/*        border: 3% outset rgb(81, 140, 228);*/
+        box-sizing: border-box;
+        width: 100%;
     }
     
     .message_to_fb{
-        width: 320px;
+        width: 85%;
     }
     
     .share_fb{
-        margin-left: 265px;    
+        float:right;
+        margin-right: 10%;
     }
     
     #body_text_fb{
