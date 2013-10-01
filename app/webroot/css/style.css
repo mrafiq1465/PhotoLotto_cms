@@ -447,4 +447,9 @@ textarea + .switch {
     #body_text_fb{
         margin-top:15px;
     }
+    
+    .container{
+        width:100%;
+    }
+    
 }
