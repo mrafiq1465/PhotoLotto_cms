@@ -54,10 +54,11 @@
                                                         <a href="#"
                                                            style="margin: 0;padding: 0;"><img
                                                                 src="<?php echo $image_columnA; ?>"
-                                                                alt="Fun"
-                                                                style="display: block;margin: 0;padding: 0;max-width: 100%;"></a>
+                                                                alt="PIXTA"
+                                                                width="240" height="240" 
+                                                                style="display: block;margin: 0;padding: 0;"></a>
 
-                                                        <a href="<?php echo $fb_share; ?>"
+                                                        <a href="<?php echo $fb_share; ?>&new=2"
                                                            style="margin: 0;padding: 0;color: #2BA6CB;"><img
                                                                 alt="Share on Facebook"
                                                                 src="http://www.pixta.com.au/img/email_image/def-fb-share.png"
