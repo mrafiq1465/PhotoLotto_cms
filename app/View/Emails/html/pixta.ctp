@@ -1,150 +1,20 @@
-<table cellpadding="0" cellspacing="0"
-       style=" background:#000000 url('<?php echo $image_bg; ?>') ; margin: 0;padding: 0;width: 100%;">
-    <tr>
-        <td>
-            <table class="head-wrap"  cellpadding="0" cellspacing="0"
-                   style="margin: 0;padding: 0;width: 100%;">
-                <tr style="margin: 0;padding: 0;">
-                    <td style="margin: 0;padding: 0;"></td>
-                    <td class="header container"
-                        style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;">
-                        <div class="content"
-                             style="padding: 0;margin: 0 auto;max-width: 600px;display: block;">
-                            <table cellpadding="0" cellspacing="0"
-                                   style="margin: 0;padding: 0;width: 100%;">
-                                <tr style="margin: 0;padding: 0;">
-                                    <td height="100px" align="center" style="margin: 0;padding: 0;">
-                                        <a href="<?php echo $image_header_href; ?>"><img src="<?php echo $image_header; ?>"
-                                             style="display: block;max-width: 100%;margin: 0;padding: 0;"
-                                             alt="header"></a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                    </td>
-                    <td style="margin: 0;padding: 0;"></td>
-                </tr>
-            </table>
-            <table class="body-wrap" cellpadding="0" cellspacing="0"
-                   style="margin: 0;padding: 0;width: 100%;">
-                <tr style="margin: 0;padding: 0;">
-                    <td style="margin: 0;padding: 0;"></td>
-                    <td class="container"  height="10"
-                        style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;"></td>
-                    <td style="margin: 0;padding: 0;"></td>
-                </tr>
-                <tr style="margin: 0;padding: 0;">
-                    <td style="margin: 0;padding: 0;"></td>
-                    <td class="container"
-                        style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;">
-                        <div class="column-wrap"
-                             style="margin: 0 auto;padding: 0;max-width: 600px;">
-                            <div class="column"
-                                 style="margin: 0;padding: 0;width: 300px;float: left;">
-                                <table cellpadding="0" cellspacing="0"
-                                       style="margin: 0;padding: 0;width: 100%;">
-                                    <tr style="margin: 0;padding: 0;">
-                                        <td style="padding: 0 5px;margin: 0;">
-                                            <table cellpadding="0" cellspacing="0"
-                                                   style="margin: 0;padding: 0;width: 100%;">
-                                                <tr style="margin: 0;padding: 0;">
-                                                    <td style="padding: 0 0 10px;margin: 0;"
-                                                        align="center">
-                                                        <a href="#"
-                                                           style="margin: 0;padding: 0;"><img
-                                                                src="<?php echo $image_columnA; ?>"
-                                                                alt="PIXTA"
-                                                                width="240" height="240" 
-                                                                style="display: block;margin: 0;padding: 0;"></a>
-
-                                                        <a href="<?php echo $fb_share; ?>&new=2"
-                                                           style="margin: 0;padding: 0;color: #2BA6CB;"><img
-                                                                alt="Share on Facebook"
-                                                                src="http://www.pixta.com.au/img/email_image/def-fb-share.png"
-                                                                style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
-
-                                                        <!--a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=ig&share_url='.$ig_share. '&image_url='.$share_url; ?>"
-                                                           style="margin: 0;padding: 0;color: #2BA6CB;"><img
-                                                                alt="Share on Instagram"
-                                                                src="http://www.pixta.com.au/img/email_image/def-ig-share.png"
-                                                                style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a-->
-
-                                                        <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=tw&share_url='.$tw_share. '&image_url='.$share_url; ?>"
-                                                           style="margin: 0;padding: 0;color: #2BA6CB;"><img
-                                                                alt="Share on Twitter"
-                                                                src="http://www.pixta.com.au/img/email_image/def-tw-share.png"
-                                                                style="display: block;margin: 0;padding: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;max-width: 100%;"></a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="column"
-                                 style="margin: 0;padding: 0;width: 300px;float: left;">
-                                <table cellpadding="0" cellspacing="0"
-                                       style="margin: 0;padding: 0;width: 100%;">
-                                    <tr style="margin: 0;padding: 0;">
-                                        <td style="padding: 0 5px;margin: 0;">
-                                            <table cellpadding="0" cellspacing="0" class="social" width="100%"
-                                                   style="margin: 0;padding: 0;width: 100%;">
-                                                <tr style="margin: 0;padding: 0;">
-                                                    <td style="padding: 0px;margin: 0;"
-                                                        align="center" >
-                                                        <div
-                                                                style="margin: 0;padding: 0;">
-                                                                <?php echo $image_columnB; ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="clear"
-                                 style="margin: 0;padding: 0;display: block;clear: both;"></div>
-                        </div>
-                    </td>
-                    <td style="margin: 0;padding: 0;"></td>
-                </tr>
-                <tr style="margin: 0;padding: 0;">
-                    <td style="margin: 0;padding: 0;"></td>
-                    <td class="container"  height="10"
-                        style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;"></td>
-                    <td style="margin: 0;padding: 0;"></td>
-                </tr>
-            </table>
-            <table class="head-wrap"  cellpadding="0" cellspacing="0"
-                   style="margin: 0;padding: 0;width: 100%;">
-                <tr style="margin: 0;padding: 0;">
-                    <td style="margin: 0;padding: 0;"></td>
-                    <td class="header container"
-                        style="margin: 0 auto;padding: 0;display: block;max-width: 600px;clear: both;">
-                        <div class="content"
-                             style="padding: 0;margin: 0 auto;max-width: 600px;display: block;">
-                            <table  cellpadding="0" cellspacing="0"
-                                    style="margin: 0;padding: 0;width: 100%;">
-                                <tr style="margin: 0;padding: 0;">
-                                    <td height="100px" align="center"
-                                        style="margin: 0;padding: 0;">
-                                        <a href="<?php echo $image_footer_href; ?>"><img
-                                                style="display: block;max-width: 100%;margin: 0;padding: 0;"
-                                                src="<?php echo $image_footer; ?>"
-                                                alt="footer">
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                    <td style="margin: 0;padding: 0;"></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
+<table cellpadding="0" cellspacing="0" style=" background:#000000 url('<?php echo $image_bg; ?>') ; margin: 0;padding: 20px;width: 100%;">
+    <tr><td>
+        <div style="max-width:600px;text-align:center;">
+            <a href="<?php echo $image_header_href; ?>"><img src="<?php echo $image_header; ?>" alt="header"></a>
+        </div>
+        <div style="float:left;width:290px;">
+            <img src="<?php echo $image_columnA; ?>" alt="PIXTA" width="290" height="290" style="display: block;margin: 0;padding: 0;">
+            <a href="<?php echo $fb_share; ?>&new=5" style="margin: 0;padding: 0;color: #2BA6CB;"><img alt="Share on Facebook" src="http://www.pixta.com.au/img/email_image/def-fb-share.png" style="display: block;width:290px;"></a>
+            <a href="<?php echo $host.'/events/trace_share/'.$event_email_id.'/?media=tw&share_url='.$tw_share. '&image_url='.$share_url; ?>" style="margin: 0;padding: 0;color: #2BA6CB;"><img alt="Share on Twitter" src="http://www.pixta.com.au/img/email_image/def-tw-share.png" style="display: block;width:290px;"></a>
+        </div>
+        <div style="float:left;width:300px;">
+            <?php echo $image_columnB; ?>
+        </div>
+        <div style="clear:both;display:block;"></div>
+        <div style="max-width:600px;text-align:center;">
+            <a href="<?php echo $image_footer_href; ?>"><img src="<?php echo $image_footer; ?>" alt="footer"></a>
+        </div>
+        <div style="clear:both;display:block;height:50px;"></div>
+        </td></tr>
 </table>
-
