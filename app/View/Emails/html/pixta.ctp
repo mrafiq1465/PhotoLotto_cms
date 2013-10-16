@@ -1,6 +1,4 @@
-<html>
-<body style="background:#000000 url('<?php echo $image_bg; ?>') ; margin: 0;padding:0;">
-<table cellpadding="0" cellspacing="0" style="width: 100%;padding: 0 20px;">
+<table cellpadding="0" cellspacing="0" background="<?php echo $image_bg; ?>" style="background:#000000 url('<?php echo $image_bg; ?>') ;width: 100%;padding: 0 20px;">
     <tr><td>
         <div style="max-width:600px;text-align:center;">
             <a href="<?php echo $image_header_href; ?>"><img src="<?php echo $image_header; ?>" alt="header"></a>
@@ -20,5 +18,3 @@
         <div style="clear:both;display:block;height:50px;"></div>
         </td></tr>
 </table>
-</body>
-</html>
