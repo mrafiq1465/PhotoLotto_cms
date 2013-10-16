@@ -1,6 +1,6 @@
-<table cellpadding="0" cellspacing="0" background="<?php echo $image_bg; ?>" style="background:#000000 url('<?php echo $image_bg; ?>') ;width: 100%;padding: 0 20px;">
+<table cellpadding="0" cellspacing="0" background="<?php echo $image_bg; ?>" style="background:#000000 url('<?php echo $image_bg; ?>') ;max-width:650px;padding: 0 20px;">
     <tr><td>
-        <div style="max-width:600px;text-align:center;">
+        <div style="max-width:650px;text-align:center;">
             <a href="<?php echo $image_header_href; ?>"><img src="<?php echo $image_header; ?>" alt="header"></a>
         </div>
         <div style="float:left;width:290px;">
