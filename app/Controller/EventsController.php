@@ -820,7 +820,7 @@ if(!in_array('openssl',get_loaded_extensions())){
 
         if (!empty($_GET)) {
             date_default_timezone_set('Australia/Sydney');
-            $success = $this->Event->EventEmail->save(array(
+             $success = $this->Event->EventEmail->save(array(
                 'EventEmail' => array(
                     'event_id' => $_GET['event_id'],
                     'phone_type' => $_GET['phone_type'],
@@ -1363,7 +1363,7 @@ if(!in_array('openssl',get_loaded_extensions())){
             if(!empty($event_config['EventEmailConfig']['id']))
                 $email_config_id = $event_config['EventEmailConfig']['id'];
 
-            $fb_share = "http://www.pixta.com.au/events/share/?photo=".$photo."&email_config_id=" .$event_email_id;
+            $fb_share = "http://www.pixta.com.au/events/user_share/?photo=".$photo."&email_config_id=" .$event_email_id;
 
             //twitter share url
 
