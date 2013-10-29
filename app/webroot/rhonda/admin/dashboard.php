@@ -115,32 +115,187 @@
 			<div class="row-fluid">
 				<div class="box span12">
 					<div class="box-header well">
-						<h2><i class="icon-info-sign"></i> Basic Stats Overview</h2>
-						<div class="box-icon">
-							<!--<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>-->
-							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-						</div>
+						<h2><i class="icon-info-sign"></i> Total Stats for All 4 Days (all data sync'd to live server for all time)</h2>
+						
 					</div>
 					<div class="box-content">
                                             <?php include "includes/functions.php";
                                             dbConnect();
                                             $result=mysql_query("SELECT vote from promos");?>
-						Total Entries: <?php echo(mysql_num_rows($result));?><br/>
-                                                <?php $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE vote='K') as 'totketut', (SELECT count(vote) from promos WHERE vote='T') as 'tottrent'");
-                                                while($row = mysql_fetch_array($result)) {?>
-						Total Votes Ketut: <?php echo($row['totketut']);?><br/>
-                                                Total Votes Trent: <?php echo($row['tottrent']);?><br/>
-                                                <?php } ?>
-                                                 <?php $result=mysql_query("SELECT max(dateadded) as 'maxdate' from promos");
-                                                while($row = mysql_fetch_array($result)) {?>
-						Last entry in database: <?php echo($row['maxdate']);?><br/>
-                                                <?php } ?>
+                                                <?php $result=mysql_query("SELECT (SELECT count(vote) from promos) as 'totentries', (SELECT count(vote) from promos WHERE vote='K') as 'totketut', (SELECT count(vote) from promos WHERE vote='T') as 'tottrent'");?>
+                                               <?php while($row = mysql_fetch_array($result)) {?>
+						<ul class="dashboard-list">
+							<li>
+								<a href="#">
+									<span class="green"><?php echo($row['totentries']);?></span>
+									Entries sync'd to live                                    
+								</a>
+							</li>
+						  <li>
+							<a href="#">
+							  <span class="red"><?php echo($row['totketut']);?></span>
+							  Voted 'Trent'
+							</a>
+						  </li>
+						  <li>
+							<a href="#">
+							  <span class="blue"><?php echo($row['tottrent']);?></span>
+							  Voted 'Ketut'                                    
+							</a>
+						  </li>
+						 
+						</ul>
+                                            <?php } ?>
                                                 
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
+                        
+                        
+                         <div class="row-fluid">
+                        <div class="box span3">
+                             <?php $day1='2013-11-02';
+                             $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
+                             ?>
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+					</div>
+					<div class="box-content">
+                                            <?php while($row = mysql_fetch_array($result)) {?>
+						<ul class="dashboard-list">
+							<li>
+								<a href="#">
+									<span class="green"><?php echo($row['totentries']);?></span>
+									Entries sync'd to live                                    
+								</a>
+							</li>
+						  <li>
+							<a href="#">
+							  <span class="red"><?php echo($row['totketut']);?></span>
+							  Voted 'Trent'
+							</a>
+						  </li>
+						  <li>
+							<a href="#">
+							  <span class="blue"><?php echo($row['tottrent']);?></span>
+							  Voted 'Ketut'                                    
+							</a>
+						  </li>
+						 
+						</ul>
+                                            <?php } ?>
+					</div>
+				</div><!--/span-->
+                                
+                               <div class="box span3">
+                             <?php $day1='2013-11-05';
+                             $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
+                             ?>
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+					</div>
+					<div class="box-content">
+                                            <?php while($row = mysql_fetch_array($result)) {?>
+						<ul class="dashboard-list">
+							<li>
+								<a href="#">
+									<span class="green"><?php echo($row['totentries']);?></span>
+									Entries sync'd to live                                    
+								</a>
+							</li>
+						  <li>
+							<a href="#">
+							  <span class="red"><?php echo($row['totketut']);?></span>
+							  Voted 'Trent'
+							</a>
+						  </li>
+						  <li>
+							<a href="#">
+							  <span class="blue"><?php echo($row['tottrent']);?></span>
+							  Voted 'Ketut'                                    
+							</a>
+						  </li>
+						 
+						</ul>
+                                            <?php } ?>
+					</div>
+				</div><!--/span-->
+                                
+                                <div class="box span3">
+                             <?php $day1='2013-11-06';
+                             $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
+                             ?>
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+					</div>
+					<div class="box-content">
+                                            <?php while($row = mysql_fetch_array($result)) {?>
+						<ul class="dashboard-list">
+							<li>
+								<a href="#">
+									<span class="green"><?php echo($row['totentries']);?></span>
+									Entries sync'd to live                                    
+								</a>
+							</li>
+						  <li>
+							<a href="#">
+							  <span class="red"><?php echo($row['totketut']);?></span>
+							  Voted 'Trent'
+							</a>
+						  </li>
+						  <li>
+							<a href="#">
+							  <span class="blue"><?php echo($row['tottrent']);?></span>
+							  Voted 'Ketut'                                    
+							</a>
+						  </li>
+						 
+						</ul>
+                                            <?php } ?>
+					</div>
+				</div><!--/span-->
+                                
+                               <div class="box span3">
+                             <?php $day1='2013-11-09';
+                             $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
+                             ?>
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+					</div>
+					<div class="box-content">
+                                            <?php while($row = mysql_fetch_array($result)) {?>
+						<ul class="dashboard-list">
+							<li>
+								<a href="#">
+									<span class="green"><?php echo($row['totentries']);?></span>
+									Entries sync'd to live                                    
+								</a>
+							</li>
+						  <li>
+							<a href="#">
+							  <span class="red"><?php echo($row['totketut']);?></span>
+							  Voted 'Trent'
+							</a>
+						  </li>
+						  <li>
+							<a href="#">
+							  <span class="blue"><?php echo($row['tottrent']);?></span>
+							  Voted 'Ketut'                                    
+							</a>
+						  </li>
+						 
+						</ul>
+                                            <?php } ?>
+					</div>
+				</div><!--/span-->
+                                
+                                
+			</div><!--/row-->
+                        
+                        
+                        
+                        
 
                         <div class="row-fluid">
 				<div class="box span12">

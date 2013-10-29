@@ -1,7 +1,11 @@
 <?php
 function dbConnect(){
     global $con;
-    $con = mysql_connect("localhost", "root", "flydigital2013") or die(    mysql_error());
+    if ($_SERVER['HTTP_HOST']=="pixta.dev") {
+        $con = mysql_connect("localhost", "root", "rootuser") or die(    mysql_error());
+    } else {
+        $con = mysql_connect("localhost", "root", "flydigital2013") or die(    mysql_error());
+    }
     mysql_select_db("pixta", $con) or die(mysql_error());
 }
 function sanitise($string) {
