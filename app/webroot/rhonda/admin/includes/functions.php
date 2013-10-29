@@ -1,7 +1,7 @@
 <?php
 function dbConnect(){
     global $con;
-    $con = mysql_connect("localhost", "root", "rootuser") or die(    mysql_error());
+    $con = mysql_connect("localhost", "root", "flydigital2013") or die(    mysql_error());
     mysql_select_db("pixta", $con) or die(mysql_error());
 }
 function sanitise($string) {
