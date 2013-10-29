@@ -43,8 +43,11 @@ $i++;
     $csv_output.="email_sms_send".", ";
     $csv_output.="sent_email_address".", ";
     $csv_output .= "\n";
-
-$values = mysql_query("SELECT * from promos");
+if($_GET['day']==0){
+    $values = mysql_query("SELECT * from promos");
+} else {
+    $values = mysql_query("SELECT * from promos WHERE DATE(dateadded)='".$_GET['day']."'");
+}
 while ($rowr = mysql_fetch_row($values)) {
 for ($j=0;$j<19;$j++) {
 $csv_output .= $rowr[$j].", ";

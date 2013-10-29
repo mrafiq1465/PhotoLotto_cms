@@ -146,7 +146,7 @@
 						 
 						</ul>
                                             <?php } ?>
-                                                
+                                                <br/><a href="exportcsv.php?day=0" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a><br/><br/>
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -185,15 +185,16 @@
 						 
 						</ul>
                                             <?php } ?>
+                                            <br/><a href="exportcsv.php?day=<?php echo($day1);?>" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a><br/><br/>
 					</div>
 				</div><!--/span-->
                                 
                                <div class="box span3">
-                             <?php $day1='2013-11-05';
+                             <?php $day1='2013-10-25';
                              $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
                              ?>
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+						<h2><i class="icon-list"></i> Day 2 (<?php echo($day1);?>)</h2>
 					</div>
 					<div class="box-content">
                                             <?php while($row = mysql_fetch_array($result)) {?>
@@ -219,6 +220,7 @@
 						 
 						</ul>
                                             <?php } ?>
+                                            <br/><a href="exportcsv.php?day=<?php echo($day1);?>" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a><br/><br/>
 					</div>
 				</div><!--/span-->
                                 
@@ -227,7 +229,7 @@
                              $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
                              ?>
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+						<h2><i class="icon-list"></i> Day 3 (<?php echo($day1);?>)</h2>
 					</div>
 					<div class="box-content">
                                             <?php while($row = mysql_fetch_array($result)) {?>
@@ -253,6 +255,7 @@
 						 
 						</ul>
                                             <?php } ?>
+                                            <br/><a href="exportcsv.php?day=<?php echo($day1);?>" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a><br/><br/>
 					</div>
 				</div><!--/span-->
                                 
@@ -261,7 +264,7 @@
                              $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
                              ?>
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-list"></i> Day 1 (<?php echo($day1);?>)</h2>
+						<h2><i class="icon-list"></i> Day 4 (<?php echo($day1);?>)</h2>
 					</div>
 					<div class="box-content">
                                             <?php while($row = mysql_fetch_array($result)) {?>
@@ -287,6 +290,7 @@
 						 
 						</ul>
                                             <?php } ?>
+                                            <br/><a href="exportcsv.php?day=<?php echo($day1);?>" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a><br/><br/>
 					</div>
 				</div><!--/span-->
                                 
@@ -297,24 +301,7 @@
                         
                         
 
-                        <div class="row-fluid">
-				<div class="box span12">
-					<div class="box-header well">
-						<h2><i class="icon-info-sign"></i> Download CSV of all data</h2>
-						<div class="box-icon">
-							<!--<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>-->
-							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-						</div>
-					</div>
-					<div class="box-content">
-						<a href="exportcsv.php" class="btn btn-large"><i class="icon-download-alt"></i> Download CSV file</a>
-
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-					
+                      
 			
 				
 		<hr>
