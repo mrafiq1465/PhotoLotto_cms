@@ -1119,7 +1119,9 @@ if(!in_array('openssl',get_loaded_extensions())){
         $EmailID        = isset($_GET['email_config_id']) ? trim($_GET['email_config_id']) : "";
         $EventEmailId   = isset($_GET['event_email_id']) ? trim($_GET['event_email_id']) : "";
                 
-        
+
+        $this->Event->EventEmail->query("update event_emails set fb_share = ifnull(fb_share, 0) + 1 where id = $EventEmailId"); 
+       
         if ($Photo == "" || $EmailID == "" || $EventEmailId == ""){
             $this->redirect('http://www.pixta.com.au/');
             return;
@@ -1132,21 +1134,12 @@ if(!in_array('openssl',get_loaded_extensions())){
 
         $facebook_msg = 'PIXTA is now on the App Store';
 
-        if(!empty($event_config['Event']['facebook_msg']))
-            $facebook_msg = $event_config['Event']['facebook_msg'];
-        
-        if(!empty($event_config['Event']['facebook_url']))
-            $facebook_msg = $facebook_msg . '  ' .$event_config['Event']['facebook_url'];
+
         
         $this->set('Photo', $Photo);
         $this->set('EmailID',$EmailID);
         $this->set('EventEmailId',$EventEmailId);
         $this->set('FbMsg',$facebook_msg);
-        
-        if($EventEmailId > 0)
-           $this->redirect('/events/trace_share/'.$EventEmailId.'/?media=fb');
-        else
-           $this->redirect('http://www.facebook.com');
         
     }
 
