@@ -842,6 +842,7 @@ if(!in_array('openssl',get_loaded_extensions())){
             $event_config =  $this->EventEmailConfig->find('first', array('conditions'=>array('event_id'=>$_GET['event_id']), 'recursive'=>-1));
 			$image_footer_href = "#";
             $image_header_href = "#";
+            
             if(!empty($event_config)){
                 if(isset($event_config['EventEmailConfig']['image_header']) && trim($event_config['EventEmailConfig']['image_header'])!=='') {
                     $image_header = $host . $event_config['EventEmailConfig']['image_header'];
@@ -896,6 +897,7 @@ if(!in_array('openssl',get_loaded_extensions())){
             if(empty($subject)){
                 $subject = $_GET['subject'];
             }
+            
             if (empty($_GET['email_to'])) {
                 die(json_encode(array('error' => 'email not given')));
             }
@@ -903,15 +905,13 @@ if(!in_array('openssl',get_loaded_extensions())){
                 $to=preg_split("([, ;\n])", $_GET['email_to']);
 
                 //Fb share url
-
-
                 //$fb_share = "http://www.facebook.com/share.php?u=http://appevent.s3.amazonaws.com/".$_GET['photo'];
                 //http://facebook.com/dialog/feed?app_id=144734069055490&link=http://appevent.s3.amazonaws.com/i_20130614082959.jpg&redirect_uri=https://www.pixta.com.au/events/trace_share/23/?media=fb
                 //$fb_share = "http://facebook.com/dialog/feed?app_id=".$this->fbappid."&link=http://appevent.s3.amazonaws.com/".$_GET['photo']."&redirect_uri=https://www.pixta.com.au/events/trace_share/".$event_email_id."/?media=fb";
 
                 $email_config_id = 0;
                 if(!empty($event_config['EventEmailConfig']['id']))
-                    $email_config_id = $event_config['EventEmailConfig']['id'];
+                    $email_config_id = $event_config['EventEmailConfig']['event_id'];
 
                 $fb_share = "http://www.pixta.com.au/events/user_share/?photo=".$_GET['photo']."&event_email_id=" .$event_email_id."&email_config_id=".$email_config_id;
 
