@@ -1143,6 +1143,11 @@ if(!in_array('openssl',get_loaded_extensions())){
         $this->set('EventEmailId',$EventEmailId);
         $this->set('FbMsg',$facebook_msg);
         
+        if($EventEmailId > 0)
+           $this->redirect('/events/trace_share/'.$EventEmailId.'/?media=fb');
+        else
+           $this->redirect('http://www.facebook.com');
+        
     }
 
     public function share_from_form() 
