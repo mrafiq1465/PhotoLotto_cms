@@ -115,7 +115,7 @@
 			<div class="row-fluid">
 				<div class="box span12">
 					<div class="box-header well">
-						<h2><i class="icon-info-sign"></i> Total Stats for All 4 Days (all data sync'd to live server for all time)</h2>
+						<h2><i class="icon-info-sign"></i> Total Stats for All 4 Days</h2>
 						
 					</div>
 					<div class="box-content">
@@ -134,13 +134,13 @@
 						  <li>
 							<a href="#">
 							  <span class="red"><?php echo($row['totketut']);?></span>
-							  Voted 'Trent'
+							  Voted 'Ketut'
 							</a>
 						  </li>
 						  <li>
 							<a href="#">
 							  <span class="blue"><?php echo($row['tottrent']);?></span>
-							  Voted 'Ketut'                                    
+							  Voted 'Trent'                                    
 							</a>
 						  </li>
 						 
@@ -173,13 +173,13 @@
 						  <li>
 							<a href="#">
 							  <span class="red"><?php echo($row['totketut']);?></span>
-							  Voted 'Trent'
+							  Voted 'Ketut'
 							</a>
 						  </li>
 						  <li>
 							<a href="#">
 							  <span class="blue"><?php echo($row['tottrent']);?></span>
-							  Voted 'Ketut'                                    
+							  Voted 'Trent'                                    
 							</a>
 						  </li>
 						 
@@ -208,13 +208,13 @@
 						  <li>
 							<a href="#">
 							  <span class="red"><?php echo($row['totketut']);?></span>
-							  Voted 'Trent'
+							  Voted 'Ketut'
 							</a>
 						  </li>
 						  <li>
 							<a href="#">
 							  <span class="blue"><?php echo($row['tottrent']);?></span>
-							  Voted 'Ketut'                                    
+							  Voted 'Trent'                                    
 							</a>
 						  </li>
 						 
@@ -243,13 +243,13 @@
 						  <li>
 							<a href="#">
 							  <span class="red"><?php echo($row['totketut']);?></span>
-							  Voted 'Trent'
+							  Voted 'Ketut'
 							</a>
 						  </li>
 						  <li>
 							<a href="#">
 							  <span class="blue"><?php echo($row['tottrent']);?></span>
-							  Voted 'Ketut'                                    
+							  Voted 'Trent'                                    
 							</a>
 						  </li>
 						 
@@ -278,13 +278,13 @@
 						  <li>
 							<a href="#">
 							  <span class="red"><?php echo($row['totketut']);?></span>
-							  Voted 'Trent'
+							  Voted 'Ketut'
 							</a>
 						  </li>
 						  <li>
 							<a href="#">
 							  <span class="blue"><?php echo($row['tottrent']);?></span>
-							  Voted 'Ketut'                                    
+							  Voted 'Trent'                                    
 							</a>
 						  </li>
 						 
