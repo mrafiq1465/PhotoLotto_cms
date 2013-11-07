@@ -225,7 +225,7 @@
 				</div><!--/span-->
                                 
                                 <div class="box span3">
-                             <?php $day1='2013-11-06';
+                             <?php $day1='2013-11-07';
                              $result=mysql_query("SELECT (SELECT count(vote) from promos WHERE DATE(dateadded)='".$day1."') as 'totentries', (SELECT count(vote) from promos WHERE vote='K' AND DATE(dateadded)='".$day1."') as 'totketut', (SELECT count(vote) from promos WHERE vote='T' AND DATE(dateadded)='".$day1."') as 'tottrent'");
                              ?>
 					<div class="box-header well" data-original-title>
